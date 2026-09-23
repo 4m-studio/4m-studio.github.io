@@ -1,10 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://4m-studio.github.io/</loc><priority>1.0</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/storyreel.html</loc><priority>0.4</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/meetlog.html</loc><priority>0.4</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/qqnest.html</loc><priority>0.4</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/avatartracker.html</loc><priority>0.4</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/wearly.html</loc><priority>0.4</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/worthview.html</loc><priority>0.4</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://4m-studio.github.io/</loc><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/</loc><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/avatartracker/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/avatartracker/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/avatartracker/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/avatartracker/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/avatartracker/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/avatartracker/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/storyreel/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/storyreel/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/storyreel/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/storyreel/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/storyreel/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/storyreel/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/meetlog/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/meetlog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/meetlog/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/meetlog/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/meetlog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/meetlog/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/qqnest/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/qqnest/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/qqnest/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/qqnest/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/qqnest/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/qqnest/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/wearly/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/wearly/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/wearly/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/wearly/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/wearly/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/wearly/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/apps/worthview/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/worthview/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/worthview/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/worthview/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/worthview/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/worthview/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/avatartracker.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/storyreel.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/meetlog.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/qqnest.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/wearly.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/worthview.html</loc><priority>0.3</priority></url>
 </urlset>

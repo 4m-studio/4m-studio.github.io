@@ -124,8 +124,20 @@
     heart: {
       label: 'Love you!', emoji: '🫶', dur: 2.6,
       pose: function (t) {
-        return { R: [700, 770], Rh: 'Heart', Rr: -10,
+        // Finger heart beside the cheek. The wrist sits out at shoulder height
+        // so the IK keeps the elbow DOWN and the forearm points up; closer in,
+        // MieMie's long arms can only fold with the elbow up (upside down).
+        return { R: [868, 800 - Math.max(0, Math.sin(t * 6)) * 12], Rh: 'Heart', Rr: -14,
                  smile: 1, winkL: t > 0.35 && t < 2.1 ? 1 : 0, blush: 1, roll: 5, lookX: 0.1 };
+      }
+    },
+    bigheart: {
+      label: 'Big love!', emoji: '💗', dur: 2.8,
+      pose: function (t) {
+        // Both arms overhead, hands meeting on top of the head.
+        var b = Math.sin(t * 5) * 8;
+        return { L: [452, 190 + b], R: [580, 190 + b], Lh: 'Open', Rh: 'Open', Lr: 28, Rr: -28,
+                 smile: 1, open: 0.35, blush: 1, roll: Math.sin(t * 2.6) * 3, lookY: -0.05 };
       }
     },
     peace: {
@@ -174,7 +186,15 @@
       }
     }
   };
-  var ORDER = ['wave', 'heart', 'peace', 'thumbs', 'clap', 'dance', 'surprised', 'shy'];
+  var ORDER = ['wave', 'heart', 'peace', 'bigheart', 'thumbs', 'clap', 'dance', 'surprised', 'shy'];
+  var LABELS = {
+    zh: { wave: '嗨～你好！', heart: '比心～', bigheart: '爱你哟！', peace: '耶 ✌️', thumbs: '真棒！',
+          clap: '好耶！', dance: '一起跳舞！', surprised: '哇！', shy: '嘿嘿…' }
+  };
+  function label(name, g) {
+    var lang = (document.documentElement.lang || 'en').slice(0, 2);
+    return (LABELS[lang] && LABELS[lang][name]) || g.label;
+  }
 
   /* ---------- Build ---------- */
   function el(tag, cls, parent) {
@@ -284,6 +304,8 @@
     this.visible = true;
 
     this.bubble = root.querySelector('.mm-bubble');
+    this.frame = root.querySelector('.mm-frame');
+    this.frameTop = parseFloat(root.getAttribute('data-frame-top') || '640');
     this.layout();
     this.bind();
     this.render(0);
@@ -296,6 +318,9 @@
     var r = this.stage.getBoundingClientRect();
     var sc = r.width / cw;
     this.stage.style.height = (ch * sc) + 'px';
+    // The frame (her "screen") starts at chin height, so the head and any
+    // raised arm break out over its top edge.
+    if (this.frame) this.frame.style.top = ((this.frameTop - cy0) * sc) + 'px';
     this.fig.style.transform = 'translate(' + (-cx0 * sc) + 'px,' + (-cy0 * sc) + 'px) scale(' + sc + ')';
     this.scale = sc; this.crop = [cx0, cy0];
   };
@@ -312,7 +337,7 @@
     // Touch screens have no hover: say so in the hint.
     var hint = this.root.querySelector('.mm-hint');
     if (hint && !window.matchMedia('(hover: hover)').matches) {
-      hint.textContent = 'Touch anywhere — she looks. Tap her for a move.';
+      hint.textContent = this.root.getAttribute('data-hint-touch') || 'Touch anywhere — she looks. Tap her for a move.';
     }
     window.addEventListener('resize', function () { self.layout(); self.wake(); }, { passive: true });
 
@@ -359,7 +384,7 @@
       b.setAttribute('aria-pressed', String(b.getAttribute('data-gesture') === name));
     });
     if (this.bubble) {
-      this.bubble.textContent = g.label;
+      this.bubble.textContent = label(name, g);
       this.bubble.classList.remove('is-on');
       void this.bubble.offsetWidth;
       this.bubble.classList.add('is-on');
@@ -493,6 +518,12 @@
     var lx = S.lookX.x, ly = S.lookY.x;
     var breath = this.breath || 0;
 
+    if (this.frame) {
+      // The frame tilts with her gaze; she stays square to the viewer, which
+      // is what makes her read as standing in front of it.
+      this.frame.style.transform = 'perspective(1100px) rotateY(' + (lx * -9).toFixed(2) +
+        'deg) rotateX(' + (6 + ly * 5).toFixed(2) + 'deg)';
+    }
     n.body.style.transform = 'translateY(' + (S.bounce.x + breath * 2).toFixed(2) + 'px) rotate(' +
       S.sway.x.toFixed(2) + 'deg)';
 

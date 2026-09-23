@@ -68,7 +68,9 @@
   function checkReveals() {
     if (!revealables.length) return;
     revealables = revealables.filter(function (el) {
-      if (inView(el, 0.9)) { el.classList.add('is-in'); return false; }
+      // Anything at or above the fold counts, including elements a fast jump
+      // skipped past entirely — a .reveal must never stay invisible.
+      if (el.getBoundingClientRect().top < (window.innerHeight || 800) * 0.9) { el.classList.add('is-in'); return false; }
       return true;
     });
   }
@@ -157,6 +159,53 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(function (s) { so.observe(s); });
   }
+
+  /* ---------- Apps dropdown ----------
+     Opens on hover (with a short close delay so the pointer can travel into
+     the panel), on keyboard focus, and on click/tap. Esc closes it. On the
+     mobile menu the list is simply shown inline. */
+  document.querySelectorAll('[data-menu]').forEach(function (item) {
+    var trigger = item.querySelector('.nav__apps');
+    var timer = null;
+    var mobile = window.matchMedia('(max-width: 720px)');
+    function set(open) {
+      clearTimeout(timer);
+      item.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    }
+    item.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' && !mobile.matches) set(true); });
+    item.addEventListener('pointerleave', function (e) {
+      if (e.pointerType === 'mouse' && !mobile.matches) timer = setTimeout(function () { set(false); }, 180);
+    });
+    trigger.addEventListener('click', function (e) {
+      if (mobile.matches) return;               // inline list on mobile; link goes to #apps
+      // First tap/click opens the panel; a click while open follows the link.
+      if (!item.classList.contains('is-open')) { e.preventDefault(); set(true); }
+    });
+    item.addEventListener('focusout', function (e) { if (!item.contains(e.relatedTarget)) set(false); });
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); set(true); setTimeout(function () { var f = item.querySelector('.menu__item'); if (f) f.focus(); }, 40); }
+    });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { set(false); trigger.focus(); }
+      if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target.classList.contains('menu__item')) {
+        e.preventDefault();
+        var all = Array.prototype.slice.call(item.querySelectorAll('.menu__item'));
+        var i = all.indexOf(e.target) + (e.key === 'ArrowDown' ? 1 : -1);
+        if (all[i]) all[i].focus();
+      }
+    });
+    document.addEventListener('click', function (e) { if (!item.contains(e.target)) set(false); });
+  });
+
+  /* ---------- Language choice is remembered ---------- */
+  document.querySelectorAll('[data-set-lang]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('4m-lang', a.getAttribute('data-set-lang')); } catch (e) {}
+      // Keep the hash (e.g. #slide-wearly) when switching language.
+      if (location.hash && a.href.indexOf('#') < 0) a.href = a.href + location.hash;
+    });
+  });
 
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
