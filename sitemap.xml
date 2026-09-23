@@ -56,6 +56,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/worthview/"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/worthview/"/>
   </url>
+  <url><loc>https://4m-studio.github.io/privacy/</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/terms/</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/terms/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/terms/</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/terms/"/>
+  </url>
   <url><loc>https://4m-studio.github.io/privacy/avatartracker.html</loc><priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/avatartracker.html"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/avatartracker.html"/>

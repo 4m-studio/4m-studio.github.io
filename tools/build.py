@@ -6,10 +6,10 @@
 
 Reads   content/site.json      site-wide strings (English + 中文)
         content/apps.json      one entry per app (English + 中文)
-        content/privacy/<slug>.html / <slug>.zh.html   privacy policy bodies
+        content/privacy/<slug>(.zh).html, content/legal/terms(.zh).html
 Writes  index.html, zh/index.html                    home (hero carousel)
         apps/<slug>/index.html, zh/apps/<slug>/...   one page per app
-        privacy/<slug>.html, zh/privacy/<slug>.html  privacy policies
+        privacy/, privacy/<slug>.html, terms/ (+ zh/)  legal pages
         404.html, sitemap.xml, robots.txt
 
 Every page is plain static HTML — GitHub Pages serves the output as is.
@@ -29,6 +29,7 @@ with open(os.path.join(ROOT, "content", "site.json"), encoding="utf-8") as f:
 with open(os.path.join(ROOT, "content", "apps.json"), encoding="utf-8") as f:
     APPS = json.load(f)
 BASE = SITE["baseUrl"]
+EULA = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
 EMAIL = SITE["email"]
 
 
@@ -56,16 +57,15 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-# Every app has an English and a Chinese name, always shown English first:
-# "StoryReel 故事卷轴". NM() is plain text (titles, aria labels, prose);
-# NMH() is markup, so lists can align the two names in columns.
-def NM(a):
-    return f'{a["name"]["en"]} {a["name"]["zh"]}'
+# Every app has an English and a Chinese name. English pages show only the
+# English name, Chinese pages only the Chinese one. NM() is plain text,
+# NMH() the escaped markup version.
+def NM(a, lang):
+    return a["name"][lang]
 
 
-def NMH(a):
-    return (f'<span class="nm"><span class="nm__en">{esc(a["name"]["en"])}</span> '
-            f'<span class="nm__zh" lang="zh-CN">{esc(a["name"]["zh"])}</span></span>')
+def NMH(a, lang):
+    return esc(a["name"][lang])
 
 
 def month(date, lang):
@@ -107,7 +107,7 @@ CHEVRON = ('<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="n
 
 def app_store_btn(app, lang, small=True):
     cls = "btn btn--primary" + (" btn--sm" if small else "")
-    name = NM(app)
+    name = NM(app, lang)
     if app.get("appStore"):
         return (f'<a class="{cls}" href="{esc(app["appStore"])}" target="_blank" rel="noopener" '
                 f'aria-label="{esc(name)} — App Store">{APPLE} {T("app_store", lang)}</a>')
@@ -214,7 +214,7 @@ def nav(lang, path):
     items = "".join(
         f'<a class="menu__item" role="menuitem" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}" '
         f'style="--accent: var(--{a["accent"]})">{icon(a, root, 40, "menu__icon")}'
-        f'<span><b>{NMH(a)}{" <em>" + T("hero_new", lang) + "</em>" if a.get("isNew") else ""}</b>'
+        f'<span><b>{NMH(a, lang)}{" <em>" + T("hero_new", lang) + "</em>" if a.get("isNew") else ""}</b>'
         f'<small>{esc(L(a["tagline"], lang))}</small></span></a>' for a in APPS)
     return f'''<a class="skip" href="#main">{T("skip", lang)}</a>
 <header class="nav">
@@ -248,8 +248,10 @@ def nav(lang, path):
 def footer(lang, path):
     root = rel_root(lang, path)
     home = href(lang, path, lang, "")
-    apps = "".join(f'<li><a href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">{NMH(a)}</a></li>' for a in APPS)
-    legal = "".join(f'<li><a href="{href(lang, path, lang, "privacy/" + a["slug"] + ".html")}">{NMH(a)}</a></li>' for a in APPS)
+    apps = "".join(f'<li><a href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">{NMH(a, lang)}</a></li>' for a in APPS)
+    legal = (f'<li><a href="{href(lang, path, lang, "privacy/")}">{T("legal_privacy", lang)}</a></li>'
+             f'<li><a href="{href(lang, path, lang, "terms/")}">{T("legal_terms", lang)}</a></li>'
+             f'<li><a href="{EULA}" target="_blank" rel="noopener">{T("legal_eula", lang)}</a></li>')
     return f'''<footer class="footer">
   <div class="wrap">
     <div class="footer__grid">
@@ -257,13 +259,13 @@ def footer(lang, path):
         <a class="brand" href="{home}"><span class="brand__mark">4M</span><span>4M&nbsp;Studio</span></a>
         <p style="margin-top:14px;max-width:34ch;font-size:14.5px">{T("footer_blurb", lang)}</p>
       </div>
-      <div><h5>{T("footer_apps", lang)}</h5><ul class="namelist">{apps}</ul></div>
+      <div><h5>{T("footer_apps", lang)}</h5><ul>{apps}</ul></div>
       <div><h5>{T("footer_studio", lang)}</h5><ul>
-        <li><a href="{home}#studio">{T("nav_studio", lang)}</a></li>
+        <li><a href="{home}#studio">{T("footer_about", lang)}</a></li>
         <li><a href="{home}#updates">{T("nav_updates", lang)}</a></li>
         <li><a href="{home}#contact">{T("nav_contact", lang)}</a></li>
         <li><a href="{SITE["github"]}" target="_blank" rel="noopener">GitHub</a></li></ul></div>
-      <div><h5>{T("footer_legal", lang)}</h5><ul class="namelist">{legal}</ul></div>
+      <div><h5>{T("footer_legal", lang)}</h5><ul>{legal}</ul></div>
     </div>
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> 4M Studio. {T("footer_rights", lang)}</span>
@@ -328,10 +330,10 @@ def home(lang):
     n = len(APPS)
     slides, tabs = [], []
     for i, a in enumerate(APPS):
-        name = esc(NM(a))
+        name = esc(NM(a, lang))
         page_href = href(lang, path, lang, "apps/" + a["slug"] + "/")
-        badge = (f'<span class="dot"></span> {T("hero_new", lang)} · {NMH(a)}' if a.get("isNew")
-                 else f'{icon(a, root, 22, "badge__icon")} {esc(L(a["category"], lang))} · {NMH(a)}')
+        badge = (f'<span class="dot"></span> {T("hero_new", lang)} · {NMH(a, lang)}' if a.get("isNew")
+                 else f'{icon(a, root, 22, "badge__icon")} {esc(L(a["category"], lang))} · {NMH(a, lang)}')
         slides.append(f'''
       <article class="news__slide" id="slide-{a["slug"]}" style="--accent: var(--{a["accent"]})" role="group"
                aria-roledescription="slide" aria-label="{esc(T("slide_of", lang, i=i + 1, n=n))}: {name}">
@@ -349,13 +351,13 @@ def home(lang):
       </article>''')
         tabs.append(f'<button class="news__tab" type="button" role="tab" aria-controls="slide-{a["slug"]}" '
                     f'aria-selected="{"true" if i == 0 else "false"}" style="--accent: var(--{a["accent"]})">'
-                    f'{icon(a, root, 28, "news__tabicon")}<span>{NMH(a)}</span></button>')
+                    f'{icon(a, root, 28, "news__tabicon")}<span>{NMH(a, lang)}</span></button>')
 
     cards = "".join(f'''
       <a class="app-tile reveal" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}" style="--accent: var(--{a["accent"]}); --d: {0.04 * i:.2f}s">
         {icon(a, root, 64)}
         <span class="tag">{esc(L(a["category"], lang))}{(" · " + T("hero_new", lang)) if a.get("isNew") else ""}</span>
-        <h3>{NMH(a)}</h3>
+        <h3>{NMH(a, lang)}</h3>
         <p>{esc(L(a["tagline"], lang))}</p>
         <span class="link-arrow">{T("learn_more", lang)} {ARROW}</span>
       </a>''' for i, a in enumerate(APPS))
@@ -363,7 +365,7 @@ def home(lang):
     posts_src = sorted(APPS, key=lambda a: a["news"]["date"], reverse=True)
     posts = "".join(f'''
       <article class="post reveal" style="--d: {0.05 * (i % 3):.2f}s">
-        <div class="post__meta"><span class="chip">{esc(NM(a))}</span><span>{month(a["news"]["date"], lang)}</span></div>
+        <div class="post__meta"><span class="chip">{esc(NM(a, lang))}</span><span>{month(a["news"]["date"], lang)}</span></div>
         <h3>{esc(L(a["news"]["title"], lang))}</h3>
         <p>{esc(L(a["news"]["body"], lang))}</p>
         <a class="link-arrow" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">{T("read_more", lang)} {ARROW}</a>
@@ -461,7 +463,7 @@ def home(lang):
 def contact_block(lang, app=None):
     subject = "4M%20Studio" if not app else app["name"]["en"].replace(" ", "%20") + "%20support"
     if app:
-        name = esc(NM(app))
+        name = esc(NM(app, lang))
         eyebrow, title, lede = T("p_support", lang), T("p_support_t", lang, app=name), T("p_support_b", lang, app=name)
     else:
         eyebrow, title, lede = T("contact_eyebrow", lang), T("contact_title", lang), T("contact_lede", lang)
@@ -485,7 +487,7 @@ def contact_block(lang, app=None):
 def app_page(a, lang):
     path = f"apps/{a['slug']}/"
     root = rel_root(lang, path)
-    name = esc(NM(a))
+    name = esc(NM(a, lang))
     feats = "".join(f'''
         <div class="feature reveal" style="--d: {0.05 * (i % 3):.2f}s">
           <div class="feature__icon" aria-hidden="true">{f["emoji"]}</div>
@@ -495,7 +497,7 @@ def app_page(a, lang):
     priv = "".join(f"<li>{esc(L(p, lang))}</li>" for p in a["privacy"])
     others = "".join(f'''
         <a class="app-tile app-tile--sm" href="{href(lang, path, lang, "apps/" + o["slug"] + "/")}" style="--accent: var(--{o["accent"]})">
-          {icon(o, root, 48)}<h3>{NMH(o)}</h3><p>{esc(L(o["tagline"], lang))}</p>
+          {icon(o, root, 48)}<h3>{NMH(o, lang)}</h3><p>{esc(L(o["tagline"], lang))}</p>
         </a>''' for o in APPS if o is not a)
     body = f'''
 <section class="app-hero" style="--accent: var(--{a["accent"]})">
@@ -506,7 +508,7 @@ def app_page(a, lang):
         <a href="{href(lang, path, lang, "")}#apps">{T("nav_apps", lang)}</a><span aria-hidden="true">/</span>
         <span aria-current="page">{name}</span>
       </nav>
-      <div class="app-hero__id">{icon(a, root, 84)}<div><p class="tag">{esc(L(a["category"], lang))}</p><p class="app-hero__name">{NMH(a)}</p></div></div>
+      <div class="app-hero__id">{icon(a, root, 84)}<div><p class="tag">{esc(L(a["category"], lang))}</p><p class="app-hero__name">{NMH(a, lang)}</p></div></div>
       <h1>{L(a["headline"], lang)}</h1>
       <p class="lede">{esc(L(a["lede"], lang))}</p>
       <div class="hero__cta">
@@ -559,7 +561,7 @@ def app_page(a, lang):
   </div>
 </section>
 '''
-    ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": NM(a),
+    ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": NM(a, lang),
           "operatingSystem": "iOS", "applicationCategory": L(a["category"], "en"),
           "description": L(a["lede"], lang), "url": abs_url(lang, path),
           "author": {"@type": "Organization", "name": "4M Studio", "url": BASE}}
@@ -567,7 +569,7 @@ def app_page(a, lang):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     scripts = ("main", "miemie") if a["visual"] == "miemie" else ("main",)
-    return page(lang, path, f'{NM(a)} — {L(a["tagline"], lang)} · 4M Studio',
+    return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head)
 
 
@@ -577,15 +579,53 @@ def privacy_page(a, lang):
     root = rel_root(lang, path)
     src = a["slug"] + (".zh.html" if lang == "zh" else ".html")
     with open(os.path.join(ROOT, "content", "privacy", src), encoding="utf-8") as f:
-        inner = f.read().replace("{root}", root).replace("{name}", NMH(a))
+        inner = f.read().replace("{root}", root).replace("{name}", NMH(a, lang))
     body = f'''<div class="wrap doc">
 {inner}
   <p style="margin-top:34px"><a class="link-arrow" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    {esc(T("privacy_back", lang, app=NM(a)))}</a></p>
+    {esc(T("privacy_back", lang, app=NM(a, lang)))}</a></p>
 </div>'''
-    return page(lang, path, f'{NM(a)} — {T("privacy_title", lang)} · 4M Studio',
-                T("privacy_desc", lang, app=NM(a)), body)
+    return page(lang, path, f'{NM(a, lang)} — {T("privacy_title", lang)} · 4M Studio',
+                T("privacy_desc", lang, app=NM(a, lang)), body)
+
+
+def privacy_index(lang):
+    """/privacy/ — the studio-wide promise, then one link per app."""
+    path = "privacy/"
+    root = rel_root(lang, path)
+    rows = "".join(f'''
+        <a class="app-tile app-tile--sm" href="{href(lang, path, lang, "privacy/" + a["slug"] + ".html")}" style="--accent: var(--{a["accent"]})">
+          {icon(a, root, 48)}<h3>{NMH(a, lang)}</h3><p>{esc(L(a["privacy"][0], lang))}</p>
+        </a>''' for a in APPS)
+    points = "".join(f"<li>{T(k, lang)}</li>" for k in ("pi_1", "pi_2", "pi_3", "pi_4"))
+    body = f'''<div class="wrap doc">
+  <div class="doc__head">
+    <p class="eyebrow">{T("legal_eyebrow", lang)}</p>
+    <h1 style="font-size:clamp(34px,5vw,54px)">{T("legal_privacy", lang)}</h1>
+    <p class="lede">{T("pi_lede", lang)}</p>
+  </div>
+  <div class="doc__body" style="max-width:none">
+    <h2>{T("pi_promise", lang)}</h2>
+    <ul>{points}</ul>
+    <h2>{T("pi_per_app", lang)}</h2>
+    <p>{T("pi_per_app_b", lang)}</p>
+    <div class="app-grid app-grid--legal">{rows}
+    </div>
+    <h2>{T("nav_contact", lang)}</h2>
+    <p>{T("pi_contact", lang)} <a href="mailto:privacy@4mstudio.app">privacy@4mstudio.app</a></p>
+  </div>
+</div>'''
+    return page(lang, path, f'{T("legal_privacy", lang)} · 4M Studio', T("pi_lede", lang), body)
+
+
+def terms_page(lang):
+    path = "terms/"
+    src = "terms.zh.html" if lang == "zh" else "terms.html"
+    with open(os.path.join(ROOT, "content", "legal", src), encoding="utf-8") as f:
+        inner = f.read()
+    body = f'<div class="wrap doc">\n{inner}\n</div>'
+    return page(lang, path, f'{T("legal_terms", lang)} · 4M Studio', T("terms_desc", lang), body)
 
 
 def not_found():
@@ -628,13 +668,16 @@ def main():
             written.append(write(out_file(lang, f"apps/{a['slug']}/"), app_page(a, lang)))
         for a in APPS:
             written.append(write(out_file(lang, f"privacy/{a['slug']}.html"), privacy_page(a, lang)))
+        written.append(write(out_file(lang, "privacy/"), privacy_index(lang)))
+        written.append(write(out_file(lang, "terms/"), terms_page(lang)))
     written.append(write("404.html", not_found()))
 
     urls = []
-    for path in [""] + [f"apps/{a['slug']}/" for a in APPS] + [f"privacy/{a['slug']}.html" for a in APPS]:
+    for path in ([""] + [f"apps/{a['slug']}/" for a in APPS] + ["privacy/", "terms/"]
+                 + [f"privacy/{a['slug']}.html" for a in APPS]):
         for lang in LANGS:
             alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{HTML_LANG[l]}" href="{abs_url(l, path)}"/>' for l in LANGS)
-            pr = "1.0" if path == "" else ("0.3" if path.startswith("privacy/") else "0.8")
+            pr = "1.0" if path == "" else ("0.3" if path.startswith(("privacy/", "terms/")) else "0.8")
             urls.append(f'  <url><loc>{abs_url(lang, path)}</loc><priority>{pr}</priority>{alts}\n  </url>')
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
           'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(urls) + "\n</urlset>\n")

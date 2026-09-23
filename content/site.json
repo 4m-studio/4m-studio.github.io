@@ -9,7 +9,7 @@
     },
     "description": {
       "en": "4M Studio is an independent iOS app studio behind AvatarTracker, StoryReel, MeetLog, QQNest, Wearly and WorthView — small, private apps for iPhone.",
-      "zh": "4M Studio 是一家独立 iOS 应用工作室，作品包括 AvatarTracker 随影、StoryReel 故事卷轴、MeetLog 会记、QQNest 鹊巢、Wearly 衣见和 WorthView 净览——小而精、注重隐私的 iPhone 应用。"
+      "zh": "4M Studio 是一家独立 iOS 应用工作室，作品包括随影、故事卷轴、会记、鹊巢、衣见和净览——小而精、注重隐私的 iPhone 应用。"
     },
     "nav_apps": {
       "en": "Apps",
@@ -85,7 +85,7 @@
     },
     "mm_label": {
       "en": "MieMie, AvatarTracker's character. She follows your pointer; press to play a gesture.",
-      "zh": "AvatarTracker 的角色 MieMie。她会跟着你的鼠标看；点一下她会做动作。"
+      "zh": "随影的角色 MieMie。她会跟着你的鼠标看；点一下她会做动作。"
     },
     "mm_live": {
       "en": "Tracking you",
@@ -256,8 +256,8 @@
       "zh": "工作室"
     },
     "footer_legal": {
-      "en": "Privacy policies",
-      "zh": "隐私政策"
+      "en": "Legal",
+      "zh": "法律"
     },
     "footer_rights": {
       "en": "All rights reserved.",
@@ -350,6 +350,66 @@
     "privacy_back": {
       "en": "Back to {app}",
       "zh": "返回 {app}"
+    },
+    "footer_about": {
+      "en": "About",
+      "zh": "关于我们"
+    },
+    "legal_eyebrow": {
+      "en": "Legal",
+      "zh": "法律"
+    },
+    "legal_privacy": {
+      "en": "Privacy Policy",
+      "zh": "隐私政策"
+    },
+    "legal_terms": {
+      "en": "Terms of Use",
+      "zh": "使用条款"
+    },
+    "legal_eula": {
+      "en": "License Agreement (EULA)",
+      "zh": "最终用户许可协议"
+    },
+    "terms_desc": {
+      "en": "Terms of use for the 4M Studio website and iOS apps.",
+      "zh": "4M Studio 网站及 iOS 应用的使用条款。"
+    },
+    "pi_lede": {
+      "en": "How every 4M Studio app treats your data — and where to find each app's full policy.",
+      "zh": "4M Studio 的每一款应用如何对待你的数据，以及各应用完整隐私政策的入口。"
+    },
+    "pi_promise": {
+      "en": "What every app promises",
+      "zh": "每款应用的共同承诺"
+    },
+    "pi_1": {
+      "en": "Your data stays on your device unless an app clearly says otherwise.",
+      "zh": "除非应用明确说明，你的数据都只保存在你的设备上。"
+    },
+    "pi_2": {
+      "en": "No ads, no third-party trackers, no analytics SDKs.",
+      "zh": "没有广告，没有第三方追踪器，没有统计分析 SDK。"
+    },
+    "pi_3": {
+      "en": "We never sell or rent your data, and never link it across apps.",
+      "zh": "我们绝不出售或出租你的数据，也不会跨应用关联数据。"
+    },
+    "pi_4": {
+      "en": "No account needed, except where a connection requires one.",
+      "zh": "无需注册账号（除非某项连接功能必须如此）。"
+    },
+    "pi_per_app": {
+      "en": "Policy for each app",
+      "zh": "各应用隐私政策"
+    },
+    "pi_per_app_b": {
+      "en": "Each app does different things, so each has its own policy that says exactly what it accesses and why.",
+      "zh": "每款应用的功能不同，因此各有一份独立的隐私政策，写明它具体会访问什么、为什么。"
+    },
+    "pi_contact": {
+      "en": "Questions about privacy in any of our apps:",
+      "zh": "对任何一款应用的隐私有疑问，请联系："
     }
   },
   "marquee": {

@@ -32,7 +32,8 @@ it. Change the content files or `tools/build.py` instead.
 | Nav, section titles, studio copy, footer, button labels (both languages) | `content/site.json` → `"t"` |
 | Support email, GitHub link, site URL | top of `content/site.json` |
 | A privacy policy | `content/privacy/<slug>.html` (English) and `<slug>.zh.html` (中文) — edit both |
-| An app's names | `"name": {"en": …, "zh": …}` — always shown English first, e.g. **StoryReel 故事卷轴** |
+| Terms of Use | `content/legal/terms.html` and `terms.zh.html` |
+| An app's names | `"name": {"en": …, "zh": …}` — English pages show the English name, Chinese pages the Chinese one |
 | Phone mock-up contents | `mock()` in `tools/build.py` |
 | Colours, spacing, motion | `assets/css/main.css` (tokens at the top) |
 
@@ -57,7 +58,8 @@ the app's accent colour).
 /                      home — hero carousel (one slide per app), apps grid, studio, updates, contact
 /apps/<slug>/          one page per app: hero, features, privacy at a glance, details, support, more apps
 /zh/…                  the same pages in Chinese
-/privacy/<slug>.html   privacy policies (and /zh/privacy/<slug>.html in Chinese)
+/privacy/              Privacy Policy overview → one policy per app at /privacy/<slug>.html
+/terms/                Terms of Use (apps are licensed under Apple's Standard EULA, linked in the footer)
 /404.html              bilingual not-found page
 ```
 

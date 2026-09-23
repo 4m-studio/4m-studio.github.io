@@ -1052,3 +1052,6 @@ main { overflow-x: clip; }
 .namelist a { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; }
 .namelist .nm { display: contents; }
 .namelist .nm__zh { opacity: .75; }
+.app-grid--legal { grid-template-columns: repeat(3, 1fr); margin: 18px 0 8px; }
+.doc__body .app-tile { text-decoration: none; color: inherit; }
+@media (max-width: 720px) { .app-grid--legal { grid-template-columns: 1fr; } }
