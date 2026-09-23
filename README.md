@@ -1,7 +1,7 @@
 # 4M Studio — website
 
 The marketing site for **4M Studio** and its iOS apps — AvatarTracker, StoryReel,
-MeetLog, QQNest (鹊巢), Wearly (衣见) and WorthView — in **English and 中文**.
+MeetLog, QQNest, Wearly and WorthView — in **English and 中文**.
 Live at <https://4m-studio.github.io/>, served by GitHub Pages from `main`.
 
 Plain static HTML, CSS and JS. The pages are generated from two JSON files by a
@@ -31,7 +31,8 @@ it. Change the content files or `tools/build.py` instead.
 | An App Store link | `"appStore"` in `content/apps.json` — while empty, the button reads "Coming soon" instead of linking nowhere |
 | Nav, section titles, studio copy, footer, button labels (both languages) | `content/site.json` → `"t"` |
 | Support email, GitHub link, site URL | top of `content/site.json` |
-| A privacy policy | `content/privacy/<slug>.html` (English) |
+| A privacy policy | `content/privacy/<slug>.html` (English) and `<slug>.zh.html` (中文) — edit both |
+| An app's names | `"name": {"en": …, "zh": …}` — always shown English first, e.g. **StoryReel 故事卷轴** |
 | Phone mock-up contents | `mock()` in `tools/build.py` |
 | Colours, spacing, motion | `assets/css/main.css` (tokens at the top) |
 
@@ -43,7 +44,7 @@ the app's accent colour).
 
 1. Add an entry to `content/apps.json` (copy an existing one; `slug` becomes the URL).
 2. Add its icon to `assets/img/` and a `--<slug>` accent gradient in `:root` of `main.css`.
-3. Add `content/privacy/<slug>.html`.
+3. Add `content/privacy/<slug>.html` and `<slug>.zh.html`.
 4. Add a mock-up branch in `mock()` in `tools/build.py` (or reuse `"visual"` of another app).
 5. `python3 tools/build.py`. The carousel slide, Apps menu, home grid, app page,
    footer links, sitemap and "More from 4M" rows all appear automatically.
@@ -56,7 +57,7 @@ the app's accent colour).
 /                      home — hero carousel (one slide per app), apps grid, studio, updates, contact
 /apps/<slug>/          one page per app: hero, features, privacy at a glance, details, support, more apps
 /zh/…                  the same pages in Chinese
-/privacy/<slug>.html   privacy policies (English; the Chinese pages link to them marked （英文）)
+/privacy/<slug>.html   privacy policies (and /zh/privacy/<slug>.html in Chinese)
 /404.html              bilingual not-found page
 ```
 
@@ -100,6 +101,7 @@ update its row in the `L` table.
 | What | Where |
 |---|---|
 | `hello@4mstudio.app` / `privacy@4mstudio.app` | `content/site.json`, `content/privacy/*.html` |
+| Chinese names I proposed: 随影 (AvatarTracker), 会记 (MeetLog), 净览 (WorthView) | `content/apps.json` |
 | App Store links | `"appStore"` in `content/apps.json` |
 | News dates and copy | `"news"` in `content/apps.json` |
 | The four **M** values | `v1_t` … `v4_b` in `content/site.json` |

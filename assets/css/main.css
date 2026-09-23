@@ -1041,3 +1041,14 @@ main { overflow-x: clip; }
   .phone--solo { width: 220px; }
   .specs > div { grid-template-columns: 100px 1fr; }
 }
+
+/* ---------- App names: English first, Chinese second ---------- */
+.nm__zh { font-weight: 500; opacity: .62; letter-spacing: 0; }
+.app-hero__name .nm__zh, .app-tile h3 .nm__zh { font-size: .82em; }
+.news__tab .nm__zh { opacity: .7; }
+/* Footer lists: two aligned columns — English | 中文 */
+.footer ul.namelist { display: grid; grid-template-columns: max-content 1fr; column-gap: .7em; row-gap: 9px; }
+.namelist li { display: contents; }
+.namelist a { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; }
+.namelist .nm { display: contents; }
+.namelist .nm__zh { opacity: .75; }

@@ -56,10 +56,52 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/worthview/"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/worthview/"/>
   </url>
-  <url><loc>https://4m-studio.github.io/privacy/avatartracker.html</loc><priority>0.3</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/storyreel.html</loc><priority>0.3</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/meetlog.html</loc><priority>0.3</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/qqnest.html</loc><priority>0.3</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/wearly.html</loc><priority>0.3</priority></url>
-  <url><loc>https://4m-studio.github.io/privacy/worthview.html</loc><priority>0.3</priority></url>
+  <url><loc>https://4m-studio.github.io/privacy/avatartracker.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/avatartracker.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/avatartracker.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/avatartracker.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/avatartracker.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/avatartracker.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/storyreel.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/storyreel.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/storyreel.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/storyreel.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/storyreel.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/storyreel.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/meetlog.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/meetlog.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/meetlog.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/meetlog.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/meetlog.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/meetlog.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/qqnest.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/qqnest.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/qqnest.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/qqnest.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/qqnest.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/qqnest.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/wearly.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/wearly.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/wearly.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/wearly.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/wearly.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/wearly.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/worthview.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/worthview.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/worthview.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/worthview.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/worthview.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/worthview.html"/>
+  </url>
 </urlset>
