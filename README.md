@@ -30,7 +30,7 @@ it. Change the content files or `tools/build.py` instead.
 | An app's name, tagline, headline, description, features, privacy bullets, requirements, news card | `content/apps.json` |
 | An App Store link | `"appStore"` in `content/apps.json` — while empty, the button reads "Coming soon" instead of linking nowhere |
 | Nav, section titles, studio copy, footer, button labels (both languages) | `content/site.json` → `"t"` |
-| Support email, GitHub link, site URL | top of `content/site.json` |
+| Support email (`support.4mstudio@gmail.com`, one inbox for all apps), GitHub link, site URL | top of `content/site.json`; the address also appears in `content/privacy/*` and `content/legal/*` |
 | A privacy policy | `content/privacy/<slug>.html` (English) and `<slug>.zh.html` (中文) — edit both |
 | Terms of Use | `content/legal/terms.html` and `terms.zh.html` |
 | An app's names | `"name": {"en": …, "zh": …}` — English pages show the English name, Chinese pages the Chinese one |
@@ -102,7 +102,6 @@ update its row in the `L` table.
 
 | What | Where |
 |---|---|
-| `hello@4mstudio.app` / `privacy@4mstudio.app` | `content/site.json`, `content/privacy/*.html` |
 | Chinese names I proposed: 随影 (AvatarTracker), 会记 (MeetLog), 净览 (WorthView) | `content/apps.json` |
 | App Store links | `"appStore"` in `content/apps.json` |
 | News dates and copy | `"news"` in `content/apps.json` |

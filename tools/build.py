@@ -613,7 +613,7 @@ def privacy_index(lang):
     <div class="app-grid app-grid--legal">{rows}
     </div>
     <h2>{T("nav_contact", lang)}</h2>
-    <p>{T("pi_contact", lang)} <a href="mailto:privacy@4mstudio.app">privacy@4mstudio.app</a></p>
+    <p>{T("pi_contact", lang)} <a href="mailto:support.4mstudio@gmail.com">support.4mstudio@gmail.com</a></p>
   </div>
 </div>'''
     return page(lang, path, f'{T("legal_privacy", lang)} · 4M Studio', T("pi_lede", lang), body)
