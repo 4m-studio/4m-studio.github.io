@@ -975,7 +975,7 @@ main { overflow-x: clip; }
 .app-tile h3 { margin: 4px 0 2px; }
 .app-tile p { font-size: 15px; margin: 0; }
 .app-tile .link-arrow { margin-top: auto; padding-top: 18px; font-size: 14px; }
-.app-grid--sm { grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px; }
+.app-grid--sm { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
 .app-tile--sm { min-height: 0; padding: 18px; }
 .app-tile--sm .app-icon { width: 48px; height: 48px; border-radius: 13px; margin-bottom: 10px; }
 .app-tile--sm h3 { font-size: 16px; }
@@ -1130,3 +1130,67 @@ main { overflow-x: clip; }
   .trio:hover .shot--left  { transform: translate3d(-100px, 22px, -60px) rotateY(12deg) rotateZ(-7deg) scale(.8); }
   .trio:hover .shot--right { transform: translate3d(100px, 22px, -60px) rotateY(-12deg) rotateZ(7deg) scale(.8); }
 }
+
+/* ==========================================================================
+   Per-app themes — app pages and their privacy pages wear the app's colours.
+   build.py sets --brand / --brand-2 / --brand-3 / --brand-grad on <body class="app-theme">;
+   "light" apps also get --theme-bg / --theme-bg-2 / --theme-ink.
+   ========================================================================== */
+.app-theme .aurora {
+  background:
+    radial-gradient(1100px 700px at 12% -8%,  color-mix(in srgb, var(--brand) 24%, transparent), transparent 62%),
+    radial-gradient(900px 640px at 88% 4%,    color-mix(in srgb, var(--brand-2) 18%, transparent), transparent 60%),
+    radial-gradient(1000px 800px at 50% 108%, color-mix(in srgb, var(--brand-3) 14%, transparent), transparent 62%),
+    var(--bg);
+}
+.app-theme .aurora__blob--1 { background: radial-gradient(circle at 30% 30%, var(--brand), transparent 68%); }
+.app-theme .aurora__blob--2 { background: radial-gradient(circle at 60% 40%, var(--brand-2), transparent 68%); }
+.app-theme .aurora__blob--3 { background: radial-gradient(circle at 50% 50%, var(--brand-3), transparent 68%); }
+.app-theme ::selection { background: color-mix(in srgb, var(--brand) 40%, transparent); }
+
+.app-theme--light {
+  --bg:            var(--theme-bg);
+  --bg-2:          var(--theme-bg-2);
+  --surface:       rgba(255, 255, 255, 0.62);
+  --surface-2:     rgba(255, 255, 255, 0.9);
+  --stroke:        color-mix(in srgb, var(--theme-ink) 11%, transparent);
+  --stroke-strong: color-mix(in srgb, var(--theme-ink) 20%, transparent);
+  --text:          var(--theme-ink);
+  --text-2:        color-mix(in srgb, var(--theme-ink) 74%, transparent);
+  --text-3:        color-mix(in srgb, var(--theme-ink) 54%, transparent);
+  --shadow-lg:     0 30px 70px -28px color-mix(in srgb, var(--theme-ink) 45%, transparent);
+  color-scheme: light;
+}
+.app-theme--light .aurora__blob { opacity: 0.2; }
+.app-theme--light .grain { opacity: 0.02; }
+.app-theme--light .nav.is-stuck { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+.app-theme--light .menu { background: color-mix(in srgb, var(--bg) 96%, transparent); box-shadow: var(--shadow-lg); }
+.app-theme--light .nav__links .menu__item:hover,
+.app-theme--light .nav__links .menu__item:focus-visible { background: color-mix(in srgb, var(--theme-ink) 6%, transparent); }
+@media (max-width: 760px) {
+  .app-theme--light .nav__links { background: color-mix(in srgb, var(--bg) 98%, transparent); }
+}
+.app-theme--light .feature, .app-theme--light .fact-card, .app-theme--light .app-tile { box-shadow: 0 18px 40px -30px color-mix(in srgb, var(--theme-ink) 40%, transparent); }
+.app-theme--light .shot, .app-theme--light .shot--poster, .app-theme--light .banner-shot {
+  box-shadow: 0 34px 70px -30px color-mix(in srgb, var(--theme-ink) 55%, transparent), 0 0 0 1px var(--stroke);
+}
+.app-theme--light .trio::before, .app-theme--light .tour__media::before { opacity: 0.16; }
+
+/* App hero with a wide App Store image: centred headline, image underneath */
+.app-hero--banner .app-hero__grid { grid-template-columns: 1fr; justify-items: center; text-align: center; min-height: 0; gap: clamp(32px, 5vw, 56px); }
+.app-hero--banner .app-hero__text { max-width: 780px; display: flex; flex-direction: column; align-items: center; }
+.app-hero--banner .crumbs, .app-hero--banner .hero__cta { justify-content: center; }
+.app-hero--banner .app-hero__id { justify-content: center; text-align: left; }
+.app-hero--banner .lede { margin-inline: auto; }
+.app-hero--banner .app-hero__visual { width: 100%; }
+.app-hero--banner .banner-shot { margin: 0; }
+/* The studio logo keeps the studio's own colours on themed app pages */
+.app-theme .brand__mark { background: linear-gradient(115deg, #7c5cff 0%, #b45cff 42%, #ff4d8d 100%); }
+.app-theme .contact {
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--brand) 20%, transparent), transparent 55%),
+    radial-gradient(120% 140% at 100% 100%, color-mix(in srgb, var(--brand-2) 18%, transparent), transparent 55%),
+    var(--surface);
+}
+.app-theme .btn--primary { box-shadow: 0 12px 34px -12px color-mix(in srgb, var(--brand) 95%, transparent); }
+.app-theme .btn--primary:hover { box-shadow: 0 18px 44px -12px var(--brand); }

@@ -54,9 +54,14 @@ the app's accent colour).
    on the app page (any `"features"` left over show as cards below the tour).
    Give each image its `"w"`/`"h"`. App Store marketing images (with their own
    headline and phone art) get `"kind": "poster"` and are shown as cards without a
-   phone frame, as StoryReel does; a wide one can go in `"banner"` above the tour.
+   phone frame; a wide one in `"banner"` becomes the app page's hero image.
+   StoryReel shows both ways: phone-screen crops in `"shots"` for the home slide
+   (lined up with the other apps' phones) and its App Store images on its own page.
    Raw screenshots that already show a Dynamic Island get `"island": false`.
-5. `python3 tools/build.py`. The carousel slide, Apps menu, home grid, app page,
+5. Give the app a `"theme"`: `"colors"` (main, light, deep) tint its page and privacy
+   page; `"mode": "light"` plus `"bg"`, `"bg2"` and `"ink"` (text colour) makes those
+   pages light, for apps whose own UI is light (StoryReel, CardPick).
+6. `python3 tools/build.py`. The carousel slide, Apps menu, home grid, app page,
    footer links, sitemap and "More from 4M" rows all appear automatically.
 
 ---

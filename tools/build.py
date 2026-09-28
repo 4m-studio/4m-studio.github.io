@@ -234,12 +234,7 @@ def tour(app, lang, root):
           <ul class="feature-list">{pts}</ul>
         </div>
       </div>''')
-    banner = ""
-    if app.get("banner"):
-        b = app["banner"]
-        banner = (f'\n    <figure class="banner-shot reveal"><img src="{root}assets/img/{b["src"]}" '
-                  f'alt="{esc(L(b["alt"], lang))}" width="{b["w"]}" height="{b["h"]}" loading="lazy" decoding="async"></figure>')
-    return f'{banner}<div class="tour">{"".join(rows)}\n    </div>'
+    return f'<div class="tour">{"".join(rows)}\n    </div>'
 
 
 def visual(app, lang, root, big=False):
@@ -248,6 +243,27 @@ def visual(app, lang, root, big=False):
     if app["visual"] == "miemie":
         return miemie(lang, root, 440 if big else 400)
     return f'<div class="solo-stage">{mock(app, lang)}</div>'
+
+
+# ---------- per-app colour themes ----------
+def theme_attrs(app):
+    """App pages (and their privacy pages) take on the app's own colours.
+    `theme` in apps.json: colors [main, light, deep]; mode "light" also sets bg, bg2 and ink (text)."""
+    if not app or not app.get("theme"):
+        return ""
+    th = app["theme"]
+    c1, c2, c3 = th["colors"]
+    style = f'--brand:{c1};--brand-2:{c2};--brand-3:{c3};--brand-grad:var(--{app["accent"]})'
+    cls = "app-theme"
+    if th.get("mode") == "light":
+        cls += " app-theme--light"
+        style += f';--theme-bg:{th["bg"]};--theme-bg-2:{th["bg2"]};--theme-ink:{th["ink"]}'
+    return f' class="{cls}" style="{style}"'
+
+
+def theme_color(app):
+    th = (app or {}).get("theme") or {}
+    return th.get("bg", "#05060a") if th.get("mode") == "light" else "#05060a"
 
 
 # ---------- chrome ----------
@@ -319,7 +335,7 @@ def footer(lang, path):
 </footer>'''
 
 
-def page(lang, path, title, desc, body, scripts=("main",), alternates=True, head_extra="", og_image="og.jpg"):
+def page(lang, path, title, desc, body, scripts=("main",), alternates=True, head_extra="", og_image="og.jpg", app=None):
     root = rel_root(lang, path)
     canon = abs_url(lang, path)
     alt = ""
@@ -334,7 +350,7 @@ def page(lang, path, title, desc, body, scripts=("main",), alternates=True, head
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="theme-color" content="#05060a">
+<meta name="theme-color" content="{theme_color(app)}">
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{root}assets/img/favicon.svg">
 <link rel="canonical" href="{canon}">{alt}
@@ -349,7 +365,7 @@ def page(lang, path, title, desc, body, scripts=("main",), alternates=True, head
 <link rel="stylesheet" href="{root}assets/css/main.css?v={ver("assets/css/main.css")}">
 <script>document.documentElement.classList.add('js');</script>{head_extra}
 </head>
-<body>
+<body{theme_attrs(app)}>
 <div class="progress" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true">
   <span class="aurora__blob aurora__blob--1"></span>
@@ -547,8 +563,14 @@ def app_page(a, lang):
         <a class="app-tile app-tile--sm" href="{href(lang, path, lang, "apps/" + o["slug"] + "/")}" style="--accent: var(--{o["accent"]})">
           {icon(o, root, 48)}<h3>{NMH(o, lang)}</h3><p>{esc(L(o["tagline"], lang))}</p>
         </a>''' for o in APPS if o is not a)
+    if a.get("banner"):  # a wide App Store image under a centred headline
+        b = a["banner"]
+        hero_visual = (f'<figure class="banner-shot"><img src="{root}assets/img/{b["src"]}" alt="{esc(L(b["alt"], lang))}" '
+                       f'width="{b["w"]}" height="{b["h"]}" decoding="async" fetchpriority="high"></figure>')
+    else:
+        hero_visual = visual(a, lang, root, big=True)
     body = f'''
-<section class="app-hero" style="--accent: var(--{a["accent"]})">
+<section class="app-hero{" app-hero--banner" if a.get("banner") else ""}" style="--accent: var(--{a["accent"]})">
   <div class="wrap app-hero__grid">
     <div class="app-hero__text">
       <nav class="crumbs" aria-label="Breadcrumb">
@@ -565,7 +587,7 @@ def app_page(a, lang):
       </div>
       <p class="news__meta">{esc(L(a["platform"], lang))}</p>
     </div>
-    <div class="app-hero__visual">{visual(a, lang, root, big=True)}</div>
+    <div class="app-hero__visual">{hero_visual}</div>
   </div>
 </section>
 
@@ -617,7 +639,7 @@ def app_page(a, lang):
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     scripts = ("main", "miemie") if a["visual"] == "miemie" else ("main",)
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
-                L(a["lede"], lang), body, scripts=scripts, head_extra=head)
+                L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 
 
 # ---------- privacy + 404 ----------
@@ -634,7 +656,7 @@ def privacy_page(a, lang):
     {esc(T("privacy_back", lang, app=NM(a, lang)))}</a></p>
 </div>'''
     return page(lang, path, f'{NM(a, lang)} — {T("privacy_title", lang)} · 4M Studio',
-                T("privacy_desc", lang, app=NM(a, lang)), body)
+                T("privacy_desc", lang, app=NM(a, lang)), body, app=a)
 
 
 def privacy_index(lang):

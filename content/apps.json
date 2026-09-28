@@ -126,6 +126,13 @@
         "en": "Blinking eyes, lip-sync, bouncy hair and arms that can finally wave, make a heart and throw a peace sign.",
         "zh": "会眨眼、会对口型、头发会甩，手臂终于能挥手、比心、比耶了。"
       }
+    },
+    "theme": {
+      "colors": [
+        "#8a6cff",
+        "#ff6fb1",
+        "#b9a4ff"
+      ]
     }
   },
   {
@@ -224,34 +231,32 @@
     },
     "shots": [
       {
-        "src": "storyreel/appstore-chapters.webp",
+        "src": "storyreel/timeline.webp",
         "alt": {
-          "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
-          "zh": "故事卷轴——编辑旅行的每个章节：故事编辑器与章节编辑面板"
+          "en": "StoryReel Timeline tab with photos grouped by day",
+          "zh": "故事卷轴时间线页：按天分组的照片"
         },
-        "w": 852,
-        "h": 1846,
-        "kind": "poster"
+        "w": 600,
+        "h": 1304
       },
       {
-        "src": "storyreel/appstore-stories.webp",
+        "src": "storyreel/home.webp",
         "alt": {
-          "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
-          "zh": "故事卷轴——把照片变成旅行故事：首页与旅行项目"
+          "en": "StoryReel Home with trip projects and Browse Memories",
+          "zh": "故事卷轴首页：旅行项目与回忆浏览"
         },
-        "w": 852,
-        "h": 1846,
-        "kind": "poster"
+        "w": 580,
+        "h": 1319,
+        "island": false
       },
       {
-        "src": "storyreel/appstore-map-timeline.webp",
+        "src": "storyreel/map.webp",
         "alt": {
-          "en": "StoryReel — Follow the story on Map and Timeline",
-          "zh": "故事卷轴——在地图和时间线上回顾旅程"
+          "en": "StoryReel Map tab showing photo counts on a globe",
+          "zh": "故事卷轴地图页：地球上标出各地照片数量"
         },
-        "w": 852,
-        "h": 1846,
-        "kind": "poster"
+        "w": 600,
+        "h": 1304
       }
     ],
     "tour": [
@@ -394,6 +399,17 @@
       },
       "w": 1672,
       "h": 941
+    },
+    "theme": {
+      "mode": "light",
+      "bg": "#fbf4ec",
+      "bg2": "#f4e6d6",
+      "ink": "#2b1c12",
+      "colors": [
+        "#f76b1c",
+        "#ffa12b",
+        "#e8471d"
+      ]
     }
   },
   {
@@ -522,6 +538,13 @@
         "en": "Decisions, action items and open questions now come from a model running entirely on your iPhone.",
         "zh": "决定、待办和未解决问题，现在全部由在你 iPhone 本地运行的模型生成。"
       }
+    },
+    "theme": {
+      "colors": [
+        "#4c6bff",
+        "#2ec9ff",
+        "#7a3dff"
+      ]
     }
   },
   {
@@ -650,6 +673,13 @@
         "en": "Feed her, decorate her room and play two mini-games — all offline.",
         "zh": "投喂、布置小窝、玩两款小游戏——全程离线。"
       }
+    },
+    "theme": {
+      "colors": [
+        "#52d97f",
+        "#ffc93c",
+        "#17b8a6"
+      ]
     }
   },
   {
@@ -778,6 +808,13 @@
         "en": "An AI stylist that plans around your calendar and the forecast, using only clothes you already own.",
         "zh": "一位 AI 造型师，结合日历和天气，只用你已有的衣服帮你搭配。"
       }
+    },
+    "theme": {
+      "colors": [
+        "#fc8a20",
+        "#ffb12b",
+        "#f45c18"
+      ]
     }
   },
   {
@@ -907,6 +944,13 @@
         "en": "Balances and holdings in one calm dashboard — with no architecture for moving money at all.",
         "zh": "余额和持仓集中在一个安静的看板里——而且从架构上就不能动你的钱。"
       }
+    },
+    "theme": {
+      "colors": [
+        "#17b8a6",
+        "#3ee0a1",
+        "#2a7bff"
+      ]
     }
   },
   {
@@ -1149,6 +1193,17 @@
           }
         ]
       }
-    ]
+    ],
+    "theme": {
+      "mode": "light",
+      "bg": "#eef6f5",
+      "bg2": "#dfeeed",
+      "ink": "#10262a",
+      "colors": [
+        "#168e82",
+        "#1fbf9f",
+        "#1d4fb8"
+      ]
+    }
   }
 ]
