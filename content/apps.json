@@ -134,10 +134,10 @@
       "en": "StoryReel",
       "zh": "故事卷轴"
     },
-    "icon": "icon-storyreel.svg",
+    "icon": "icon-storyreel.png",
     "accent": "storyreel",
     "appStore": "",
-    "visual": "storyreel",
+    "visual": "shots",
     "category": {
       "en": "Photo & Video",
       "zh": "摄影与录像"
@@ -147,8 +147,8 @@
       "zh": "把旅行，讲成一个故事。"
     },
     "headline": {
-      "en": "Your trip,<br><span class=\"grad-text\">told as a story.</span>",
-      "zh": "把旅行，<br><span class=\"grad-text\">讲成一个故事。</span>"
+      "en": "Turn photos into<br><span class=\"grad-text\">travel stories.</span>",
+      "zh": "把照片，<br><span class=\"grad-text\">变成旅行故事。</span>"
     },
     "lede": {
       "en": "StoryReel turns a camera roll full of travel photos into a cinematic memory video. It already knows when and where every photo was taken — so it sorts, picks and sequences for you, and animates the route between places.",
@@ -163,28 +163,6 @@
       "zh": "iOS 18 或更高版本。"
     },
     "features": [
-      {
-        "emoji": "🗺️",
-        "title": {
-          "en": "Timeline and Map",
-          "zh": "时间线与地图"
-        },
-        "body": {
-          "en": "Browse photos by day or on one map of everywhere you've been — tap a place to start a video from just that trip.",
-          "zh": "按日期浏览照片，或在一张地图上看遍所有去过的地方；点一下某个地点，就能只用那次旅行的照片开始做视频。"
-        }
-      },
-      {
-        "emoji": "📚",
-        "title": {
-          "en": "Smart chapters",
-          "zh": "智能分章"
-        },
-        "body": {
-          "en": "Photos are grouped into chapters by place and time, and the best shots are pre-picked on device — no blinks, no screenshots.",
-          "zh": "按地点和时间自动把照片分成章节，并在本地预选最好的照片——闭眼照、截图统统筛掉。"
-        }
-      },
       {
         "emoji": "🌍",
         "title": {
@@ -217,17 +195,6 @@
           "en": "Royalty-free tracks in five moods, plus captions you type, dictate, or draft with optional AI.",
           "zh": "五种氛围的免版税音乐；字幕可以手打、语音输入，或用可选的 AI 起草。"
         }
-      },
-      {
-        "emoji": "📱",
-        "title": {
-          "en": "Local-first",
-          "zh": "本地优先"
-        },
-        "body": {
-          "en": "No account and no backend. Projects and edits live on your iPhone; the only network call is the optional AI caption request.",
-          "zh": "无账号、无后端。项目和编辑都保存在你的 iPhone 上；唯一的联网请求是可选的 AI 字幕。"
-        }
       }
     ],
     "privacy": [
@@ -254,6 +221,179 @@
         "en": "Globe, vintage chart, hand-drawn and more — each one a complete look for your trip video.",
         "zh": "蓝色星球、复古海图、手绘……每一款都是一整套旅行视频的视觉风格。"
       }
+    },
+    "shots": [
+      {
+        "src": "storyreel/appstore-chapters.webp",
+        "alt": {
+          "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
+          "zh": "故事卷轴——编辑旅行的每个章节：故事编辑器与章节编辑面板"
+        },
+        "w": 852,
+        "h": 1846,
+        "kind": "poster"
+      },
+      {
+        "src": "storyreel/appstore-stories.webp",
+        "alt": {
+          "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
+          "zh": "故事卷轴——把照片变成旅行故事：首页与旅行项目"
+        },
+        "w": 852,
+        "h": 1846,
+        "kind": "poster"
+      },
+      {
+        "src": "storyreel/appstore-map-timeline.webp",
+        "alt": {
+          "en": "StoryReel — Follow the story on Map and Timeline",
+          "zh": "故事卷轴——在地图和时间线上回顾旅程"
+        },
+        "w": 852,
+        "h": 1846,
+        "kind": "poster"
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "storyreel/appstore-stories.webp",
+          "alt": {
+            "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
+            "zh": "故事卷轴——把照片变成旅行故事：首页与旅行项目"
+          },
+          "w": 852,
+          "h": 1846,
+          "kind": "poster"
+        },
+        "step": {
+          "en": "Organize",
+          "zh": "整理"
+        },
+        "title": {
+          "en": "Every trip, in one place.",
+          "zh": "每一次旅行，都在这里。"
+        },
+        "body": {
+          "en": "Home keeps your video projects — in progress or exported — with dates, photo counts and running time. Browse Memories sorts your whole library by city or by day, so any old trip is a tap away from becoming a video.",
+          "zh": "首页集中管理你的视频项目——进行中的、已导出的——附带日期、照片数和时长。“浏览回忆”把整个相册按城市或按天整理好，任何一段旧旅行，点一下就能开始做成视频。"
+        },
+        "points": [
+          {
+            "en": "Shortcuts for a new project, by date, by map, or import",
+            "zh": "一键新建项目，或按日期、按地图、导入照片开始"
+          },
+          {
+            "en": "Resume, rename, duplicate or delete any project",
+            "zh": "随时继续、重命名、复制或删除项目"
+          },
+          {
+            "en": "Memories grouped by city or by day across your library",
+            "zh": "整个相册的回忆按城市或按天分组"
+          },
+          {
+            "en": "No account — projects are saved on your iPhone",
+            "zh": "无需账号——项目保存在你的 iPhone 上"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "storyreel/appstore-chapters.webp",
+          "alt": {
+            "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
+            "zh": "故事卷轴——编辑旅行的每个章节：故事编辑器与章节编辑面板"
+          },
+          "w": 852,
+          "h": 1846,
+          "kind": "poster"
+        },
+        "step": {
+          "en": "Build",
+          "zh": "创作"
+        },
+        "title": {
+          "en": "Edit every chapter of the trip.",
+          "zh": "每个章节，都能细细打磨。"
+        },
+        "body": {
+          "en": "Photos are grouped into chapters by place and date, with the best shots picked on device. The Story Builder lays out the whole video top to bottom — opening, route, chapters, music, captions and ending — and every part stays editable.",
+          "zh": "照片按地点和日期自动分成章节，并在本地挑出最好的几张。故事编辑器把整部视频从上到下铺开——开场、路线、章节、配乐、字幕、结尾——每一部分都可以修改。"
+        },
+        "points": [
+          {
+            "en": "Change a chapter's title, date, caption, photos and route",
+            "zh": "修改章节的标题、日期、字幕、照片和路线"
+          },
+          {
+            "en": "Blinks, blurry shots and screenshots are filtered out for you",
+            "zh": "闭眼、模糊的照片和截图会被自动筛掉"
+          },
+          {
+            "en": "Pick how you travelled between stops — plane, car, train and more",
+            "zh": "选择两站之间的交通方式——飞机、汽车、火车等"
+          },
+          {
+            "en": "Captions typed, dictated, or drafted by optional AI",
+            "zh": "字幕可手打、语音输入，或用可选的 AI 起草"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "storyreel/appstore-map-timeline.webp",
+          "alt": {
+            "en": "StoryReel — Follow the story on Map and Timeline",
+            "zh": "故事卷轴——在地图和时间线上回顾旅程"
+          },
+          "w": 852,
+          "h": 1846,
+          "kind": "poster"
+        },
+        "step": {
+          "en": "Explore & relive",
+          "zh": "探索与回顾"
+        },
+        "title": {
+          "en": "Follow the story on map and timeline.",
+          "zh": "在地图和时间线上，重温整段旅程。"
+        },
+        "body": {
+          "en": "The Map tab puts every photo on a globe, from state down to city and town; the Timeline lays your camera roll out day by day with where you went. Tap a place or select a few days to start a video from just those photos.",
+          "zh": "地图页把每张照片放到地球上，可以从州缩放到城市和小镇；时间线页按天铺开相册，写明你去了哪里。点一个地方、或选中几天，就能只用这些照片开始做视频。"
+        },
+        "points": [
+          {
+            "en": "Three zoom levels: state, city and town",
+            "zh": "三级缩放：州、城市、小镇"
+          },
+          {
+            "en": "Photo counts on every place you've photographed",
+            "zh": "每个拍过照片的地方都标出数量"
+          },
+          {
+            "en": "A place summary for every day",
+            "zh": "每一天都附地点摘要"
+          },
+          {
+            "en": "Jump to any date from the calendar",
+            "zh": "用日历跳到任意日期"
+          },
+          {
+            "en": "Start a project from a place or a few days",
+            "zh": "从一个地点或几天的照片开始新项目"
+          }
+        ]
+      }
+    ],
+    "banner": {
+      "src": "storyreel/appstore-overview.webp",
+      "alt": {
+        "en": "StoryReel — Plan, build and relive every journey: Organize, Build and Explore",
+        "zh": "故事卷轴——规划、创作、重温每一段旅程：整理、创作、探索"
+      },
+      "w": 1672,
+      "h": 941
     }
   },
   {

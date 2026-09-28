@@ -202,10 +202,13 @@ def miemie(lang, root, width=420):
 
 # ---------- real screenshots ----------
 def shot(app, img, lang, root, cls=""):
-    """One real app screenshot in a phone frame. `img` is {"src", "alt": {en, zh}}."""
-    return (f'<figure class="shot {cls}"><span class="shot__island" aria-hidden="true"></span>'
-            f'<img src="{root}assets/img/{img["src"]}" alt="{esc(L(img["alt"], lang))}" width="600" height="1304" '
-            f'loading="lazy" decoding="async"></figure>')
+    """One real app screenshot in a phone frame, or an App Store image ("kind": "poster") as a card.
+    `img` is {"src", "alt": {en, zh}, "w", "h"}; "island": false when the image already shows one."""
+    poster = img.get("kind") == "poster"  # a finished App Store image: no phone frame
+    island = '<span class="shot__island" aria-hidden="true"></span>' if img.get("island", True) and not poster else ""
+    return (f'<figure class="shot{" shot--poster" if poster else ""} {cls}">{island}'
+            f'<img src="{root}assets/img/{img["src"]}" alt="{esc(L(img["alt"], lang))}" '
+            f'width="{img.get("w", 600)}" height="{img.get("h", 1304)}" loading="lazy" decoding="async"></figure>')
 
 
 def trio(app, lang, root):
@@ -231,7 +234,12 @@ def tour(app, lang, root):
           <ul class="feature-list">{pts}</ul>
         </div>
       </div>''')
-    return f'<div class="tour">{"".join(rows)}\n    </div>'
+    banner = ""
+    if app.get("banner"):
+        b = app["banner"]
+        banner = (f'\n    <figure class="banner-shot reveal"><img src="{root}assets/img/{b["src"]}" '
+                  f'alt="{esc(L(b["alt"], lang))}" width="{b["w"]}" height="{b["h"]}" loading="lazy" decoding="async"></figure>')
+    return f'{banner}<div class="tour">{"".join(rows)}\n    </div>'
 
 
 def visual(app, lang, root, big=False):
@@ -524,14 +532,16 @@ def app_page(a, lang):
     path = f"apps/{a['slug']}/"
     root = rel_root(lang, path)
     name = esc(NM(a, lang))
-    feats = tour(a, lang, root) if a.get("tour") else "".join(f'''
+    feats = "".join(f'''
         <div class="feature reveal" style="--d: {0.05 * (i % 3):.2f}s">
           <div class="feature__icon" aria-hidden="true">{f["emoji"]}</div>
           <h3>{esc(L(f["title"], lang))}</h3>
           <p>{esc(L(f["body"], lang))}</p>
         </div>''' for i, f in enumerate(a.get("features", [])))
-    if not a.get("tour"):
-        feats = f'<div class="features">{feats}\n    </div>'
+    grid_cls = "features features--after" if a.get("tour") else "features"
+    feats = f'<div class="{grid_cls}">{feats}\n    </div>' if feats.strip() else ""
+    if a.get("tour"):  # screen-by-screen tour first, then any remaining feature cards below it
+        feats = tour(a, lang, root) + ("\n    " + feats if feats else "")
     priv = "".join(f"<li>{esc(L(p, lang))}</li>" for p in a["privacy"])
     others = "".join(f'''
         <a class="app-tile app-tile--sm" href="{href(lang, path, lang, "apps/" + o["slug"] + "/")}" style="--accent: var(--{o["accent"]})">
