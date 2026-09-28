@@ -1,7 +1,7 @@
 # 4M Studio — website
 
 The marketing site for **4M Studio** and its iOS apps — AvatarTracker, StoryReel,
-MeetLog, QQNest, Wearly and WorthView — in **English and 中文**.
+MeetLog, QQNest, Wearly, WorthView and CardPick — in **English and 中文**.
 Live at <https://4m-studio.github.io/>, served by GitHub Pages from `main`.
 
 Plain static HTML, CSS and JS. The pages are generated from two JSON files by a

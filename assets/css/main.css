@@ -31,6 +31,7 @@
   --avatartracker: linear-gradient(135deg, #b9a4ff 0%, #8a6cff 50%, #ff6fb1 100%);
   --wearly:        linear-gradient(135deg, #ffb12b 0%, #fc8a20 52%, #f45c18 100%);
   --worthview:     linear-gradient(135deg, #3ee0a1 0%, #17b8a6 55%, #2a7bff 100%);
+  --cardpick:      linear-gradient(135deg, #1fbf9f 0%, #1690a0 50%, #1d4fb8 100%);
 
   /* Geometry */
   --r-sm: 12px;
@@ -838,6 +839,26 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .networth { font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 2px 0 6px; }
 .networth small { display: block; font-size: 10.5px; font-weight: 600; color: #3ee0a1; letter-spacing: 0; margin-top: 3px; }
 .spark { width: 100%; height: 48px; margin-bottom: 8px; }
+/* CardPick */
+.cp-search { display: flex; align-items: center; gap: 6px; border-radius: 12px; padding: 8px 10px; font-size: 11.5px; font-weight: 600;
+  background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.1); }
+.cp-search svg { color: #3ad6b8; flex: none; }
+.cp-pick { display: flex; align-items: center; gap: 10px; border-radius: 14px; padding: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+.cp-card { flex: none; width: 50px; height: 32px; border-radius: 6px; background: linear-gradient(135deg, var(--c1), var(--c2));
+  box-shadow: 0 4px 12px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.14); position: relative; }
+.cp-card::before { content: ""; position: absolute; left: 7px; top: 9px; width: 9px; height: 7px; border-radius: 2px; background: linear-gradient(135deg, #f3d77e, #c9a24c); }
+.cp-pick small { display: block; font-size: 8.5px; font-weight: 700; letter-spacing: .14em; color: #3ad6b8; }
+.cp-pick b { display: block; font-size: 12px; font-weight: 680; letter-spacing: -.01em; line-height: 1.15; margin: 1px 0 2px; }
+.cp-pick em { font-style: normal; font-size: 10.5px; font-weight: 700; color: #3ad6b8; }
+.cp-rows { display: grid; gap: 7px; padding: 2px 2px 0; }
+.cp-row { display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; font-size: 9.5px; color: var(--text-2); }
+.cp-row span:nth-child(2) { font-weight: 700; color: var(--text); }
+.cp-row i { grid-column: 1 / -1; height: 4px; border-radius: 999px; background: rgba(255,255,255,.1); overflow: hidden; }
+.cp-row i::after { content: ""; display: block; height: 100%; width: var(--w); border-radius: inherit; background: rgba(255,255,255,.38); }
+.cp-row--win { color: var(--text); font-weight: 600; }
+.cp-row--win i::after { background: var(--accent); }
+.cp-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.cp-chips span { font-size: 9.5px; font-weight: 600; padding: 5px 8px; border-radius: 999px; background: rgba(255,255,255,.08); color: var(--text-2); }
 .app-card--feature .app-card__media { align-self: center; }
 a.badge { transition: border-color .2s, background .2s; }
 a.badge:hover { border-color: var(--stroke-strong); }
@@ -1014,7 +1035,7 @@ main { overflow-x: clip; }
 /* ---------- Responsive (v3) ---------- */
 @media (max-width: 1000px) {
   .news__slide, .app-hero__grid { grid-template-columns: 1fr; gap: 10px; padding: 30px 28px 26px; }
-  .app-hero__grid { padding: 0; }
+  .app-hero__grid { padding-block: 0; } /* keep .wrap side gutters */
   .news__visual { min-height: 0; }
   .app-grid { grid-template-columns: 1fr 1fr; }
   .app-grid--sm { grid-template-columns: repeat(3, 1fr); }

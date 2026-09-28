@@ -768,5 +768,134 @@
         "zh": "余额和持仓集中在一个安静的看板里——而且从架构上就不能动你的钱。"
       }
     }
+  },
+  {
+    "slug": "cardpick",
+    "name": {
+      "en": "CardPick",
+      "zh": "CardPick"
+    },
+    "icon": "icon-cardpick.png",
+    "accent": "cardpick",
+    "isNew": true,
+    "appStore": "",
+    "visual": "cardpick",
+    "category": {
+      "en": "Finance",
+      "zh": "财务"
+    },
+    "tagline": {
+      "en": "The right card for every purchase.",
+      "zh": "每一笔，都刷对卡。"
+    },
+    "headline": {
+      "en": "Which card?<br><span class=\"grad-text\">Just ask.</span>",
+      "zh": "刷哪张卡？<br><span class=\"grad-text\">问一下就知道。</span>"
+    },
+    "lede": {
+      "en": "CardPick tells you which of your credit cards earns the most on what you're about to buy. Type “Costco $200” or “Dinner $120” and get the winning card, what it earns and why — worked out on your iPhone. No card numbers, no bank logins, no accounts.",
+      "zh": "CardPick 告诉你，眼前这笔消费用哪张信用卡回报最高。输入“Costco $200”或“Dinner $120”，马上看到该刷哪张卡、能拿多少、为什么——全部在你的 iPhone 上算好。不需要卡号，不需要网银登录，也不用注册账号。"
+    },
+    "platform": {
+      "en": "iPhone · iOS 17",
+      "zh": "iPhone · iOS 17"
+    },
+    "requirements": {
+      "en": "iOS 17 or later. Covers popular US credit cards.",
+      "zh": "iOS 17 或更高版本。收录美国常见信用卡。"
+    },
+    "features": [
+      {
+        "emoji": "🔎",
+        "title": {
+          "en": "Just type the purchase",
+          "zh": "直接输入要买什么"
+        },
+        "body": {
+          "en": "“Costco $200”, “Uber”, “United flight $600” — CardPick recognises the merchant and category, and asks with quick category chips when it isn't sure.",
+          "zh": "“Costco $200”、“Uber”、“United flight $600”——CardPick 自动识别商家和消费类别；拿不准时会给出类别选项让你点选，而不是瞎猜。"
+        }
+      },
+      {
+        "emoji": "🏆",
+        "title": {
+          "en": "One clear winner",
+          "zh": "一眼看出赢家"
+        },
+        "body": {
+          "en": "The best card in your wallet, what it earns on this purchase and why — plus a side-by-side comparison of every card you carry.",
+          "zh": "告诉你钱包里哪张卡最好、这笔能拿多少、为什么——并把你所有卡的回报并排对比。"
+        }
+      },
+      {
+        "emoji": "🔄",
+        "title": {
+          "en": "Rotating 5%, handled honestly",
+          "zh": "季度 5% 类别，诚实计算"
+        },
+        "body": {
+          "en": "Quarterly bonus categories count only after you mark them activated. Until then you'll see “5% if activated” and how many days are left.",
+          "zh": "季度轮换的 5% 类别只有在你标记“已激活”后才计入；在那之前会显示“激活后 5%”以及剩余天数。"
+        }
+      },
+      {
+        "emoji": "📊",
+        "title": {
+          "en": "Your benefits at a glance",
+          "zh": "权益一目了然"
+        },
+        "body": {
+          "en": "See the best card for each category, bonuses waiting on activation, and when this quarter's 5% ends.",
+          "zh": "按类别查看最佳用卡、等待激活的奖励，以及本季度 5% 何时结束。"
+        }
+      },
+      {
+        "emoji": "🏷️",
+        "title": {
+          "en": "Your offers stack on top",
+          "zh": "叠加你自己的优惠"
+        },
+        "body": {
+          "en": "Saw 10% back at Nike in your card's app? Add it, and CardPick includes it on top of the card's usual earning.",
+          "zh": "在发卡行 App 里看到 Nike 返 10%？添加进来，CardPick 会把它叠加到这张卡的常规回报上一起计算。"
+        }
+      },
+      {
+        "emoji": "🎯",
+        "title": {
+          "en": "No made-up numbers",
+          "zh": "不编造数字"
+        },
+        "body": {
+          "en": "Points and miles show as points unless you set your own value per point, and spending caps are shown — never guessed.",
+          "zh": "积分和里程默认按积分显示，除非你自己设定每分价值；消费上限会如实标出，绝不猜测。"
+        }
+      }
+    ],
+    "privacy": [
+      {
+        "en": "Only card products — never numbers, logins or account access",
+        "zh": "只记录卡片产品——从不需要卡号、登录或账户权限"
+      },
+      {
+        "en": "Every recommendation is worked out on your iPhone",
+        "zh": "所有推荐都在你的 iPhone 上计算"
+      },
+      {
+        "en": "No accounts, no analytics, no AI services",
+        "zh": "没有账号、没有统计分析、不调用 AI 服务"
+      }
+    ],
+    "news": {
+      "date": "2026-09",
+      "title": {
+        "en": "CardPick: which card should I use?",
+        "zh": "CardPick：这笔该刷哪张卡？"
+      },
+      "body": {
+        "en": "Type what you're buying and CardPick picks the card in your wallet that earns the most — right on your iPhone.",
+        "zh": "输入你要买什么，CardPick 就从你的钱包里挑出回报最高的那张卡——就在你的 iPhone 上。"
+      }
+    }
   }
 ]

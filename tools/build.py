@@ -176,6 +176,20 @@ def mock(app, lang, cls=""):
             <div class="tile">🏦 {"储蓄与支票账户 · 只读" if zh else "Checking & savings · Read only"}</div>
             <div class="tile tile--accent">📈 {"券商 · 14 个持仓" if zh else "Brokerage · 14 holdings"}</div>
             <div class="tile">🏠 {"房产" if zh else "Home"} · 🚗 {"汽车 · 手动" if zh else "Car · manual"}</div>'''
+    elif v == "cardpick":
+        rows = [("Blue Cash Preferred", "3%", 100, True), ("Sapphire Preferred", "2x", 67, False),
+                ("Freedom Unlimited", "1.5%", 50, False), ("Freedom Flex", "1%", 33, False)]
+        bars = "".join(f'<div class="cp-row{" cp-row--win" if win else ""}"><span>{n}</span><span>{r}</span><i style="--w:{w}%"></i></div>'
+                       for n, r, w, win in rows)
+        inner = f'''
+            <div class="screen-ui__head">{"刷哪张卡？" if zh else "Which card?"}</div>
+            <p class="screen-ui__sub">{"输入你要买什么" if zh else "Type what you're buying."}</p>
+            <div class="cp-search"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>Uber</div>
+            <div class="cp-pick"><span class="cp-card" style="--c1:#1d5fc4;--c2:#5494e6"></span>
+              <div><small>{"推荐" if zh else "USE"}</small><b>Blue Cash Preferred</b><em>{"3% 返现" if zh else "3% cash back"}</em></div></div>
+            <div class="tile">✓ {"交通出行：网约车、打车、停车、火车均为 3%" if zh else "Transit — rideshare, taxis, parking and trains earn 3%"}</div>
+            <div class="cp-rows">{bars}</div>
+            <div class="cp-chips"><span>Costco $200</span><span>Dinner $120</span><span>$50 gas</span></div>'''
     return (f'<div class="phone phone--solo {cls}" style="--accent: var(--{app["accent"]})" aria-hidden="true">'
             f'<div class="phone__screen"><span class="phone__notch"></span><div class="screen-ui">{inner}'
             f'</div></div></div>')

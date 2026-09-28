@@ -66,6 +66,7 @@
     left:  { s: [322.2, 819.5], e: [210.2, 1210.5], w: [113.3, 1559.4], out: -1 },
     right: { s: [709.9, 819.5], e: [819.8, 1213.7], w: [911.4, 1544.3], out: 1 }
   };
+  var IRIS = { x: 13, up: 5, down: 12 };   // canvas px
   var HANDS = ['Rest', 'Open', 'Fist', 'Point', 'Peace', 'ThumbsUp', 'Heart'];
 
   var DEG = 180 / Math.PI;
@@ -265,8 +266,21 @@
       var g = group('', feat);
       layer('eye' + cap, g, base);
       var clip = group('', g);
+      // The iris is masked to the white of the eye itself (mask_eye_*.png is
+      // traced from the socket artwork), so it can never sit on the lashes or
+      // skin. The ellipse is only a fallback for browsers without CSS masks.
       clip.style.clipPath = 'ellipse(' + (ap[2] / 2 - 3) + 'px ' + (ap[3] / 2 - 2) + 'px at ' +
         (ap[0] + ap[2] / 2) + 'px ' + (ap[1] + ap[3] / 2) + 'px)';
+      var sock = L['eye' + cap];
+      var mask = 'url("' + base + 'mask_eye_' + side + '.png")';
+      var mpos = (sock[0] - sock[2] / 2) + 'px ' + (sock[1] - sock[3] / 2) + 'px';
+      var msize = sock[2] + 'px ' + sock[3] + 'px';
+      ['webkitMask', 'mask'].forEach(function (k) {
+        clip.style[k + 'Image'] = mask;
+        clip.style[k + 'Position'] = mpos;
+        clip.style[k + 'Size'] = msize;
+        clip.style[k + 'Repeat'] = 'no-repeat';
+      });
       var iris = layer('iris' + cap, clip, base);
       var lid = layer('lid' + cap, feat, base);
       var brow = layer('brow' + cap, feat, base);
@@ -543,7 +557,10 @@
       'px) rotate(' + (-hairLag * 0.1).toFixed(2) + 'deg)';
 
     // Irises, clipped to each eye's aperture.
-    var ix = (lx * 27).toFixed(2), iy = (ly * 11).toFixed(2);
+    // Travel measured against the eye-white masks: the most either iris can
+    // move while at least ~70% of it stays visible (sideways 13, up 5, down 12).
+    var ix = (clamp(lx, -1, 1) * IRIS.x).toFixed(2);
+    var iy = (ly < 0 ? Math.max(ly, -1) * IRIS.up : Math.min(ly, 1) * IRIS.down).toFixed(2);
     this.eyes.left.iris.style.transform = 'translate(' + ix + 'px,' + iy + 'px)';
     this.eyes.right.iris.style.transform = 'translate(' + ix + 'px,' + iy + 'px)';
 

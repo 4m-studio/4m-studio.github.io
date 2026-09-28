@@ -56,6 +56,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/worthview/"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/worthview/"/>
   </url>
+  <url><loc>https://4m-studio.github.io/apps/cardpick/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/cardpick/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/cardpick/"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/apps/cardpick/</loc><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/apps/cardpick/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/apps/cardpick/"/>
+  </url>
   <url><loc>https://4m-studio.github.io/privacy/</loc><priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/"/>
@@ -119,5 +127,13 @@
   <url><loc>https://4m-studio.github.io/zh/privacy/worthview.html</loc><priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/worthview.html"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/worthview.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/privacy/cardpick.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/cardpick.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/cardpick.html"/>
+  </url>
+  <url><loc>https://4m-studio.github.io/zh/privacy/cardpick.html</loc><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://4m-studio.github.io/privacy/cardpick.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://4m-studio.github.io/zh/privacy/cardpick.html"/>
   </url>
 </urlset>
