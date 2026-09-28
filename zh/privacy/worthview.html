@@ -85,7 +85,7 @@
     <h3 style="margin-top:26px">SimpleFIN Bridge</h3>
     <p>你在 SimpleFIN 自己的网站上连接机构，再把设置令牌交给净览。之后你的 iPhone 直接与 SimpleFIN 通信，只请求余额——不含交易记录。SimpleFIN 是独立的服务，有自己的条款和隐私政策。</p>
     <h3 style="margin-top:26px">Apple 钱包（FinanceKit）</h3>
-    <p>在你授权后，净览通过 Apple 的 FinanceKit 读取 Apple Card、Apple Cash 和储蓄账户的余额。这些数据在你的 iPhone 上读取，从不离开设备，也不使用交易记录。</p>
+    <p>在该功能可用且你授权后，净览通过 Apple 的 FinanceKit 读取 Apple Card、Apple Cash 和储蓄账户的余额。这些数据在你的 iPhone 上读取，从不离开设备，也不使用交易记录。</p>
     <h3 style="margin-top:26px">个人 Plaid 中继</h3>
     <p>使用 Plaid 时，你在 Plaid Link 中登录银行，请求经由一个<em>你自己</em>部署在 Cloudflare 账户上的小型中继——4M&nbsp;Studio 不运营它。中继不保存数据库或日志；它会把 Plaid 的访问令牌封装加密，只有中继自己能打开，你的 iPhone 把这份封装后的令牌存进钥匙串。由于 Plaid 无法为银行账户单独开通余额读取，银行连接会以最小的交易窗口（一天）创建；净览从不请求、也从不读取任何交易记录。</p>
     <p>余额和价格由各机构提供，可能有延迟；持仓不是实时报价。净览不构成理财建议。</p>
@@ -118,10 +118,6 @@
     <h2>联系我们</h2>
     <p>对净览的隐私有疑问？请发邮件至
        <a href="mailto:support.4mstudio@gmail.com">support.4mstudio@gmail.com</a>，会有真人回复你。</p>
-
-    <div class="note">
-      <strong>模板提示——</strong>本页根据净览当前代码撰写。提交前请对照实际版本逐条核对，并在向 App Store Connect 提交网址前删除此提示框。本页不构成法律意见。
-    </div>
   </div>
 
   <p style="margin-top:34px"><a class="link-arrow" href="../../zh/apps/worthview/">

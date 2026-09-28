@@ -23,7 +23,7 @@
     <h3 style="margin-top:26px">SimpleFIN Bridge</h3>
     <p>You connect your institutions on SimpleFIN's own site and give WorthView a setup token. Your iPhone then talks to SimpleFIN directly and requests balances only — no transaction history. SimpleFIN is a separate service with its own terms and privacy policy.</p>
     <h3 style="margin-top:26px">Apple Wallet (FinanceKit)</h3>
-    <p>With your permission, WorthView reads Apple Card, Apple Cash and Savings balances through Apple's FinanceKit. This data is read on your iPhone and never leaves it. Transactions are not used.</p>
+    <p>Where available, and only with your permission, WorthView reads Apple Card, Apple Cash and Savings balances through Apple's FinanceKit. This data is read on your iPhone and never leaves it. Transactions are not used.</p>
     <h3 style="margin-top:26px">Personal Plaid relay</h3>
     <p>If you use Plaid, you sign in to your bank inside Plaid Link, and requests go through a small relay that <em>you</em> deploy on your own Cloudflare account — 4M&nbsp;Studio does not operate it. The relay keeps no database or logs. It seals Plaid's access token so that only the relay can open it, and your iPhone stores that sealed token in the Keychain. Because Plaid does not offer balances on their own for bank accounts, bank connections are created with the smallest possible transaction window (one day); WorthView never requests or reads any transactions.</p>
     <p>Balances and prices are reported by your institutions and may be delayed. Holdings are not live quotes. WorthView is not financial advice.</p>
@@ -58,10 +58,4 @@
     <h2>Contact</h2>
     <p>Questions about privacy in WorthView? Email
        <a href="mailto:support.4mstudio@gmail.com">support.4mstudio@gmail.com</a> and a human will reply.</p>
-
-    <div class="note">
-      <strong>Template notice —</strong> this page was written from WorthView's current code.
-      Review every line against the version you submit, and delete this box before
-      submitting the URL to App Store Connect. It is not legal advice.
-    </div>
   </div>

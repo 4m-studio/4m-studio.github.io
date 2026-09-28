@@ -860,8 +860,8 @@
           "zh": "连接方式由你选"
         },
         "body": {
-          "en": "SimpleFIN Bridge for most US banks, cards and brokerages, Apple Wallet balances read on-device, or a personal Plaid relay you run yourself. Or skip connections and add everything by hand.",
-          "zh": "SimpleFIN Bridge 覆盖大多数美国银行、信用卡和券商；Apple 钱包余额在设备上读取；也可以用你自己部署的 Plaid 中继。或者一个都不连，全部手动添加。"
+          "en": "SimpleFIN Bridge for most US banks, cards and brokerages, a personal Plaid relay you run yourself, and Apple Wallet balances read on-device once Apple enables it. Or skip connections and add everything by hand.",
+          "zh": "SimpleFIN Bridge 覆盖大多数美国银行、信用卡和券商；也可以用你自己部署的 Plaid 中继；Apple 钱包余额在 Apple 开放后于设备上读取。或者一个都不连，全部手动添加。"
         }
       },
       {
