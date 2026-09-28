@@ -1197,3 +1197,4 @@ main { overflow-x: clip; }
 
 /* WorthView: the home slide sits on black, its own page on a light grey-blue — deepen the gradient on light pages */
 .app-theme--light { --worthview: linear-gradient(135deg, #6f7cff 0%, #3346d3 52%, #1b2573 100%); }
+.app-theme--light { --wearly: linear-gradient(135deg, #c9a06a 0%, #b08956 48%, #6e5638 100%); }

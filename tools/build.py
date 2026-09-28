@@ -203,11 +203,11 @@ def miemie(lang, root, width=420):
 # ---------- real screenshots ----------
 def shot(app, img, lang, root, cls=""):
     """One real app screenshot in a phone frame, or an App Store image ("kind": "poster") as a card.
-    `img` is {"src", "alt": {en, zh}, "w", "h"}; "island": false when the image already shows one."""
+    `img` is {"src", optional "src_zh", "alt": {en, zh}, "w", "h"}; "island": false when the image already shows one."""
     poster = img.get("kind") == "poster"  # a finished App Store image: no phone frame
     island = '<span class="shot__island" aria-hidden="true"></span>' if img.get("island", True) and not poster else ""
     return (f'<figure class="shot{" shot--poster" if poster else ""} {cls}">{island}'
-            f'<img src="{root}assets/img/{img["src"]}" alt="{esc(L(img["alt"], lang))}" '
+            f'<img src="{root}assets/img/{img.get("src_zh") if lang == "zh" and img.get("src_zh") else img["src"]}" alt="{esc(L(img["alt"], lang))}" '
             f'width="{img.get("w", 600)}" height="{img.get("h", 1304)}" loading="lazy" decoding="async"></figure>')
 
 

@@ -688,10 +688,10 @@
       "en": "Wearly",
       "zh": "衣见"
     },
-    "icon": "icon-wearly.svg",
+    "icon": "icon-wearly.png",
     "accent": "wearly",
     "appStore": "",
-    "visual": "wearly",
+    "visual": "shots",
     "category": {
       "en": "Lifestyle",
       "zh": "生活"
@@ -705,82 +705,49 @@
       "zh": "每天穿什么，<br><span class=\"grad-text\">替你想好了。</span>"
     },
     "lede": {
-      "en": "Wearly is an AI wardrobe stylist that knows what you own, where you're going and what the weather is doing. Open it in the morning and you already know what to wear — built from clothes already in your closet.",
-      "zh": "衣见是一位 AI 衣橱造型师：它知道你有哪些衣服、今天要去哪里、天气怎么样。早上打开，就知道今天穿什么——而且都来自你自己的衣柜。"
+      "en": "Wearly is an AI wardrobe stylist that knows what you own, where you're going and what the weather is doing. Photograph your clothes once, and every morning it hands you an outfit built from your own closet — with one plain sentence on why it works.",
+      "zh": "衣见是一位 AI 衣橱造型师：它知道你有哪些衣服、今天要去哪里、天气怎么样。把衣服拍一次，之后每天早上，它都会用你自己衣柜里的衣服搭好一套，并用一句大白话告诉你为什么这样搭。"
     },
     "platform": {
       "en": "iPhone · iOS 18",
       "zh": "iPhone · iOS 18"
     },
     "requirements": {
-      "en": "iOS 18 or later. Live weather uses WeatherKit; calendar is optional.",
-      "zh": "iOS 18 或更高版本。实时天气使用 WeatherKit，日历为可选。"
+      "en": "iOS 18 or later. Works with no permissions at all; live weather uses Apple WeatherKit and the calendar is optional.",
+      "zh": "iOS 18 或更高版本。不授权任何权限也能用；实时天气来自 Apple WeatherKit，日历为可选。"
     },
     "features": [
       {
-        "emoji": "☀️",
+        "emoji": "🌦️",
         "title": {
-          "en": "Dressed for the day",
-          "zh": "为今天而穿"
+          "en": "Weather that plans ahead",
+          "zh": "提前替你看天气"
         },
         "body": {
-          "en": "Outfits planned around the whole day's forecast — a cardigan for a 61° morning that turns into a 76° afternoon.",
-          "zh": "按全天天气来搭配——早上 16°C、下午 24°C，就给你加一件开衫。"
+          "en": "Too cold is treated as worse than slightly too warm, and when rain is likely Wearly steers you away from suede and toward something with a hood.",
+          "zh": "冷比稍微热一点更难受，所以它宁可让你多穿一点；预报有雨时，会避开麂皮，提醒你带件有帽子的外套。"
         }
       },
       {
-        "emoji": "📅",
+        "emoji": "🧠",
         "title": {
-          "en": "Knows your plans",
-          "zh": "了解你的安排"
+          "en": "Remembers what you loved",
+          "zh": "记得你喜欢什么"
         },
         "body": {
-          "en": "Reads your calendar as occasions — team meeting, dinner, gym — and dresses you for all of them at once.",
-          "zh": "把日历读成场合——团队会议、晚餐、健身——一套穿搭兼顾全天。"
-        }
-      },
-      {
-        "emoji": "💬",
-        "title": {
-          "en": "Why this works",
-          "zh": "为什么这样穿"
-        },
-        "body": {
-          "en": "Every pick comes with a plain sentence explaining it. No scores, no jargon.",
-          "zh": "每套推荐都附一句大白话解释，没有分数，也没有术语。"
-        }
-      },
-      {
-        "emoji": "📸",
-        "title": {
-          "en": "Snap your closet",
-          "zh": "拍照建衣橱"
-        },
-        "body": {
-          "en": "Photograph your clothes and each piece is cut out and tagged on device — colour, pattern, fabric, warmth, formality.",
-          "zh": "给衣服拍张照，每件单品都会在本地自动抠图并标注颜色、图案、面料、保暖度和正式程度。"
-        }
-      },
-      {
-        "emoji": "🧳",
-        "title": {
-          "en": "Stylist chat and packing",
-          "zh": "造型师对话与打包清单"
-        },
-        "body": {
-          "en": "Ask for alternatives in plain words, or get a capsule packing list: the fewest pieces for the most outfits.",
-          "zh": "用日常语言让它换一套，或生成胶囊打包清单：用最少的单品搭出最多的造型。"
+          "en": "Tell it an outfit was too warm, too formal or just right. Feedback fades over time, and combinations you loved come back around.",
+          "zh": "告诉它这套太热、太正式，或者刚刚好。反馈会随时间淡化，而你喜欢的组合会再次出现。"
         }
       },
       {
         "emoji": "🔒",
         "title": {
-          "en": "Photos stay home",
-          "zh": "照片不出门"
+          "en": "Private by design",
+          "zh": "从设计上保护隐私"
         },
         "body": {
-          "en": "Garment photos never leave your iPhone. Calendar event titles never leave it either.",
-          "zh": "衣服照片不会离开你的 iPhone，日历里的事件标题也不会。"
+          "en": "Clothing photos are analysed on your iPhone with Apple Vision. Calendar events are reduced to an occasion — the titles never leave your device.",
+          "zh": "衣服照片用 Apple Vision 在 iPhone 本地分析；日历事件只转换成场合类型，标题不会离开你的设备。"
         }
       }
     ],
@@ -810,12 +777,260 @@
       }
     },
     "theme": {
+      "mode": "light",
+      "bg": "#f6f4f0",
+      "bg2": "#ebe4d8",
+      "ink": "#1b1917",
       "colors": [
-        "#fc8a20",
-        "#ffb12b",
-        "#f45c18"
+        "#b08956",
+        "#d6b183",
+        "#6e5638"
       ]
-    }
+    },
+    "shots": [
+      {
+        "src": "wearly/closet.webp",
+        "src_zh": "wearly/zh/closet.webp",
+        "alt": {
+          "en": "Wearly Closet: every piece cut out and tagged, with category filters",
+          "zh": "衣见“衣柜”页：每件单品都已抠图并分类，可按品类筛选"
+        },
+        "w": 600,
+        "h": 1304
+      },
+      {
+        "src": "wearly/today.webp",
+        "src_zh": "wearly/zh/today.webp",
+        "alt": {
+          "en": "Wearly Today: the day's forecast and calendar above today's outfit, laid out as a flat-lay",
+          "zh": "衣见“今天”页：当天天气和日程，下面是今天的搭配平铺图"
+        },
+        "w": 600,
+        "h": 1304
+      },
+      {
+        "src": "wearly/calendar.webp",
+        "src_zh": "wearly/zh/calendar.webp",
+        "alt": {
+          "en": "Wearly Calendar: tomorrow's outfit and a week of planned looks",
+          "zh": "衣见“日历”页：明天穿什么，以及规划好的一周搭配"
+        },
+        "w": 600,
+        "h": 1304
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "wearly/today.webp",
+          "src_zh": "wearly/zh/today.webp",
+          "alt": {
+            "en": "Wearly Today: the day's forecast and calendar above today's outfit, laid out as a flat-lay",
+            "zh": "衣见“今天”页：当天天气和日程，下面是今天的搭配平铺图"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Today",
+          "zh": "今天"
+        },
+        "title": {
+          "en": "Open it, and you're dressed.",
+          "zh": "打开它，就知道穿什么。"
+        },
+        "body": {
+          "en": "Today reads the whole day before it picks — the forecast from morning to evening and what's on your calendar — then lays out one outfit from your own closet as a flat-lay you can tap to change.",
+          "zh": "“今天”页先把一整天看完再做决定——从早到晚的天气，加上日历里的安排——然后用你自己衣柜里的衣服，平铺出一套搭配，点一下就能换。"
+        },
+        "points": [
+          {
+            "en": "Warmth is planned across the day: a 61° → 76° day gets a cardigan that comes off by lunch",
+            "zh": "按全天温度来穿：早上 16°、下午 24°，就配一件中午能脱掉的开衫"
+          },
+          {
+            "en": "A 10:00 meeting and a 6:30 dinner are dressed for with one outfit",
+            "zh": "10 点开会、晚上 6 点半吃饭，一套就能兼顾"
+          },
+          {
+            "en": "“Why this works” explains every pick in one plain sentence — never a score",
+            "zh": "“为什么这样搭”用一句大白话解释每套推荐——不打分"
+          },
+          {
+            "en": "Wear This, Shuffle, More casual, More formal — or tap a piece to swap it or say it's too warm",
+            "zh": "就穿这套、换一套、更随意、更正式——或点某件单品替换，或告诉它太热了"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "wearly/closet.webp",
+          "src_zh": "wearly/zh/closet.webp",
+          "alt": {
+            "en": "Wearly Closet: every piece cut out and tagged, with category filters",
+            "zh": "衣见“衣柜”页：每件单品都已抠图并分类，可按品类筛选"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Closet",
+          "zh": "衣柜"
+        },
+        "title": {
+          "en": "Photograph it once.",
+          "zh": "拍一次就够了。"
+        },
+        "body": {
+          "en": "Lay a few pieces out and take one photo. Wearly separates each garment, cuts it out and tags it on your iPhone — colour, pattern, fabric, warmth and formality — and you can correct anything it got wrong.",
+          "zh": "把几件衣服摊开拍一张照片，衣见会在 iPhone 上把每一件分开、抠图，并标注颜色、图案、面料、保暖度和正式程度；识别不对的地方可以随时改。"
+        },
+        "points": [
+          {
+            "en": "Camera, multi-select from your photo library, or a mirror selfie",
+            "zh": "拍照、从相册多选，或者一张对镜自拍"
+          },
+          {
+            "en": "Search, filter by category, and sort by most or least worn",
+            "zh": "搜索、按品类筛选，按穿得最多或最少排序"
+          },
+          {
+            "en": "Pieces in the laundry are left out of suggestions until they're back",
+            "zh": "放进待洗的衣服不会被推荐，洗好后自动回来"
+          },
+          {
+            "en": "Every piece keeps its outfit history and what it goes well with",
+            "zh": "每件单品都记得穿过的搭配，以及和什么最配"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "wearly/calendar.webp",
+          "src_zh": "wearly/zh/calendar.webp",
+          "alt": {
+            "en": "Wearly Calendar: tomorrow's outfit and a week of planned looks",
+            "zh": "衣见“日历”页：明天穿什么，以及规划好的一周搭配"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Calendar",
+          "zh": "日历"
+        },
+        "title": {
+          "en": "Plan the week in one tap.",
+          "zh": "一键规划一整周。"
+        },
+        "body": {
+          "en": "Plan My Week drafts an outfit for every day ahead, matched to that day's forecast and plans, and spaces out your favourites so nothing repeats too soon. The night before, tomorrow's outfit is waiting at the top.",
+          "zh": "“规划这一周”会为接下来每一天搭好一套，匹配当天的天气和安排，并把常穿的单品错开，不会太快重复。前一晚，明天的搭配就放在最上面等你。"
+        },
+        "points": [
+          {
+            "en": "Seven days at a glance, each with its occasion and temperature range",
+            "zh": "七天一目了然，每天都标着场合和温度区间"
+          },
+          {
+            "en": "Try another for any single day, or clear it",
+            "zh": "任何一天都可以换一套，或者清空"
+          },
+          {
+            "en": "Statement pieces get a longer rest than a plain black tee",
+            "zh": "抢眼的单品比基础黑 T 休息得更久"
+          },
+          {
+            "en": "An optional evening reminder with tomorrow's look",
+            "zh": "可选的晚间提醒，告诉你明天穿什么"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "wearly/chat.webp",
+          "src_zh": "wearly/zh/chat.webp",
+          "alt": {
+            "en": "Wearly Stylist chat: pairing ideas and a packing list for a trip",
+            "zh": "衣见造型师对话：单品搭配建议和出行行李清单"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Stylist",
+          "zh": "造型师"
+        },
+        "title": {
+          "en": "Ask in plain words.",
+          "zh": "用大白话问就行。"
+        },
+        "body": {
+          "en": "Tap the chat bubble to talk to your stylist. Ask what to wear tonight, what goes with a piece you love, or where to start packing — answers come from the same engine as Today, built only from what you own.",
+          "zh": "点右上角的对话气泡，就能和造型师聊。问今晚穿什么、某件心头好配什么，或者出门该带什么——回答和“今天”页用的是同一套引擎，只用你已有的衣服。"
+        },
+        "points": [
+          {
+            "en": "“Make today's outfit more casual” or “Give me three outfits for church”",
+            "zh": "“今天这套再随意一点”或“给我三套适合教堂的”"
+          },
+          {
+            "en": "Pairing questions answered with pieces from your own closet",
+            "zh": "搭配问题，用你衣柜里的单品来回答"
+          },
+          {
+            "en": "Packing lists: the fewest pieces for the most outfits, with a note on why",
+            "zh": "行李清单：用最少的单品搭出最多造型，并说明理由"
+          },
+          {
+            "en": "Runs on your iPhone — no account, no sign-up",
+            "zh": "在 iPhone 上运行——不需要账号，也不用注册"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "wearly/profile.webp",
+          "src_zh": "wearly/zh/profile.webp",
+          "alt": {
+            "en": "Wearly Profile: this month's outfits, closet use, most worn and best value",
+            "zh": "衣见“我的”页：本月搭配、衣柜利用率、穿得最多与最划算的单品"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Profile",
+          "zh": "我的"
+        },
+        "title": {
+          "en": "See what you actually wear.",
+          "zh": "看看自己到底穿了什么。"
+        },
+        "body": {
+          "en": "Profile keeps a light, honest read on your wardrobe: outfits logged this month, how much of your closet you've worn in the last 90 days, your most-worn piece, the best value per wear, and the favourites you've forgotten.",
+          "zh": "“我的”页轻量又如实地记录你的衣橱：本月记录了多少套、最近 90 天衣柜用了多少、穿得最多的单品、每次穿着最划算的单品，还有被你遗忘的好东西。"
+        },
+        "points": [
+          {
+            "en": "Cost per wear, if you note what a piece cost",
+            "zh": "记下价格，就能看到每次穿着的成本"
+          },
+          {
+            "en": "Forgotten favourites nudge pieces back into rotation",
+            "zh": "“被遗忘的好东西”把旧爱重新带回日常"
+          },
+          {
+            "en": "Set your styles, colours and how dressed-up you usually are",
+            "zh": "设置你的风格、喜欢的颜色，以及平时穿得多正式"
+          },
+          {
+            "en": "Rate an outfit and the next suggestions follow your feedback",
+            "zh": "给搭配打个分，之后的推荐会参考你的反馈"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "worthview",
