@@ -410,6 +410,22 @@
     "pi_contact": {
       "en": "Questions about privacy in any of our apps:",
       "zh": "对任何一款应用的隐私有疑问，请联系："
+    },
+    "qq_label": {
+      "en": "Qiao Que's nest — tap to pat him",
+      "zh": "桥鹊的小窝——点一下摸摸他"
+    },
+    "qq_hint": {
+      "en": "Tap Qiao Que to pat him, or feed him a treat. Your bond is saved in this browser.",
+      "zh": "点桥鹊摸摸他，或者喂他点零食。亲密度会保存在这个浏览器里。"
+    },
+    "qq_actions": {
+      "en": "Pat or feed Qiao Que",
+      "zh": "摸摸或投喂桥鹊"
+    },
+    "qq_bond": {
+      "en": "Bond",
+      "zh": "亲密度"
     }
   },
   "marquee": {

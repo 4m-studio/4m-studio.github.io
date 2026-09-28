@@ -41,7 +41,7 @@
     tabs.forEach(function (t, k) { t.addEventListener('click', function () { go(k); }); });
 
     root.addEventListener('keydown', function (e) {
-      if (e.target.closest('.mm-stage')) return;          // MieMie owns Enter/Space
+      if (e.target.closest('.mm-stage, .qqn-room')) return;   // MieMie / Qiao Que own Enter/Space
       if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1, { focusTab: !!e.target.closest('.news__tabs') }); }
       if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index - 1, { focusTab: !!e.target.closest('.news__tabs') }); }
     });
@@ -51,7 +51,7 @@
        swiping across MieMie doesn't also make her gesture. */
     var start = null, dx = 0, dragging = false, suppressClick = false;
     function begin(x, y, target) {
-      if (target.closest('button, a, .mm-actions')) return;
+      if (target.closest('button, a, .mm-actions, .qqn-actions')) return;
       start = { x: x, y: y, w: viewport.clientWidth };
       dx = 0; dragging = false;
     }

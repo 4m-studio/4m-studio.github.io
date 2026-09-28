@@ -27,7 +27,7 @@
   /* Per-app accents */
   --storyreel:     linear-gradient(135deg, #ffa12b 0%, #f76b1c 52%, #e8471d 100%);
   --meetlog:       linear-gradient(135deg, #ffbf5e 0%, #f59a3c 50%, #e0672a 100%);
-  --qqnest:        linear-gradient(135deg, #ffc93c 0%, #52d97f 55%, #17b8a6 100%);
+  --qqnest:        linear-gradient(135deg, #a9d6f5 0%, #8fb8f0 42%, #ff9aa6 100%);
   --avatartracker: linear-gradient(135deg, #b9a4ff 0%, #8a6cff 50%, #ff6fb1 100%);
   --wearly:        linear-gradient(135deg, #ffb12b 0%, #fc8a20 52%, #f45c18 100%);
   --worthview:     linear-gradient(135deg, #b3bbff 0%, #8190ff 48%, #5b6cff 100%);
@@ -830,6 +830,126 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .mm-actions button[aria-pressed="true"] { background: rgba(160,130,255,.25); border-color: rgba(180,150,255,.7); }
 @media (max-width: 420px) { .mm-actions { gap: 5px; } .mm-actions button { width: 33px; height: 33px; font-size: 16px; border-radius: 10px; } }
 
+/* ---------- QQNest (Qiao Que's nest, live — assets/js/qqnest.js) ----------
+   Colours are the app's own (QQNest Core/Theme.swift). */
+.qqn {
+  --qq-cream: #fffbf4; --qq-cream-deep: #fff3e4; --qq-ink: #5b4b48; --qq-ink-soft: #9c8a86;
+  --qq-sky: #8fb8f0; --qq-peach: #ff9aa6; --qq-shadow: rgba(217, 183, 154, .34);
+  --qq-font: ui-rounded, "SF Pro Rounded", -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  position: relative; width: 100%; max-width: var(--qqn-w, 420px); margin: 0 auto;
+  user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.qqn-app {
+  position: relative; padding: 12px 12px 14px; border-radius: 36px; color: var(--qq-ink); font-family: var(--qq-font);
+  background:
+    radial-gradient(70% 45% at 0% 0%, rgba(169, 214, 245, .45), transparent 70%),
+    radial-gradient(60% 40% at 100% 100%, rgba(255, 194, 199, .45), transparent 70%),
+    linear-gradient(180deg, var(--qq-cream), var(--qq-cream-deep));
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, .5) inset, 0 -30px 90px -40px rgba(143, 184, 240, .55);
+}
+.qqn-room {
+  position: relative; aspect-ratio: 380 / 420; border-radius: 26px; overflow: hidden; cursor: pointer; outline: none;
+  box-shadow: 0 10px 24px -14px var(--qq-shadow); isolation: isolate;
+}
+.qqn-room:focus-visible { box-shadow: 0 0 0 3px var(--qq-sky); }
+.qqn-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.qqn-figwrap { position: absolute; left: 50%; bottom: 6%; transform: translate(-50%, 0); transform-origin: 50% 100%; pointer-events: none; }
+.qqn-fig { position: absolute; left: 0; top: 0; width: 1600px; height: 2000px; transform-origin: 0 0; }
+.qqn-g { position: absolute; left: 0; top: 0; width: 1600px; height: 2000px; }
+.qqn-l { position: absolute; max-width: none; display: block; }
+.qqn-fx { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.qqn-p, .qqn-food { position: absolute; left: 0; top: 0; line-height: 0; pointer-events: none; }
+.qqn-food { z-index: 6; filter: drop-shadow(0 6px 8px rgba(217, 183, 154, .5)); }
+.qqn-conf { position: absolute; top: 0; width: 7px; height: 11px; border-radius: 2px; }
+
+/* room bits that move or unlock */
+.qqn-curtain { transform-box: fill-box; transform-origin: 50% 0; animation: qqnCurtain 4s var(--ease-in-out) infinite alternate; }
+.qqn-curtain--r { animation-direction: alternate-reverse; }
+@keyframes qqnCurtain { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+.qqn-note { animation: qqnNote 2.6s var(--ease-in-out) infinite alternate; }
+.qqn-note--b { animation-direction: alternate-reverse; }
+@keyframes qqnNote { from { translate: 0 0; } to { translate: 0 -12px; } }
+.qqn-decor { opacity: 0; transform-box: fill-box; transform-origin: 50% 50%; transform: scale(.7); transition: opacity .5s var(--ease), transform .7s var(--ease); }
+.qqn-room.has-rug .qqn-rug, .qqn-room.has-garland .qqn-garland { opacity: 1; transform: none; }
+.qqn-room.has-garland .qqn-garland { animation: qqnTwinkle 2.6s var(--ease-in-out) infinite alternate; }
+@keyframes qqnTwinkle { from { opacity: .6; } to { opacity: .95; } }
+
+/* speech bubble (StateViews.swift SpeechBubble) */
+.qqn-bubble {
+  position: absolute; left: 50%; top: 20%; z-index: 4; max-width: 72%; width: max-content; pointer-events: none;
+  padding: 10px 16px; border-radius: 18px; background: #fff; color: var(--qq-ink);
+  font: 500 14px/1.35 var(--qq-font); text-align: center; box-shadow: 0 6px 16px -6px var(--qq-shadow);
+  opacity: 0; transform: translate(-50%, -50%) scale(.7); transform-origin: 50% 100%;
+  transition: opacity .22s var(--ease), transform .38s cubic-bezier(.3, 1.6, .5, 1);
+}
+.qqn-bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -7px; width: 16px; height: 16px; margin-left: -8px;
+  background: #fff; border-radius: 3px; transform: scaleY(.6) rotate(45deg);
+}
+.qqn-bubble.is-on { opacity: 1; transform: translate(-50%, -50%); }
+
+/* bond card (HomeView affectionBar) */
+.qqn-bond {
+  display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 8px 8px; margin-top: 10px;
+  padding: 12px 14px 13px; border-radius: 22px; background: #fff; box-shadow: 0 8px 18px -10px var(--qq-shadow);
+}
+.qqn-bond__heart { display: grid; line-height: 0; }
+.qqn-bond__heart.is-pop { animation: qqnPop .45s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes qqnPop { 40% { transform: scale(1.35); } }
+.qqn-bond__name { font-size: 14px; font-weight: 700; white-space: nowrap; }
+.qqn-bond__to { justify-self: end; font-size: 11.5px; color: var(--qq-ink-soft); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.qqn-bond__bar { grid-column: 1 / -1; height: 10px; border-radius: 999px; background: var(--qq-cream-deep); overflow: hidden; }
+.qqn-bond__bar i {
+  display: block; height: 100%; width: 6%; border-radius: inherit;
+  background: linear-gradient(180deg, #ffb3bd, var(--qq-peach)); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .45);
+  transition: width .7s cubic-bezier(.3, 1.3, .5, 1);
+}
+
+/* actions: pat + six treats (CuteIcons.swift) */
+.qqn-actions { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 12px; }
+.qqn-btn {
+  width: 42px; height: 42px; flex: none; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%;
+  background: #fff; cursor: pointer; box-shadow: 0 5px 12px -5px var(--qq-shadow);
+  transition: transform .25s cubic-bezier(.3, 1.6, .5, 1), box-shadow .2s;
+}
+.qqn-btn:hover { transform: translateY(-3px); box-shadow: 0 9px 16px -6px var(--qq-shadow); }
+.qqn-btn:active { transform: scale(.9); }
+.qqn-btn:focus-visible { outline: 2px solid var(--qq-sky); outline-offset: 2px; }
+.qqn-btn--pat { background: #f3efff; }
+.qqn-sep { width: 1px; height: 24px; background: rgba(91, 75, 72, .12); margin: 0 2px; }
+
+/* level-up card (HomeView LevelUpOverlay) */
+.qqn-level {
+  position: absolute; left: 50%; top: 4%; z-index: 5; width: min(78%, 280px); padding: 14px 16px 14px;
+  border-radius: 22px; background: #fff; text-align: center; box-shadow: 0 16px 34px -14px rgba(91, 75, 72, .45);
+  transform: translateX(-50%); animation: qqnIn .5s cubic-bezier(.3, 1.5, .5, 1) both; cursor: default;
+}
+.qqn-level.is-out { animation: qqnOut .25s var(--ease) forwards; }
+@keyframes qqnIn { from { opacity: 0; transform: translateX(-50%) scale(.7); } }
+@keyframes qqnOut { to { opacity: 0; transform: translateX(-50%) scale(.9); } }
+.qqn-level p { margin: 0; }
+.qqn-level__t { font-size: 16px; font-weight: 800; color: var(--qq-ink); }
+.qqn-level__s { display: inline-block; margin: 7px 0 6px !important; padding: 4px 14px; border-radius: 999px; font-size: 14px; font-weight: 700; color: #f07c8c; background: rgba(255, 194, 199, .35); }
+.qqn-level__n { font-size: 12px; color: var(--qq-ink-soft); }
+.qqn-level__ok {
+  margin-top: 10px; padding: 7px 22px; border: 0; border-radius: 999px; cursor: pointer;
+  font: 700 13px var(--qq-font); color: #fff; background: var(--qq-peach); box-shadow: 0 6px 14px -6px var(--qq-peach);
+}
+.qqn .mm-hint { margin-top: 12px; }
+.app-theme--light .qqn-app { box-shadow: 0 30px 70px -30px rgba(91, 75, 72, .45), 0 0 0 1px rgba(91, 75, 72, .06); }
+
+@media (max-width: 420px) {
+  .qqn-app { padding: 10px 10px 12px; border-radius: 30px; }
+  .qqn-room { border-radius: 22px; }
+  .qqn-actions { gap: 5px; }
+  .qqn-btn { width: 37px; height: 37px; }
+  .qqn-btn svg { width: 23px; height: 23px; }
+  .qqn-bond__to { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qqn-curtain, .qqn-note, .qqn-room.has-garland .qqn-garland { animation: none; }
+}
+
 /* ---------- New app mock-up bits (Wearly, WorthView) ---------- */
 .outfit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 4px 0 8px; }
 .outfit span {
@@ -957,8 +1077,6 @@ main { overflow-x: clip; }
 .news__slide.is-active .phone--solo, .app-hero .phone--solo { animation: float 7s var(--ease-in-out) infinite; }
 .route { border-radius: 13px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); height: 84px; padding: 6px; }
 .route svg { width: 100%; height: 100%; }
-.nest { height: 96px; border-radius: 14px; display: grid; place-items: center; font-size: 46px;
-  background: radial-gradient(circle at 50% 70%, rgba(255,201,60,.35), transparent 60%), rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); }
 
 /* ---------- App grid (home) ---------- */
 .app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
@@ -1199,3 +1317,4 @@ main { overflow-x: clip; }
 .app-theme--light { --worthview: linear-gradient(135deg, #6f7cff 0%, #3346d3 52%, #1b2573 100%); }
 .app-theme--light { --wearly: linear-gradient(135deg, #c9a06a 0%, #b08956 48%, #6e5638 100%); }
 .app-theme--light { --meetlog: linear-gradient(135deg, #e0954a 0%, #c9762a 48%, #9e561a 100%); }
+.app-theme--light { --qqnest: linear-gradient(135deg, #5e8fd6 0%, #8f7ad8 50%, #e56f8a 100%); }

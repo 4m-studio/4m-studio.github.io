@@ -760,10 +760,10 @@
       "en": "QQNest",
       "zh": "鹊巢"
     },
-    "icon": "icon-qqnest.svg",
+    "icon": "icon-qqnest.png",
     "accent": "qqnest",
     "appStore": "",
-    "visual": "qqnest",
+    "visual": "nest",
     "category": {
       "en": "Games · Casual",
       "zh": "游戏 · 休闲"
@@ -777,71 +777,38 @@
       "zh": "给桥鹊<br><span class=\"grad-text\">一个温暖的小窝。</span>"
     },
     "lede": {
-      "en": "QQNest is a light companion game built around Qiao Que (桥鹊), a voice-room host. Feed her, decorate her room, play mini-games to earn treats, and watch your bond grow — fully offline, with no account and no purchases.",
-      "zh": "鹊巢是一款围绕语音厅主播「桥鹊」打造的轻量陪伴养成小游戏。投喂她、布置她的小窝、玩小游戏赚零食，看着你们的亲密度一点点升级——完全离线，无需账号，没有付费。"
+      "en": "QQNest is a little companion game built around Qiao Que (桥鹊), a fox-eared voice-room host. Pat him, feed him treats, play two mini-games to bring gifts home, and watch your bond grow from “First meeting” to “A special giraffe” — fully offline, with no account and no purchases.",
+      "zh": "鹊巢是一款围绕语音厅主播「桥鹊」打造的轻量陪伴养成小游戏。摸摸他、给他投喂零食、玩两款小游戏把礼物带回小窝，看着亲密度从「初次见面」一路升到「特别的长颈鹿」——完全离线，无需账号，没有付费。"
     },
     "platform": {
       "en": "iPhone · iOS 16",
       "zh": "iPhone · iOS 16"
     },
     "requirements": {
-      "en": "iOS 16 or later. Works fully offline.",
-      "zh": "iOS 16 或更高版本，完全离线可玩。"
+      "en": "iOS 16 or later. Works fully offline. The game's interface is in Simplified Chinese.",
+      "zh": "iOS 16 或更高版本，完全离线可玩。游戏界面为简体中文。"
     },
     "features": [
       {
-        "emoji": "🐦",
+        "emoji": "🔊",
         "title": {
-          "en": "Chibi Qiao Que",
-          "zh": "Q 版桥鹊"
+          "en": "Sounds made on the fly",
+          "zh": "实时合成的音效"
         },
         "body": {
-          "en": "Eight expressions and idle animations, all drawn in code — she reacts to everything you do.",
-          "zh": "8 种表情和待机动画，全部用代码绘制——你的每个操作她都会有反应。"
+          "en": "No audio files: every pop, sparkle and level-up tune is synthesised live — and it never interrupts the music you're listening to.",
+          "zh": "没有音频文件：每一声点击、闪光和升级旋律都是实时合成的，也不会打断你正在听的歌。"
         }
       },
       {
-        "emoji": "🍰",
+        "emoji": "🫧",
         "title": {
-          "en": "Feed and bond",
-          "zh": "投喂与亲密度"
+          "en": "Gentle motion",
+          "zh": "温和的动效"
         },
         "body": {
-          "en": "Treats raise your intimacy level and unlock new stages, outfits and moments together.",
-          "zh": "投喂零食提升亲密度，解锁新的阶段、服装和互动时刻。"
-        }
-      },
-      {
-        "emoji": "🧩",
-        "title": {
-          "en": "Two mini-games",
-          "zh": "两款小游戏"
-        },
-        "body": {
-          "en": "A 1024 merge puzzle and a match-3 with combos, special pieces and levels — both pay out in treats.",
-          "zh": "1024 合成和带连击、特殊元素、关卡的消消乐——都能赢零食奖励。"
-        }
-      },
-      {
-        "emoji": "🏠",
-        "title": {
-          "en": "A room to decorate",
-          "zh": "可布置的小窝"
-        },
-        "body": {
-          "en": "Bed, desk, window, sofa and a music corner, with decorations you unlock as you play.",
-          "zh": "床、书桌、窗户、沙发和音乐角，还有边玩边解锁的装饰。"
-        }
-      },
-      {
-        "emoji": "🏆",
-        "title": {
-          "en": "Collection and daily tasks",
-          "zh": "收藏与每日任务"
-        },
-        "body": {
-          "en": "Foods, outfits, decorations, expressions and achievements to collect, plus daily tasks to come back for.",
-          "zh": "收集食物、服装、装饰、表情和成就，每天还有新任务等你回来。"
+          "en": "Respects Reduce Motion: fewer bounces, less movement and fewer particles, everywhere in the game.",
+          "zh": "尊重系统「减弱动态效果」：全游戏的弹跳、位移和粒子都会自动减少。"
         }
       },
       {
@@ -851,8 +818,8 @@
           "zh": "离线、无付费"
         },
         "body": {
-          "en": "No account, no network, no in-app purchases. Your progress lives on your iPhone.",
-          "zh": "无账号、不联网、无内购，游戏进度只保存在你的 iPhone 上。"
+          "en": "No account, no network, no ads, no in-app purchases. Your progress lives on your iPhone.",
+          "zh": "无账号、不联网、无广告、无内购，游戏进度只保存在你的 iPhone 上。"
         }
       }
     ],
@@ -871,23 +838,181 @@
       }
     ],
     "news": {
-      "date": "2026-08",
+      "date": "2026-09",
       "title": {
-        "en": "QQNest: a nest for Qiao Que",
-        "zh": "鹊巢：给桥鹊一个家"
+        "en": "Qiao Que moves into his nest",
+        "zh": "桥鹊搬进小窝啦"
       },
       "body": {
-        "en": "Feed her, decorate her room and play two mini-games — all offline.",
-        "zh": "投喂、布置小窝、玩两款小游戏——全程离线。"
+        "en": "New hand-drawn layered art, eight moods — and you can visit his nest right here on the site.",
+        "zh": "全新分层手绘立绘、八种情绪——现在还能直接在网站上去他的小窝坐坐。"
       }
     },
     "theme": {
       "colors": [
-        "#52d97f",
-        "#ffc93c",
-        "#17b8a6"
-      ]
-    }
+        "#5e8fd6",
+        "#ff9aa6",
+        "#ffd98e"
+      ],
+      "mode": "light",
+      "bg": "#fffbf4",
+      "bg2": "#fff3e4",
+      "ink": "#5b4b48"
+    },
+    "tour": [
+      {
+        "img": {
+          "src": "qqnest/home.webp",
+          "alt": {
+            "en": "QQNest nest screen: Qiao Que standing in his room with a speech bubble, the bond bar and the feed, pat and play buttons",
+            "zh": "鹊巢小窝页：桥鹊站在房间里说话，下方是亲密度条和投食、摸摸、去玩游戏按钮"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "The nest",
+          "zh": "小窝"
+        },
+        "title": {
+          "en": "Qiao Que lives here",
+          "zh": "桥鹊就住在这里"
+        },
+        "body": {
+          "en": "His room has a bed, a desk with a lamp, curtains that sway and a record player in the corner. Pat him and he bounces, blushes or grins; feed him and he answers with a line of his own.",
+          "zh": "房间里有床、带台灯的书桌、轻轻摆动的窗帘，角落里还有一台唱片机。摸摸他，他会弹一下、害羞或者笑出来；投喂零食，他会回你一句专属的话。"
+        },
+        "points": [
+          {
+            "en": "Eight moods — happy, surprised, shy, sleepy, cuddly, waving, cheering and calm",
+            "zh": "八种情绪：开心、惊喜、害羞、犯困、撒娇、挥手、庆祝和平静"
+          },
+          {
+            "en": "Six treats, from candy to a mystery gift, each with its own reactions",
+            "zh": "六种零食，从糖果到神秘礼物盒，每种都有专属反应"
+          },
+          {
+            "en": "Hand-drawn layered art that sways, blinks and twitches its ears",
+            "zh": "分层手绘立绘：会摇晃、眨眼、抖耳朵"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "qqnest/games.webp",
+          "alt": {
+            "en": "QQNest games screen with the 1024 merge game and the match-3 game",
+            "zh": "鹊巢游戏页：鹊鹿 1024 和鹿鹿消消乐"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Games",
+          "zh": "游戏"
+        },
+        "title": {
+          "en": "Play a minute or two, bring something home",
+          "zh": "玩一两分钟，给桥鹊带点东西回去"
+        },
+        "body": {
+          "en": "In the 1024 merge game, matching gifts climb a ten-step ladder — candy, cookie, strawberry milk, cake… all the way up to a limited-edition Qiao Que. The higher the combo, the bigger the reward.",
+          "zh": "「鹊鹿 1024」把相同的小礼物合在一起，从糖果、小饼干、草莓牛奶、小蛋糕一路合到限定桥鹊；连击越高，奖励越多。"
+        },
+        "points": [
+          {
+            "en": "Up to 200+ stars a round, plus treats",
+            "zh": "每局最多可得 200+ 星星，还有零食"
+          },
+          {
+            "en": "Daily tasks: feed, pat, play two rounds, merge a 128",
+            "zh": "每日任务：投食、摸摸、玩两局、合成 128"
+          },
+          {
+            "en": "Best scores and achievements are kept",
+            "zh": "记录最高分和成就"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "qqnest/match.webp",
+          "alt": {
+            "en": "QQNest match-3 level 1: pick 20 strawberries in 20 moves, with shuffle and hammer boosters",
+            "zh": "鹊巢消消乐第 1 关：20 步摘 20 颗草莓，下方有洗牌和小锤子道具"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Match-3",
+          "zh": "消消乐"
+        },
+        "title": {
+          "en": "Pick a basket of strawberries",
+          "zh": "为桥鹊摘一篮草莓"
+        },
+        "body": {
+          "en": "The match-3 opens with hand-made levels — like 20 strawberries in 20 moves — and then keeps generating new ones. Line up four for an antler rocket, five for a Qiao Que planet, a T or L for a microphone bomb.",
+          "zh": "「鹿鹿消消乐」前几关是手工设计的，比如 20 步摘 20 颗草莓，之后自动生成新关卡。四连出鹿角火箭，五连出桥鹊星球，T 形或 L 形出麦克风炸弹。"
+        },
+        "points": [
+          {
+            "en": "Shuffle and hammer boosters",
+            "zh": "洗牌和小锤子道具"
+          },
+          {
+            "en": "Cascades and chain reactions",
+            "zh": "下落连锁消除"
+          },
+          {
+            "en": "Levels that keep coming",
+            "zh": "关卡源源不断"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "qqnest/profile.webp",
+          "alt": {
+            "en": "QQNest profile: bond stages from First meeting to A special giraffe, and today's daily tasks",
+            "zh": "鹊巢「我的」页：从初次见面到特别的长颈鹿的亲密度阶段，以及每日任务"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Bond",
+          "zh": "亲密度"
+        },
+        "title": {
+          "en": "Four stages of getting close",
+          "zh": "四个阶段，慢慢变亲近"
+        },
+        "body": {
+          "en": "Every pat and treat adds to your bond, and each stage unlocks something new: a shy face and new greetings, then a rug and a yawn — and finally a limited photo together.",
+          "zh": "每一次摸摸和投喂都会增加亲密度，每个阶段都有新解锁：害羞表情和新问候语、小窝地毯和打哈欠，最后是一张限定合影。"
+        },
+        "points": [
+          {
+            "en": "Daily tasks that pay out stars and treats",
+            "zh": "每日任务，奖励星星和零食"
+          },
+          {
+            "en": "A collection of foods, decorations, expressions and achievements",
+            "zh": "收藏：食物、装饰、表情、成就"
+          },
+          {
+            "en": "Pick your giraffe avatar and nickname",
+            "zh": "自选长颈鹿头像和昵称"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "wearly",

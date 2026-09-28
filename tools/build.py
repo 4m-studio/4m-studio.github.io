@@ -144,15 +144,6 @@ def mock(app, lang, cls=""):
             <div class="wave">{"".join(f'<i style="animation-delay:{i*0.12:.2f}s"></i>' for i in range(12))}</div>
             <div class="tile tile--accent">{"已生成总结 · 2 个决定" if zh else "Summary ready · 2 decisions"}</div>
             <div class="tile tile--tall">☐ {"发送方案" if zh else "Send the deck"}<br>☐ {"确认上线日期" if zh else "Confirm launch date"}<br>? {"定价谁来定？" if zh else "Who owns pricing?"}</div>'''
-    elif v == "qqnest":
-        inner = f'''
-            <div class="screen-ui__head">{"桥鹊的小窝" if zh else "Qiao Que's nest"}</div>
-            <p class="screen-ui__sub">{"亲密度 Lv.4 · 心动" if zh else "Bond Lv.4 · Sweetheart"}</p>
-            <div class="nest" aria-hidden="true"><span>🐦</span></div>
-            <div class="bar"><i style="width:68%"></i></div>
-            <div class="tile tile--accent">🍰 {"投喂草莓蛋糕 +12" if zh else "Strawberry cake +12"}</div>
-            <div class="tile">🧩 1024 · {"最高分 8,420" if zh else "best 8,420"}</div>
-            <div class="tile">🏆 {"今日任务 2/3" if zh else "Daily tasks 2/3"}</div>'''
     elif v == "wearly":
         inner = f'''
             <div class="screen-ui__head">{"今天" if zh else "Today"}</div>
@@ -200,6 +191,25 @@ def miemie(lang, root, width=420):
           </div>'''
 
 
+def nest(lang, root, width=440):
+    """Qiao Que's nest: the QQNest home screen, live (assets/js/qqnest.js)."""
+    return f'''<div class="qqn" data-qqnest data-src="{root}assets/img/qqnest/rig/" style="--qqn-w:{width}px">
+            <div class="qqn-app">
+              <div class="qqn-room" tabindex="0" role="button" aria-label="{esc(T("qq_label", lang))}">
+                <span class="qqn-bubble" aria-live="polite"></span>
+              </div>
+              <div class="qqn-bond">
+                <span class="qqn-bond__heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="11" fill="#FF8BA0"/><path d="M12 17.6s-4.6-2.8-5.9-5.6c-.9-2.1.4-4.4 2.6-4.4 1.4 0 2.3.7 3.3 1.8 1-1.1 1.9-1.8 3.3-1.8 2.2 0 3.5 2.3 2.6 4.4-1.3 2.8-5.9 5.6-5.9 5.6Z" fill="#fff"/></svg></span>
+                <span class="qqn-bond__name"></span>
+                <span class="qqn-bond__to"></span>
+                <span class="qqn-bond__bar" role="progressbar" aria-label="{esc(T("qq_bond", lang))}" aria-valuemin="0" aria-valuemax="100"><i></i></span>
+              </div>
+              <div class="qqn-actions" role="group" aria-label="{esc(T("qq_actions", lang))}"></div>
+            </div>
+            <p class="mm-hint">{T("qq_hint", lang)}</p>
+          </div>'''
+
+
 # ---------- real screenshots ----------
 def shot(app, img, lang, root, cls=""):
     """One real app screenshot in a phone frame, or an App Store image ("kind": "poster") as a card.
@@ -238,6 +248,8 @@ def tour(app, lang, root):
 
 
 def visual(app, lang, root, big=False):
+    if app["visual"] == "nest":
+        return nest(lang, root, 440 if big else 400)
     if app.get("shots"):
         return trio(app, lang, root)
     if app["visual"] == "miemie":
@@ -517,7 +529,7 @@ def home(lang):
     }
     head = redirect + f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     return page(lang, path, T("title", lang), T("description", lang), body,
-                scripts=("main", "carousel", "miemie"), head_extra=head)
+                scripts=("main", "carousel", "miemie", "qqnest"), head_extra=head)
 
 
 def contact_block(lang, app=None):
@@ -637,7 +649,7 @@ def app_page(a, lang):
     if a.get("appStore"):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
-    scripts = ("main", "miemie") if a["visual"] == "miemie" else ("main",)
+    scripts = ("main",) + {"miemie": ("miemie",), "nest": ("qqnest",)}.get(a["visual"], ())
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 
