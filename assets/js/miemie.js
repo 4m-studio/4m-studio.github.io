@@ -46,6 +46,8 @@
     nose:            [514.0, 488.2, 39, 40,    'nose'],
     eyeLeft:         [425.0, 414.5, 108, 68,   'eye_left'],
     eyeRight:        [607.5, 415.1, 109, 69,   'eye_right'],
+    lashLeft:        [425.0, 414.5, 108, 68,   'lash_left'],
+    lashRight:       [607.5, 415.1, 109, 69,   'lash_right'],
     irisLeft:        [435.0, 417.1, 46, 47,    'iris_left'],
     irisRight:       [596.1, 417.6, 46, 48,    'iris_right'],
     lidLeft:         [427.6, 400.3, 110, 66,   'lid_left'],
@@ -66,7 +68,7 @@
     left:  { s: [322.2, 819.5], e: [210.2, 1210.5], w: [113.3, 1559.4], out: -1 },
     right: { s: [709.9, 819.5], e: [819.8, 1213.7], w: [911.4, 1544.3], out: 1 }
   };
-  var IRIS = { x: 13, up: 5, down: 12 };   // canvas px
+  var IRIS = { x: 15, up: 6, down: 13 };   // canvas px
   var HANDS = ['Rest', 'Open', 'Fist', 'Point', 'Peace', 'ThumbsUp', 'Heart'];
 
   var DEG = 180 / Math.PI;
@@ -266,9 +268,9 @@
       var g = group('', feat);
       layer('eye' + cap, g, base);
       var clip = group('', g);
-      // The iris is masked to the white of the eye itself (mask_eye_*.png is
-      // traced from the socket artwork), so it can never sit on the lashes or
-      // skin. The ellipse is only a fallback for browsers without CSS masks.
+      // The iris is masked to the white of the eye plus a few px under the lid
+      // line (mask_eye_*.png, traced from the socket artwork); the lash layer
+      // above hides that overlap. The ellipse is a fallback for no CSS masks.
       clip.style.clipPath = 'ellipse(' + (ap[2] / 2 - 3) + 'px ' + (ap[3] / 2 - 2) + 'px at ' +
         (ap[0] + ap[2] / 2) + 'px ' + (ap[1] + ap[3] / 2) + 'px)';
       var sock = L['eye' + cap];
@@ -282,6 +284,10 @@
         clip.style[k + 'Repeat'] = 'no-repeat';
       });
       var iris = layer('iris' + cap, clip, base);
+      // Lashes, liner and lid skin (the socket minus its white), drawn back
+      // OVER the iris so it tucks under the lid line instead of stopping short
+      // of it with a white gap.
+      layer('lash' + cap, g, base);
       var lid = layer('lid' + cap, feat, base);
       var brow = layer('brow' + cap, feat, base);
       return { g: g, iris: iris, lid: lid, brow: brow };
@@ -558,7 +564,7 @@
 
     // Irises, clipped to each eye's aperture.
     // Travel measured against the eye-white masks: the most either iris can
-    // move while at least ~70% of it stays visible (sideways 13, up 5, down 12).
+    // move while at least ~70% of it stays visible (sideways 15, up 6, down 13).
     var ix = (clamp(lx, -1, 1) * IRIS.x).toFixed(2);
     var iy = (ly < 0 ? Math.max(ly, -1) * IRIS.up : Math.min(ly, 1) * IRIS.down).toFixed(2);
     this.eyes.left.iris.style.transform = 'translate(' + ix + 'px,' + iy + 'px)';
