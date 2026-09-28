@@ -418,10 +418,10 @@
       "en": "MeetLog",
       "zh": "会记"
     },
-    "icon": "icon-meetlog.svg",
+    "icon": "icon-meetlog.png",
     "accent": "meetlog",
     "appStore": "",
-    "visual": "meetlog",
+    "visual": "shots",
     "category": {
       "en": "Productivity",
       "zh": "效率"
@@ -435,8 +435,8 @@
       "zh": "每一场会议，<br><span class=\"grad-text\">都私密地记住。</span>"
     },
     "lede": {
-      "en": "Record, transcribe and summarise a meeting without sending a word to the cloud. MeetLog turns an hour of talking into decisions, action items and open questions — in English, Chinese, or both.",
-      "zh": "录音、转写、总结，一个字都不上传云端。会记 把一小时的讨论整理成决定、待办和待解决的问题——中文、英文，或中英混说都可以。"
+      "en": "Record, transcribe and summarise a meeting without sending a word to the cloud. MeetLog turns an hour of talking into decisions, action items and open questions — in English, Chinese, or both — and can show any meeting translated line by line.",
+      "zh": "录音、转写、总结，一个字都不上传云端。会记 把一小时的讨论整理成决策、待办和未决问题——中文、英文，或中英混说都可以；任何一场会议还能逐句对照翻译。"
     },
     "platform": {
       "en": "iPhone · Apple Watch",
@@ -448,58 +448,25 @@
     },
     "features": [
       {
-        "emoji": "🎙️",
+        "emoji": "⌚️",
         "title": {
-          "en": "One-tap capture",
-          "zh": "一键录音"
+          "en": "The Action Button, as a record button",
+          "zh": "把操作按钮变成录音键"
         },
         "body": {
-          "en": "Start from the app, a widget or the Apple Watch Action Button, and drop markers on the moments that matter.",
-          "zh": "从 App、小组件或 Apple Watch 操作按钮开始录音，重要时刻随手打个标记。"
+          "en": "Put MeetLog's shortcut on the Action Button of your iPhone or Apple Watch Ultra: press once to start recording, press again to stop.",
+          "zh": "把会记的快捷指令设到 iPhone 或 Apple Watch Ultra 的操作按钮上：按一下开始录音，再按一下停止。"
         }
       },
       {
-        "emoji": "📝",
+        "emoji": "📅",
         "title": {
-          "en": "On-device transcription",
-          "zh": "本地转写"
+          "en": "Named from your calendar",
+          "zh": "用日历里的名字命名"
         },
         "body": {
-          "en": "Apple's on-device speech engine turns audio into a timestamped transcript that plays in sync with the recording.",
-          "zh": "使用 Apple 本地语音引擎生成带时间戳的文字稿，并与录音同步播放。"
-        }
-      },
-      {
-        "emoji": "✅",
-        "title": {
-          "en": "Structured summaries",
-          "zh": "结构化总结"
-        },
-        "body": {
-          "en": "Decisions, action items with owners, and open questions — drafted by an on-device model, shaped by meeting type.",
-          "zh": "决定、带负责人的待办、未解决的问题——由本地模型生成，并按会议类型调整重点。"
-        }
-      },
-      {
-        "emoji": "🌐",
-        "title": {
-          "en": "Bilingual by design",
-          "zh": "天生双语"
-        },
-        "body": {
-          "en": "Built for meetings that switch between English and Chinese, with a personal dictionary for names and jargon.",
-          "zh": "为中英切换的会议而设计，还能用个人词典记住人名和行业术语。"
-        }
-      },
-      {
-        "emoji": "🔍",
-        "title": {
-          "en": "Searchable history",
-          "zh": "可搜索的历史"
-        },
-        "body": {
-          "en": "Find any meeting, decision or task later, and export to Markdown when you need to share.",
-          "zh": "随时搜索过往的会议、决定和任务；需要分享时导出为 Markdown。"
+          "en": "With calendar access, a recording takes the name of the event it happened in — “Weekly 1:1”, not “Recording 14”. MeetLog only reads your calendar, never writes to it.",
+          "zh": "允许访问日历后，录音会自动用当时那场日程的名字——“每周一对一”，而不是“录音 14”。会记只读取日历，从不写入。"
         }
       },
       {
@@ -509,8 +476,8 @@
           "zh": "数据不出设备"
         },
         "body": {
-          "en": "Audio, transcript and summary stay on your iPhone and paired Apple Watch. That's the first principle, not a setting.",
-          "zh": "录音、文字稿和总结只存在你的 iPhone 和配对的 Apple Watch 上——这是第一原则，而不是一个开关。"
+          "en": "Audio, transcripts, summaries and translations stay on your iPhone and paired Apple Watch. There's no account and no MeetLog server — that's the first principle, not a setting.",
+          "zh": "录音、文字稿、总结和翻译都只在你的 iPhone 和配对的 Apple Watch 上。没有账号，也没有会记的服务器——这是第一原则，而不是一个开关。"
         }
       }
     ],
@@ -540,12 +507,252 @@
       }
     },
     "theme": {
+      "mode": "light",
+      "bg": "#faf6f1",
+      "bg2": "#f2ebe1",
+      "ink": "#1b1613",
       "colors": [
-        "#4c6bff",
-        "#2ec9ff",
-        "#7a3dff"
+        "#c9762a",
+        "#f0a75a",
+        "#9e561a"
       ]
-    }
+    },
+    "shots": [
+      {
+        "src": "meetlog/recording.webp",
+        "src_zh": "meetlog/zh/recording.webp",
+        "alt": {
+          "en": "MeetLog recording a team sync: a running timer, two marked moments and the live transcript",
+          "zh": "会记正在录一场团队同步：计时、两处标记和实时转写"
+        },
+        "w": 600,
+        "h": 1304
+      },
+      {
+        "src": "meetlog/summary.webp",
+        "src_zh": "meetlog/zh/summary.webp",
+        "alt": {
+          "en": "MeetLog summary of a design review: overview, expandable topics, decisions and my action items",
+          "zh": "会记的一场设计评审总结：概览、可展开的话题、决策和我的待办"
+        },
+        "w": 600,
+        "h": 1304
+      },
+      {
+        "src": "meetlog/transcript.webp",
+        "src_zh": "meetlog/zh/transcript.webp",
+        "alt": {
+          "en": "MeetLog transcript with translation on: each timestamped line has its translation underneath",
+          "zh": "会记打开翻译后的转写：每一句带时间戳的原文下面都有对应译文"
+        },
+        "w": 600,
+        "h": 1304
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "meetlog/recording.webp",
+          "src_zh": "meetlog/zh/recording.webp",
+          "alt": {
+            "en": "MeetLog recording a team sync: a running timer, two marked moments and the live transcript",
+            "zh": "会记正在录一场团队同步：计时、两处标记和实时转写"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Record",
+          "zh": "录音"
+        },
+        "title": {
+          "en": "One tap, and it's listening.",
+          "zh": "点一下，就开始记。"
+        },
+        "body": {
+          "en": "The mic button starts recording straight away with your defaults — no form to fill in first. The transcript appears as people talk, the meeting type and language can change mid-meeting, and Mark flags the moments you'll want to find later.",
+          "zh": "点一下麦克风就直接开始录音，按你的默认设置来，不用先填表。说话的同时文字稿就出现了；会议中途也能改会议类型或语言，重要时刻点“标记”留个记号。"
+        },
+        "points": [
+          {
+            "en": "Start from the app, the iPhone Action Button or your Apple Watch",
+            "zh": "从 App、iPhone 操作按钮或 Apple Watch 开始录音"
+          },
+          {
+            "en": "A Live Activity keeps the timer on your Lock Screen",
+            "zh": "实时活动把计时显示在锁定屏幕上"
+          },
+          {
+            "en": "Away from your iPhone, Apple Watch records on its own and hands the audio over later",
+            "zh": "iPhone 不在身边时，Apple Watch 会自己录，稍后再把录音交给 iPhone"
+          },
+          {
+            "en": "English or Chinese recognition, switchable mid-recording",
+            "zh": "英文或中文识别，录音中途可以切换"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "meetlog/summary.webp",
+          "src_zh": "meetlog/zh/summary.webp",
+          "alt": {
+            "en": "MeetLog summary of a design review: overview, expandable topics, decisions and my action items",
+            "zh": "会记的一场设计评审总结：概览、可展开的话题、决策和我的待办"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Summary",
+          "zh": "总结"
+        },
+        "title": {
+          "en": "The whole hour, on one screen.",
+          "zh": "一小时的会，一屏看完。"
+        },
+        "body": {
+          "en": "When you stop, a model on your iPhone writes the overview, the topics discussed, the decisions made, your action items and everyone else's, and the questions still open. What it pays most attention to depends on the kind of meeting.",
+          "zh": "一停止录音，iPhone 上的模型就写出概览、讨论过的话题、做出的决策、你的待办和别人的待办，以及还没解决的问题。重点放在哪里，取决于这是什么类型的会议。"
+        },
+        "points": [
+          {
+            "en": "Ten meeting types, from One-on-One and Team Sync to Interview and Post-Meeting Debrief",
+            "zh": "十种会议类型：从一对一、团队同步，到面试和会后复盘"
+          },
+          {
+            "en": "Topics expand into details, and every section can be edited",
+            "zh": "话题可以展开看细节，每个部分都能编辑"
+          },
+          {
+            "en": "Tick off action items right inside the summary",
+            "zh": "在总结里直接勾掉待办"
+          },
+          {
+            "en": "Uses Apple Intelligence where available, with a built-in fallback so no recording goes unsummarised",
+            "zh": "有 Apple Intelligence 时用它来写；没有时自动换成内置方法，不会白录"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "meetlog/transcript.webp",
+          "src_zh": "meetlog/zh/transcript.webp",
+          "alt": {
+            "en": "MeetLog transcript with translation on: each timestamped line has its translation underneath",
+            "zh": "会记打开翻译后的转写：每一句带时间戳的原文下面都有对应译文"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Transcript",
+          "zh": "转写"
+        },
+        "title": {
+          "en": "Every line, in both languages.",
+          "zh": "每一句，两种语言。"
+        },
+        "body": {
+          "en": "The transcript is timestamped and plays in sync with the audio — tap any line to jump there. Turn on translation and each line gets its English or Chinese counterpart underneath, translated on your iPhone.",
+          "zh": "文字稿带时间戳，和录音同步播放——点任意一句就跳到那里。打开翻译，每一句下面都会出现对应的中文或英文，翻译在你的 iPhone 上完成。"
+        },
+        "points": [
+          {
+            "en": "Lines the recogniser wasn't sure about are flagged to verify",
+            "zh": "识别得没把握的句子会标上“待确认”"
+          },
+          {
+            "en": "Remove long silences, or split a recording into two meetings at any line",
+            "zh": "去掉长时间的静音，或在任意一句把录音拆成两场会议"
+          },
+          {
+            "en": "Picked the wrong language? Transcribe it again in the other one",
+            "zh": "选错了语言？换另一种语言重新转写"
+          },
+          {
+            "en": "Export any meeting as Markdown",
+            "zh": "任何会议都能导出为 Markdown"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "meetlog/logs.webp",
+          "src_zh": "meetlog/zh/logs.webp",
+          "alt": {
+            "en": "MeetLog Meeting Logs: a week strip, search, and meetings grouped by day with their open tasks",
+            "zh": "会记的“会议记录”：一周日历、搜索，以及按天分组、显示待办数的会议"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Logs",
+          "zh": "记录"
+        },
+        "title": {
+          "en": "A meeting memory you can search.",
+          "zh": "能搜索的会议记忆。"
+        },
+        "body": {
+          "en": "Meetings are grouped by day under a week strip. Search titles, people and transcripts, and see every open task that's yours in one place.",
+          "zh": "会议按天分组，上面是一周日历。可以搜索标题、人名和文字稿，属于你的未完成待办也都集中在一处。"
+        },
+        "points": [
+          {
+            "en": "Each card shows the overview, the length and your open tasks",
+            "zh": "每张卡片显示概览、时长和你还没完成的待办"
+          },
+          {
+            "en": "Jump to any week or month from the calendar",
+            "zh": "从日历跳到任意一周或任意一个月"
+          },
+          {
+            "en": "Select several meetings to merge them into one, or export them together",
+            "zh": "多选会议，合并成一场，或一起导出"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "meetlog/settings.webp",
+          "src_zh": "meetlog/zh/settings.webp",
+          "alt": {
+            "en": "MeetLog Settings: default language, ten meeting types and recordings waiting to import",
+            "zh": "会记的“设置”：默认语言、十种会议类型，以及等待导入的录音"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Settings",
+          "zh": "设置"
+        },
+        "title": {
+          "en": "Set it once, then just tap.",
+          "zh": "设一次，之后只管点。"
+        },
+        "body": {
+          "en": "Choose the language you speak most and the meeting type you record most, and the mic button uses them every time. Recordings shared from Voice Memos or the Files app wait in an inbox until you import them.",
+          "zh": "选好你最常说的语言和最常录的会议类型，之后每次点麦克风都会用它们。从语音备忘录或“文件”App 分享过来的录音，会先在收件箱里等你导入。"
+        },
+        "points": [
+          {
+            "en": "Imported recordings keep the date they were actually recorded",
+            "zh": "导入的录音保留真实的录制日期"
+          },
+          {
+            "en": "Auto-delete old audio to free space — transcripts and summaries are always kept",
+            "zh": "自动删除旧录音来释放空间——文字稿和总结永远保留"
+          },
+          {
+            "en": "Automatic backups to the Files app, as one readable Markdown file that restores fully",
+            "zh": "自动备份到“文件”App：一份能直接阅读、也能完整恢复的 Markdown 文件"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "qqnest",

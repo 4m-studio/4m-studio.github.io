@@ -26,7 +26,7 @@
 
   /* Per-app accents */
   --storyreel:     linear-gradient(135deg, #ffa12b 0%, #f76b1c 52%, #e8471d 100%);
-  --meetlog:       linear-gradient(135deg, #2ec9ff 0%, #4c6bff 60%, #7a3dff 100%);
+  --meetlog:       linear-gradient(135deg, #ffbf5e 0%, #f59a3c 50%, #e0672a 100%);
   --qqnest:        linear-gradient(135deg, #ffc93c 0%, #52d97f 55%, #17b8a6 100%);
   --avatartracker: linear-gradient(135deg, #b9a4ff 0%, #8a6cff 50%, #ff6fb1 100%);
   --wearly:        linear-gradient(135deg, #ffb12b 0%, #fc8a20 52%, #f45c18 100%);
@@ -1198,3 +1198,4 @@ main { overflow-x: clip; }
 /* WorthView: the home slide sits on black, its own page on a light grey-blue — deepen the gradient on light pages */
 .app-theme--light { --worthview: linear-gradient(135deg, #6f7cff 0%, #3346d3 52%, #1b2573 100%); }
 .app-theme--light { --wearly: linear-gradient(135deg, #c9a06a 0%, #b08956 48%, #6e5638 100%); }
+.app-theme--light { --meetlog: linear-gradient(135deg, #e0954a 0%, #c9762a 48%, #9e561a 100%); }
