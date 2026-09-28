@@ -823,11 +823,11 @@
       "en": "WorthView",
       "zh": "净览"
     },
-    "icon": "icon-worthview.svg",
+    "icon": "icon-worthview.png",
     "accent": "worthview",
     "isNew": true,
     "appStore": "",
-    "visual": "worthview",
+    "visual": "shots",
     "category": {
       "en": "Finance",
       "zh": "财务"
@@ -841,82 +841,49 @@
       "zh": "你的资产，<br><span class=\"grad-text\">只读不动。</span>"
     },
     "lede": {
-      "en": "WorthView is a privacy-first net-worth dashboard. Connect your banks and brokerages, add the things they don't know about, and watch one honest number over time. It can see balances — it has no way to move money.",
-      "zh": "净览 是一个隐私优先的净资产看板。连接你的银行和券商账户，再补上它们不知道的资产，长期看清一个真实的数字。它能看到余额——但完全没有动钱的能力。"
+      "en": "WorthView is a privacy-first net-worth dashboard for iPhone. Bring your bank, card and brokerage balances together with the things no bank knows about — your home, your car, your crypto — and watch one honest number over time. It can see balances. It has no way to move money.",
+      "zh": "净览是一款隐私优先的 iPhone 净资产看板。把银行、信用卡和券商账户的余额，和银行不知道的资产——房子、车、加密货币——放在一起，长期看清一个真实的数字。它能看到余额，但完全没有动钱的能力。"
     },
     "platform": {
       "en": "iPhone · iOS 17",
       "zh": "iPhone · iOS 17"
     },
     "requirements": {
-      "en": "iOS 17 or later. Institution connections via Plaid (US).",
-      "zh": "iOS 17 或更高版本。机构连接通过 Plaid（美国）。"
+      "en": "iOS 17 or later. Account connections cover US banks, cards and brokerages via SimpleFIN Bridge or Plaid; manual entries work anywhere.",
+      "zh": "iOS 17 或更高版本。账户连接通过 SimpleFIN Bridge 或 Plaid 覆盖美国银行、信用卡和券商；手动记录不限地区。"
     },
     "features": [
       {
-        "emoji": "🏦",
+        "emoji": "🔗",
         "title": {
-          "en": "Banks and brokerages",
-          "zh": "银行与券商"
+          "en": "Connect your way",
+          "zh": "连接方式由你选"
         },
         "body": {
-          "en": "Connect through Plaid Link to see balances and investment holdings in one place.",
-          "zh": "通过 Plaid Link 连接，在一个地方查看账户余额和投资持仓。"
+          "en": "SimpleFIN Bridge for most US banks, cards and brokerages, Apple Wallet balances read on-device, or a personal Plaid relay you run yourself. Or skip connections and add everything by hand.",
+          "zh": "SimpleFIN Bridge 覆盖大多数美国银行、信用卡和券商；Apple 钱包余额在设备上读取；也可以用你自己部署的 Plaid 中继。或者一个都不连，全部手动添加。"
         }
       },
       {
-        "emoji": "🙅",
+        "emoji": "🕒",
         "title": {
-          "en": "Read-only by design",
-          "zh": "从设计上只读"
+          "en": "Honest about freshness",
+          "zh": "数据新旧，如实标注"
         },
         "body": {
-          "en": "No transfers, trades, bill-pay, account numbers or transaction history. The capability simply isn't built.",
-          "zh": "不能转账、交易、缴费，不读取账号和交易记录——这些能力根本没有被开发。"
+          "en": "Out-of-date values are clearly labelled. If a refresh fails, your last good numbers stay on screen, marked as stale — never silently wiped.",
+          "zh": "过期的数值会清楚标注。刷新失败时，上一次的数据会保留在屏幕上并标为过期——绝不会悄悄清空。"
         }
       },
       {
-        "emoji": "🏠",
+        "emoji": "📊",
         "title": {
-          "en": "Everything else, by hand",
-          "zh": "其他资产手动添加"
+          "en": "Holdings at a glance",
+          "zh": "持仓一目了然"
         },
         "body": {
-          "en": "Property, cars, cash, foreign accounts or loans — add them manually; they stay only on your iPhone.",
-          "zh": "房产、汽车、现金、海外账户或贷款——手动添加，只保存在你的 iPhone 上。"
-        }
-      },
-      {
-        "emoji": "📈",
-        "title": {
-          "en": "One number over time",
-          "zh": "一个数字，长期追踪"
-        },
-        "body": {
-          "en": "Daily net-worth snapshots build a history you can trust, with clear freshness labels on every value.",
-          "zh": "每日净资产快照汇成可信的历史曲线，每个数值都标明更新时间。"
-        }
-      },
-      {
-        "emoji": "🛡️",
-        "title": {
-          "en": "Locked when you're away",
-          "zh": "离开即上锁"
-        },
-        "body": {
-          "en": "Face ID after two minutes away, and values are hidden in the app switcher.",
-          "zh": "离开两分钟后需面容 ID 解锁，在多任务界面中数值会被隐藏。"
-        }
-      },
-      {
-        "emoji": "🔌",
-        "title": {
-          "en": "Disconnect any time",
-          "zh": "随时断开"
-        },
-        "body": {
-          "en": "Removing an institution revokes access and deletes its stored token from the server.",
-          "zh": "移除机构即撤销授权，并从服务器删除对应的访问令牌。"
+          "en": "Open a brokerage or retirement account to see each holding's shares, price and value, exactly as your institution reports them.",
+          "zh": "打开券商或退休账户，就能看到每项持仓的股数、价格和市值，与机构报告的一致。"
         }
       }
     ],
@@ -926,12 +893,12 @@
         "zh": "只读取余额和持仓，从不读取交易记录"
       },
       {
-        "en": "Bank credentials go to Plaid, never to us",
-        "zh": "银行登录信息只交给 Plaid，我们接触不到"
+        "en": "Bank sign-in happens at SimpleFIN or Plaid, never inside WorthView",
+        "zh": "银行登录在 SimpleFIN 或 Plaid 完成，从不经过净览"
       },
       {
-        "en": "Manual assets and history stay on your iPhone",
-        "zh": "手动资产和历史记录只保存在你的 iPhone 上"
+        "en": "No 4M Studio server — entries, history and keys stay on your iPhone",
+        "zh": "4M Studio 不设服务器——记录、历史和密钥都只在你的 iPhone 上"
       }
     ],
     "news": {
@@ -941,17 +908,163 @@
         "zh": "净览：只读的净资产看板"
       },
       "body": {
-        "en": "Balances and holdings in one calm dashboard — with no architecture for moving money at all.",
-        "zh": "余额和持仓集中在一个安静的看板里——而且从架构上就不能动你的钱。"
+        "en": "Every balance you have, plus the house and the car, in one calm dashboard — with no code for moving money at all.",
+        "zh": "所有账户余额，再加上房子和车，集中在一个安静的看板里——而且根本没有动钱的代码。"
       }
     },
     "theme": {
+      "mode": "light",
+      "bg": "#f2f3fa",
+      "bg2": "#e3e6f8",
+      "ink": "#131a42",
       "colors": [
-        "#17b8a6",
-        "#3ee0a1",
-        "#2a7bff"
+        "#3346d3",
+        "#6f7cff",
+        "#141d4f"
       ]
-    }
+    },
+    "shots": [
+      {
+        "src": "worthview/assets.webp",
+        "alt": {
+          "en": "WorthView Assets: quick add and linked accounts grouped by type",
+          "zh": "净览“资产”页：快速添加与按类型分组的已连接账户"
+        }
+      },
+      {
+        "src": "worthview/overview.webp",
+        "alt": {
+          "en": "WorthView Overview: net worth, one-year chart, assets and liabilities",
+          "zh": "净览“总览”页：净资产、一年走势、资产与负债"
+        }
+      },
+      {
+        "src": "worthview/privacy.webp",
+        "alt": {
+          "en": "WorthView Privacy: what the app cannot do, and Face ID lock",
+          "zh": "净览“隐私”页：应用做不到的事与面容 ID 锁"
+        }
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "worthview/overview.webp",
+          "alt": {
+            "en": "WorthView Overview: net worth, one-year chart, assets and liabilities",
+            "zh": "净览“总览”页：净资产、一年走势、资产与负债"
+          }
+        },
+        "step": {
+          "en": "Overview",
+          "zh": "总览"
+        },
+        "title": {
+          "en": "One honest number.",
+          "zh": "一个真实的数字。"
+        },
+        "body": {
+          "en": "Net worth sits at the top with how far it has moved and a chart you can take from one month to all time. Below it, assets against liabilities in a single bar, then an allocation breakdown of where it all sits.",
+          "zh": "净资产放在最上方，旁边是涨跌幅，图表可以从一个月一路看到全部历史。下面一条横条对比资产与负债，再往下是资产分布。"
+        },
+        "points": [
+          {
+            "en": "1M, 3M, 6M, 1Y and All — the chart and change badge follow along",
+            "zh": "1 个月、3 个月、6 个月、1 年、全部——图表和涨跌幅一起切换"
+          },
+          {
+            "en": "Debt shown as a share of your assets, not just a total",
+            "zh": "负债以占资产的比例显示，而不只是一个总数"
+          },
+          {
+            "en": "A private daily snapshot on your iPhone builds your trend over time",
+            "zh": "每天在 iPhone 上保存一张私密快照，慢慢积累出你的走势"
+          },
+          {
+            "en": "Each currency is totalled separately — no silent exchange-rate guesses",
+            "zh": "不同币种分开统计——不会悄悄按汇率换算"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "worthview/assets.webp",
+          "alt": {
+            "en": "WorthView Assets: quick add and linked accounts grouped by type",
+            "zh": "净览“资产”页：快速添加与按类型分组的已连接账户"
+          }
+        },
+        "step": {
+          "en": "Assets",
+          "zh": "资产"
+        },
+        "title": {
+          "en": "Everything you own and owe.",
+          "zh": "拥有的、欠下的，都在这里。"
+        },
+        "body": {
+          "en": "Linked accounts are grouped into cash, investments and retirement, each with its own total. Quick add covers what no bank reports — your home, a car, cash on hand, crypto, valuables, foreign accounts or a loan.",
+          "zh": "已连接的账户按现金、投资、退休账户分组，每组都有合计。“快速添加”补上银行不会告诉你的部分——房子、车、手头现金、加密货币、贵重物品、海外账户或贷款。"
+        },
+        "points": [
+          {
+            "en": "Every row says Linked or Manual, so you know where a number came from",
+            "zh": "每一行都标明“已连接”或“手动”，数字从哪来一清二楚"
+          },
+          {
+            "en": "Manual values untouched for 90 days are flagged for a refresh",
+            "zh": "手动数值超过 90 天未更新，会提醒你刷新"
+          },
+          {
+            "en": "Investment accounts open to their holdings — institution-reported, not live quotes",
+            "zh": "投资账户可展开查看持仓——数据来自机构，不是实时报价"
+          },
+          {
+            "en": "Manual entries are stored only on your iPhone",
+            "zh": "手动记录只保存在你的 iPhone 上"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "worthview/privacy.webp",
+          "alt": {
+            "en": "WorthView Privacy: what the app cannot do, and Face ID lock",
+            "zh": "净览“隐私”页：应用做不到的事与面容 ID 锁"
+          }
+        },
+        "step": {
+          "en": "Privacy",
+          "zh": "隐私"
+        },
+        "title": {
+          "en": "Read only, by design.",
+          "zh": "从设计上就是只读。"
+        },
+        "body": {
+          "en": "The Privacy tab spells out what WorthView cannot do: transfer money, trade securities, pay bills, or see your bank passwords and MFA codes. None of it is switched off — it was never built.",
+          "zh": "“隐私”页写明了净览做不到的事：转账、买卖证券、缴费，以及查看你的银行密码和验证码。这些功能不是被关掉了，而是从来没有做过。"
+        },
+        "points": [
+          {
+            "en": "Optional Face ID / Touch ID, asked again after two minutes away",
+            "zh": "可选面容 ID / 触控 ID，离开两分钟后再次验证"
+          },
+          {
+            "en": "Balances are hidden in the app switcher",
+            "zh": "在多任务界面中隐藏余额"
+          },
+          {
+            "en": "Connection keys live in the iPhone Keychain and never sync to iCloud",
+            "zh": "连接密钥保存在 iPhone 钥匙串中，从不同步到 iCloud"
+          },
+          {
+            "en": "Balances only — WorthView never downloads your transaction history",
+            "zh": "只读余额——净览从不下载你的交易记录"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "cardpick",
