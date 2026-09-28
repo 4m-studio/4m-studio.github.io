@@ -47,6 +47,11 @@ the app's accent colour).
 2. Add its icon to `assets/img/` and a `--<slug>` accent gradient in `:root` of `main.css`.
 3. Add `content/privacy/<slug>.html` and `<slug>.zh.html`.
 4. Add a mock-up branch in `mock()` in `tools/build.py` (or reuse `"visual"` of another app).
+   **Or use real screenshots** (as CardPick does): put them in `assets/img/<slug>/`
+   (600 px wide WebP), then add `"shots"` — three images shown overlapping on the
+   home slide and app hero (left, centre, right) — and `"tour"` — one row per screen
+   with a step name, title, text and bullet points, which replaces the feature grid
+   on the app page.
 5. `python3 tools/build.py`. The carousel slide, Apps menu, home grid, app page,
    footer links, sitemap and "More from 4M" rows all appear automatically.
 

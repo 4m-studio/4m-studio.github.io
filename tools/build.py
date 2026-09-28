@@ -176,20 +176,6 @@ def mock(app, lang, cls=""):
             <div class="tile">🏦 {"储蓄与支票账户 · 只读" if zh else "Checking & savings · Read only"}</div>
             <div class="tile tile--accent">📈 {"券商 · 14 个持仓" if zh else "Brokerage · 14 holdings"}</div>
             <div class="tile">🏠 {"房产" if zh else "Home"} · 🚗 {"汽车 · 手动" if zh else "Car · manual"}</div>'''
-    elif v == "cardpick":
-        rows = [("Blue Cash Preferred", "3%", 100, True), ("Sapphire Preferred", "2x", 67, False),
-                ("Freedom Unlimited", "1.5%", 50, False), ("Freedom Flex", "1%", 33, False)]
-        bars = "".join(f'<div class="cp-row{" cp-row--win" if win else ""}"><span>{n}</span><span>{r}</span><i style="--w:{w}%"></i></div>'
-                       for n, r, w, win in rows)
-        inner = f'''
-            <div class="screen-ui__head">{"刷哪张卡？" if zh else "Which card?"}</div>
-            <p class="screen-ui__sub">{"输入你要买什么" if zh else "Type what you're buying."}</p>
-            <div class="cp-search"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>Uber</div>
-            <div class="cp-pick"><span class="cp-card" style="--c1:#1d5fc4;--c2:#5494e6"></span>
-              <div><small>{"推荐" if zh else "USE"}</small><b>Blue Cash Preferred</b><em>{"3% 返现" if zh else "3% cash back"}</em></div></div>
-            <div class="tile">✓ {"交通出行：网约车、打车、停车、火车均为 3%" if zh else "Transit — rideshare, taxis, parking and trains earn 3%"}</div>
-            <div class="cp-rows">{bars}</div>
-            <div class="cp-chips"><span>Costco $200</span><span>Dinner $120</span><span>$50 gas</span></div>'''
     return (f'<div class="phone phone--solo {cls}" style="--accent: var(--{app["accent"]})" aria-hidden="true">'
             f'<div class="phone__screen"><span class="phone__notch"></span><div class="screen-ui">{inner}'
             f'</div></div></div>')
@@ -214,7 +200,43 @@ def miemie(lang, root, width=420):
           </div>'''
 
 
+# ---------- real screenshots ----------
+def shot(app, img, lang, root, cls=""):
+    """One real app screenshot in a phone frame. `img` is {"src", "alt": {en, zh}}."""
+    return (f'<figure class="shot {cls}"><span class="shot__island" aria-hidden="true"></span>'
+            f'<img src="{root}assets/img/{img["src"]}" alt="{esc(L(img["alt"], lang))}" width="600" height="1304" '
+            f'loading="lazy" decoding="async"></figure>')
+
+
+def trio(app, lang, root):
+    """Three overlapping screenshots: left, centre (front), right."""
+    left, centre, right = app["shots"]
+    return (f'<div class="trio" style="--accent: var(--{app["accent"]})">'
+            f'{shot(app, left, lang, root, "shot--left")}{shot(app, right, lang, root, "shot--right")}'
+            f'{shot(app, centre, lang, root, "shot--centre")}</div>')
+
+
+def tour(app, lang, root):
+    """Screen-by-screen walkthrough that replaces the feature grid when an app has real screenshots."""
+    rows = []
+    for i, t in enumerate(app["tour"]):
+        pts = "".join(f"<li>{esc(L(p, lang))}</li>" for p in t["points"])
+        rows.append(f'''
+      <div class="tour__row reveal">
+        <div class="tour__media">{shot(app, t["img"], lang, root)}</div>
+        <div class="tour__text">
+          <p class="tour__step"><span>{i + 1:02d}</span>{esc(L(t["step"], lang))}</p>
+          <h3>{esc(L(t["title"], lang))}</h3>
+          <p class="lede">{esc(L(t["body"], lang))}</p>
+          <ul class="feature-list">{pts}</ul>
+        </div>
+      </div>''')
+    return f'<div class="tour">{"".join(rows)}\n    </div>'
+
+
 def visual(app, lang, root, big=False):
+    if app.get("shots"):
+        return trio(app, lang, root)
     if app["visual"] == "miemie":
         return miemie(lang, root, 440 if big else 400)
     return f'<div class="solo-stage">{mock(app, lang)}</div>'
@@ -502,12 +524,14 @@ def app_page(a, lang):
     path = f"apps/{a['slug']}/"
     root = rel_root(lang, path)
     name = esc(NM(a, lang))
-    feats = "".join(f'''
+    feats = tour(a, lang, root) if a.get("tour") else "".join(f'''
         <div class="feature reveal" style="--d: {0.05 * (i % 3):.2f}s">
           <div class="feature__icon" aria-hidden="true">{f["emoji"]}</div>
           <h3>{esc(L(f["title"], lang))}</h3>
           <p>{esc(L(f["body"], lang))}</p>
-        </div>''' for i, f in enumerate(a["features"]))
+        </div>''' for i, f in enumerate(a.get("features", [])))
+    if not a.get("tour"):
+        feats = f'<div class="features">{feats}\n    </div>'
     priv = "".join(f"<li>{esc(L(p, lang))}</li>" for p in a["privacy"])
     others = "".join(f'''
         <a class="app-tile app-tile--sm" href="{href(lang, path, lang, "apps/" + o["slug"] + "/")}" style="--accent: var(--{o["accent"]})">
@@ -541,8 +565,7 @@ def app_page(a, lang):
       <p class="eyebrow">{T("p_features", lang)}</p>
       <h2>{T("p_features_t", lang)}</h2>
     </div>
-    <div class="features">{feats}
-    </div>
+    {feats}
   </div>
 </section>
 
