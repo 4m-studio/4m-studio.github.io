@@ -936,6 +936,16 @@ p { margin: 0 0 1em; color: var(--text-2); }
   font: 700 13px var(--qq-font); color: #fff; background: var(--qq-peach); box-shadow: 0 6px 14px -6px var(--qq-peach);
 }
 .qqn .mm-hint { margin-top: 12px; }
+/* Home slide: just the room, closer in — Qiao Que and his giraffe fill more of it */
+.qqn-cam { position: absolute; inset: 0; transform-origin: 50% 100%; }
+.qqn--compact .qqn-cam { transform: scale(1.32); }
+.qqn--compact .qqn-room {
+  border-radius: 34px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, .45) inset, 0 -30px 90px -40px rgba(143, 184, 240, .55);
+}
+.qqn--compact .qqn-bubble { top: 11%; }
+.qqn--compact .qqn-soon { display: none; }   /* cut off by the zoom; an in-app status anyway */
+@media (max-width: 420px) { .qqn--compact .qqn-room { border-radius: 28px; } }
 .app-theme--light .qqn-app { box-shadow: 0 30px 70px -30px rgba(91, 75, 72, .45), 0 0 0 1px rgba(91, 75, 72, .06); }
 
 @media (max-width: 420px) {

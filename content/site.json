@@ -426,6 +426,10 @@
     "qq_bond": {
       "en": "Bond",
       "zh": "亲密度"
+    },
+    "qq_hint_short": {
+      "en": "Tap Qiao Que to pat him.",
+      "zh": "点一下桥鹊，摸摸他。"
     }
   },
   "marquee": {

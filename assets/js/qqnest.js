@@ -286,8 +286,8 @@
       '<rect x="-26" y="-17" width="52" height="34" rx="8" fill="#CFA97F"/>' +
       '<circle cx="-6" cy="-2" r="11" fill="#5B4B48" fill-opacity=".85"/><circle cx="-6" cy="-2" r="3" fill="#fff"/>' +
       '<rect x="10.5" y="-14" width="3" height="20" rx="1.5" fill="#9C8A86" transform="rotate(28 12 -4)"/>' +
-      '<rect x="-34" y="19" width="68" height="15" rx="7.5" fill="#AE9AE3" fill-opacity=".9"/>' +
-      '<text x="0" y="29.6" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff" font-family="ui-rounded, \'SF Pro Rounded\', system-ui, sans-serif">Coming Soon</text></g>');
+      '<g class="qqn-soon"><rect x="-34" y="19" width="68" height="15" rx="7.5" fill="#AE9AE3" fill-opacity=".9"/>' +
+      '<text x="0" y="29.6" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff" font-family="ui-rounded, \'SF Pro Rounded\', system-ui, sans-serif">Coming Soon</text></g></g>');
     return '<svg class="qqn-scene" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' + o.join('') + '</svg>';
   }
 
@@ -330,8 +330,12 @@
     var base = root.getAttribute('data-src') || 'assets/img/qqnest/rig/';
 
     this.roomEl = root.querySelector('.qqn-room');
-    this.roomEl.insertAdjacentHTML('afterbegin', room());
-    this.figWrap = el('div', 'qqn-figwrap', this.roomEl);
+    // Compact (home slide): just the room, Qiao Que and his giraffe, seen through a closer "camera".
+    // Full (app page): plus the bond bar, the treats and level-ups.
+    this.compact = root.hasAttribute('data-compact');
+    var cam = el('div', 'qqn-cam', this.roomEl);
+    cam.innerHTML = room();
+    this.figWrap = el('div', 'qqn-figwrap', cam);
     var fig = this.fig = el('div', 'qqn-fig', this.figWrap);
     this.fx = el('div', 'qqn-fx', this.roomEl);
     this.bubble = root.querySelector('.qqn-bubble');
@@ -372,7 +376,7 @@
     this.pokes = 0;
 
     this.load();
-    this.buildActions();
+    if (!this.compact) this.buildActions();
     this.renderBond(false);
     this.layout();
     this.bind();
@@ -556,6 +560,7 @@
   };
 
   Nest.prototype.addAffection = function (n) {
+    if (this.compact) return;              // the home slide has no bond bar
     var before = this.stage;
     this.aff += n;
     this.stage = this.stageFor(this.aff);
@@ -607,8 +612,9 @@
     return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true"><path d="' + path + '" fill="' + color + '"/></svg>';
   }
   Nest.prototype.origin = function () {
-    var r = this.roomEl.getBoundingClientRect();
-    return [r.width / 2, r.height * 0.58, r.width / 380];
+    // Around his chest, wherever the camera puts him.
+    var r = this.roomEl.getBoundingClientRect(), f = this.figWrap.getBoundingClientRect();
+    return [f.left + f.width / 2 - r.left, f.top + f.height * 0.5 - r.top, f.width / 190];
   };
   Nest.prototype.burst = function (count) {
     if (this.reduce) count = Math.ceil(count / 3);

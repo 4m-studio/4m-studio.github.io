@@ -191,8 +191,16 @@ def miemie(lang, root, width=420):
           </div>'''
 
 
-def nest(lang, root, width=440):
-    """Qiao Que's nest: the QQNest home screen, live (assets/js/qqnest.js)."""
+def nest(lang, root, width=440, compact=False):
+    """Qiao Que's nest: the QQNest home screen, live (assets/js/qqnest.js).
+    compact (home slide): only the room with Qiao Que and his giraffe, bigger; the app page gets the full nest."""
+    if compact:
+        return f'''<div class="qqn qqn--compact" data-qqnest data-compact data-src="{root}assets/img/qqnest/rig/" style="--qqn-w:{width}px">
+            <div class="qqn-room" tabindex="0" role="button" aria-label="{esc(T("qq_label", lang))}">
+              <span class="qqn-bubble" aria-live="polite"></span>
+            </div>
+            <p class="mm-hint">{T("qq_hint_short", lang)}</p>
+          </div>'''
     return f'''<div class="qqn" data-qqnest data-src="{root}assets/img/qqnest/rig/" style="--qqn-w:{width}px">
             <div class="qqn-app">
               <div class="qqn-room" tabindex="0" role="button" aria-label="{esc(T("qq_label", lang))}">
@@ -247,9 +255,9 @@ def tour(app, lang, root):
     return f'<div class="tour">{"".join(rows)}\n    </div>'
 
 
-def visual(app, lang, root, big=False):
+def visual(app, lang, root, big=False, home=False):
     if app["visual"] == "nest":
-        return nest(lang, root, 440 if big else 400)
+        return nest(lang, root, 500 if home else 440, compact=home)
     if app.get("shots"):
         return trio(app, lang, root)
     if app["visual"] == "miemie":
@@ -419,7 +427,7 @@ def home(lang):
           </div>
           <p class="news__meta">{esc(L(a["platform"], lang))}</p>
         </div>
-        <div class="news__visual">{visual(a, lang, root, big=True)}</div>
+        <div class="news__visual">{visual(a, lang, root, big=True, home=True)}</div>
       </article>''')
         tabs.append(f'<button class="news__tab" type="button" role="tab" aria-controls="slide-{a["slug"]}" '
                     f'aria-selected="{"true" if i == 0 else "false"}" style="--accent: var(--{a["accent"]})">'
