@@ -537,7 +537,7 @@ def home(lang):
     }
     head = redirect + f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     return page(lang, path, T("title", lang), T("description", lang), body,
-                scripts=("main", "carousel", "miemie", "qqnest"), head_extra=head)
+                scripts=("main", "carousel", "rig", "miemie", "qqnest"), head_extra=head)
 
 
 def contact_block(lang, app=None):
@@ -657,7 +657,7 @@ def app_page(a, lang):
     if a.get("appStore"):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
-    scripts = ("main",) + {"miemie": ("miemie",), "nest": ("qqnest",)}.get(a["visual"], ())
+    scripts = ("main",) + {"miemie": ("rig", "miemie"), "nest": ("rig", "qqnest")}.get(a["visual"], ())
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 

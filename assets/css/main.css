@@ -26,10 +26,10 @@
 
   /* Per-app accents */
   --storyreel:     linear-gradient(135deg, #ffa12b 0%, #f76b1c 52%, #e8471d 100%);
-  --meetlog:       linear-gradient(135deg, #ffbf5e 0%, #f59a3c 50%, #e0672a 100%);
-  --qqnest:        linear-gradient(135deg, #a9d6f5 0%, #8fb8f0 42%, #ff9aa6 100%);
-  --avatartracker: linear-gradient(135deg, #b9a4ff 0%, #8a6cff 50%, #ff6fb1 100%);
-  --wearly:        linear-gradient(135deg, #ffb12b 0%, #fc8a20 52%, #f45c18 100%);
+  --meetlog:       linear-gradient(135deg, #8df0c4 0%, #3ed69c 50%, #14a878 100%);
+  --qqnest:        linear-gradient(135deg, #ffc9d0 0%, #ffa0ad 45%, #f0678a 100%);
+  --avatartracker: linear-gradient(135deg, #cdb9ff 0%, #a384ff 50%, #7c4dff 100%);
+  --wearly:        linear-gradient(135deg, #f3d6ae 0%, #d9ad7c 50%, #b98552 100%);
   --worthview:     linear-gradient(135deg, #b3bbff 0%, #8190ff 48%, #5b6cff 100%);
   --cardpick:      linear-gradient(135deg, #1fbf9f 0%, #1690a0 50%, #1d4fb8 100%);
 
@@ -794,12 +794,8 @@ p { margin: 0 0 1em; color: var(--text-2); }
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: linear-gradient(115deg, rgba(255,255,255,.10), transparent 32%, transparent 70%, rgba(255,255,255,.05));
 }
-.mm-fig {
-  position: absolute; left: 0; top: 0; z-index: 1; width: 1024px; height: 1920px; transform-origin: 0 0; pointer-events: none;
-  filter: drop-shadow(0 26px 30px rgba(0,0,0,.55));
-}
-.mm-g { position: absolute; left: 0; top: 0; width: 1024px; height: 1920px; will-change: transform; }
-.mm-l { position: absolute; max-width: none; display: block; }
+/* One canvas, sized and placed by miemie.js (rig.js draws the layers). */
+.mm-fig { position: absolute; left: 0; top: 0; z-index: 1; display: block; max-width: none; pointer-events: none; }
 .mm-stage::after { /* soft floor fade so the cropped legs dissolve into the frame */
   content: ""; position: absolute; z-index: 2; left: 3%; right: 3%; bottom: 0; height: 20%;
   background: linear-gradient(180deg, transparent, #11121a 90%); pointer-events: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
@@ -854,9 +850,8 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .qqn-room:focus-visible { box-shadow: 0 0 0 3px var(--qq-sky); }
 .qqn-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .qqn-figwrap { position: absolute; left: 50%; bottom: 6%; transform: translate(-50%, 0); transform-origin: 50% 100%; pointer-events: none; }
-.qqn-fig { position: absolute; left: 0; top: 0; width: 1600px; height: 2000px; transform-origin: 0 0; }
-.qqn-g { position: absolute; left: 0; top: 0; width: 1600px; height: 2000px; }
-.qqn-l { position: absolute; max-width: none; display: block; }
+/* One canvas, sized and placed by qqnest.js (rig.js draws the layers). */
+.qqn-fig { position: absolute; left: 0; top: 0; display: block; max-width: none; }
 .qqn-fx { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
 .qqn-p, .qqn-food { position: absolute; left: 0; top: 0; line-height: 0; pointer-events: none; }
 .qqn-food { z-index: 6; filter: drop-shadow(0 6px 8px rgba(217, 183, 154, .5)); }

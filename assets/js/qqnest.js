@@ -298,16 +298,16 @@
     if (parent) parent.appendChild(e);
     return e;
   }
+  /* The figure is drawn on one canvas (assets/js/rig.js). As DOM, each group
+     was a 1600×2000 box — far too heavy for phones. Unset pivots default to
+     the artboard centre, as CSS transform-origin did. */
+  var STAGE = null;
   function group(parent, pivot) {
-    var g = el('div', 'qqn-g', parent);
-    if (pivot) g.style.transformOrigin = pivot[0] + 'px ' + pivot[1] + 'px';
-    return g;
+    return STAGE.group(parent, pivot ? pivot[0] : CW / 2, pivot ? pivot[1] : CH / 2);
   }
   function layer(name, parent, base) {
-    var d = LAYERS[name], img = el('img', 'qqn-l', parent);
-    img.src = base + name + '.webp'; img.alt = ''; img.draggable = false; img.decoding = 'async';
-    img.style.cssText = 'left:' + d[0] + 'px;top:' + d[1] + 'px;width:' + d[2] + 'px;height:' + d[3] + 'px';
-    return img;
+    var d = LAYERS[name];
+    return STAGE.image(parent, base + name + '.webp', d[0], d[1], d[2], d[3]);
   }
 
   /* ---------- Spring for the tap bounce ---------- */
@@ -336,13 +336,18 @@
     var cam = el('div', 'qqn-cam', this.roomEl);
     cam.innerHTML = room();
     this.figWrap = el('div', 'qqn-figwrap', cam);
-    var fig = this.fig = el('div', 'qqn-fig', this.figWrap);
+    var fig = this.fig = el('canvas', 'qqn-fig', this.figWrap);
+    fig.setAttribute('aria-hidden', 'true');
+    // Artboard plus a margin for raised arms and ear flicks.
+    STAGE = this.rig = new window.Rig2D.Stage(fig, [-120, -120, CW + 120, CH + 40]);
+    this.rig.onload = function () { self.rig.draw(); };
+    fig = null;
     this.fx = el('div', 'qqn-fx', this.roomEl);
     this.bubble = root.querySelector('.qqn-bubble');
 
     /* QQFigure: same draw order and grouping as the app */
-    layer('shadow', fig, base);
-    var body = group(fig, PIV.feet);
+    layer('shadow', null, base);
+    var body = group(null, PIV.feet);
     var n = this.n = { body: body };
     n.tail = group(body, PIV.tail); layer('tail', n.tail, base);
     layer('body', body, base);
@@ -375,6 +380,7 @@
     this.visible = true;
     this.pokes = 0;
 
+    STAGE = null;
     this.load();
     if (!this.compact) this.buildActions();
     this.renderBond(false);
@@ -417,9 +423,14 @@
     // Figure = half the room's width (HomeView: min(w * 0.46, 190) on a ~393pt stage).
     var fw = r.width * 0.5;
     this.figScale = fw / CW;
-    this.fig.style.transform = 'scale(' + this.figScale + ')';
     this.figWrap.style.width = fw + 'px';
     this.figWrap.style.height = (fw * CH / CW) + 'px';
+    // Extra resolution for the compact camera zoom (×1.32) and the tap stretch.
+    var b = this.rig.box;
+    this.rig.resize(this.figScale, this.compact ? 1.45 : 1.1);
+    this.fig.style.left = (b[0] * this.figScale) + 'px';
+    this.fig.style.top = (b[1] * this.figScale) + 'px';
+    this.rig.draw();
   };
 
   Nest.prototype.bind = function () {
@@ -678,8 +689,6 @@
     this.raf = requestAnimationFrame(loop);
   };
 
-  function rot(d) { return 'rotate(' + d.toFixed(2) + 'deg)'; }
-
   Nest.prototype.frame = function (dt) {
     this.time += dt;
     var now = this.time, n = this.n;
@@ -706,30 +715,28 @@
     this.figWrap.style.transform = 'translate(-50%,' + (-b * 124 * this.figScale).toFixed(2) + 'px) scale(' +
       (1 + b * 0.10).toFixed(4) + ',' + (1 - b * 0.14).toFixed(4) + ')';
 
-    n.body.style.transform = rot(s.lean) + ' scale(' + (1 + 0.02 * s.breathe).toFixed(4) + ')';
-    n.tail.style.transform = rot(s.tail);
-    n.armL.style.transform = rot(s.armLeft);
-    n.armR.style.transform = rot(s.armRight);
-    n.plush.style.transform = rot(s.plush);
-    n.head.style.transform = 'translate(' + (lx * 10).toFixed(1) + 'px,' + (-s.headLift * K + ly * 6).toFixed(2) + 'px) ' +
-      rot(s.headTilt + lx * 2.5);
+    n.body.rot = s.lean; n.body.sx = n.body.sy = 1 + 0.02 * s.breathe;
+    n.tail.rot = s.tail;
+    n.armL.rot = s.armLeft;
+    n.armR.rot = s.armRight;
+    n.plush.rot = s.plush;
+    n.head.tx = lx * 10; n.head.ty = -s.headLift * K + ly * 6; n.head.rot = s.headTilt + lx * 2.5;
     // A little parallax inside the head: features lead, back hair trails.
-    n.back.style.transform = n.hairBackG.style.transform = 'translate(' + (-lx * 6).toFixed(1) + 'px,' + (-ly * 4).toFixed(1) + 'px)';
-    n.face.style.transform = 'translate(' + (lx * 5).toFixed(1) + 'px,' + (ly * 4).toFixed(1) + 'px)';
-    n.side.style.transform = 'translate(' + (lx * 4).toFixed(1) + 'px,' + (ly * 3).toFixed(1) + 'px)';
-    var fx = (lx * 14).toFixed(1), fy = (ly * 10).toFixed(1);
-    n.feat.style.transform = 'translate(' + fx + 'px,' + fy + 'px)';
-    n.feat2.style.transform = 'translate(' + fx + 'px,' + fy + 'px)';
-    n.brows.style.transform = 'translateY(' + (-s.browLift * K).toFixed(2) + 'px)';
-    n.fringe.style.transform = 'translate(' + (lx * 9).toFixed(1) + 'px,' + (ly * 6).toFixed(1) + 'px)';
-    n.earL.style.transform = 'translate(' + (-lx * 4).toFixed(1) + 'px,0) ' + rot(s.earLeft);
-    n.earR.style.transform = 'translate(' + (-lx * 4).toFixed(1) + 'px,0) ' + rot(s.earRight);
-    n.earLImg[0].style.opacity = n.earRImg[0].style.opacity = (1 - s.earFlush).toFixed(3);
-    n.earLImg[1].style.opacity = n.earRImg[1].style.opacity = s.earFlush.toFixed(3);
-    n.ahoge.style.transform = 'translate(' + (lx * 9).toFixed(1) + 'px,0) ' + rot(s.ahoge);
-    EYES.forEach(function (e) { n.eyes[e].style.opacity = Math.min(1, s.eyes[e] || 0).toFixed(3); });
-    MOUTHS.forEach(function (m) { n.mouths[m].style.opacity = Math.min(1, s.mouths[m] || 0).toFixed(3); });
-    n.blush.style.opacity = Math.min(1, BLUSH_BASE + s.blushBoost).toFixed(3);
+    n.back.tx = n.hairBackG.tx = -lx * 6; n.back.ty = n.hairBackG.ty = -ly * 4;
+    n.face.tx = lx * 5; n.face.ty = ly * 4;
+    n.side.tx = lx * 4; n.side.ty = ly * 3;
+    n.feat.tx = n.feat2.tx = lx * 14; n.feat.ty = n.feat2.ty = ly * 10;
+    n.brows.ty = -s.browLift * K;
+    n.fringe.tx = lx * 9; n.fringe.ty = ly * 6;
+    n.earL.tx = n.earR.tx = -lx * 4;
+    n.earL.rot = s.earLeft; n.earR.rot = s.earRight;
+    n.earLImg[0].a = n.earRImg[0].a = 1 - s.earFlush;
+    n.earLImg[1].a = n.earRImg[1].a = s.earFlush;
+    n.ahoge.tx = lx * 9; n.ahoge.rot = s.ahoge;
+    EYES.forEach(function (e) { n.eyes[e].a = Math.min(1, s.eyes[e] || 0); });
+    MOUTHS.forEach(function (m) { n.mouths[m].a = Math.min(1, s.mouths[m] || 0); });
+    n.blush.a = Math.min(1, BLUSH_BASE + s.blushBoost);
+    this.rig.draw();
   };
 
   function init() {

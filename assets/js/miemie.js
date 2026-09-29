@@ -206,18 +206,16 @@
     if (parent) parent.appendChild(e);
     return e;
   }
+  /* Layers are nodes of one canvas (assets/js/rig.js), not DOM elements:
+     a DOM layer per part made ~20 full-artboard GPU layers, which crashed
+     iPhone Safari. Unset origins default to the artboard centre, as in CSS. */
+  var STAGE = null;
   function layer(id, parent, base) {
-    var d = L[id], img = el('img', 'mm-l', parent);
-    img.src = base + d[4] + '.webp';
-    img.alt = ''; img.draggable = false; img.decoding = 'async';
-    img.style.cssText = 'left:' + (d[0] - d[2] / 2) + 'px;top:' + (d[1] - d[3] / 2) +
-      'px;width:' + d[2] + 'px;height:' + d[3] + 'px';
-    return img;
+    var d = L[id];
+    return STAGE.image(parent, base + d[4] + '.webp', d[0] - d[2] / 2, d[1] - d[3] / 2, d[2], d[3]);
   }
   function group(cls, parent, ox, oy) {
-    var g = el('div', 'mm-g ' + (cls || ''), parent);
-    if (ox != null) g.style.transformOrigin = ox + 'px ' + oy + 'px';
-    return g;
+    return STAGE.group(parent, ox != null ? ox : W / 2, oy != null ? oy : H / 2);
   }
 
   function MieMie(root) {
@@ -227,21 +225,25 @@
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var stage = root.querySelector('.mm-stage');
-    var fig = el('div', 'mm-fig', stage);
+    var fig = el('canvas', 'mm-fig', stage);
+    fig.setAttribute('aria-hidden', 'true');
     this.stage = stage; this.fig = fig;
+    // Artboard area the canvas covers: the whole figure plus room for raised hands.
+    STAGE = this.rig = new window.Rig2D.Stage(fig, [-160, -160, W + 160, H]);
+    this.rig.onload = function () { self.draw(); };
 
-    var body = group('mm-body', fig, 512, 1560);
+    var body = group('mm-body', null, 512, 1560);
     var headBack = group('mm-head', body, HEAD_PIVOT[0], HEAD_PIVOT[1]);
     var hairBackG = group('', headBack, HEAD_PIVOT[0], 250);
     layer('hairBack', hairBackG, base);
-    layer('neck', body, base).style.zIndex = 10;
-    var torso = group('', body); torso.style.zIndex = 20;
+    layer('neck', body, base).z = 10;
+    var torso = group('', body); torso.z = 20;
     layer('body', torso, base);
 
     this.arms = {};
     ['left', 'right'].forEach(function (side) {
       var A = ARM[side], cap = side === 'left' ? 'Left' : 'Right';
-      var wrapG = group('mm-arm', body); wrapG.style.zIndex = 25;
+      var wrapG = group('mm-arm', body); wrapG.z = 25;
       var up = group('', wrapG, A.s[0], A.s[1]);
       layer('arm' + cap + 'Upper', up, base);
       var fo = group('', up, A.e[0], A.e[1]);
@@ -250,13 +252,13 @@
       var hands = {};
       HANDS.forEach(function (h) {
         hands[h] = layer('hand' + cap + h, ha, base);
-        hands[h].style.opacity = h === 'Rest' ? 1 : 0;
+        hands[h].a = h === 'Rest' ? 1 : 0;
       });
       self.arms[side] = { wrap: wrapG, up: up, fo: fo, ha: ha, hands: hands, shape: 'Rest' };
     });
 
     var head = group('mm-head', body, HEAD_PIVOT[0], HEAD_PIVOT[1]);
-    head.style.zIndex = 30;
+    head.z = 30;
     var faceG = group('', head);
     layer('face', faceG, base);
     var feat = group('', head);
@@ -269,20 +271,12 @@
       layer('eye' + cap, g, base);
       var clip = group('', g);
       // The iris is masked to the white of the eye plus a few px under the lid
-      // line (mask_eye_*.png, traced from the socket artwork); the lash layer
-      // above hides that overlap. The ellipse is a fallback for no CSS masks.
-      clip.style.clipPath = 'ellipse(' + (ap[2] / 2 - 3) + 'px ' + (ap[3] / 2 - 2) + 'px at ' +
-        (ap[0] + ap[2] / 2) + 'px ' + (ap[1] + ap[3] / 2) + 'px)';
+      // line (mask_eye_*.png, traced from the socket artwork) and an ellipse
+      // inside the aperture; the lash layer above hides that overlap.
+      clip.ellipse = [ap[0] + ap[2] / 2, ap[1] + ap[3] / 2, ap[2] / 2 - 3, ap[3] / 2 - 2];
       var sock = L['eye' + cap];
-      var mask = 'url("' + base + 'mask_eye_' + side + '.png")';
-      var mpos = (sock[0] - sock[2] / 2) + 'px ' + (sock[1] - sock[3] / 2) + 'px';
-      var msize = sock[2] + 'px ' + sock[3] + 'px';
-      ['webkitMask', 'mask'].forEach(function (k) {
-        clip.style[k + 'Image'] = mask;
-        clip.style[k + 'Position'] = mpos;
-        clip.style[k + 'Size'] = msize;
-        clip.style[k + 'Repeat'] = 'no-repeat';
-      });
+      clip.mask = { img: STAGE.load(base + 'mask_eye_' + side + '.png'),
+                    x: sock[0] - sock[2] / 2, y: sock[1] - sock[3] / 2, w: sock[2], h: sock[3] };
       var iris = layer('iris' + cap, clip, base);
       // Lashes, liner and lid skin (the socket minus its white), drawn back
       // OVER the iris so it tucks under the lid line instead of stopping short
@@ -326,6 +320,7 @@
     this.bubble = root.querySelector('.mm-bubble');
     this.frame = root.querySelector('.mm-frame');
     this.frameTop = parseFloat(root.getAttribute('data-frame-top') || '640');
+    STAGE = null;
     this.layout();
     this.bind();
     this.render(0);
@@ -341,9 +336,15 @@
     // The frame (her "screen") starts at chin height, so the head and any
     // raised arm break out over its top edge.
     if (this.frame) this.frame.style.top = ((this.frameTop - cy0) * sc) + 'px';
-    this.fig.style.transform = 'translate(' + (-cx0 * sc) + 'px,' + (-cy0 * sc) + 'px) scale(' + sc + ')';
+    var b = this.rig.box;
+    this.rig.resize(sc);
+    this.fig.style.left = ((b[0] - cx0) * sc) + 'px';
+    this.fig.style.top = ((b[1] - cy0) * sc) + 'px';
+    this.fig.style.filter = 'drop-shadow(0 ' + (26 * sc).toFixed(2) + 'px ' + (30 * sc).toFixed(2) + 'px rgba(0,0,0,.55))';
     this.scale = sc; this.crop = [cx0, cy0];
   };
+
+  MieMie.prototype.draw = function () { this.rig.draw(); };
 
   MieMie.prototype.bind = function () {
     var self = this;
@@ -359,7 +360,7 @@
     if (hint && !window.matchMedia('(hover: hover)').matches) {
       hint.textContent = this.root.getAttribute('data-hint-touch') || 'Touch anywhere — she looks. Tap her for a move.';
     }
-    window.addEventListener('resize', function () { self.layout(); self.wake(); }, { passive: true });
+    window.addEventListener('resize', function () { self.layout(); self.draw(); self.wake(); }, { passive: true });
 
     this.stage.addEventListener('click', function () { self.next(); });
     this.stage.addEventListener('keydown', function (e) {
@@ -445,8 +446,8 @@
   MieMie.prototype.setHand = function (side, shape) {
     var arm = this.arms[side];
     if (arm.shape === shape) return;
-    arm.hands[arm.shape].style.opacity = 0;
-    arm.hands[shape].style.opacity = 1;
+    arm.hands[arm.shape].a = 0;
+    arm.hands[shape].a = 1;
     arm.shape = shape;
   };
 
@@ -459,8 +460,8 @@
     this.setHand('left', p.Lh || 'Rest');
     this.setHand('right', p.Rh || 'Rest');
     // Raised arms pass in front of the hair and face.
-    this.arms.left.wrap.style.zIndex = p.L ? 120 : 25;
-    this.arms.right.wrap.style.zIndex = p.R ? 120 : 25;
+    this.arms.left.wrap.z = p.L ? 120 : 25;
+    this.arms.right.wrap.z = p.R ? 120 : 25;
     S.smile.t = p.smile || 0; S.open.t = p.open || 0;
     S.blush.t = p.blush != null ? p.blush : 0.55;
     S.brow.t = p.brow || 0;
@@ -544,56 +545,53 @@
       this.frame.style.transform = 'perspective(1100px) rotateY(' + (lx * -9).toFixed(2) +
         'deg) rotateX(' + (6 + ly * 5).toFixed(2) + 'deg)';
     }
-    n.body.style.transform = 'translateY(' + (S.bounce.x + breath * 2).toFixed(2) + 'px) rotate(' +
-      S.sway.x.toFixed(2) + 'deg)';
+    n.body.ty = S.bounce.x + breath * 2; n.body.rot = S.sway.x;
 
     var roll = S.roll.x + lx * 5;
-    var headT = 'translate(' + (lx * 10).toFixed(2) + 'px,' + (ly * 8 - breath * 1.5).toFixed(2) +
-      'px) rotate(' + roll.toFixed(2) + 'deg)';
-    n.head.style.transform = headT;
-    n.headBack.style.transform = headT;
+    n.head.tx = n.headBack.tx = lx * 10;
+    n.head.ty = n.headBack.ty = ly * 8 - breath * 1.5;
+    n.head.rot = n.headBack.rot = roll;
 
     // 2.5D: features move more than the face, back hair moves the other way.
-    n.face.style.transform = 'translate(' + (lx * 7).toFixed(2) + 'px,' + (ly * 5).toFixed(2) + 'px)';
-    n.feat.style.transform = 'translate(' + (lx * 17).toFixed(2) + 'px,' + (ly * 12).toFixed(2) + 'px)';
+    n.face.tx = lx * 7; n.face.ty = ly * 5;
+    n.feat.tx = lx * 17; n.feat.ty = ly * 12;
     var hairLag = S.hair.x - (lx * 14 + S.roll.x * 0.8);
-    n.hairF.style.transform = 'translate(' + (lx * 11).toFixed(2) + 'px,' + (ly * 6).toFixed(2) +
-      'px) rotate(' + (-hairLag * 0.12).toFixed(2) + 'deg)';
-    n.hairB.style.transform = 'translate(' + (-lx * 7).toFixed(2) + 'px,' + (-ly * 4).toFixed(2) +
-      'px) rotate(' + (-hairLag * 0.1).toFixed(2) + 'deg)';
+    n.hairF.tx = lx * 11; n.hairF.ty = ly * 6; n.hairF.rot = -hairLag * 0.12;
+    n.hairB.tx = -lx * 7; n.hairB.ty = -ly * 4; n.hairB.rot = -hairLag * 0.1;
 
     // Irises, clipped to each eye's aperture.
     // Travel measured against the eye-white masks: the most either iris can
     // move while at least ~70% of it stays visible (sideways 15, up 6, down 13).
-    var ix = (clamp(lx, -1, 1) * IRIS.x).toFixed(2);
-    var iy = (ly < 0 ? Math.max(ly, -1) * IRIS.up : Math.min(ly, 1) * IRIS.down).toFixed(2);
-    this.eyes.left.iris.style.transform = 'translate(' + ix + 'px,' + iy + 'px)';
-    this.eyes.right.iris.style.transform = 'translate(' + ix + 'px,' + iy + 'px)';
+    var ix = clamp(lx, -1, 1) * IRIS.x;
+    var iy = ly < 0 ? Math.max(ly, -1) * IRIS.up : Math.min(ly, 1) * IRIS.down;
+    this.eyes.left.iris.tx = this.eyes.right.iris.tx = ix;
+    this.eyes.left.iris.ty = this.eyes.right.iris.ty = iy;
 
     // Blink: lid fades in first, then the open eye fades out (sequenced).
     [['left', S.lidL.x], ['right', S.lidR.x]].forEach(function (e) {
       var eye = this.eyes[e[0]], c = clamp(e[1], 0, 1);
-      eye.lid.style.opacity = band(c, 0.28, 0.6).toFixed(3);
-      eye.g.style.opacity = (1 - band(c, 0.6, 0.92)).toFixed(3);
-      eye.brow.style.transform = 'translateY(' + (-S.brow.x * 18 + c * 4).toFixed(2) + 'px)';
+      eye.lid.a = band(c, 0.28, 0.6);
+      eye.g.a = 1 - band(c, 0.6, 0.92);
+      eye.brow.ty = -S.brow.x * 18 + c * 4;
     }, this);
 
     // Mouth cross-fade
     var sm = clamp(S.smile.x, 0, 1), op = clamp(S.open.x, 0, 1);
-    this.mouth.open.style.opacity = op.toFixed(3);
-    this.mouth.smile.style.opacity = (sm * (1 - op)).toFixed(3);
-    this.mouth.neutral.style.opacity = (1 - Math.max(sm, op)).toFixed(3);
-    n.blush.style.opacity = clamp(S.blush.x, 0, 1).toFixed(3);
+    this.mouth.open.a = op;
+    this.mouth.smile.a = sm * (1 - op);
+    this.mouth.neutral.a = 1 - Math.max(sm, op);
+    n.blush.a = clamp(S.blush.x, 0, 1);
 
     // Arms (idle: a hint of swing with the breath)
     var swing = breath * 0.8;
     var a = this.arms;
-    a.left.up.style.transform = 'rotate(' + (S.LU.x + swing).toFixed(2) + 'deg)';
-    a.left.fo.style.transform = 'rotate(' + S.LF.x.toFixed(2) + 'deg)';
-    a.left.ha.style.transform = 'rotate(' + S.LH.x.toFixed(2) + 'deg)';
-    a.right.up.style.transform = 'rotate(' + (S.RU.x - swing).toFixed(2) + 'deg)';
-    a.right.fo.style.transform = 'rotate(' + S.RF.x.toFixed(2) + 'deg)';
-    a.right.ha.style.transform = 'rotate(' + S.RH.x.toFixed(2) + 'deg)';
+    a.left.up.rot = S.LU.x + swing;
+    a.left.fo.rot = S.LF.x;
+    a.left.ha.rot = S.LH.x;
+    a.right.up.rot = S.RU.x - swing;
+    a.right.fo.rot = S.RF.x;
+    a.right.ha.rot = S.RH.x;
+    this.draw();
   };
 
   function init() {
