@@ -47,28 +47,6 @@
         }
       },
       {
-        "emoji": "🧑‍🎨",
-        "title": {
-          "en": "Layered 2D characters",
-          "zh": "分层 2D 角色"
-        },
-        "body": {
-          "en": "Hand-drawn characters built from separate layers: eyes that blink, lips that sync, hair that swings and arms with real joints.",
-          "zh": "由独立图层组成的手绘角色：会眨的眼睛、跟着说话的嘴、会甩动的头发、带关节的手臂。"
-        }
-      },
-      {
-        "emoji": "👋",
-        "title": {
-          "en": "Gestures that blend in",
-          "zh": "不打断的预设动作"
-        },
-        "body": {
-          "en": "Wave, heart, peace, clap, dance… presets sit on top of live tracking, so she keeps blinking and talking mid-gesture.",
-          "zh": "挥手、比心、剪刀手、鼓掌、跳舞……动作叠加在实时追踪之上，做动作时她照样眨眼、说话。"
-        }
-      },
-      {
         "emoji": "🎚️",
         "title": {
           "en": "Calm, snappy motion",
@@ -77,17 +55,6 @@
         "body": {
           "en": "A quick calibration to your neutral face, then every channel is smoothed on its own: blinks stay crisp, head motion stays calm.",
           "zh": "先快速校准你的自然表情，再对每个通道单独平滑：眨眼干脆利落，头部动作平稳自然。"
-        }
-      },
-      {
-        "emoji": "🧍",
-        "title": {
-          "en": "A growing cast",
-          "zh": "角色越来越多"
-        },
-        "body": {
-          "en": "MieMie, Mika and the classic stick figure today. Switching characters never restarts the camera.",
-          "zh": "目前有 MieMie、Mika 和经典火柴人；切换角色时摄像头不会重启。"
         }
       },
       {
@@ -133,7 +100,157 @@
         "#ff6fb1",
         "#b9a4ff"
       ]
-    }
+    },
+    "tour": [
+      {
+        "img": {
+          "src": "avatartracker/stick-live.webp",
+          "alt": {
+            "en": "AvatarTracker live screen: the Stick figure celebrating with both arms up and an open-mouthed grin, the reaction bar below with Celebrate selected",
+            "zh": "随影直播画面：火柴人双手高举、张嘴大笑地庆祝，下方反应栏选中了“庆祝”"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Where it began",
+          "zh": "起点"
+        },
+        "title": {
+          "en": "It started with a stick figure.",
+          "zh": "一切从一个火柴人开始。"
+        },
+        "body": {
+          "en": "A circle, two dots and a line: the very first AvatarTracker character. It proved the idea — your blinks, brows, mouth and head tilt, drawn back at you in real time. Stick is still in the app, and still the quickest way to see the tracking at work.",
+          "zh": "一个圆、两个点、一条线——这是随影的第一个角色。它验证了最初的想法：你的眨眼、眉毛、嘴型和歪头，都能实时画出来。火柴人至今仍在 App 里，也是看清面部追踪最直接的方式。"
+        },
+        "points": [
+          {
+            "en": "Eyes, brows and mouth follow yours live",
+            "zh": "眼睛、眉毛和嘴巴实时跟随你"
+          },
+          {
+            "en": "Arms that shoot up for 🎉 Celebrate",
+            "zh": "点 🎉 庆祝，双手高高举起"
+          },
+          {
+            "en": "Clean lines that stay sharp at any size",
+            "zh": "线条干净，任何尺寸都清晰"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "avatartracker/mika-live.webp",
+          "alt": {
+            "en": "AvatarTracker live screen: Mika, a flat hand-drawn character with long dark hair and a blue top, waving with her raised arm; Wave is selected in the reaction bar",
+            "zh": "随影直播画面：长黑发、蓝上衣的手绘角色 Mika 抬手挥手，反应栏选中了“挥手”"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "A drawing",
+          "zh": "一幅画"
+        },
+        "title": {
+          "en": "Then the lines became a drawing.",
+          "zh": "然后，线条变成了一幅画。"
+        },
+        "body": {
+          "en": "Mika is drawn in clean shapes and flat colour, then cut into parts — eyes, lids, brows, three mouths, hair in front and behind, and arms with real elbows — so every piece can move on its own while your face drives it.",
+          "zh": "Mika 用简洁的形状和平涂色彩画成，再拆成一个个部件——眼睛、眼皮、眉毛、三种嘴型、前后两层头发，以及带关节的手臂——每一块都能单独动起来，由你的表情来驱动。"
+        },
+        "points": [
+          {
+            "en": "Eyes that blink and follow your gaze",
+            "zh": "会眨眼，眼神跟着你走"
+          },
+          {
+            "en": "Jointed arms: tap 👋 and she waves",
+            "zh": "关节手臂：点 👋 她就挥手"
+          },
+          {
+            "en": "Five hand shapes, from open palm to peace sign",
+            "zh": "五种手势，从张开手掌到比耶"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "avatartracker/miemie-live.webp",
+          "alt": {
+            "en": "AvatarTracker live screen: MieMie, a painted layered 2D character, smiling and making a finger heart beside her cheek; Heart is selected in the reaction bar",
+            "zh": "随影直播画面：精绘分层 2D 角色 MieMie 微笑着在脸颊旁比出指尖爱心，反应栏选中了“比心”"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "Layered 2D",
+          "zh": "分层 2D"
+        },
+        "title": {
+          "en": "Now she's a fully painted 2D character.",
+          "zh": "现在，她是一个精绘的 2D 角色。"
+        },
+        "body": {
+          "en": "MieMie is painted in full detail and split into 36 layers: lashes, irises and lids, three mouth shapes, hair that swings behind the head, and hands drawn for seven poses. Tap 🫶 and she makes a finger heart while she keeps blinking and talking with you.",
+          "zh": "MieMie 以完整细节绘制，拆成 36 个图层：睫毛、虹膜和眼皮，三种嘴型，会在脑后摆动的头发，还有七种姿势的手。点一下 🫶，她就比出指尖爱心，同时继续跟着你眨眼、说话。"
+        },
+        "points": [
+          {
+            "en": "36 layers, rigged with a real arm skeleton",
+            "zh": "36 个图层，配有真实的手臂骨骼"
+          },
+          {
+            "en": "Seven hand poses, including a finger heart",
+            "zh": "七种手势，包括指尖比心"
+          },
+          {
+            "en": "Reactions blend on top of live tracking",
+            "zh": "反应动作叠加在实时追踪之上"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "avatartracker/home.webp",
+          "alt": {
+            "en": "AvatarTracker home screen: MieMie on the stage card with a Tracking you badge, the Go Live button, and the avatar row with Stick, MieMie, Mika and Create",
+            "zh": "随影首页：舞台卡片上的 MieMie 和“正在追踪”标记、Go Live 按钮，以及火柴人、MieMie、Mika 和“创建”的角色栏"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "What's next",
+          "zh": "下一步"
+        },
+        "title": {
+          "en": "One cast, one tap — and 3D is next.",
+          "zh": "一个角色栏，一键切换——下一站是 3D。"
+        },
+        "body": {
+          "en": "Home keeps the whole cast in one row. Pick Stick, Mika or MieMie and Go Live — switching never restarts the camera. Next on the roadmap: 3D avatars, driven by the same face tracking.",
+          "zh": "首页把所有角色放在同一排：选火柴人、Mika 或 MieMie，点 Go Live 就开播，切换角色也不会重启摄像头。下一步计划：由同一套面部追踪驱动的 3D 形象。"
+        },
+        "points": [
+          {
+            "en": "Switch characters without restarting the camera",
+            "zh": "切换角色，无需重启摄像头"
+          },
+          {
+            "en": "The same seven reactions on every character",
+            "zh": "每个角色都有同样的七种反应"
+          },
+          {
+            "en": "Planned next: 3D avatars",
+            "zh": "计划中：3D 形象"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "storyreel",
