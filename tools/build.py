@@ -176,11 +176,12 @@ GESTURES = [("wave", "👋"), ("heart", "🫶"), ("bigheart", "💗"), ("peace",
             ("clap", "👏"), ("dance", "💃"), ("surprised", "✨"), ("shy", "😳")]
 
 
-def miemie(lang, root, width=420):
+def miemie(lang, root, width=420, short=False):
     buttons = "".join(
         f'<button type="button" data-gesture="{g}" title="{esc(T("g_" + g, lang))}" '
         f'aria-label="{esc(T("g_" + g, lang))}" aria-pressed="false">{e}</button>' for g, e in GESTURES)
-    return f'''<div class="miemie" data-miemie data-src="{root}assets/img/miemie/" data-frame-top="640" style="--mm-w:{width}px"
+    # short: on phones (home slide) the stage crops her at the waist so the whole card fits on screen
+    return f'''<div class="miemie" data-miemie{" data-short" if short else ""} data-src="{root}assets/img/miemie/" data-frame-top="640" style="--mm-w:{width}px"
                data-hint-touch="{esc(T("mm_hint_touch", lang))}">
             <div class="mm-stage" tabindex="0" role="button" aria-label="{esc(T("mm_label", lang))}">
               <div class="mm-frame"><span class="mm-live"><i></i>{T("mm_live", lang)}</span></div>
@@ -261,7 +262,7 @@ def visual(app, lang, root, big=False, home=False):
     if app.get("shots"):
         return trio(app, lang, root)
     if app["visual"] == "miemie":
-        return miemie(lang, root, 440 if big else 400)
+        return miemie(lang, root, 440 if big else 400, short=home)
     return f'<div class="solo-stage">{mock(app, lang)}</div>'
 
 
@@ -463,7 +464,7 @@ def home(lang):
 <section class="hero-news" aria-label="{esc(T("hero_label", lang))}">
   <h1 class="sr-only">4M Studio — {esc(T("title", lang).split("—")[-1].strip())}</h1>
   <div class="wrap">
-    <div class="news" data-carousel aria-roledescription="carousel" aria-label="{esc(T("hero_label", lang))}">
+    <div class="news" data-carousel data-autoplay="7000" aria-roledescription="carousel" aria-label="{esc(T("hero_label", lang))}">
       <div class="news__viewport">
         <div class="news__track">{"".join(slides)}
         </div>
@@ -474,6 +475,10 @@ def home(lang):
         <div class="news__tabs" role="tablist" aria-label="{esc(T("hero_label", lang))}">{"".join(tabs)}</div>
         <button class="news__arrow" type="button" data-next aria-label="{esc(T("hero_next", lang))}">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="news__play" type="button" data-toggle aria-pressed="false" hidden
+                data-label-pause="{esc(T("hero_pause", lang))}" data-label-play="{esc(T("hero_play", lang))}" aria-label="{esc(T("hero_pause", lang))}">
+          <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+          <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
       </div>
     </div>
   </div>
@@ -585,7 +590,7 @@ def app_page(a, lang):
         </a>''' for o in APPS if o is not a)
     if a.get("banner"):  # a wide App Store image under a centred headline
         b = a["banner"]
-        hero_visual = (f'<figure class="banner-shot"><img src="{root}assets/img/{b["src"]}" alt="{esc(L(b["alt"], lang))}" '
+        hero_visual = (f'<figure class="banner-shot"><img src="{root}assets/img/{b.get("src_zh") if lang == "zh" and b.get("src_zh") else b["src"]}" alt="{esc(L(b["alt"], lang))}" '
                        f'width="{b["w"]}" height="{b["h"]}" decoding="async" fetchpriority="high"></figure>')
     else:
         hero_visual = visual(a, lang, root, big=True)

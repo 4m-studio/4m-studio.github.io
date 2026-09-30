@@ -329,7 +329,9 @@
   MieMie.prototype.layout = function () {
     // Crop of the canvas that the stage shows (canvas px). Arms can reach a
     // little outside it; the stage does not clip them.
-    var cx0 = -110, cy0 = 60, cw = 1244, ch = 1700;
+    // Home slide on a phone (`data-short`): crop at the waist so the whole card fits on screen.
+    var short = this.root.hasAttribute('data-short') && window.matchMedia('(max-width: 720px)').matches;
+    var cx0 = -110, cy0 = 60, cw = 1244, ch = short ? 1000 : 1700;
     var r = this.stage.getBoundingClientRect();
     var sc = r.width / cw;
     this.stage.style.height = (ch * sc) + 'px';

@@ -1,23 +1,61 @@
 /* ==========================================================================
    4M Studio — hero news carousel.
-   One slide per app. Arrows, tabs, swipe/drag and ←/→ keys. No autoplay:
-   the first slide is MieMie, and she shouldn't be yanked away mid-wave.
-   Inactive slides are `inert`, so keyboard and screen-reader users only
-   ever meet the slide that is on screen.
+   One slide per app. Arrows, tabs, swipe/drag and ←/→ keys.
+   Autoplay (data-autoplay="ms"): moves on by itself, with a progress bar on
+   the active tab. It holds while the pointer is over the carousel, while a
+   visitor is touching/typing in it (and for a while after), while keyboard
+   focus is inside it, while MieMie is mid-gesture, when the carousel is off
+   screen or the browser tab is hidden. The pause button stops it for good;
+   prefers-reduced-motion turns it off. Inactive slides are `inert`, so
+   keyboard and screen-reader users only ever meet the slide that is on screen.
+   The tab strip scrolls sideways when the apps don't fit; the active tab is
+   kept in view and the edges fade when there is more to swipe to.
    ========================================================================== */
 (function () {
   'use strict';
 
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   document.querySelectorAll('[data-carousel]').forEach(function (root) {
     var viewport = root.querySelector('.news__viewport');
     var track = root.querySelector('.news__track');
+    var tabsEl = root.querySelector('.news__tabs');
     var slides = Array.prototype.slice.call(root.querySelectorAll('.news__slide'));
     var tabs = Array.prototype.slice.call(root.querySelectorAll('.news__tab'));
+    var toggle = root.querySelector('[data-toggle]');
     var n = slides.length, index = 0;
     if (!n) return;
 
+    /* ---------- Tab strip: keep the active tab in view, fade overflowing edges ---------- */
+    function edges() {
+      if (!tabsEl) return;
+      var max = tabsEl.scrollWidth - tabsEl.clientWidth;
+      tabsEl.classList.toggle('has-more-start', tabsEl.scrollLeft > 2);
+      tabsEl.classList.toggle('has-more-end', tabsEl.scrollLeft < max - 2);
+    }
+    function reveal(i, smooth) {
+      if (!tabsEl || tabsEl.scrollWidth <= tabsEl.clientWidth) { edges(); return; }
+      var t = tabs[i];
+      var left = t.offsetLeft - (tabsEl.clientWidth - t.offsetWidth) / 2;
+      left = Math.max(0, Math.min(left, tabsEl.scrollWidth - tabsEl.clientWidth));
+      // scrollTo on the strip only — never scrollIntoView, which would also scroll the page.
+      if (tabsEl.scrollTo) tabsEl.scrollTo({ left: left, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+      else tabsEl.scrollLeft = left;
+    }
+    if (tabsEl) {
+      tabsEl.addEventListener('scroll', edges, { passive: true });
+      window.addEventListener('resize', function () { reveal(index, false); }, { passive: true });
+    }
+
+    // The browser scrolls the (overflow: hidden) viewport itself when it follows a
+    // #slide-… link; that offset would add to the track transform and show the wrong slide.
+    function unscroll() { if (viewport.scrollLeft) viewport.scrollLeft = 0; }
+    viewport.addEventListener('scroll', unscroll, { passive: true });
+
     function go(i, opts) {
+      opts = opts || {};
       index = (i + n) % n;
+      unscroll();
       track.style.transform = 'translate3d(' + (-index * 100) + '%,0,0)';
       slides.forEach(function (s, k) {
         var on = k === index;
@@ -30,15 +68,17 @@
         t.tabIndex = k === index ? 0 : -1;
       });
       root.style.setProperty('--active-accent', getComputedStyle(slides[index]).getPropertyValue('--accent'));
-      if (opts && opts.focusTab) tabs[index].focus();
-      if (!(opts && opts.silent) && history.replaceState) {
+      reveal(index, !opts.instant);
+      if (opts.focusTab) tabs[index].focus();
+      if (!opts.silent && history.replaceState) {
         history.replaceState(null, '', index === 0 ? location.pathname + location.search : '#' + slides[index].id);
       }
+      restart();
     }
 
-    root.querySelector('[data-prev]').addEventListener('click', function () { go(index - 1); });
-    root.querySelector('[data-next]').addEventListener('click', function () { go(index + 1); });
-    tabs.forEach(function (t, k) { t.addEventListener('click', function () { go(k); }); });
+    root.querySelector('[data-prev]').addEventListener('click', function () { hold(); go(index - 1); });
+    root.querySelector('[data-next]').addEventListener('click', function () { hold(); go(index + 1); });
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { hold(); go(k); }); });
 
     root.addEventListener('keydown', function (e) {
       if (e.target.closest('.mm-stage, .qqn-room')) return;   // MieMie / Qiao Que own Enter/Space
@@ -46,9 +86,10 @@
       if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index - 1, { focusTab: !!e.target.closest('.news__tabs') }); }
     });
 
-    /* Swipe / drag. Horizontal intent only — vertical scrolling stays native
-       (touch-action: pan-y). A real drag swallows the click that follows, so
-       swiping across MieMie doesn't also make her gesture. */
+    /* ---------- Swipe / drag ----------
+       Horizontal intent only — vertical scrolling stays native (touch-action:
+       pan-y). A real drag swallows the click that follows, so swiping across
+       MieMie doesn't also make her gesture. */
     var start = null, dx = 0, dragging = false, suppressClick = false;
     function begin(x, y, target) {
       if (target.closest('button, a, .mm-actions, .qqn-actions')) return;
@@ -101,6 +142,56 @@
       if (suppressClick) { e.stopPropagation(); e.preventDefault(); }
     }, true);
 
+    /* ---------- Autoplay ---------- */
+    var DELAY = parseInt(root.getAttribute('data-autoplay'), 10) || 0;
+    var HOLD = 12000;                 // quiet time after the visitor last touched/typed in the carousel
+    var auto = DELAY > 0 && !reduceMotion;
+    var elapsed = 0, last = 0, heldUntil = 0, hovering = false, onScreen = true, stopped = false, tick = null;
+
+    function hold() { heldUntil = Date.now() + HOLD; }
+    function restart() { elapsed = 0; paint(); }
+    function paint() {
+      if (!auto) return;
+      var p = stopped ? 0 : Math.min(1, elapsed / DELAY);
+      tabs.forEach(function (t, k) { t.style.setProperty('--p', k === index ? p.toFixed(3) : '0'); });
+    }
+    function waiting() {
+      return stopped || hovering || !onScreen || document.hidden || Date.now() < heldUntil ||
+        !!root.querySelector(':focus-visible') ||
+        !!slides[index].querySelector('[data-playing]');     // MieMie mid-gesture
+    }
+    function step() {
+      var now = Date.now(), dt = Math.min(now - last, 1000); last = now;
+      if (waiting()) return;
+      elapsed += dt;
+      if (elapsed >= DELAY) go(index + 1, { silent: true });
+      else paint();
+    }
+
+    if (auto) {
+      root.classList.add('is-autoplay');
+      if (toggle) {
+        toggle.hidden = false;
+        toggle.addEventListener('click', function () {
+          stopped = !stopped;
+          toggle.setAttribute('aria-pressed', String(stopped));
+          toggle.setAttribute('aria-label', toggle.getAttribute(stopped ? 'data-label-play' : 'data-label-pause'));
+          root.classList.toggle('is-stopped', stopped);
+          restart();
+        });
+      }
+      root.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hovering = true; });
+      root.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hovering = false; });
+      root.addEventListener('pointerdown', function (e) { if (!e.target.closest('[data-toggle]')) hold(); }, true);
+      root.addEventListener('touchstart', hold, { passive: true, capture: true });
+      root.addEventListener('keydown', hold, true);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (en) { onScreen = en[0].isIntersecting; }, { threshold: 0.35 }).observe(viewport);
+      }
+      last = Date.now();
+      tick = setInterval(step, 100);
+    }
+
     // Deep link: /#slide-wearly opens on Wearly (also when the hash changes later).
     window.addEventListener('hashchange', function () {
       var el = location.hash && root.querySelector(location.hash.replace(/[^#\w-]/g, ''));
@@ -109,7 +200,7 @@
     var hashed = location.hash && root.querySelector(location.hash.replace(/[^#\w-]/g, ''));
     var first = hashed && slides.indexOf(hashed) >= 0 ? slides.indexOf(hashed) : 0;
     track.classList.add('is-dragging'); // no animation for the first placement
-    go(first, { silent: true });
+    go(first, { silent: true, instant: true });
     requestAnimationFrame(function () { requestAnimationFrame(function () { track.classList.remove('is-dragging'); }); });
   });
 })();

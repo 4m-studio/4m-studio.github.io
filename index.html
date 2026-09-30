@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://4m-studio.github.io/">
 <meta property="og:image" content="https://4m-studio.github.io/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/css/main.css?v=ded60cd0">
+<link rel="stylesheet" href="assets/css/main.css?v=7e88f550">
 <script>document.documentElement.classList.add('js');</script>
 <script>try{var l=localStorage.getItem('4m-lang');if(l==='zh'||(!l&&/^zh/i.test(navigator.language||''))){location.replace('zh/'+location.hash)}}catch(e){}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "4M Studio", "url": "https://4m-studio.github.io/", "email": "support.4mstudio@gmail.com", "description": "4M Studio is an independent iOS app studio behind AvatarTracker, StoryReel, MeetLog, QQNest, Wearly, WorthView and CardPick — small, private apps for iPhone."}</script>
@@ -65,7 +65,7 @@
 <section class="hero-news" aria-label="Featured apps">
   <h1 class="sr-only">4M Studio — iOS apps made with care</h1>
   <div class="wrap">
-    <div class="news" data-carousel aria-roledescription="carousel" aria-label="Featured apps">
+    <div class="news" data-carousel data-autoplay="7000" aria-roledescription="carousel" aria-label="Featured apps">
       <div class="news__viewport">
         <div class="news__track">
       <article class="news__slide" id="slide-avatartracker" style="--accent: var(--avatartracker)" role="group"
@@ -80,7 +80,7 @@
           </div>
           <p class="news__meta">iPhone · Camera</p>
         </div>
-        <div class="news__visual"><div class="miemie" data-miemie data-src="assets/img/miemie/" data-frame-top="640" style="--mm-w:440px"
+        <div class="news__visual"><div class="miemie" data-miemie data-short data-src="assets/img/miemie/" data-frame-top="640" style="--mm-w:440px"
                data-hint-touch="Touch anywhere — she looks. Tap her for a move.">
             <div class="mm-stage" tabindex="0" role="button" aria-label="MieMie, AvatarTracker&#x27;s character. She follows your pointer; press to play a gesture.">
               <div class="mm-frame"><span class="mm-live"><i></i>Tracking you</span></div>
@@ -187,6 +187,10 @@
         <div class="news__tabs" role="tablist" aria-label="Featured apps"><button class="news__tab" type="button" role="tab" aria-controls="slide-avatartracker" aria-selected="true" style="--accent: var(--avatartracker)"><img class="news__tabicon" src="assets/img/icon-avatartracker.png" alt="" width="28" height="28" style="--accent: var(--avatartracker)" loading="lazy" decoding="async"><span>AvatarTracker</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-storyreel" aria-selected="false" style="--accent: var(--storyreel)"><img class="news__tabicon" src="assets/img/icon-storyreel.png" alt="" width="28" height="28" style="--accent: var(--storyreel)" loading="lazy" decoding="async"><span>StoryReel</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-meetlog" aria-selected="false" style="--accent: var(--meetlog)"><img class="news__tabicon" src="assets/img/icon-meetlog.png" alt="" width="28" height="28" style="--accent: var(--meetlog)" loading="lazy" decoding="async"><span>MeetLog</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-qqnest" aria-selected="false" style="--accent: var(--qqnest)"><img class="news__tabicon" src="assets/img/icon-qqnest.png" alt="" width="28" height="28" style="--accent: var(--qqnest)" loading="lazy" decoding="async"><span>QQNest</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-wearly" aria-selected="false" style="--accent: var(--wearly)"><img class="news__tabicon" src="assets/img/icon-wearly.png" alt="" width="28" height="28" style="--accent: var(--wearly)" loading="lazy" decoding="async"><span>Wearly</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-worthview" aria-selected="false" style="--accent: var(--worthview)"><img class="news__tabicon" src="assets/img/icon-worthview.png" alt="" width="28" height="28" style="--accent: var(--worthview)" loading="lazy" decoding="async"><span>WorthView</span></button><button class="news__tab" type="button" role="tab" aria-controls="slide-cardpick" aria-selected="false" style="--accent: var(--cardpick)"><img class="news__tabicon" src="assets/img/icon-cardpick.png" alt="" width="28" height="28" style="--accent: var(--cardpick)" loading="lazy" decoding="async"><span>CardPick</span></button></div>
         <button class="news__arrow" type="button" data-next aria-label="Next app">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="news__play" type="button" data-toggle aria-pressed="false" hidden
+                data-label-pause="Pause slideshow" data-label-play="Play slideshow" aria-label="Pause slideshow">
+          <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+          <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
       </div>
     </div>
   </div>
@@ -377,9 +381,9 @@
   </div>
 </footer>
 <script src="assets/js/main.js?v=22449af1" defer></script>
-<script src="assets/js/carousel.js?v=2999c9e7" defer></script>
+<script src="assets/js/carousel.js?v=d4b1ee77" defer></script>
 <script src="assets/js/rig.js?v=4ce4b4ab" defer></script>
-<script src="assets/js/miemie.js?v=4c61d350" defer></script>
+<script src="assets/js/miemie.js?v=99846324" defer></script>
 <script src="assets/js/qqnest.js?v=8c330379" defer></script>
 </body>
 </html>

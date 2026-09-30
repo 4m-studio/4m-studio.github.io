@@ -231,7 +231,7 @@
     },
     "shots": [
       {
-        "src": "storyreel/timeline.webp",
+        "src": "storyreel/timeline.webp", "src_zh": "storyreel/zh/timeline.webp",
         "alt": {
           "en": "StoryReel Timeline tab with photos grouped by day",
           "zh": "故事卷轴时间线页：按天分组的照片"
@@ -240,7 +240,7 @@
         "h": 1304
       },
       {
-        "src": "storyreel/home.webp",
+        "src": "storyreel/home.webp", "src_zh": "storyreel/zh/home.webp",
         "alt": {
           "en": "StoryReel Home with trip projects and Browse Memories",
           "zh": "故事卷轴首页：旅行项目与回忆浏览"
@@ -250,7 +250,7 @@
         "island": false
       },
       {
-        "src": "storyreel/map.webp",
+        "src": "storyreel/map.webp", "src_zh": "storyreel/zh/map.webp",
         "alt": {
           "en": "StoryReel Map tab showing photo counts on a globe",
           "zh": "故事卷轴地图页：地球上标出各地照片数量"
@@ -262,7 +262,7 @@
     "tour": [
       {
         "img": {
-          "src": "storyreel/appstore-stories.webp",
+          "src": "storyreel/appstore-stories.webp", "src_zh": "storyreel/zh/appstore-stories.webp",
           "alt": {
             "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
             "zh": "故事卷轴——把照片变成旅行故事：首页与旅行项目"
@@ -304,7 +304,7 @@
       },
       {
         "img": {
-          "src": "storyreel/appstore-chapters.webp",
+          "src": "storyreel/appstore-chapters.webp", "src_zh": "storyreel/zh/appstore-chapters.webp",
           "alt": {
             "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
             "zh": "故事卷轴——编辑旅行的每个章节：故事编辑器与章节编辑面板"
@@ -346,7 +346,7 @@
       },
       {
         "img": {
-          "src": "storyreel/appstore-map-timeline.webp",
+          "src": "storyreel/appstore-map-timeline.webp", "src_zh": "storyreel/zh/appstore-map-timeline.webp",
           "alt": {
             "en": "StoryReel — Follow the story on Map and Timeline",
             "zh": "故事卷轴——在地图和时间线上回顾旅程"
@@ -392,7 +392,7 @@
       }
     ],
     "banner": {
-      "src": "storyreel/appstore-overview.webp",
+      "src": "storyreel/appstore-overview.webp", "src_zh": "storyreel/zh/appstore-overview.webp",
       "alt": {
         "en": "StoryReel — Plan, build and relive every journey: Organize, Build and Explore",
         "zh": "故事卷轴——规划、创作、重温每一段旅程：整理、创作、探索"

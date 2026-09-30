@@ -1323,3 +1323,66 @@ main { overflow-x: clip; }
 .app-theme--light { --wearly: linear-gradient(135deg, #c9a06a 0%, #b08956 48%, #6e5638 100%); }
 .app-theme--light { --meetlog: linear-gradient(135deg, #e0954a 0%, #c9762a 48%, #9e561a 100%); }
 .app-theme--light { --qqnest: linear-gradient(135deg, #5e8fd6 0%, #8f7ad8 50%, #e56f8a 100%); }
+
+/* ---------- Hero carousel: autoplay, scrolling tab strip, phone layout (Sep 29) ---------- */
+/* Tab strip scrolls sideways when the apps don't fit; edges fade while there is more to swipe to. */
+.news__tabs { position: relative; min-width: 0; flex: 0 1 auto; overscroll-behavior-x: contain; }
+.news__tab { flex: none; position: relative; }
+.news__tabs.has-more-end { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+.news__tabs.has-more-start { -webkit-mask-image: linear-gradient(90deg, transparent, #000 36px); mask-image: linear-gradient(90deg, transparent, #000 36px); }
+.news__tabs.has-more-start.has-more-end {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 36px, #000 calc(100% - 36px), transparent);
+}
+/* Autoplay progress: a thin bar under the active tab (set by carousel.js as --p, 0…1) */
+.is-autoplay .news__tab::after {
+  content: ""; position: absolute; left: 22%; right: 22%; bottom: 1px; height: 2.5px; border-radius: 2px;
+  background: var(--accent); transform-origin: left center; transform: scaleX(var(--p, 0));
+  transition: transform .1s linear, opacity .2s; opacity: 0; pointer-events: none;
+}
+.is-autoplay .news__tab[aria-selected="true"]::after { opacity: 1; }
+.is-autoplay.is-stopped .news__tab::after { opacity: 0; }
+.news__play {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; flex: none;
+  background: transparent; border: 1px solid var(--stroke); color: var(--text-2); transition: border-color .2s, color .2s;
+}
+.news__play:hover { border-color: var(--stroke-strong); color: var(--text); }
+.news__play[hidden] { display: none; }
+.news__play .i-play, .is-stopped .news__play .i-pause { display: none; }
+.is-stopped .news__play .i-play { display: block; }
+
+@media (max-width: 720px) {
+  .hero-news { padding-bottom: 18px; }
+  /* Picture first, then a short text block — the whole card fits on one phone screen. */
+  .news__slide { display: flex; flex-direction: column; justify-content: flex-start; gap: 10px; padding: 14px 18px 18px; }
+  .news__visual { order: -1; width: 100%; }
+  .news__slide .badge { margin-bottom: 8px; }
+  .news__title { font-size: clamp(28px, 8.2vw, 34px); margin-bottom: 8px; }
+  :lang(zh) .news__title { font-size: clamp(27px, 8vw, 34px); }
+  .news__slide .lede {
+    font-size: 15px; line-height: 1.55; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .news__slide .hero__cta { flex-wrap: nowrap; gap: 10px; margin-top: 14px; }
+  .news__slide .hero__cta .btn { padding: 11px 18px; font-size: 14.5px; white-space: nowrap; }
+  .news__meta { display: none; }
+
+  .news__slide .trio { min-height: 270px; }
+  .news__slide .trio::before { filter: blur(60px); }
+  .news__slide .trio .shot { width: 122px; padding: 5px; border-radius: 24px; }
+  .news__slide .trio .shot img { border-radius: 21px; }
+  .news__slide .trio .shot__island { top: 10px; height: 11px; }
+  .news__slide .trio .shot--left,  .news__slide .trio:hover .shot--left  { transform: translate3d(-76px, 16px, -60px) rotateY(16deg) rotateZ(-6deg) scale(.8); }
+  .news__slide .trio .shot--right, .news__slide .trio:hover .shot--right { transform: translate3d(76px, 16px, -60px) rotateY(-16deg) rotateZ(6deg) scale(.8); }
+  .news__slide .miemie { margin-top: 0; max-width: 330px; }
+  .news__slide .mm-hint { display: none; }
+  .news__slide .mm-actions { margin-top: 8px; gap: 3px; flex-wrap: nowrap; }
+  .news__slide .mm-actions button { width: 31px; height: 31px; font-size: 15px; border-radius: 9px; }
+  .news__slide .qqn { max-width: 250px; }
+  .news__slide .solo-stage { min-height: 296px; }
+  .news__slide .phone--solo { width: 150px; }
+
+  .news__controls { gap: 8px; margin-top: 14px; }
+  .news__arrow { width: 40px; height: 40px; }
+  .news__play { width: 34px; height: 34px; }
+}

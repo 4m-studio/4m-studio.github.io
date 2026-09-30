@@ -63,6 +63,14 @@
       "en": "Next app",
       "zh": "下一个"
     },
+    "hero_pause": {
+      "en": "Pause slideshow",
+      "zh": "暂停自动播放"
+    },
+    "hero_play": {
+      "en": "Play slideshow",
+      "zh": "继续自动播放"
+    },
     "slide_of": {
       "en": "{i} of {n}",
       "zh": "第 {i} 个，共 {n} 个"
