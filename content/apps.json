@@ -139,7 +139,7 @@
     "slug": "storyreel",
     "name": {
       "en": "StoryReel",
-      "zh": "故事卷轴"
+      "zh": "旅迹"
     },
     "icon": "icon-storyreel.png",
     "accent": "storyreel",
@@ -159,7 +159,7 @@
     },
     "lede": {
       "en": "StoryReel turns a camera roll full of travel photos into a cinematic memory video. It already knows when and where every photo was taken — so it sorts, picks and sequences for you, and animates the route between places.",
-      "zh": "故事卷轴 把相册里的旅行照片变成电影感的回忆视频。它知道每张照片拍摄的时间和地点，自动帮你分章节、挑照片、排顺序，还会把地点之间的路线做成动画。"
+      "zh": "旅迹把相册里的旅行照片变成电影感的回忆视频。它知道每张照片拍摄的时间和地点，自动帮你分章节、挑照片、排顺序，还会把地点之间的路线做成动画。"
     },
     "platform": {
       "en": "iPhone · iOS 18",
@@ -222,7 +222,7 @@
       "date": "2026-04",
       "title": {
         "en": "Twelve cinematic themes for StoryReel",
-        "zh": "故事卷轴 上线 12 款电影感主题"
+        "zh": "旅迹上线 12 款电影感主题"
       },
       "body": {
         "en": "Globe, vintage chart, hand-drawn and more — each one a complete look for your trip video.",
@@ -234,7 +234,7 @@
         "src": "storyreel/timeline.webp", "src_zh": "storyreel/zh/timeline.webp",
         "alt": {
           "en": "StoryReel Timeline tab with photos grouped by day",
-          "zh": "故事卷轴时间线页：按天分组的照片"
+          "zh": "旅迹时间线页：按天分组的照片"
         },
         "w": 600,
         "h": 1304
@@ -243,7 +243,7 @@
         "src": "storyreel/home.webp", "src_zh": "storyreel/zh/home.webp",
         "alt": {
           "en": "StoryReel Home with trip projects and Browse Memories",
-          "zh": "故事卷轴首页：旅行项目与回忆浏览"
+          "zh": "旅迹首页：旅行项目与回忆浏览"
         },
         "w": 580,
         "h": 1319,
@@ -253,7 +253,7 @@
         "src": "storyreel/map.webp", "src_zh": "storyreel/zh/map.webp",
         "alt": {
           "en": "StoryReel Map tab showing photo counts on a globe",
-          "zh": "故事卷轴地图页：地球上标出各地照片数量"
+          "zh": "旅迹地图页：地球上标出各地照片数量"
         },
         "w": 600,
         "h": 1304
@@ -265,7 +265,7 @@
           "src": "storyreel/appstore-stories.webp", "src_zh": "storyreel/zh/appstore-stories.webp",
           "alt": {
             "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
-            "zh": "故事卷轴——把照片变成旅行故事：首页与旅行项目"
+            "zh": "旅迹——把照片变成旅行故事：首页与旅行项目"
           },
           "w": 852,
           "h": 1846,
@@ -307,7 +307,7 @@
           "src": "storyreel/appstore-chapters.webp", "src_zh": "storyreel/zh/appstore-chapters.webp",
           "alt": {
             "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
-            "zh": "故事卷轴——编辑旅行的每个章节：故事编辑器与章节编辑面板"
+            "zh": "旅迹——编辑旅行的每个章节：故事编辑器与章节编辑面板"
           },
           "w": 852,
           "h": 1846,
@@ -349,7 +349,7 @@
           "src": "storyreel/appstore-map-timeline.webp", "src_zh": "storyreel/zh/appstore-map-timeline.webp",
           "alt": {
             "en": "StoryReel — Follow the story on Map and Timeline",
-            "zh": "故事卷轴——在地图和时间线上回顾旅程"
+            "zh": "旅迹——在地图和时间线上回顾旅程"
           },
           "w": 852,
           "h": 1846,
@@ -395,7 +395,7 @@
       "src": "storyreel/appstore-overview.webp", "src_zh": "storyreel/zh/appstore-overview.webp",
       "alt": {
         "en": "StoryReel — Plan, build and relive every journey: Organize, Build and Explore",
-        "zh": "故事卷轴——规划、创作、重温每一段旅程：整理、创作、探索"
+        "zh": "旅迹——规划、创作、重温每一段旅程：整理、创作、探索"
       },
       "w": 1672,
       "h": 941
@@ -1617,7 +1617,7 @@
     "slug": "cardpick",
     "name": {
       "en": "CardPick",
-      "zh": "CardPick"
+      "zh": "选卡"
     },
     "icon": "icon-cardpick.png",
     "accent": "cardpick",
@@ -1638,7 +1638,7 @@
     },
     "lede": {
       "en": "CardPick tells you which of your credit cards earns the most on what you're about to buy. Type “Costco $200” or “Dinner $120” and get the winning card, what it earns and why — worked out on your iPhone. No card numbers, no bank logins, no accounts.",
-      "zh": "CardPick 告诉你，眼前这笔消费用哪张信用卡回报最高。输入“Costco $200”或“Dinner $120”，马上看到该刷哪张卡、能拿多少、为什么——全部在你的 iPhone 上算好。不需要卡号，不需要网银登录，也不用注册账号。"
+      "zh": "选卡告诉你，眼前这笔消费用哪张信用卡回报最高。输入“Costco $200”或“Dinner $120”，马上看到该刷哪张卡、能拿多少、为什么——全部在你的 iPhone 上算好。不需要卡号，不需要网银登录，也不用注册账号。"
     },
     "platform": {
       "en": "iPhone · iOS 17",
@@ -1666,11 +1666,11 @@
       "date": "2026-09",
       "title": {
         "en": "CardPick: which card should I use?",
-        "zh": "CardPick：这笔该刷哪张卡？"
+        "zh": "选卡：这笔该刷哪张卡？"
       },
       "body": {
         "en": "Type what you're buying and CardPick picks the card in your wallet that earns the most — right on your iPhone.",
-        "zh": "输入你要买什么，CardPick 就从你的钱包里挑出回报最高的那张卡——就在你的 iPhone 上。"
+        "zh": "输入你要买什么，选卡就从你的钱包里挑出回报最高的那张卡——就在你的 iPhone 上。"
       }
     },
     "shots": [
@@ -1678,21 +1678,21 @@
         "src": "cardpick/benefits.webp",
         "alt": {
           "en": "CardPick Benefits screen with best card by category",
-          "zh": "CardPick“权益”页：各类别最佳用卡"
+          "zh": "选卡“权益”页：各类别最佳用卡"
         }
       },
       {
         "src": "cardpick/result.webp",
         "alt": {
           "en": "CardPick recommending Blue Cash Preferred for Uber",
-          "zh": "CardPick 为 Uber 推荐 Blue Cash Preferred"
+          "zh": "选卡为 Uber 推荐 Blue Cash Preferred"
         }
       },
       {
         "src": "cardpick/wallet.webp",
         "alt": {
           "en": "CardPick Wallet screen listing card products",
-          "zh": "CardPick“钱包”页：卡片产品列表"
+          "zh": "选卡“钱包”页：卡片产品列表"
         }
       }
     ],
@@ -1702,7 +1702,7 @@
           "src": "cardpick/ask.webp",
           "alt": {
             "en": "CardPick Ask screen with quick picks by category",
-            "zh": "CardPick“问一问”页：按类别的快捷推荐"
+            "zh": "选卡“问一问”页：按类别的快捷推荐"
           }
         },
         "step": {
@@ -1741,7 +1741,7 @@
           "src": "cardpick/result.webp",
           "alt": {
             "en": "CardPick recommending Blue Cash Preferred for Uber",
-            "zh": "CardPick 为 Uber 推荐 Blue Cash Preferred"
+            "zh": "选卡为 Uber 推荐 Blue Cash Preferred"
           }
         },
         "step": {
@@ -1754,7 +1754,7 @@
         },
         "body": {
           "en": "Search “Uber” and CardPick names the card to use, what it earns and why — then ranks every card in your wallet for the same purchase, so you can see how close the others come.",
-          "zh": "搜索“Uber”，CardPick 会告诉你该用哪张卡、能拿多少、为什么——再把钱包里每张卡按这笔消费排名，其他卡差多少一目了然。"
+          "zh": "搜索“Uber”，选卡会告诉你该用哪张卡、能拿多少、为什么——再把钱包里每张卡按这笔消费排名，其他卡差多少一目了然。"
         },
         "points": [
           {
@@ -1780,7 +1780,7 @@
           "src": "cardpick/benefits.webp",
           "alt": {
             "en": "CardPick Benefits screen with best card by category",
-            "zh": "CardPick“权益”页：各类别最佳用卡"
+            "zh": "选卡“权益”页：各类别最佳用卡"
           }
         },
         "step": {
@@ -1819,7 +1819,7 @@
           "src": "cardpick/wallet.webp",
           "alt": {
             "en": "CardPick Wallet screen listing card products",
-            "zh": "CardPick“钱包”页：卡片产品列表"
+            "zh": "选卡“钱包”页：卡片产品列表"
           }
         },
         "step": {
@@ -1832,7 +1832,7 @@
         },
         "body": {
           "en": "Add the cards you carry by product name. CardPick never asks for numbers, logins or account access, and everything it keeps stays on your iPhone.",
-          "zh": "按产品名称添加你持有的卡。CardPick 从不索取卡号、登录或账户权限，保存的一切都只在你的 iPhone 上。"
+          "zh": "按产品名称添加你持有的卡。选卡从不索取卡号、登录或账户权限，保存的一切都只在你的 iPhone 上。"
         },
         "points": [
           {

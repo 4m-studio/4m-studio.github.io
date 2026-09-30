@@ -1386,3 +1386,39 @@ main { overflow-x: clip; }
   .news__arrow { width: 40px; height: 40px; }
   .news__play { width: 34px; height: 34px; }
 }
+
+/* ---------- App grid on phones: compact rows (Sep 29) ----------
+   Icon left, category / name / slogan beside it, chevron at the right edge,
+   so each card uses the full width instead of one tall left-aligned column. */
+@media (max-width: 720px) {
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) { gap: 10px; margin-top: 30px; }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile {
+    display: grid; grid-template-columns: 60px minmax(0, 1fr) 20px; grid-template-rows: auto auto auto;
+    column-gap: 14px; row-gap: 1px; align-items: center;
+    min-height: 0; padding: 14px 14px 14px 14px; border-radius: 20px;
+  }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile .app-icon {
+    grid-column: 1; grid-row: 1 / 4; width: 60px; height: 60px; border-radius: 15px; margin: 0; align-self: center;
+  }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile .tag {
+    grid-column: 2; grid-row: 1; font-size: 10.5px; letter-spacing: .1em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile h3 {
+    grid-column: 2; grid-row: 2; margin: 1px 0 0; font-size: 17px; line-height: 1.25;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile p {
+    grid-column: 2; grid-row: 3; font-size: 13.5px; line-height: 1.4; color: var(--text-2);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  /* "Learn more" becomes a chevron; the whole row is the link, so the text stays for screen readers only */
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile .link-arrow {
+    grid-column: 3; grid-row: 1 / 4; margin: 0; padding: 0; justify-self: end;
+    font-size: 0; color: var(--text-3); width: 20px; height: 20px; display: grid; place-items: center;
+  }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile .link-arrow svg { width: 18px; height: 18px; }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile::before { right: -10%; top: -60%; width: 60%; height: 220%; filter: blur(50px); opacity: .16; }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile:hover { transform: none; }
+  .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile:active { transform: scale(.985); }
+}
