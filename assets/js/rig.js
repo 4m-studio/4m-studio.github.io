@@ -11,7 +11,8 @@
      M = T(origin) · T(tx, ty) · R(rot°) · S(sx, sy) · T(-origin)
    Children draw in z order (stable, like CSS z-index among siblings).
    A node with `mask` renders its subtree off screen and keeps only the
-   pixels under the mask image (optionally also inside `ellipse`).
+   pixels under the mask image (optionally also inside `ellipse`); a node
+   with only `ellipse` is clipped to it directly.
    ========================================================================== */
 (function () {
   'use strict';
@@ -50,6 +51,12 @@
       if (ready(n.img)) { ctx.globalAlpha = a; ctx.drawImage(n.img, n.x, n.y, n.w, n.h); }
     } else if (n.mask) {
       drawMasked(ctx, n, a, k);
+    } else if (n.ellipse) {
+      // Clip to the ellipse only (a character whose eyes have no mask image).
+      var e = n.ellipse;
+      ctx.save(); ctx.beginPath(); ctx.ellipse(e[0], e[1], e[2], e[3], 0, 0, Math.PI * 2); ctx.clip();
+      drawKids(ctx, n, a, k);
+      ctx.restore();
     } else {
       drawKids(ctx, n, a, k);
     }

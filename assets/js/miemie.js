@@ -1,12 +1,14 @@
 /* ==========================================================================
-   MieMie — a live, layered 2D character for the AvatarTracker card.
+   MieMie — live, layered 2D characters for AvatarTracker.
 
-   A small web port of AvatarTracker's Layered2DAvatarRenderer, driven by the
-   same MieMie.avatarpkg rig: the layer rectangles, head pivot, eye apertures
-   and arm skeleton below are copied from its avatar.json (canvas 1024x1920).
+   A small web port of AvatarTracker's Layered2DAvatarRenderer. One engine,
+   one canvas (assets/js/rig.js); a character is a rig definition copied from
+   its .avatarpkg/avatar.json — layer rectangles, head pivot, eye apertures and
+   arm skeleton, in that package's canvas px. MieMie's is below. The app page
+   adds Mika and Stick (assets/js/cast.js) and swaps them on the same stage.
 
-   - She looks at the pointer (head, face parallax, irises clipped to the eye).
-   - Blinks on her own; hair lags behind the head a little.
+   - Looks at the pointer (head, face parallax, irises clipped to the eye).
+   - Blinks on its own; hair lags behind the head a little.
    - Click / tap / Enter to cycle through preset gestures; the action row
      triggers a specific one. Arms are placed by 2-bone IK from wrist targets.
 
@@ -16,9 +18,7 @@
 (function () {
   'use strict';
 
-  var W = 1024, H = 1920;
-
-  /* ---------- Rig (from MieMie.avatarpkg/avatar.json, in canvas px) ---------- */
+  /* ---------- MieMie (MieMie.avatarpkg/avatar.json, canvas 1024x1920) ---------- */
   var L = {
     hairBack:        [517.2, 448.2, 679, 705,  'hair_back'],
     neck:            [515.1, 727.5, 207, 244,  'neck'],
@@ -59,17 +59,23 @@
     mouthOpen:       [515.9, 559.3, 119, 77,   'mouth_open'],
     hairFront:       [540.8, 439.2, 635, 719,  'hair_front']
   };
-  var HEAD_PIVOT = [516.1, 734.4];
-  var APERTURE = {
-    left:  [371.0, 380.4, 108.3, 68.2],
-    right: [553.0, 380.7, 109.2, 68.5]
+  var MIEMIE = {
+    id: 'miemie', dir: 'miemie/', W: 1024, H: 1920, L: L,
+    pivot: [516.1, 734.4],
+    aperture: { left: [371.0, 380.4, 108.3, 68.2], right: [553.0, 380.7, 109.2, 68.5] },
+    arm: {
+      left:  { s: [322.2, 819.5], e: [210.2, 1210.5], w: [113.3, 1559.4], out: -1 },
+      right: { s: [709.9, 819.5], e: [819.8, 1213.7], w: [911.4, 1544.3], out: 1 }
+    },
+    iris: { x: 15, up: 6, down: 13 },   // canvas px
+    hands: ['Rest', 'Open', 'Fist', 'Point', 'Peace', 'ThumbsUp', 'Heart'], rest: 'Rest',
+    eyeMask: true,                      // mask_eye_*.png + lash_*: the iris tucks under the lid line
+    hairY: 250, bodyPivot: [512, 1560],
+    box: [-160, -160, 1024 + 160, 1920],  // artboard area the canvas covers (room for raised hands)
+    crop: [-110, 60, 1244, 1700], shortH: 1000,
+    frameTop: 640, lookY: 440,
+    brow: 18, lidDrop: 0, mouthDrop: 0
   };
-  var ARM = {
-    left:  { s: [322.2, 819.5], e: [210.2, 1210.5], w: [113.3, 1559.4], out: -1 },
-    right: { s: [709.9, 819.5], e: [819.8, 1213.7], w: [911.4, 1544.3], out: 1 }
-  };
-  var IRIS = { x: 15, up: 6, down: 13 };   // canvas px
-  var HANDS = ['Rest', 'Open', 'Fist', 'Point', 'Peace', 'ThumbsUp', 'Heart'];
 
   var DEG = 180 / Math.PI;
   function ang(a, b) { return Math.atan2(b[1] - a[1], b[0] - a[0]) * DEG; }
@@ -78,16 +84,21 @@
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function band(v, a, b) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
 
-  Object.keys(ARM).forEach(function (k) {
-    var a = ARM[k];
-    a.l1 = dist(a.s, a.e); a.l2 = dist(a.e, a.w);
-    a.restU = ang(a.s, a.e); a.restF = ang(a.e, a.w);
-  });
+  function prepare(def) {
+    if (def.ready || !def.arm) return def;
+    Object.keys(def.arm).forEach(function (k) {
+      var a = def.arm[k];
+      a.l1 = dist(a.s, a.e); a.l2 = dist(a.e, a.w);
+      a.restU = ang(a.s, a.e); a.restF = ang(a.e, a.w);
+    });
+    def.ready = true;
+    return def;
+  }
 
   /* Two-bone IK: wrist target -> local rotations (deg) of upper arm and forearm.
      The elbow always bends outward, away from the body. */
-  function ik(side, tx, ty) {
-    var a = ARM[side];
+  function ik(def, side, tx, ty) {
+    var a = def.arm[side];
     var d = clamp(dist(a.s, [tx, ty]), Math.abs(a.l1 - a.l2) + 2, a.l1 + a.l2 - 2);
     var base = Math.atan2(ty - a.s[1], tx - a.s[0]);
     var alpha = Math.acos(clamp((a.l1 * a.l1 + d * d - a.l2 * a.l2) / (2 * a.l1 * d), -1, 1));
@@ -114,7 +125,8 @@
 
   /* ---------- Gestures ----------
      Each returns targets for time t (seconds since start). Arms are given as
-     wrist positions in canvas px; `hand*` picks the hand drawing. */
+     wrist positions in MieMie's canvas px (a character's `adapt` maps them onto
+     its own rig); `hand*` picks the hand drawing. */
   var GESTURES = {
     wave: {
       label: 'Hi there!', emoji: '👋', dur: 2.6,
@@ -206,97 +218,107 @@
     if (parent) parent.appendChild(e);
     return e;
   }
-  /* Layers are nodes of one canvas (assets/js/rig.js), not DOM elements:
+
+  /* `def` is a character definition (MIEMIE above, or one from cast.js).
+     Layers are nodes of one canvas (assets/js/rig.js), not DOM elements:
      a DOM layer per part made ~20 full-artboard GPU layers, which crashed
      iPhone Safari. Unset origins default to the artboard centre, as in CSS. */
-  var STAGE = null;
-  function layer(id, parent, base) {
-    var d = L[id];
-    return STAGE.image(parent, base + d[4] + '.webp', d[0] - d[2] / 2, d[1] - d[3] / 2, d[2], d[3]);
-  }
-  function group(cls, parent, ox, oy) {
-    return STAGE.group(parent, ox != null ? ox : W / 2, oy != null ? oy : H / 2);
-  }
-
-  function MieMie(root) {
-    var base = root.getAttribute('data-src') || 'assets/img/miemie/';
+  function Character(root, def) {
+    def = prepare(def || MIEMIE);
+    // data-src points at MieMie's folder; every character lives beside it.
+    var imgRoot = (root.getAttribute('data-src') || 'assets/img/miemie/').replace(/miemie\/$/, '');
+    var base = imgRoot + def.dir;
     var self = this;
-    this.root = root;
+    this.root = root; this.def = def;
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var stage = root.querySelector('.mm-stage');
     var fig = el('canvas', 'mm-fig', stage);
     fig.setAttribute('aria-hidden', 'true');
     this.stage = stage; this.fig = fig;
-    // Artboard area the canvas covers: the whole figure plus room for raised hands.
-    STAGE = this.rig = new window.Rig2D.Stage(fig, [-160, -160, W + 160, H]);
+    var rig = this.rig = new window.Rig2D.Stage(fig, def.box);
     this.rig.onload = function () { self.draw(); };
 
-    var body = group('mm-body', null, 512, 1560);
-    var headBack = group('mm-head', body, HEAD_PIVOT[0], HEAD_PIVOT[1]);
-    var hairBackG = group('', headBack, HEAD_PIVOT[0], 250);
-    layer('hairBack', hairBackG, base);
-    layer('neck', body, base).z = 10;
-    var torso = group('', body); torso.z = 20;
-    layer('body', torso, base);
-
-    this.arms = {};
-    ['left', 'right'].forEach(function (side) {
-      var A = ARM[side], cap = side === 'left' ? 'Left' : 'Right';
-      var wrapG = group('mm-arm', body); wrapG.z = 25;
-      var up = group('', wrapG, A.s[0], A.s[1]);
-      layer('arm' + cap + 'Upper', up, base);
-      var fo = group('', up, A.e[0], A.e[1]);
-      layer('arm' + cap + 'Fore', fo, base);
-      var ha = group('', fo, A.w[0], A.w[1]);
-      var hands = {};
-      HANDS.forEach(function (h) {
-        hands[h] = layer('hand' + cap + h, ha, base);
-        hands[h].a = h === 'Rest' ? 1 : 0;
-      });
-      self.arms[side] = { wrap: wrapG, up: up, fo: fo, ha: ha, hands: hands, shape: 'Rest' };
-    });
-
-    var head = group('mm-head', body, HEAD_PIVOT[0], HEAD_PIVOT[1]);
-    head.z = 30;
-    var faceG = group('', head);
-    layer('face', faceG, base);
-    var feat = group('', head);
-    var blush = layer('blush', feat, base);
-    layer('nose', feat, base);
-
-    function eye(side) {
-      var cap = side === 'left' ? 'Left' : 'Right', ap = APERTURE[side];
-      var g = group('', feat);
-      layer('eye' + cap, g, base);
-      var clip = group('', g);
-      // The iris is masked to the white of the eye plus a few px under the lid
-      // line (mask_eye_*.png, traced from the socket artwork) and an ellipse
-      // inside the aperture; the lash layer above hides that overlap.
-      clip.ellipse = [ap[0] + ap[2] / 2, ap[1] + ap[3] / 2, ap[2] / 2 - 3, ap[3] / 2 - 2];
-      var sock = L['eye' + cap];
-      clip.mask = { img: STAGE.load(base + 'mask_eye_' + side + '.png'),
-                    x: sock[0] - sock[2] / 2, y: sock[1] - sock[3] / 2, w: sock[2], h: sock[3] };
-      var iris = layer('iris' + cap, clip, base);
-      // Lashes, liner and lid skin (the socket minus its white), drawn back
-      // OVER the iris so it tucks under the lid line instead of stopping short
-      // of it with a white gap.
-      layer('lash' + cap, g, base);
-      var lid = layer('lid' + cap, feat, base);
-      var brow = layer('brow' + cap, feat, base);
-      return { g: g, iris: iris, lid: lid, brow: brow };
+    function layer(id, parent) {
+      var d = def.L[id];
+      return rig.image(parent, base + d[4] + '.webp', d[0] - d[2] / 2, d[1] - d[3] / 2, d[2], d[3]);
     }
-    this.eyes = { left: eye('left'), right: eye('right') };
-    this.mouth = {
-      neutral: layer('mouthNeutral', feat, base),
-      smile: layer('mouthSmile', feat, base),
-      open: layer('mouthOpen', feat, base)
-    };
-    var hairFrontG = group('', head, HEAD_PIVOT[0], 250);
-    layer('hairFront', hairFrontG, base);
+    function group(parent, ox, oy) {
+      return rig.group(parent, ox != null ? ox : def.W / 2, oy != null ? oy : def.H / 2);
+    }
 
-    this.n = { body: body, head: head, headBack: headBack, face: faceG, feat: feat, blush: blush,
-               hairF: hairFrontG, hairB: hairBackG };
+    if (def.build) {
+      def.build(this);
+    } else {
+      var P = def.pivot;
+      var body = group(null, def.bodyPivot[0], def.bodyPivot[1]);
+      var headBack = group(body, P[0], P[1]);
+      var hairBackG = group(headBack, P[0], def.hairY);
+      layer('hairBack', hairBackG);
+      layer('neck', body).z = 10;
+      var torso = group(body); torso.z = 20;
+      layer('body', torso);
+
+      this.arms = {};
+      ['left', 'right'].forEach(function (side) {
+        var A = def.arm[side], cap = side === 'left' ? 'Left' : 'Right';
+        var wrapG = group(body); wrapG.z = 25;
+        var up = group(wrapG, A.s[0], A.s[1]);
+        layer('arm' + cap + 'Upper', up);
+        var fo = group(up, A.e[0], A.e[1]);
+        layer('arm' + cap + 'Fore', fo);
+        var ha = group(fo, A.w[0], A.w[1]);
+        var hands = {};
+        def.hands.forEach(function (h) {
+          hands[h] = layer('hand' + cap + h, ha);
+          hands[h].a = h === def.rest ? 1 : 0;
+        });
+        self.arms[side] = { wrap: wrapG, up: up, fo: fo, ha: ha, hands: hands, shape: def.rest };
+      });
+
+      var head = group(body, P[0], P[1]);
+      head.z = 30;
+      var faceG = group(head);
+      layer('face', faceG);
+      var feat = group(head);
+      var blush = layer('blush', feat);
+      layer('nose', feat);
+
+      var eye = function (side) {
+        var cap = side === 'left' ? 'Left' : 'Right', ap = def.aperture[side];
+        var g = group(feat);
+        layer('eye' + cap, g);
+        var clip = group(g);
+        clip.ellipse = [ap[0] + ap[2] / 2, ap[1] + ap[3] / 2, ap[2] / 2 - 3, ap[3] / 2 - 2];
+        if (def.eyeMask) {
+          // The iris is masked to the white of the eye plus a few px under the lid
+          // line (mask_eye_*.png, traced from the socket artwork) and an ellipse
+          // inside the aperture; the lash layer above hides that overlap.
+          var sock = def.L['eye' + cap];
+          clip.mask = { img: rig.load(base + 'mask_eye_' + side + '.png'),
+                        x: sock[0] - sock[2] / 2, y: sock[1] - sock[3] / 2, w: sock[2], h: sock[3] };
+        }
+        var iris = layer('iris' + cap, clip);
+        // Lashes, liner and lid skin (the socket minus its white), drawn back
+        // OVER the iris so it tucks under the lid line instead of stopping short
+        // of it with a white gap.
+        if (def.eyeMask) layer('lash' + cap, g);
+        var lid = layer('lid' + cap, feat);
+        var brow = layer('brow' + cap, feat);
+        return { g: g, iris: iris, lid: lid, brow: brow };
+      };
+      this.eyes = { left: eye('left'), right: eye('right') };
+      this.mouth = {
+        neutral: layer('mouthNeutral', feat),
+        smile: layer('mouthSmile', feat),
+        open: layer('mouthOpen', feat)
+      };
+      var hairFrontG = group(head, P[0], def.hairY);
+      layer('hairFront', hairFrontG);
+
+      this.n = { body: body, head: head, headBack: headBack, face: faceG, feat: feat, blush: blush,
+                 hairF: hairFrontG, hairB: hairBackG };
+    }
 
     /* springs */
     var S = this.s = {};
@@ -307,6 +329,7 @@
     sp('smile', 0, 60, 14); sp('open', 0, 70, 15); sp('blush', 0.55, 30, 11);
     sp('brow', 0, 80, 15); sp('lidL', 0, 400, 40); sp('lidR', 0, 400, 40);
     ['LU', 'LF', 'LH', 'RU', 'RF', 'RH'].forEach(function (k) { sp(k, 0, 150, 21); });
+    if (def.springs) def.springs(sp);
 
     this.pointer = null;      // {x, y} in client px
     this.lastPointer = 0;
@@ -319,23 +342,24 @@
 
     this.bubble = root.querySelector('.mm-bubble');
     this.frame = root.querySelector('.mm-frame');
-    this.frameTop = parseFloat(root.getAttribute('data-frame-top') || '640');
-    STAGE = null;
+    this.frameTop = def.frameTop;
     this.layout();
     this.bind();
     this.render(0);
   }
 
-  MieMie.prototype.layout = function () {
+  Character.prototype.layout = function () {
     // Crop of the canvas that the stage shows (canvas px). Arms can reach a
-    // little outside it; the stage does not clip them.
+    // little outside it; the stage does not clip them. Every character's crop
+    // has the same aspect, so swapping characters never resizes the stage.
     // Home slide on a phone (`data-short`): crop at the waist so the whole card fits on screen.
-    var short = this.root.hasAttribute('data-short') && window.matchMedia('(max-width: 720px)').matches;
-    var cx0 = -110, cy0 = 60, cw = 1244, ch = short ? 1000 : 1700;
+    var d = this.def;
+    var short = d.shortH && this.root.hasAttribute('data-short') && window.matchMedia('(max-width: 720px)').matches;
+    var cx0 = d.crop[0], cy0 = d.crop[1], cw = d.crop[2], ch = short ? d.shortH : d.crop[3];
     var r = this.stage.getBoundingClientRect();
     var sc = r.width / cw;
     this.stage.style.height = (ch * sc) + 'px';
-    // The frame (her "screen") starts at chin height, so the head and any
+    // The frame (the "screen") starts at chin height, so the head and any
     // raised arm break out over its top edge.
     if (this.frame) this.frame.style.top = ((this.frameTop - cy0) * sc) + 'px';
     var b = this.rig.box;
@@ -346,30 +370,46 @@
     this.scale = sc; this.crop = [cx0, cy0];
   };
 
-  MieMie.prototype.draw = function () { this.rig.draw(); };
+  Character.prototype.draw = function () {
+    if (this.def.paint) this.def.paint(this);
+    else this.rig.draw();
+    var f = this.def.fade;
+    if (f) {
+      // Dissolve a half-body character's hard bottom edge into the frame.
+      var c = this.rig.ctx, k = this.rig.k, b = this.rig.box;
+      c.save();
+      c.setTransform(k, 0, 0, k, -b[0] * k, -b[1] * k);
+      var g = c.createLinearGradient(0, f[0], 0, f[1]);
+      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,1)');
+      c.globalCompositeOperation = 'destination-out';
+      c.fillStyle = g; c.fillRect(b[0], f[0], b[2] - b[0], b[3] - f[0]);
+      c.restore();
+    }
+  };
 
-  MieMie.prototype.bind = function () {
-    var self = this;
+  Character.prototype.bind = function () {
+    var self = this, on = this.listeners = [];
+    function listen(target, type, fn, opts) { target.addEventListener(type, fn, opts); on.push([target, type, fn, opts]); }
     function look(e) {
       self.pointer = { x: e.clientX, y: e.clientY };
       self.lastPointer = self.time;
       self.wake();
     }
-    window.addEventListener('pointermove', look, { passive: true });
-    window.addEventListener('pointerdown', look, { passive: true });
+    listen(window, 'pointermove', look, { passive: true });
+    listen(window, 'pointerdown', look, { passive: true });
     // Touch screens have no hover: say so in the hint.
     var hint = this.root.querySelector('.mm-hint');
     if (hint && !window.matchMedia('(hover: hover)').matches) {
       hint.textContent = this.root.getAttribute('data-hint-touch') || 'Touch anywhere — she looks. Tap her for a move.';
     }
-    window.addEventListener('resize', function () { self.layout(); self.draw(); self.wake(); }, { passive: true });
+    listen(window, 'resize', function () { self.layout(); self.draw(); self.wake(); }, { passive: true });
 
-    this.stage.addEventListener('click', function () { self.next(); });
-    this.stage.addEventListener('keydown', function (e) {
+    listen(this.stage, 'click', function () { self.next(); });
+    listen(this.stage, 'keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); self.next(); }
     });
     this.root.querySelectorAll('[data-gesture]').forEach(function (b) {
-      b.addEventListener('click', function (e) {
+      listen(b, 'click', function (e) {
         e.stopPropagation();
         self.play(b.getAttribute('data-gesture'));
       });
@@ -377,28 +417,43 @@
 
     if ('IntersectionObserver' in window) {
       var greeted = false;
-      new IntersectionObserver(function (entries) {
+      this.io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           self.visible = en.isIntersecting;
           if (en.isIntersecting) {
             self.wake();
             if (!greeted && en.intersectionRatio > 0.5) {
               greeted = true;
-              setTimeout(function () { if (!self.gesture) self.play('wave'); }, 500);
+              self.greetTimer = setTimeout(function () { if (!self.gesture) self.play('wave'); }, 500);
             }
           }
         });
-      }, { threshold: [0, 0.5] }).observe(this.stage);
+      }, { threshold: [0, 0.5] });
+      this.io.observe(this.stage);
     }
     this.wake();
   };
 
-  MieMie.prototype.next = function () {
+  /* Stop and remove everything this character added, so another can take the stage. */
+  Character.prototype.destroy = function () {
+    this.dead = true;
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = null;
+    clearTimeout(this.greetTimer); clearTimeout(this.reduceTimer);
+    if (this.io) this.io.disconnect();
+    (this.listeners || []).forEach(function (l) { l[0].removeEventListener(l[1], l[2], l[3]); });
+    this.rig.onload = null;
+    if (this.fig.parentNode) this.fig.parentNode.removeChild(this.fig);
+    this.fig.width = this.fig.height = 0;   // release the backing store now, not at GC
+    this.clearPlaying();
+  };
+
+  Character.prototype.next = function () {
     this.play(ORDER[this.idx % ORDER.length]);
     this.idx++;
   };
 
-  MieMie.prototype.play = function (name) {
+  Character.prototype.play = function (name) {
     var g = GESTURES[name];
     if (!g) return;
     this.gesture = { name: name, g: g, t: 0 };
@@ -414,7 +469,7 @@
     }
     if (this.reduce) {
       // Jump to the key pose instead of animating into it.
-      this.applyTargets(g.pose(g.dur * 0.45));
+      this.applyTargets(this.pose(name, g.dur * 0.45));
       var S = this.s;
       Object.keys(S).forEach(function (k) { S[k].snap(); });
       this.render(0);
@@ -427,43 +482,55 @@
     this.wake();
   };
 
-  MieMie.prototype.clearPlaying = function () {
+  /* A gesture's pose at time t, mapped onto this character's own rig. */
+  Character.prototype.pose = function (name, t) {
+    var p = GESTURES[name].pose(t);
+    return this.def.adapt ? this.def.adapt(p, name, t) : p;
+  };
+
+  Character.prototype.clearPlaying = function () {
     this.root.removeAttribute('data-playing');
     this.root.querySelectorAll('[data-gesture]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
     if (this.bubble) this.bubble.classList.remove('is-on');
   };
 
-  MieMie.prototype.wake = function () {
-    if (this.raf || !this.visible) return;
+  Character.prototype.wake = function () {
+    if (this.raf || !this.visible || this.dead) return;
     var self = this, last = performance.now();
     function loop(now) {
       var dt = Math.min((now - last) / 1000, 1 / 30); last = now;
       self.raf = null;
+      if (self.dead) return;
       self.tick(dt);
       if (self.visible && (!self.reduce || self.gesture)) self.raf = requestAnimationFrame(loop);
     }
     this.raf = requestAnimationFrame(loop);
   };
 
-  MieMie.prototype.setHand = function (side, shape) {
+  Character.prototype.setHand = function (side, shape) {
     var arm = this.arms[side];
+    if (!arm.hands[shape]) shape = shape === 'Rest' ? this.def.rest : 'Open';  // no drawing for it: open hand, as in the app
     if (arm.shape === shape) return;
     arm.hands[arm.shape].a = 0;
     arm.hands[shape].a = 1;
     arm.shape = shape;
   };
 
-  MieMie.prototype.applyTargets = function (p) {
-    var S = this.s;
-    var l = p.L ? ik('left', p.L[0], p.L[1]) : { u: 0, f: 0 };
-    var r = p.R ? ik('right', p.R[0], p.R[1]) : { u: 0, f: 0 };
-    S.LU.t = l.u; S.LF.t = l.f; S.LH.t = p.Lr || 0;
-    S.RU.t = r.u; S.RF.t = r.f; S.RH.t = p.Rr || 0;
-    this.setHand('left', p.Lh || 'Rest');
-    this.setHand('right', p.Rh || 'Rest');
-    // Raised arms pass in front of the hair and face.
-    this.arms.left.wrap.z = p.L ? 120 : 25;
-    this.arms.right.wrap.z = p.R ? 120 : 25;
+  Character.prototype.applyTargets = function (p) {
+    var S = this.s, d = this.def;
+    if (d.targets) {
+      d.targets(this, p);
+    } else {
+      var l = p.L ? ik(d, 'left', p.L[0], p.L[1]) : { u: 0, f: 0 };
+      var r = p.R ? ik(d, 'right', p.R[0], p.R[1]) : { u: 0, f: 0 };
+      S.LU.t = l.u; S.LF.t = l.f; S.LH.t = p.Lr || 0;
+      S.RU.t = r.u; S.RF.t = r.f; S.RH.t = p.Rr || 0;
+      this.setHand('left', p.Lh || 'Rest');
+      this.setHand('right', p.Rh || 'Rest');
+      // Raised arms pass in front of the hair and face.
+      this.arms.left.wrap.z = p.L ? 120 : 25;
+      this.arms.right.wrap.z = p.R ? 120 : 25;
+    }
     S.smile.t = p.smile || 0; S.open.t = p.open || 0;
     S.blush.t = p.blush != null ? p.blush : 0.55;
     S.brow.t = p.brow || 0;
@@ -473,8 +540,8 @@
     S.lidL.t = this.poseWinkL; S.lidR.t = 0;
   };
 
-  MieMie.prototype.tick = function (dt) {
-    var S = this.s, self = this;
+  Character.prototype.tick = function (dt) {
+    var S = this.s, d = this.def;
     this.time += dt;
 
     // Gesture timeline
@@ -482,7 +549,7 @@
       this.gesture.t += dt;
       var g = this.gesture.g;
       if (this.gesture.t >= g.dur) { this.gesture = null; this.applyTargets({}); this.clearPlaying(); }
-      else this.applyTargets(g.pose(this.gesture.t));
+      else this.applyTargets(this.pose(this.gesture.name, this.gesture.t));
     }
 
     // Where to look: the pointer, else a gentle idle wander.
@@ -490,12 +557,12 @@
     var usePointer = this.pointer && (this.time - this.lastPointer < 5);
     if (usePointer) {
       var r = this.stage.getBoundingClientRect();
-      var hx = r.left + (HEAD_PIVOT[0] - this.crop[0]) * this.scale;
-      var hy = r.top + (440 - this.crop[1]) * this.scale;
+      var hx = r.left + (d.lookX != null ? d.lookX : d.pivot[0]) * this.scale - this.crop[0] * this.scale;
+      var hy = r.top + (d.lookY - this.crop[1]) * this.scale;
       var dx = this.pointer.x - hx, dy = this.pointer.y - hy;
       var reach = Math.max(220, r.width * 0.9);
       lx = clamp(dx / reach, -1, 1); ly = clamp(dy / reach, -1, 1);
-      // Soft saturation so far-away pointers do not pin her at the limit.
+      // Soft saturation so far-away pointers do not pin the look at the limit.
       lx = Math.tanh(lx * 1.4); ly = Math.tanh(ly * 1.4);
     } else {
       if (this.time > this.idle.next) {
@@ -533,20 +600,21 @@
     // Idle breathing
     this.breath = this.reduce ? 0 : Math.sin(this.time * 1.7);
     this.render();
-    void self;
   };
 
-  MieMie.prototype.render = function () {
-    var S = this.s, n = this.n;
+  Character.prototype.render = function () {
+    var S = this.s, n = this.n, d = this.def;
     var lx = S.lookX.x, ly = S.lookY.x;
     var breath = this.breath || 0;
 
     if (this.frame) {
-      // The frame tilts with her gaze; she stays square to the viewer, which
-      // is what makes her read as standing in front of it.
+      // The frame tilts with the gaze; the character stays square to the
+      // viewer, which is what makes it read as standing in front of it.
       this.frame.style.transform = 'perspective(1100px) rotateY(' + (lx * -9).toFixed(2) +
         'deg) rotateX(' + (6 + ly * 5).toFixed(2) + 'deg)';
     }
+    if (d.paint) { this.draw(); return; }
+
     n.body.ty = S.bounce.x + breath * 2; n.body.rot = S.sway.x;
 
     var roll = S.roll.x + lx * 5;
@@ -562,10 +630,10 @@
     n.hairB.tx = -lx * 7; n.hairB.ty = -ly * 4; n.hairB.rot = -hairLag * 0.1;
 
     // Irises, clipped to each eye's aperture.
-    // Travel measured against the eye-white masks: the most either iris can
-    // move while at least ~70% of it stays visible (sideways 15, up 6, down 13).
-    var ix = clamp(lx, -1, 1) * IRIS.x;
-    var iy = ly < 0 ? Math.max(ly, -1) * IRIS.up : Math.min(ly, 1) * IRIS.down;
+    // MieMie's travel is measured against the eye-white masks: the most either
+    // iris can move while at least ~70% of it stays visible (sideways 15, up 6, down 13).
+    var ix = clamp(lx, -1, 1) * d.iris.x;
+    var iy = ly < 0 ? Math.max(ly, -1) * d.iris.up : Math.min(ly, 1) * d.iris.down;
     this.eyes.left.iris.tx = this.eyes.right.iris.tx = ix;
     this.eyes.left.iris.ty = this.eyes.right.iris.ty = iy;
 
@@ -573,8 +641,9 @@
     [['left', S.lidL.x], ['right', S.lidR.x]].forEach(function (e) {
       var eye = this.eyes[e[0]], c = clamp(e[1], 0, 1);
       eye.lid.a = band(c, 0.28, 0.6);
+      if (d.lidDrop) eye.lid.ty = c * d.lidDrop;
       eye.g.a = 1 - band(c, 0.6, 0.92);
-      eye.brow.ty = -S.brow.x * 18 + c * 4;
+      eye.brow.ty = -S.brow.x * d.brow + c * 4;
     }, this);
 
     // Mouth cross-fade
@@ -582,6 +651,7 @@
     this.mouth.open.a = op;
     this.mouth.smile.a = sm * (1 - op);
     this.mouth.neutral.a = 1 - Math.max(sm, op);
+    if (d.mouthDrop) this.mouth.open.ty = this.mouth.smile.ty = this.mouth.neutral.ty = op * d.mouthDrop;
     n.blush.a = clamp(S.blush.x, 0, 1);
 
     // Arms (idle: a hint of swing with the breath)
@@ -598,11 +668,12 @@
 
   function init() {
     document.querySelectorAll('[data-miemie]').forEach(function (root) {
-      if (!root.__miemie) root.__miemie = new MieMie(root);
+      if (!root.__miemie) root.__miemie = new Character(root, MIEMIE);
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
-  window.MieMie = { ik: ik, gestures: ORDER };
+  window.MieMie = { ik: ik, gestures: ORDER, GESTURES: GESTURES, Character: Character, miemie: MIEMIE,
+                    util: { clamp: clamp, band: band, dist: dist, Spring: Spring } };
 })();

@@ -107,6 +107,10 @@
       "en": "Touch anywhere — she looks. Tap her for a move.",
       "zh": "点屏幕任意位置，她会看过去；点她一下试试。"
     },
+    "mm_cast": {
+      "en": "Choose a character",
+      "zh": "选择角色"
+    },
     "mm_actions": {
       "en": "MieMie gestures",
       "zh": "MieMie 的动作"

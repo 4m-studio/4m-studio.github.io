@@ -176,7 +176,23 @@ GESTURES = [("wave", "👋"), ("heart", "🫶"), ("bigheart", "💗"), ("peace",
             ("clap", "👏"), ("dance", "💃"), ("surprised", "✨"), ("shy", "😳")]
 
 
-def miemie(lang, root, width=420, short=False):
+CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika")]
+STICK_ICON = ('<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'
+              '<circle cx="16" cy="11" r="7" fill="#14141c"/><path d="M13.4 9.6v2.2M18.6 9.6v2.2M13.6 14q2.4 1.6 4.8 0'
+              'M16 18v6M16 24l-4 5M16 24l4 5M10.5 20.5h11"/></svg>')
+
+
+def cast_switcher(lang, root):
+    """Stick · MieMie · Mika under the live stage (assets/js/cast.js swaps them on the same canvas)."""
+    btns = []
+    for cid, name in CAST:
+        av = (f'<span class="mm-cast__av mm-cast__av--stick" aria-hidden="true">{STICK_ICON}</span>' if cid == "stick" else
+              f'<img class="mm-cast__av" src="{root}assets/img/avatartracker/cast-{cid}.webp" alt="" width="28" height="28" decoding="async">')
+        btns.append(f'<button type="button" role="radio" aria-checked="{"true" if cid == "miemie" else "false"}" data-char="{cid}">{av}<span>{name}</span></button>')
+    return f'<div class="mm-cast" data-cast role="radiogroup" aria-label="{esc(T("mm_cast", lang))}">{"".join(btns)}</div>'
+
+
+def miemie(lang, root, width=420, short=False, cast=False):
     buttons = "".join(
         f'<button type="button" data-gesture="{g}" title="{esc(T("g_" + g, lang))}" '
         f'aria-label="{esc(T("g_" + g, lang))}" aria-pressed="false">{e}</button>' for g, e in GESTURES)
@@ -187,7 +203,7 @@ def miemie(lang, root, width=420, short=False):
               <div class="mm-frame"><span class="mm-live"><i></i>{T("mm_live", lang)}</span></div>
               <span class="mm-bubble" aria-live="polite"></span>
             </div>
-            <div class="mm-actions" role="group" aria-label="{esc(T("mm_actions", lang))}">{buttons}</div>
+            {cast_switcher(lang, root) + chr(10) + " " * 12 if cast else ""}<div class="mm-actions" role="group" aria-label="{esc(T("mm_actions", lang))}">{buttons}</div>
             <p class="mm-hint">{T("mm_hint", lang)}</p>
           </div>'''
 
@@ -262,7 +278,8 @@ def visual(app, lang, root, big=False, home=False):
     if app.get("shots"):
         return trio(app, lang, root)
     if app["visual"] == "miemie":
-        return miemie(lang, root, 440 if big else 400, short=home)
+        # The app page also gets the cast switcher; the home card stays MieMie only.
+        return miemie(lang, root, 440 if big else 400, short=home, cast=not home)
     return f'<div class="solo-stage">{mock(app, lang)}</div>'
 
 
@@ -662,7 +679,7 @@ def app_page(a, lang):
     if a.get("appStore"):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
-    scripts = ("main",) + {"miemie": ("rig", "miemie"), "nest": ("rig", "qqnest")}.get(a["visual"], ())
+    scripts = ("main",) + {"miemie": ("rig", "miemie", "cast"), "nest": ("rig", "qqnest")}.get(a["visual"], ())
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 
