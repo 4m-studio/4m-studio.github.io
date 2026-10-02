@@ -826,7 +826,7 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .mm-actions button[aria-pressed="true"] { background: rgba(160,130,255,.25); border-color: rgba(180,150,255,.7); }
 @media (max-width: 420px) { .mm-actions { gap: 5px; } .mm-actions button { width: 33px; height: 33px; font-size: 16px; border-radius: 10px; } }
 /* Cast switcher (app page only — assets/js/cast.js) */
-.mm-cast { display: flex; justify-content: center; gap: 4px; width: max-content; max-width: 100%; margin: 16px auto 0;
+.mm-cast { display: flex; justify-content: center; gap: 4px; width: fit-content; max-width: 100%; margin: 16px auto 0;
   padding: 4px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--stroke); }
 .mm-cast button {
   display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px 4px 4px; border-radius: 999px; cursor: pointer;
@@ -845,7 +845,19 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .miemie.is-swapping .mm-fig { animation: mmIn .4s var(--ease); }
 @keyframes mmIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .miemie.is-swapping .mm-frame { transition: none; } .miemie.is-swapping .mm-fig { animation: none; } }
-@media (max-width: 420px) { .mm-cast button { padding-right: 11px; font-size: 13px; gap: 6px; } }
+.mm-cast__tag { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .04em; line-height: 1;
+  padding: 3px 5px; margin-left: -3px; border-radius: 6px; color: #fff; background: linear-gradient(135deg, #a57cff, #6a3fe0); }
+.mm-loading { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none;
+  font-size: 13px; font-weight: 600; color: var(--text-2); white-space: nowrap; animation: mmPulseText 1.4s ease-in-out infinite; }
+@keyframes mmPulseText { 50% { opacity: .45; } }
+/* Phones: four characters don't fit with faces, so the switcher becomes a plain text control. */
+@media (max-width: 480px) {
+  .mm-cast { gap: 2px; }
+  .mm-cast button { min-width: 0; padding: 7px 11px; font-size: 13px; gap: 5px; }
+  .mm-cast__av { display: none; }
+  .mm-cast__tag { margin-left: 0; }
+}
+@media (max-width: 340px) { .mm-cast button { padding: 7px 8px; font-size: 12.5px; } }
 
 /* ---------- QQNest (Qiao Que's nest, live — assets/js/qqnest.js) ----------
    Colours are the app's own (QQNest Core/Theme.swift). */

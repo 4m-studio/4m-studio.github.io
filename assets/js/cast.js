@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The AvatarTracker cast — Stick and Mika, next to MieMie (assets/js/miemie.js).
+   The AvatarTracker cast — Stick, Mika and Mochi, next to MieMie (assets/js/miemie.js).
 
    Only the AvatarTracker app page loads this. A switcher under the live stage
    swaps the character on the same canvas: the old one is torn down first, so
@@ -11,6 +11,8 @@
      the open hand stands in.
    - Stick: AvatarTracker's StickAvatarRenderer, drawn with lines in its
      dark-mode colours. Its arms follow the app's own gesture intents.
+   - Mochi: the 3D character (PrimitiveChibiBody), rebuilt with three.js in
+     assets/js/mochi3d.js, which is only downloaded when Mochi is picked.
    ========================================================================== */
 (function () {
   'use strict';
@@ -246,7 +248,103 @@
     c.restore();
   }
 
-  var DEFS = { stick: STICK, miemie: MM, mika: MIKA };
+  /* ---------- Mochi (PrimitiveChibiBody, 3D — assets/js/mochi3d.js) ----------
+     The WebGL code (Mochi plus the parts of three.js it uses, ~130 KB gzipped)
+     is fetched the first time someone picks Mochi, never before. World units
+     are the app's metres; the "artboard" is world × 1000 with y pointing down
+     from the top of the view, so the shared engine can place the frame. */
+  var VIEW = { yTop: 1.80, yBot: -0.47 };          // 2.27 tall; same aspect as the other crops
+  var AW = Math.round((VIEW.yTop - VIEW.yBot) * 1000 / (1700 / 1244)), AH = Math.round((VIEW.yTop - VIEW.yBot) * 1000);
+  var DEG2RAD = Math.PI / 180;
+  var mochiModule = null;
+  function loadMochi(root) {
+    if (!mochiModule) {
+      var url = new URL(root.getAttribute('data-mochi') || 'assets/js/mochi3d.js', document.baseURI).href;
+      mochiModule = import(url).catch(function (e) { mochiModule = null; throw e; });
+    }
+    return mochiModule;
+  }
+  function lang() { return (document.documentElement.lang || 'en').slice(0, 2); }
+  // Gesture targets in arm lengths from the shoulder, [outward, down], with the
+  // app's hand shapes. 🫶 is the app's own heart: both hands at the chest.
+  var MOCHI_POSES = {
+    wave: function (t) { var s = Math.sin(t * 9); return { L: [0.9 + s * 0.08, -0.5 - s * 0.06], Ls: 'open' }; },
+    heart: function (t) { var b = Math.max(0, Math.sin(t * 6)) * 0.05; return { L: [-0.62, 0.38 - b], R: [-0.62, 0.38 - b], Ls: 'heart', Rs: 'heart' }; },
+    bigheart: function (t) { var b = Math.sin(t * 5) * 0.04; return { L: [0.5, -0.82 + b], R: [0.5, -0.82 + b], Ls: 'heart', Rs: 'heart' }; },
+    peace: function (t) { return { R: [0.9, -0.42 + Math.sin(t * 5) * 0.04], Rs: 'peace' }; },
+    thumbs: function (t) { return { L: [0.78, -0.12 - Math.max(0, Math.sin(t * 6)) * 0.06], Ls: 'thumbsUp' }; },
+    clap: function (t) { var g = Math.abs(Math.sin(t * 8)) * 0.35; return { L: [-0.62 + g, 0.38], R: [-0.62 + g, 0.38] }; },
+    dance: function (t) { var u = (Math.sin(t * 3.4) + 1) / 2; return { L: [0.6 + u * 0.3, 0.75 - u * 1.35], R: [0.9 - u * 0.3, -0.6 + u * 1.35], Ls: 'fist', Rs: 'fist' }; },
+    surprised: function () { return { L: [0.95, 0.2], R: [0.95, 0.2] }; },
+    shy: function () { return { L: [-0.55, 0.62], R: [-0.55, 0.62] }; }
+  };
+  var MOCHI = {
+    id: 'mochi', name: 'Mochi', W: AW, H: AH,
+    box: [0, 0, AW, AH], crop: [0, 0, AW, AH],
+    frameTop: (VIEW.yTop - 0.52) * 1000,           // chin: neck 0.60 + head 0.42 − radius 0.50
+    lookX: AW / 2, lookY: (VIEW.yTop - 1.0) * 1000, // eye height
+    makeStage: function (fig, self) {
+      var st = { canvas: fig, box: [0, 0, AW, AH], k: 1, mochi: null, css: [1, 1],
+        resize: function (sc) {
+          var w = AW * sc, h = AH * sc;
+          fig.style.width = w + 'px'; fig.style.height = h + 'px';
+          this.css = [w, h];
+          if (this.mochi) this.mochi.setSize(w, h, window.devicePixelRatio || 1);
+        },
+        draw: function () {} };
+      var stage = self.root.querySelector('.mm-stage');
+      var note = document.createElement('span');
+      note.className = 'mm-loading';
+      note.textContent = lang() === 'zh' ? '正在加载 3D…' : 'Loading 3D…';
+      stage.appendChild(note);
+      st.note = note;
+      loadMochi(self.root).then(function (mod) {
+        if (self.dead) return;
+        try { st.mochi = mod.createMochi(fig, VIEW); }
+        catch (e) { note.textContent = lang() === 'zh' ? '这台设备无法显示 3D' : '3D isn’t available on this device'; return; }
+        st.mochi.setSize(st.css[0], st.css[1], window.devicePixelRatio || 1);
+        if (note.parentNode) note.parentNode.removeChild(note);
+        self.draw(); self.wake();
+      }, function () {
+        note.textContent = lang() === 'zh' ? '3D 加载失败，请刷新重试' : 'Couldn’t load 3D — try reloading';
+      });
+      return st;
+    },
+    build: function (self) { self.mochiT = {}; self.mochiLast = 0; },
+    adapt: function (p, name, t) {
+      var a = MOCHI_POSES[name] ? MOCHI_POSES[name](t) : {};
+      p.L = a.L || null; p.R = a.R || null; p.Lh = a.Ls; p.Rh = a.Rs;
+      return p;
+    },
+    targets: function (self, p) {
+      self.mochiT = { L: p.L || null, R: p.R || null, Ls: p.Lh, Rs: p.Rh };
+    },
+    paint: function (self) {
+      var m = self.rig.mochi;
+      if (!m) return;
+      // Reduced motion: dt 0 lands every spring on its target, like the 2D characters' snap.
+      var now = performance.now(), dt = self.reduce || !self.mochiLast ? 0 : Math.min((now - self.mochiLast) / 1000, 1 / 20);
+      self.mochiLast = now;
+      var S = self.s, lx = S.lookX.x, ly = S.lookY.x, T = self.mochiT || {};
+      m.apply({
+        headYaw: lx * 0.45, headPitch: -ly * 0.3, headRoll: (S.roll.x + lx * 5) * DEG2RAD,
+        gazeX: lx, gazeY: -ly, blinkL: S.lidL.x, blinkR: S.lidR.x,
+        smile: Math.min(1, S.smile.x + 0.3), open: S.open.x, browL: S.brow.x, browR: S.brow.x,
+        bounce: clamp(-S.bounce.x / 25, 0, 1.2), breath: self.breath || 0,
+        chestRoll: S.sway.x * DEG2RAD * 0.6, lean: lx * 0.03,
+        L: T.L, R: T.R, Lshape: T.Ls || 'open', Rshape: T.Rs || 'open'
+      }, dt);
+      m.render();
+    },
+    teardown: function (self) {
+      var st = self.rig;
+      if (st.mochi) st.mochi.dispose();
+      st.mochi = null;
+      if (st.note && st.note.parentNode) st.note.parentNode.removeChild(st.note);
+    }
+  };
+
+  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI };
 
   /* ---------- Switcher ---------- */
   function init() {

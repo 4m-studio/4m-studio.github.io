@@ -236,7 +236,8 @@
     var fig = el('canvas', 'mm-fig', stage);
     fig.setAttribute('aria-hidden', 'true');
     this.stage = stage; this.fig = fig;
-    var rig = this.rig = new window.Rig2D.Stage(fig, def.box);
+    // A character can bring its own stage (Mochi draws with WebGL); the rest share rig.js.
+    var rig = this.rig = def.makeStage ? def.makeStage(fig, this) : new window.Rig2D.Stage(fig, def.box);
     this.rig.onload = function () { self.draw(); };
 
     function layer(id, parent) {
@@ -443,6 +444,7 @@
     if (this.io) this.io.disconnect();
     (this.listeners || []).forEach(function (l) { l[0].removeEventListener(l[1], l[2], l[3]); });
     this.rig.onload = null;
+    if (this.def.teardown) this.def.teardown(this);
     if (this.fig.parentNode) this.fig.parentNode.removeChild(this.fig);
     this.fig.width = this.fig.height = 0;   // release the backing store now, not at GC
     this.clearPlaying();

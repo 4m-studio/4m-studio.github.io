@@ -191,8 +191,8 @@
           "zh": "分层 2D"
         },
         "title": {
-          "en": "Now she's a fully painted 2D character.",
-          "zh": "现在，她是一个精绘的 2D 角色。"
+          "en": "Then she became a fully painted 2D character.",
+          "zh": "接着，她成了一个精绘的 2D 角色。"
         },
         "body": {
           "en": "MieMie is painted in full detail and split into 36 layers: lashes, irises and lids, three mouth shapes, hair that swings behind the head, and hands drawn for seven poses. Tap 🫶 and she makes a finger heart while she keeps blinking and talking with you.",
@@ -215,25 +215,62 @@
       },
       {
         "img": {
-          "src": "avatartracker/home.webp",
+          "src": "avatartracker/mochi-live.webp",
           "alt": {
-            "en": "AvatarTracker home screen: MieMie on the stage card with a Tracking you badge, the Go Live button, and the avatar row with Stick, MieMie, Mika and Create",
-            "zh": "随影首页：舞台卡片上的 MieMie 和“正在追踪”标记、Go Live 按钮，以及火柴人、MieMie、Mika 和“创建”的角色栏"
+            "en": "AvatarTracker live screen: Mochi, a round 3D character with bear ears, a sprout on its head and a blue body, gasping wide-eyed with its head turned; Excited is selected in the reaction bar",
+            "zh": "随影直播画面：圆滚滚的 3D 角色 Mochi，小熊耳朵、头顶小芽、蓝色身体，转着头睁大眼睛惊呼，反应栏选中了“兴奋”"
           },
           "w": 600,
           "h": 1304
         },
         "step": {
-          "en": "What's next",
-          "zh": "下一步"
+          "en": "3D",
+          "zh": "3D"
         },
         "title": {
-          "en": "One cast, one tap — and 3D is next.",
-          "zh": "一个角色栏，一键切换——下一站是 3D。"
+          "en": "And now, Mochi in 3D.",
+          "zh": "现在，Mochi 来到了 3D。"
         },
         "body": {
-          "en": "Home keeps the whole cast in one row. Pick Stick, Mika or MieMie and Go Live — switching never restarts the camera. Next on the roadmap: 3D avatars, driven by the same face tracking.",
-          "zh": "首页把所有角色放在同一排：选火柴人、Mika 或 MieMie，点 Go Live 就开播，切换角色也不会重启摄像头。下一步计划：由同一套面部追踪驱动的 3D 形象。"
+          "en": "Mochi is AvatarTracker's first 3D character: a round little face with bear ears and a sprout on top, built from soft 3D shapes and lit like a toy. Turn your head and Mochi turns in real depth, while the eyes, brows and mouth keep following yours.",
+          "zh": "Mochi 是随影的第一个 3D 角色：圆圆的脸，一对小熊耳朵，头顶一棵小芽，由柔和的 3D 形状搭成，像玩具一样打光。你一转头，Mochi 就在真正的立体空间里转过来，眼睛、眉毛和嘴巴依然跟着你。"
+        },
+        "points": [
+          {
+            "en": "Turns in real 3D as your head moves",
+            "zh": "随你转头，在 3D 空间里转动"
+          },
+          {
+            "en": "Arms that keep clear of the head and body",
+            "zh": "手臂移动时会自动避开头和身体"
+          },
+          {
+            "en": "The same seven reactions, with a 3D heart for 🫶",
+            "zh": "同样的七种反应，🫶 会冒出一颗 3D 爱心"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "avatartracker/home.webp",
+          "alt": {
+            "en": "AvatarTracker home screen: MieMie on the stage card with a Tracking you badge, the Go Live button, and the avatar row with Stick, Mochi, MieMie, Mika and Create",
+            "zh": "随影首页：舞台卡片上的 MieMie 和“正在追踪”标记、Go Live 按钮，以及火柴人、Mochi、MieMie、Mika 和“创建”的角色栏"
+          },
+          "w": 600,
+          "h": 1304
+        },
+        "step": {
+          "en": "The whole cast",
+          "zh": "全员到齐"
+        },
+        "title": {
+          "en": "One cast, one tap to switch.",
+          "zh": "一个角色栏，一键切换。"
+        },
+        "body": {
+          "en": "Home keeps every character in one row: Stick, Mochi, MieMie and Mika. Pick one and Go Live — switching never restarts the camera.",
+          "zh": "首页把所有角色放在同一排：火柴人、Mochi、MieMie 和 Mika。选一个，点 Go Live 就开播，切换角色也不会重启摄像头。"
         },
         "points": [
           {
@@ -245,8 +282,8 @@
             "zh": "每个角色都有同样的七种反应"
           },
           {
-            "en": "Planned next: 3D avatars",
-            "zh": "计划中：3D 形象"
+            "en": "2D and 3D characters side by side",
+            "zh": "2D 与 3D 角色并排可选"
           }
         ]
       }
