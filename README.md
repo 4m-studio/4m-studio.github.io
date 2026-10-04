@@ -1,7 +1,7 @@
 # 4M Studio — website
 
 The marketing site for **4M Studio** and its iOS apps — AvatarTracker, StoryReel,
-MeetLog, QQNest, Wearly, WorthView and CardPick — in **English and 中文**.
+MeetLog, QQNest, Wearly, WorthView, CardPick and LingoPal — in **English and 中文**.
 Live at <https://4m-studio.github.io/>, served by GitHub Pages from `main`.
 
 Plain static HTML, CSS and JS. The pages are generated from two JSON files by a
@@ -117,6 +117,7 @@ update its row in the `L` table.
 | What | Where |
 |---|---|
 | Chinese names I proposed: 随影 (AvatarTracker), 会记 (MeetLog), 净览 (WorthView) | `content/apps.json` |
+| LingoPal phone mock-up (HTML, no screenshots yet) — swap in real screenshots as `"shots"`/`"tour"` when ready | `mock()` in `tools/build.py` |
 | App Store links | `"appStore"` in `content/apps.json` |
 | News dates and copy | `"news"` in `content/apps.json` |
 | The four **M** values | `v1_t` … `v4_b` in `content/site.json` |

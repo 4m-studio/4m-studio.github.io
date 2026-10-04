@@ -167,6 +167,33 @@ def mock(app, lang, cls=""):
             <div class="tile">🏦 {"储蓄与支票账户 · 只读" if zh else "Checking & savings · Read only"}</div>
             <div class="tile tile--accent">📈 {"券商 · 14 个持仓" if zh else "Brokerage · 14 holdings"}</div>
             <div class="tile">🏠 {"房产" if zh else "Home"} · 🚗 {"汽车 · 手动" if zh else "Car · manual"}</div>'''
+    elif v == "lingopal":
+        # LingoPal's own UI is bilingual (Chinese first) whatever the site language, so the mock is too.
+        book = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+                'stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>')
+        clock = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+                 '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>')
+        gear = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/>'
+                '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>')
+        inner = f'''
+            <div class="lp__nav">{book}<b>随译</b><span>{clock}{gear}</span></div>
+            <div class="lp-card">
+              <div class="lp-h"><b>原文</b>Original · 中文<span class="lp-dir">中 → 英 ⇄</span></div>
+              <div class="lp-src">请问去机场坐哪路公交？</div>
+            </div>
+            <div class="lp-card">
+              <div class="lp-h"><b>译文</b>Translation · English</div>
+              <div class="lp-out">Which bus goes to the airport?</div>
+              <span class="lp-btn">🔊 朗读 Read aloud</span>
+              <div class="lp-row"><span>给对方看 Show</span><span>☆ 收藏 Save</span></div>
+            </div>
+            <div class="lp-bar">
+              <span class="lp-speak lp-speak--zh"><b>说中文</b><small>Speak Chinese</small></span>
+              <span class="lp-speak lp-speak--en"><b>Speak English</b><small>说英语</small></span>
+            </div>'''
+        return (f'<div class="phone phone--solo {cls}" style="--accent: var(--{app["accent"]})" aria-hidden="true">'
+                f'<div class="phone__screen"><span class="phone__notch"></span><div class="screen-ui lp">{inner}'
+                f'</div></div></div>')
     return (f'<div class="phone phone--solo {cls}" style="--accent: var(--{app["accent"]})" aria-hidden="true">'
             f'<div class="phone__screen"><span class="phone__notch"></span><div class="screen-ui">{inner}'
             f'</div></div></div>')
@@ -463,14 +490,16 @@ def home(lang):
         <span class="link-arrow">{T("learn_more", lang)} {ARROW}</span>
       </a>''' for i, a in enumerate(APPS))
 
-    posts_src = sorted(APPS, key=lambda a: a["news"]["date"], reverse=True)
+    # An app's "news" is one post or a list of posts; every post is shown, newest first.
+    posts_src = sorted(((a, n) for a in APPS for n in (a["news"] if isinstance(a["news"], list) else [a["news"]])),
+                       key=lambda an: an[1]["date"], reverse=True)
     posts = "".join(f'''
       <article class="post reveal" style="--d: {0.05 * (i % 3):.2f}s">
-        <div class="post__meta"><span class="chip">{esc(NM(a, lang))}</span><span>{month(a["news"]["date"], lang)}</span></div>
-        <h3>{esc(L(a["news"]["title"], lang))}</h3>
-        <p>{esc(L(a["news"]["body"], lang))}</p>
+        <div class="post__meta"><span class="chip">{esc(NM(a, lang))}</span><span>{month(n["date"], lang)}</span></div>
+        <h3>{esc(L(n["title"], lang))}</h3>
+        <p>{esc(L(n["body"], lang))}</p>
         <a class="link-arrow" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">{T("read_more", lang)} {ARROW}</a>
-      </article>''' for i, a in enumerate(posts_src))
+      </article>''' for i, (a, n) in enumerate(posts_src))
 
     marquee_items = SITE["marquee"][lang]
     marquee = "".join(f'<span class="marquee__item">{esc(m)}</span>' for m in marquee_items * 2)

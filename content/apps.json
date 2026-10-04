@@ -83,17 +83,30 @@
         "zh": "无需账号，无广告，无第三方追踪"
       }
     ],
-    "news": {
-      "date": "2026-09",
-      "title": {
-        "en": "Meet MieMie, our first layered character",
-        "zh": "认识一下 MieMie：我们的第一个分层角色"
+    "news": [
+      {
+        "date": "2026-10",
+        "title": {
+          "en": "Meet Mochi, our first 3D character",
+          "zh": "认识一下 Mochi：我们的第一个 3D 角色"
+        },
+        "body": {
+          "en": "Bear ears, a sprout on top and a head that turns with yours in real 3D. You can play with Mochi right on the AvatarTracker page.",
+          "zh": "小熊耳朵、头顶小芽，你一转头，它就在真正的 3D 空间里跟着转。现在就能在随影的页面上和 Mochi 玩。"
+        }
       },
-      "body": {
-        "en": "Blinking eyes, lip-sync, bouncy hair and arms that can finally wave, make a heart and throw a peace sign.",
-        "zh": "会眨眼、会对口型、头发会甩，手臂终于能挥手、比心、比耶了。"
+      {
+        "date": "2026-09",
+        "title": {
+          "en": "Meet MieMie, our first layered character",
+          "zh": "认识一下 MieMie：我们的第一个分层角色"
+        },
+        "body": {
+          "en": "Blinking eyes, lip-sync, bouncy hair and arms that can finally wave, make a heart and throw a peace sign.",
+          "zh": "会眨眼、会对口型、头发会甩，手臂终于能挥手、比心、比耶了。"
+        }
       }
-    },
+    ],
     "theme": {
       "colors": [
         "#8a6cff",
@@ -2017,6 +2030,179 @@
         "#168e82",
         "#1fbf9f",
         "#1d4fb8"
+      ]
+    }
+  },
+  {
+    "slug": "lingopal",
+    "name": {
+      "en": "LingoPal",
+      "zh": "随译"
+    },
+    "icon": "icon-lingopal.png",
+    "accent": "lingopal",
+    "isNew": true,
+    "appStore": "",
+    "visual": "lingopal",
+    "category": {
+      "en": "Travel",
+      "zh": "旅游"
+    },
+    "tagline": {
+      "en": "Chinese ↔ English, by voice — even offline.",
+      "zh": "中英互译，开口就行，离线也能用。"
+    },
+    "headline": {
+      "en": "Two big buttons.<br><span class=\"grad-text\">No language barrier.</span>",
+      "zh": "两个大按钮，<br><span class=\"grad-text\">说话就能互译。</span>"
+    },
+    "lede": {
+      "en": "LingoPal is a Chinese ↔ English translator made with older parents in mind. Tap 说中文 or Speak English, talk, and read the translation in big type — or let LingoPal say it out loud. Speech and text are translated on your iPhone, so it keeps working in airplane mode, with no account and nothing uploaded.",
+      "zh": "随译是一款为爸妈设计的中英翻译。点“说中文”或“Speak English”，说完就能看到大字译文，也可以让随译直接读出来。语音和文字都在 iPhone 上翻译，开着飞行模式也能用，不用注册，什么都不上传。"
+    },
+    "platform": {
+      "en": "iPhone · iOS 26",
+      "zh": "iPhone · iOS 26"
+    },
+    "requirements": {
+      "en": "iOS 26 or later. Chinese ↔ English. Language packs (or an optional model) download once, then everything works offline.",
+      "zh": "iOS 26 或更高版本。中文 ↔ 英文。语言包（或可选模型）只需下载一次，之后完全离线使用。"
+    },
+    "features": [
+      {
+        "emoji": "🎙️",
+        "title": {
+          "en": "Two big buttons",
+          "zh": "两个大按钮"
+        },
+        "body": {
+          "en": "说中文 on the left, Speak English on the right. Tap once to talk and again to stop — a pulsing frame, a timer and live text show it's listening.",
+          "zh": "左边“说中文”，右边“Speak English”。点一下开始说，再点一下停止；说话时有闪动的红框、计时和实时文字。"
+        }
+      },
+      {
+        "emoji": "✍️",
+        "title": {
+          "en": "Check it, then translate",
+          "zh": "先看清，再翻译"
+        },
+        "body": {
+          "en": "What you said lands in an editable box, so a misheard word can be fixed first. You can also type or paste — the direction is detected for you.",
+          "zh": "识别出的文字先放进可编辑的框里，听错的字可以先改再翻。也可以直接打字或粘贴，中英方向会自动判断。"
+        }
+      },
+      {
+        "emoji": "🔊",
+        "title": {
+          "en": "Big text, read aloud",
+          "zh": "大字显示，还能朗读"
+        },
+        "body": {
+          "en": "The translation shows in large type with a big Read aloud button. If a number or a “not” may have been lost, LingoPal says so.",
+          "zh": "译文用大字显示，配一个大大的“朗读”按钮。如果数字或否定词可能翻丢了，随译会提醒你。"
+        }
+      },
+      {
+        "emoji": "🔄",
+        "title": {
+          "en": "Show the other person",
+          "zh": "给对方看"
+        },
+        "body": {
+          "en": "One tap fills the screen with the translation, turns up the brightness and can flip it 180° for someone across the table.",
+          "zh": "一点就全屏显示译文、调亮屏幕，还能旋转 180°，让坐在对面的人直接看。"
+        }
+      },
+      {
+        "emoji": "📖",
+        "title": {
+          "en": "A phrasebook from day one",
+          "zh": "开箱即用的常用语"
+        },
+        "body": {
+          "en": "56 hand-written travel phrases in 9 categories — airport, directions, restaurant, hotel, health, emergency and more — before anything is downloaded.",
+          "zh": "56 句手写的旅行常用语，分 9 类——机场、问路、餐厅、酒店、身体不适、紧急等，不用下载任何东西就能用。"
+        }
+      },
+      {
+        "emoji": "✈️",
+        "title": {
+          "en": "Works in airplane mode",
+          "zh": "飞行模式也能用"
+        },
+        "body": {
+          "en": "Apple's on-device language packs, or an optional open model you download once. Speech recognition and voices run on the iPhone too, and Setup has an airplane-mode self-test.",
+          "zh": "使用 Apple 的本地语言包，或一次性下载的可选开源模型；语音识别和朗读也在 iPhone 上完成，设置页还有飞行模式自检。"
+        }
+      },
+      {
+        "emoji": "👓",
+        "title": {
+          "en": "Easy to see, easy to tap",
+          "zh": "看得清，点得准"
+        },
+        "body": {
+          "en": "Chinese-first bilingual labels, your system text size, VoiceOver, a high-contrast mode and buttons at least 52 pt tall.",
+          "zh": "中文在前的双语标签，跟随系统字号，支持旁白（VoiceOver）和高对比度模式，按钮都不小于 52 pt。"
+        }
+      },
+      {
+        "emoji": "⭐️",
+        "title": {
+          "en": "History and favorites",
+          "zh": "记录与收藏"
+        },
+        "body": {
+          "en": "Recent translations and the ones you star are one tap away — kept only on the phone and left out of iCloud backup.",
+          "zh": "最近的翻译和收藏一点就能找到——只存在手机上，不进入 iCloud 备份。"
+        }
+      },
+      {
+        "emoji": "🧠",
+        "title": {
+          "en": "Choose your engine",
+          "zh": "翻译引擎任你选"
+        },
+        "body": {
+          "en": "Apple Translation by default, or Tencent's open Hy‑MT2 model running right on the iPhone. Each download is resumable and checked before it's used.",
+          "zh": "默认使用 Apple 翻译，也可以换成腾讯开源的 Hy‑MT2 模型，直接在 iPhone 上运行。下载可以断点续传，用之前都会校验。"
+        }
+      }
+    ],
+    "privacy": [
+      {
+        "en": "Speech and text are translated on your iPhone — never uploaded",
+        "zh": "语音和文字都在 iPhone 上翻译——从不上传"
+      },
+      {
+        "en": "History and favorites stay on the phone, outside iCloud backup",
+        "zh": "记录和收藏只存在手机上，不进入 iCloud 备份"
+      },
+      {
+        "en": "No accounts, no analytics, no ads",
+        "zh": "没有账号、没有统计分析、没有广告"
+      }
+    ],
+    "news": {
+      "date": "2026-10",
+      "title": {
+        "en": "Meet LingoPal, a translator for Mom and Dad",
+        "zh": "随译来了：给爸妈的翻译"
+      },
+      "body": {
+        "en": "Two big buttons, large text and a voice that reads it out — Chinese ↔ English, translated entirely on the iPhone.",
+        "zh": "两个大按钮、大字译文，还能读出来——中英互译，全部在 iPhone 上完成。"
+      }
+    },
+    "theme": {
+      "mode": "light",
+      "bg": "#fbf3f8",
+      "bg2": "#f4e3ee",
+      "ink": "#2a1024",
+      "colors": [
+        "#c02a98",
+        "#ec5fc0",
+        "#8e1580"
       ]
     }
   }

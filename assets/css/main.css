@@ -32,6 +32,7 @@
   --wearly:        linear-gradient(135deg, #f3d6ae 0%, #d9ad7c 50%, #b98552 100%);
   --worthview:     linear-gradient(135deg, #b3bbff 0%, #8190ff 48%, #5b6cff 100%);
   --cardpick:      linear-gradient(135deg, #1fbf9f 0%, #1690a0 50%, #1d4fb8 100%);
+  --lingopal:      linear-gradient(135deg, #ff9fd9 0%, #ec5fc0 50%, #b5209a 100%);
 
   /* Geometry */
   --r-sm: 12px;
@@ -1356,6 +1357,7 @@ main { overflow-x: clip; }
 .app-theme--light { --wearly: linear-gradient(135deg, #c9a06a 0%, #b08956 48%, #6e5638 100%); }
 .app-theme--light { --meetlog: linear-gradient(135deg, #e0954a 0%, #c9762a 48%, #9e561a 100%); }
 .app-theme--light { --qqnest: linear-gradient(135deg, #5e8fd6 0%, #8f7ad8 50%, #e56f8a 100%); }
+.app-theme--light { --lingopal: linear-gradient(135deg, #ec5fc0 0%, #c02a98 50%, #8e1580 100%); }
 
 /* ---------- Hero carousel: autoplay, scrolling tab strip, phone layout (Sep 29) ---------- */
 /* Tab strip scrolls sideways when the apps don't fit; edges fade while there is more to swipe to. */
@@ -1455,3 +1457,28 @@ main { overflow-x: clip; }
   .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile:hover { transform: none; }
   .app-grid:not(.app-grid--sm):not(.app-grid--legal) .app-tile:active { transform: scale(.985); }
 }
+
+/* ---------- LingoPal mock-up: its real conversation screen (light, Chinese-first, two big speak buttons) ---------- */
+/* Sized in container units so it keeps its proportions in every phone size (app hero, home slide, phones). */
+.phone__screen:has(.lp) { background: #f2f2f7; container-type: inline-size; }
+.phone:has(.lp) .phone__notch { background: #0b0b0f; }
+.screen-ui.lp { padding: 14cqw 4.7cqw 0; gap: 3.7cqw; color: #1c1c1e; font-size: 4.7cqw; line-height: 1.3; }
+.lp__nav { display: flex; align-items: center; justify-content: space-between; color: #c2410c; padding: 0 1.4cqw; }
+.lp__nav b { color: #1c1c1e; font-size: 5.2cqw; font-weight: 650; }
+.lp__nav svg { width: 6cqw; height: 6cqw; }
+.lp__nav span { display: flex; gap: 4cqw; }
+.lp-card { background: #fff; border-radius: 5.6cqw; padding: 4.7cqw; display: flex; flex-direction: column; gap: 3.3cqw; }
+.lp-h { display: flex; align-items: center; gap: 1.9cqw; color: #8a8a8e; font-size: 3.7cqw; }
+.lp-h b { color: #1c1c1e; font-size: 4.7cqw; font-weight: 650; }
+.lp-dir { margin-left: auto; padding: 1.4cqw 3.3cqw; border-radius: 999px; background: rgba(194, 65, 12, .12); color: #c2410c; font-weight: 650; font-size: 4cqw; }
+.lp-src { color: #1c1c1e; font-size: 6cqw; }
+.lp-out { color: #1c1c1e; font-size: 9.3cqw; font-weight: 650; line-height: 1.15; letter-spacing: -.01em; }
+.lp-btn { display: grid; place-items: center; min-height: 14cqw; border-radius: 4.2cqw; color: #fff; font-weight: 650; font-size: 4.7cqw; background: #1d4ed8; }
+.lp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2.8cqw; }
+.lp-row span { display: grid; place-items: center; min-height: 13cqw; border-radius: 4.2cqw; background: rgba(194, 65, 12, .12); color: #c2410c; font-weight: 650; font-size: 4cqw; }
+.lp-bar { margin: auto -4.7cqw 0; padding: 4cqw 4.7cqw 7cqw; display: grid; grid-template-columns: 1fr 1fr; gap: 2.8cqw; background: rgba(249, 249, 251, .94); border-top: 1px solid rgba(0, 0, 0, .06); }
+.lp-speak { display: grid; place-items: center; align-content: center; gap: .5cqw; min-height: 26cqw; border-radius: 5.6cqw; color: #fff; text-align: center; }
+.lp-speak b { font-size: 6cqw; font-weight: 700; }
+.lp-speak small { font-size: 3.7cqw; opacity: .85; }
+.lp-speak--zh { background: #c2410c; }
+.lp-speak--en { background: #1d4ed8; }
