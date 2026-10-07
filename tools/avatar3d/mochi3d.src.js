@@ -2,9 +2,9 @@
    A port of PrimitiveChibiBody.swift + the lights and camera of
    RealityAvatarRenderer.swift: the same primitives, sizes, colours, outline
    hulls, face placement on the head sphere, arm depth clearance and finger
-   heart. Bundled with the parts of three.js it uses into
-   assets/js/mochi3d.js (see tools/mochi/README.md), and loaded only when
-   someone picks Mochi on the AvatarTracker page. */
+   heart. Bundled with Taro and the parts of three.js they use into
+   assets/js/avatar3d.js (see README.md), and loaded only when someone
+   picks a 3D character on the AvatarTracker page. */
 import {
   WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, SphereGeometry, CapsuleGeometry,
   MeshStandardMaterial, MeshBasicMaterial, DirectionalLight, HemisphereLight, Color,

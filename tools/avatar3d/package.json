@@ -1,0 +1,12 @@
+{
+  "name": "avatar3d",
+  "private": true,
+  "description": "Builds assets/js/avatar3d.js (Mochi + Taro + the parts of three.js they use) for the AvatarTracker page.",
+  "scripts": {
+    "build": "esbuild avatar3d.src.js --bundle --minify --format=esm --legal-comments=inline --target=es2019 --outfile=../../assets/js/avatar3d.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0",
+    "three": "0.170.0"
+  }
+}

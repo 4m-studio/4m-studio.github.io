@@ -87,6 +87,17 @@
       {
         "date": "2026-10",
         "title": {
+          "en": "Meet Taro, a chubby 3D cat",
+          "zh": "认识一下 Taro：一只圆滚滚的 3D 小猫"
+        },
+        "body": {
+          "en": "A round peach tabby whose ears perk up with your brows, whose eyes squint shut when you smile, and whose tail wags along. Pick Taro on the AvatarTracker page to play with him.",
+          "zh": "一只圆圆的桃色虎斑猫：你一扬眉，它就竖起耳朵；你一笑，它就眯起眼睛，尾巴也跟着摇。在随影的页面上选 Taro 就能和它玩。"
+        }
+      },
+      {
+        "date": "2026-10",
+        "title": {
           "en": "Meet Mochi, our first 3D character",
           "zh": "认识一下 Mochi：我们的第一个 3D 角色"
         },
@@ -241,12 +252,12 @@
           "zh": "3D"
         },
         "title": {
-          "en": "And now, Mochi in 3D.",
-          "zh": "现在，Mochi 来到了 3D。"
+          "en": "And now, 3D: Mochi and Taro.",
+          "zh": "现在，Mochi 和 Taro 来到了 3D。"
         },
         "body": {
-          "en": "Mochi is AvatarTracker's first 3D character: a round little face with bear ears and a sprout on top, built from soft 3D shapes and lit like a toy. Turn your head and Mochi turns in real depth, while the eyes, brows and mouth keep following yours.",
-          "zh": "Mochi 是随影的第一个 3D 角色：圆圆的脸，一对小熊耳朵，头顶一棵小芽，由柔和的 3D 形状搭成，像玩具一样打光。你一转头，Mochi 就在真正的立体空间里转过来，眼睛、眉毛和嘴巴依然跟着你。"
+          "en": "Mochi is AvatarTracker's first 3D character: a round little face with bear ears and a sprout on top, built from soft 3D shapes and lit like a toy. Turn your head and Mochi turns in real depth, while the eyes, brows and mouth keep following yours. Then came Taro, a chubby peach tabby: his ears perk up with your brows, his eyes squint shut when you smile, and his tail wags along.",
+          "zh": "Mochi 是随影的第一个 3D 角色：圆圆的脸，一对小熊耳朵，头顶一棵小芽，由柔和的 3D 形状搭成，像玩具一样打光。你一转头，Mochi 就在真正的立体空间里转过来，眼睛、眉毛和嘴巴依然跟着你。随后加入的 Taro 是一只圆滚滚的桃色虎斑猫：你一扬眉，它就竖起耳朵；你一笑，它就眯起眼睛，尾巴也跟着摇。"
         },
         "points": [
           {
@@ -267,8 +278,8 @@
         "img": {
           "src": "avatartracker/home.webp",
           "alt": {
-            "en": "AvatarTracker home screen: MieMie on the stage card with a Tracking you badge, the Go Live button, and the avatar row with Stick, Mochi, MieMie, Mika and Create",
-            "zh": "随影首页：舞台卡片上的 MieMie 和“正在追踪”标记、Go Live 按钮，以及火柴人、Mochi、MieMie、Mika 和“创建”的角色栏"
+            "en": "AvatarTracker home screen: Taro, a chubby peach 3D cat, on the stage card with a Tracking you badge, the Go Live button, and the avatar row with Stick, Mochi 3D, Taro 3D and MieMie",
+            "zh": "随影首页：舞台卡片上圆滚滚的桃色 3D 小猫 Taro 和“正在追踪”标记、Go Live 按钮，以及火柴人、Mochi 3D、Taro 3D 和 MieMie 的角色栏"
           },
           "w": 600,
           "h": 1304
@@ -282,8 +293,8 @@
           "zh": "一个角色栏，一键切换。"
         },
         "body": {
-          "en": "Home keeps every character in one row: Stick, Mochi, MieMie and Mika. Pick one and Go Live — switching never restarts the camera.",
-          "zh": "首页把所有角色放在同一排：火柴人、Mochi、MieMie 和 Mika。选一个，点 Go Live 就开播，切换角色也不会重启摄像头。"
+          "en": "Home keeps every character in one row: Stick, Mochi, Taro, MieMie and Mika. Pick one and Go Live — switching never restarts the camera.",
+          "zh": "首页把所有角色放在同一排：火柴人、Mochi、Taro、MieMie 和 Mika。选一个，点 Go Live 就开播，切换角色也不会重启摄像头。"
         },
         "points": [
           {

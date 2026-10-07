@@ -203,19 +203,20 @@ GESTURES = [("wave", "👋"), ("heart", "🫶"), ("bigheart", "💗"), ("peace",
             ("clap", "👏"), ("dance", "💃"), ("surprised", "✨"), ("shy", "😳")]
 
 
-CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika"), ("mochi", "Mochi")]
+CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika"), ("mochi", "Mochi"), ("taro", "Taro")]
+CAST_3D = {"mochi", "taro"}
 STICK_ICON = ('<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'
               '<circle cx="16" cy="11" r="7" fill="#14141c"/><path d="M13.4 9.6v2.2M18.6 9.6v2.2M13.6 14q2.4 1.6 4.8 0'
               'M16 18v6M16 24l-4 5M16 24l4 5M10.5 20.5h11"/></svg>')
 
 
 def cast_switcher(lang, root):
-    """Stick · MieMie · Mika · Mochi under the live stage (assets/js/cast.js swaps them on the same stage)."""
+    """Stick · MieMie · Mika · Mochi · Taro under the live stage (assets/js/cast.js swaps them on the same stage)."""
     btns = []
     for cid, name in CAST:
         av = (f'<span class="mm-cast__av mm-cast__av--stick" aria-hidden="true">{STICK_ICON}</span>' if cid == "stick" else
               f'<img class="mm-cast__av" src="{root}assets/img/avatartracker/cast-{cid}.webp" alt="" width="28" height="28" decoding="async">')
-        tag = '<em class="mm-cast__tag">3D</em>' if cid == "mochi" else ""
+        tag = '<em class="mm-cast__tag">3D</em>' if cid in CAST_3D else ""
         btns.append(f'<button type="button" role="radio" aria-checked="{"true" if cid == "miemie" else "false"}" data-char="{cid}">{av}<span>{name}</span>{tag}</button>')
     return f'<div class="mm-cast" data-cast role="radiogroup" aria-label="{esc(T("mm_cast", lang))}">{"".join(btns)}</div>'
 
@@ -225,9 +226,9 @@ def miemie(lang, root, width=420, short=False, cast=False):
         f'<button type="button" data-gesture="{g}" title="{esc(T("g_" + g, lang))}" '
         f'aria-label="{esc(T("g_" + g, lang))}" aria-pressed="false">{e}</button>' for g, e in GESTURES)
     # short: on phones (home slide) the stage crops her at the waist so the whole card fits on screen
-    # cast: Mochi's WebGL bundle is fetched on demand, so its URL (with cache-busting hash) rides on the element.
-    mochi = f' data-mochi="{root}assets/js/mochi3d.js?v={ver("assets/js/mochi3d.js")}"' if cast else ""
-    return f'''<div class="miemie" data-miemie{" data-short" if short else ""}{mochi} data-src="{root}assets/img/miemie/" data-frame-top="640" style="--mm-w:{width}px"
+    # cast: the 3D characters' WebGL bundle is fetched on demand, so its URL (with cache-busting hash) rides on the element.
+    data3d = f' data-3d="{root}assets/js/avatar3d.js?v={ver("assets/js/avatar3d.js")}"' if cast else ""
+    return f'''<div class="miemie" data-miemie{" data-short" if short else ""}{data3d} data-src="{root}assets/img/miemie/" data-frame-top="640" style="--mm-w:{width}px"
                data-hint-touch="{esc(T("mm_hint_touch", lang))}">
             <div class="mm-stage" tabindex="0" role="button" aria-label="{esc(T("mm_label", lang))}">
               <div class="mm-frame"><span class="mm-live"><i></i>{T("mm_live", lang)}</span></div>
