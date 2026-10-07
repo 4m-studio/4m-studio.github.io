@@ -2043,7 +2043,7 @@
     "accent": "lingopal",
     "isNew": true,
     "appStore": "",
-    "visual": "lingopal",
+    "visual": "shots",
     "category": {
       "en": "Travel",
       "zh": "旅游"
@@ -2070,72 +2070,6 @@
     },
     "features": [
       {
-        "emoji": "🎙️",
-        "title": {
-          "en": "Two big buttons",
-          "zh": "两个大按钮"
-        },
-        "body": {
-          "en": "说中文 on the left, Speak English on the right. Tap once to talk and again to stop — a pulsing frame, a timer and live text show it's listening.",
-          "zh": "左边“说中文”，右边“Speak English”。点一下开始说，再点一下停止；说话时有闪动的红框、计时和实时文字。"
-        }
-      },
-      {
-        "emoji": "✍️",
-        "title": {
-          "en": "Check it, then translate",
-          "zh": "先看清，再翻译"
-        },
-        "body": {
-          "en": "What you said lands in an editable box, so a misheard word can be fixed first. You can also type or paste — the direction is detected for you.",
-          "zh": "识别出的文字先放进可编辑的框里，听错的字可以先改再翻。也可以直接打字或粘贴，中英方向会自动判断。"
-        }
-      },
-      {
-        "emoji": "🔊",
-        "title": {
-          "en": "Big text, read aloud",
-          "zh": "大字显示，还能朗读"
-        },
-        "body": {
-          "en": "The translation shows in large type with a big Read aloud button. If a number or a “not” may have been lost, LingoPal says so.",
-          "zh": "译文用大字显示，配一个大大的“朗读”按钮。如果数字或否定词可能翻丢了，随译会提醒你。"
-        }
-      },
-      {
-        "emoji": "🔄",
-        "title": {
-          "en": "Show the other person",
-          "zh": "给对方看"
-        },
-        "body": {
-          "en": "One tap fills the screen with the translation, turns up the brightness and can flip it 180° for someone across the table.",
-          "zh": "一点就全屏显示译文、调亮屏幕，还能旋转 180°，让坐在对面的人直接看。"
-        }
-      },
-      {
-        "emoji": "📖",
-        "title": {
-          "en": "A phrasebook from day one",
-          "zh": "开箱即用的常用语"
-        },
-        "body": {
-          "en": "56 hand-written travel phrases in 9 categories — airport, directions, restaurant, hotel, health, emergency and more — before anything is downloaded.",
-          "zh": "56 句手写的旅行常用语，分 9 类——机场、问路、餐厅、酒店、身体不适、紧急等，不用下载任何东西就能用。"
-        }
-      },
-      {
-        "emoji": "✈️",
-        "title": {
-          "en": "Works in airplane mode",
-          "zh": "飞行模式也能用"
-        },
-        "body": {
-          "en": "Apple's on-device language packs, or an optional open model you download once. Speech recognition and voices run on the iPhone too, and Setup has an airplane-mode self-test.",
-          "zh": "使用 Apple 的本地语言包，或一次性下载的可选开源模型；语音识别和朗读也在 iPhone 上完成，设置页还有飞行模式自检。"
-        }
-      },
-      {
         "emoji": "👓",
         "title": {
           "en": "Easy to see, easy to tap",
@@ -2155,17 +2089,6 @@
         "body": {
           "en": "Recent translations and the ones you star are one tap away — kept only on the phone and left out of iCloud backup.",
           "zh": "最近的翻译和收藏一点就能找到——只存在手机上，不进入 iCloud 备份。"
-        }
-      },
-      {
-        "emoji": "🧠",
-        "title": {
-          "en": "Choose your engine",
-          "zh": "翻译引擎任你选"
-        },
-        "body": {
-          "en": "Apple Translation by default, or Tencent's open Hy‑MT2 model running right on the iPhone. Each download is resumable and checked before it's used.",
-          "zh": "默认使用 Apple 翻译，也可以换成腾讯开源的 Hy‑MT2 模型，直接在 iPhone 上运行。下载可以断点续传，用之前都会校验。"
         }
       }
     ],
@@ -2204,6 +2127,197 @@
         "#ec5fc0",
         "#8e1580"
       ]
-    }
+    },
+    "shots": [
+      {
+        "src": "lingopal/phrases.webp",
+        "alt": {
+          "en": "LingoPal phrasebook: everyday phrases in Chinese and English, each with a speaker button",
+          "zh": "随译常用语：中英对照的常用短语，每句都有朗读按钮"
+        },
+        "w": 600,
+        "h": 1300
+      },
+      {
+        "src": "lingopal/main.webp",
+        "alt": {
+          "en": "LingoPal main screen: “你好！最近的地铁站在哪里？” translated into large English text — “Hello! Where is the nearest subway station?” — above the 说中文 and Speak English buttons",
+          "zh": "随译主界面：“你好！最近的地铁站在哪里？”翻译成大字英文，下面是“说中文”和“Speak English”两个按钮"
+        },
+        "w": 600,
+        "h": 1300
+      },
+      {
+        "src": "lingopal/show.webp",
+        "alt": {
+          "en": "Show the other person: the translation fills a black screen in very large white type, with Close, Flip, Speak and Colors buttons",
+          "zh": "给对方看：译文用超大白字铺满黑色屏幕，下面是关闭、转向、朗读和黑白四个按钮"
+        },
+        "w": 600,
+        "h": 1300
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "lingopal/main.webp",
+          "alt": {
+            "en": "LingoPal main screen: “你好！最近的地铁站在哪里？” translated into large English text — “Hello! Where is the nearest subway station?” — above the 说中文 and Speak English buttons",
+            "zh": "随译主界面：“你好！最近的地铁站在哪里？”翻译成大字英文，下面是“说中文”和“Speak English”两个按钮"
+          },
+          "w": 600,
+          "h": 1300
+        },
+        "step": {
+          "en": "Speak",
+          "zh": "说话"
+        },
+        "title": {
+          "en": "Tap a button. Say it. Read it.",
+          "zh": "点一下，说出来，就能看懂。"
+        },
+        "body": {
+          "en": "Tap 说中文 or Speak English and talk. Your words fill the top card as you speak, and each finished sentence is translated right away underneath — in the largest type that fits, like subtitles. Tap again to stop.",
+          "zh": "点“说中文”或“Speak English”就开始说。说的话实时出现在上面的卡片里，每说完一句，下面马上出现译文——字号能多大就多大，像字幕一样。再点一下就停止。"
+        },
+        "points": [
+          {
+            "en": "The cards show the latest sentences like subtitles; the full text is kept",
+            "zh": "卡片像字幕一样显示最新的几句，完整内容都会保留"
+          },
+          {
+            "en": "Misheard a word? Tap the text to fix it — only that sentence is translated again",
+            "zh": "听错了字？点一下文字就能改，只重新翻译改过的那一句"
+          },
+          {
+            "en": "Or type and paste; the direction is detected for you",
+            "zh": "也可以打字或粘贴，中英方向自动判断"
+          },
+          {
+            "en": "Up to five minutes per recording",
+            "zh": "每次最长可以录 5 分钟"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "lingopal/show.webp",
+          "alt": {
+            "en": "Show the other person: the translation fills a black screen in very large white type, with Close, Flip, Speak and Colors buttons",
+            "zh": "给对方看：译文用超大白字铺满黑色屏幕，下面是关闭、转向、朗读和黑白四个按钮"
+          },
+          "w": 600,
+          "h": 1300
+        },
+        "step": {
+          "en": "Show",
+          "zh": "给对方看"
+        },
+        "title": {
+          "en": "Hand it across the table.",
+          "zh": "把手机递过去就行。"
+        },
+        "body": {
+          "en": "One tap fills the screen with the translation in very large type and turns the brightness up. Flip it 180° for the person sitting opposite, switch between black and white, or let LingoPal read it out loud.",
+          "zh": "点一下，译文就用超大字铺满全屏，屏幕自动调亮。可以旋转 180° 给坐在对面的人看，切换黑底或白底，也可以让随译直接读出来。"
+        },
+        "points": [
+          {
+            "en": "Read aloud with the voices already on your iPhone",
+            "zh": "用 iPhone 自带的语音朗读"
+          },
+          {
+            "en": "The original stays underneath in smaller type",
+            "zh": "原文用小字显示在下面"
+          },
+          {
+            "en": "The screen stays awake while it's showing",
+            "zh": "显示期间屏幕不会自动锁定"
+          },
+          {
+            "en": "If a number or a “not” may have been lost, LingoPal says so",
+            "zh": "如果数字或否定词可能翻丢了，随译会提醒你"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "lingopal/phrases.webp",
+          "alt": {
+            "en": "LingoPal phrasebook: everyday phrases in Chinese and English, each with a speaker button",
+            "zh": "随译常用语：中英对照的常用短语，每句都有朗读按钮"
+          },
+          "w": 600,
+          "h": 1300
+        },
+        "step": {
+          "en": "Phrases",
+          "zh": "常用语"
+        },
+        "title": {
+          "en": "Ready before anything downloads.",
+          "zh": "什么都还没下载，就能用。"
+        },
+        "body": {
+          "en": "56 hand-written travel phrases in 9 categories — basics, airport, directions, restaurant, shopping, transport, hotel, health and emergency. Tap the speaker to say the English, or tap a phrase to show it big.",
+          "zh": "56 句手写的旅行常用语，分 9 类：常用、机场、问路、餐厅、购物、交通、酒店、身体不适和紧急。点喇叭朗读英文，点短语就能放大给对方看。"
+        },
+        "points": [
+          {
+            "en": "Written by hand, not machine-translated",
+            "zh": "人工手写，不是机器翻译"
+          },
+          {
+            "en": "Chinese first, English underneath",
+            "zh": "中文在上，英文在下"
+          },
+          {
+            "en": "Covers allergies, feeling unwell and calling for help",
+            "zh": "包括过敏、身体不适和紧急求助"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "lingopal/engine.webp",
+          "alt": {
+            "en": "LingoPal Advanced: choose Apple Translation or a downloadable Tencent Hy‑MT2 model",
+            "zh": "随译高级选项：选择 Apple 翻译，或下载腾讯混元 Hy‑MT2 模型"
+          },
+          "w": 600,
+          "h": 1300
+        },
+        "step": {
+          "en": "Offline",
+          "zh": "离线"
+        },
+        "title": {
+          "en": "Works in airplane mode.",
+          "zh": "开着飞行模式也能用。"
+        },
+        "body": {
+          "en": "Setup is a single button: it asks for the microphone and downloads what's needed, once. After that, translation, speech recognition and the voice all run on the iPhone. Apple Translation is the default; Tencent's open Hy‑MT2 model is an optional download in Advanced.",
+          "zh": "设置只有一个按钮：申请麦克风权限，把需要的东西一次下载好。之后翻译、语音识别和朗读都在 iPhone 上完成。默认使用 Apple 翻译；在“高级选项”里还可以下载腾讯开源的 Hy‑MT2 模型。"
+        },
+        "points": [
+          {
+            "en": "Apple Translation needs no model — iOS fetches the language packs once",
+            "zh": "Apple 翻译不用下载模型——iOS 只需下载一次语言包"
+          },
+          {
+            "en": "Hy‑MT2 (1.13 GB, or 1.47 GB high-precision) is often more natural for casual and mixed speech",
+            "zh": "Hy‑MT2（1.13 GB，高精度版 1.47 GB）对口语和中英混说通常更自然"
+          },
+          {
+            "en": "Downloads resume if interrupted and are checked before use",
+            "zh": "下载可以断点续传，用之前都会校验"
+          },
+          {
+            "en": "An airplane-mode check in Advanced confirms it all works offline",
+            "zh": "“高级选项”里的飞行模式自检，确认离线一切正常"
+          }
+        ]
+      }
+    ]
   }
 ]
