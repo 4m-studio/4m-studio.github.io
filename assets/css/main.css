@@ -846,23 +846,22 @@ p { margin: 0 0 1em; color: var(--text-2); }
 .miemie.is-swapping .mm-fig { animation: mmIn .4s var(--ease); }
 @keyframes mmIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .miemie.is-swapping .mm-frame { transition: none; } .miemie.is-swapping .mm-fig { animation: none; } }
-/* "3D" sits on the avatar's corner, so five characters fit in one row beside their faces. */
+/* "3D" sits on the avatar's corner, beside the face. */
 .mm-cast__tag { position: absolute; left: 20px; top: 0; font-style: normal; font-size: 8px; font-weight: 800; letter-spacing: .03em;
   line-height: 1; padding: 2px 3px; border-radius: 5px; color: #fff; background: linear-gradient(135deg, #a57cff, #6a3fe0);
   box-shadow: 0 0 0 1.5px var(--surface-2); }
 .mm-loading { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none;
   font-size: 13px; font-weight: 600; color: var(--text-2); white-space: nowrap; animation: mmPulseText 1.4s ease-in-out infinite; }
 @keyframes mmPulseText { 50% { opacity: .45; } }
-/* Phones: five characters don't fit with faces, so the switcher becomes a plain text control
-   (and wraps to a second row on the narrowest screens rather than overflow). */
+/* Phones: the characters don't fit with faces, so the switcher becomes a plain text control. */
 @media (max-width: 500px) {
   .mm-cast { border-radius: 20px; }
   .mm-cast button { min-width: 0; padding: 7px 7px; font-size: 13px; gap: 5px; }
   .mm-cast__av { display: none; }
   .mm-cast__tag { position: static; font-size: 9.5px; padding: 3px 4px; box-shadow: none; }
 }
-/* The narrowest phones drop the 3D tags to keep the five names on one row. */
-@media (max-width: 370px) { .mm-cast__tag { display: none; } }
+/* Two rows: the 2D characters, then the 3D ones (cast_switcher in tools/build.py puts the break after Mika). */
+.mm-cast__br { flex-basis: 100%; height: 0; }
 @media (max-width: 340px) { .mm-cast button { padding: 7px 6px; font-size: 12.5px; } }
 
 /* ---------- QQNest (Qiao Que's nest, live — assets/js/qqnest.js) ----------

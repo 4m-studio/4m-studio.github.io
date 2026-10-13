@@ -203,21 +203,25 @@ GESTURES = [("wave", "👋"), ("heart", "🫶"), ("bigheart", "💗"), ("peace",
             ("clap", "👏"), ("dance", "💃"), ("surprised", "✨"), ("shy", "😳")]
 
 
-CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika"), ("mochi", "Mochi"), ("taro", "Taro")]
-CAST_3D = {"mochi", "taro"}
+CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika"), ("mochi", "Mochi"), ("taro", "Taro"),
+        ("miemie3d", "MieMie")]
+CAST_3D = {"mochi", "taro", "miemie3d"}
 STICK_ICON = ('<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'
               '<circle cx="16" cy="11" r="7" fill="#14141c"/><path d="M13.4 9.6v2.2M18.6 9.6v2.2M13.6 14q2.4 1.6 4.8 0'
               'M16 18v6M16 24l-4 5M16 24l4 5M10.5 20.5h11"/></svg>')
 
 
 def cast_switcher(lang, root):
-    """Stick · MieMie · Mika · Mochi · Taro under the live stage (assets/js/cast.js swaps them on the same stage)."""
+    """Stick · MieMie · Mika · Mochi · Taro · MieMie 3D under the live stage (assets/js/cast.js swaps them on the same stage)."""
     btns = []
     for cid, name in CAST:
         av = (f'<span class="mm-cast__av mm-cast__av--stick" aria-hidden="true">{STICK_ICON}</span>' if cid == "stick" else
               f'<img class="mm-cast__av" src="{root}assets/img/avatartracker/cast-{cid}.webp" alt="" width="28" height="28" decoding="async">')
         tag = '<em class="mm-cast__tag">3D</em>' if cid in CAST_3D else ""
         btns.append(f'<button type="button" role="radio" aria-checked="{"true" if cid == "miemie" else "false"}" data-char="{cid}">{av}<span>{name}</span>{tag}</button>')
+        if cid == "mika":
+            # 2D characters on the first row, 3D on the second (MieMie and MieMie 3D line up).
+            btns.append('<span class="mm-cast__br" aria-hidden="true"></span>')
     return f'<div class="mm-cast" data-cast role="radiogroup" aria-label="{esc(T("mm_cast", lang))}">{"".join(btns)}</div>'
 
 

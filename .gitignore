@@ -2,3 +2,4 @@
 4m-studio-preview.html
 __pycache__/
 node_modules/
+.site_snapshot.tgz

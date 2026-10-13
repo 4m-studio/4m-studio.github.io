@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The AvatarTracker cast — Stick, Mika, Mochi and Taro, next to MieMie (assets/js/miemie.js).
+   The AvatarTracker cast — Stick, Mika, Mochi, Taro and MieMie 3D, next to MieMie (assets/js/miemie.js).
 
    Only the AvatarTracker app page loads this. A switcher under the live stage
    swaps the character on the same canvas: the old one is torn down first, so
@@ -11,9 +11,9 @@
      the open hand stands in.
    - Stick: AvatarTracker's StickAvatarRenderer, drawn with lines in its
      dark-mode colours. Its arms follow the app's own gesture intents.
-   - Mochi and Taro: the 3D characters (PrimitiveChibiBody, PrimitiveCatBody),
-     rebuilt with three.js in assets/js/avatar3d.js, which is only downloaded
-     when one of them is picked.
+   - Mochi, Taro and MieMie 3D: the 3D characters (PrimitiveChibiBody,
+     PrimitiveCatBody, PrimitiveMieMieBody), rebuilt with three.js in
+     assets/js/avatar3d.js, which is only downloaded when one of them is picked.
    ========================================================================== */
 (function () {
   'use strict';
@@ -249,11 +249,11 @@
     c.restore();
   }
 
-  /* ---------- Mochi and Taro (3D — assets/js/avatar3d.js) ----------
-     Mochi is PrimitiveChibiBody and Taro is PrimitiveCatBody, both rebuilt
-     with three.js. They share one bundle (the two characters plus the parts of
-     three.js they use, ~135 KB gzipped), fetched the first time someone picks
-     either of them, never before. World units are the app's metres; the
+  /* ---------- Mochi, Taro and MieMie 3D (3D — assets/js/avatar3d.js) ----------
+     Mochi is PrimitiveChibiBody, Taro PrimitiveCatBody and MieMie 3D
+     PrimitiveMieMieBody, all rebuilt with three.js. They share one bundle (the
+     characters plus the parts of three.js they use, ~145 KB gzipped), fetched
+     the first time someone picks any of them, never before. World units are the app's metres; the
      "artboard" is world × 1000 with y pointing down from the top of the view,
      so the shared engine can place the frame. */
   var DEG2RAD = Math.PI / 180;
@@ -359,8 +359,12 @@
   // framing for him (±0.95 m across), so raised paws and the tail stay in.
   var TARO = make3D({ id: 'taro', name: 'Taro', factory: 'createTaro3D',
     view: { yTop: 2.05, yBot: -0.62 }, chin: 0.52, eyes: 0.98 });
+  // MieMie 3D: neck 0.66 + head 0.40 → head centre 1.06, chin about 0.62 under
+  // the bob, eyes at 1.02; the bob and pearl clip reach about 1.55.
+  var MIEMIE3D = make3D({ id: 'miemie3d', name: 'MieMie 3D', factory: 'createMieMie3D',
+    view: { yTop: 1.84, yBot: -0.40 }, chin: 0.62, eyes: 1.02 });
 
-  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO };
+  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO, miemie3d: MIEMIE3D };
 
   /* ---------- Switcher ---------- */
   function init() {
