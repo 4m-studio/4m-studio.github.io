@@ -189,6 +189,7 @@ export const Shape = {
   openSmileFlatten: 0.6,
   smileWiden: 0.012,
   lipRadii: [0.034, 0.015, 0.011],
+  lowerLipTuck: 0.004,
 
   // Arms: two bones, a short black sleeve over the top of the upper arm.
   shoulderX: 0.235,
@@ -1036,11 +1037,13 @@ export function createMieMie(THREE) {
     const tk = Math.min(1, open * 1.6);
     tongue.scale.set(0.024 * tk, 0.012 * tk, 0.006);
     tongue.visible = open > 0.25;
-    // The lower lip rides the bottom edge of the opening: tucked under the
-    // line when shut, a thin rim below the opening when open.
-    const lipDrop = 0.35 + 0.40 * (1 - line);
-    lip.position.set(0, 0.004 - 2 * half - S.lipRadii[1] * lipDrop, 0.006);
-    lip.scale.set(S.lipRadii[0] * (1 + 0.4 * open + 0.2 * happy), S.lipRadii[1], S.lipRadii[2]);
+    // The lower lip belongs to the SHUT mouth, like the line: tucked under
+    // it while the lips are together, it hands over with it and is gone by
+    // mouthLineGoneAt, so an open mouth is the opening alone.
+    lip.position.set(0, 0.004 - 2 * half - S.lipRadii[1] + S.lowerLipTuck, 0.006);
+    const lipSize = Math.max(line, 1e-4);
+    lip.scale.set(S.lipRadii[0] * (1 + 0.2 * happy) * lipSize, S.lipRadii[1] * lipSize, S.lipRadii[2]);
+    lip.visible = line > 0.25;
   }
 
   return { root, apply, Shape };

@@ -70,14 +70,14 @@ export const Shape = {
   mouthTube: 0.0085,
   mouthArcSweep: 2.6,
   smileTilt: 0.55,
-  mouthDrop: 0.085,
+  mouthDrop: 0.050,
   /// The closed ω hands over to the opening: it thins away as the mouth
   /// opens and is gone by this much open (PrimitiveChibiBody.mouthLineWeight).
   mouthLineGoneAt: 0.18,
   /// The philtrum shut, and long enough to reach the opening once the ω has gone.
   philtrumLength: 0.032,
   philtrumOpenLength: 0.040,
-  mouthWiden: 0.030,
+  mouthWiden: 0.022,
   openSmileFlatten: 0.6,
   smileWiden: 0.014,
 
