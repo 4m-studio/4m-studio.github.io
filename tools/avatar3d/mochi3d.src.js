@@ -21,7 +21,7 @@ const Shape = {
   gazeTravelX: 0.035, gazeTravelY: 0.030, shutEyeScale: 0.10,
   browY: 0.125, browTravel: 0.030, browTilt: 0.25,
   cheekX: 0.29, cheekY: -0.14,
-  mouthY: -0.19, mouthHalfWidth: 0.052, smileTilt: 0.55, mouthDrop: 0.055,
+  mouthY: -0.19, mouthHalfWidth: 0.052, smileTilt: 0.55, mouthDrop: 0.055, mouthLineGoneAt: 0.18,
   openSmileFlatten: 0.6, smileWiden: 0.012,
   shoulderX: 0.22, shoulderY: 0.48, upperLength: 0.17, forearmLength: 0.16,
   limbRadius: 0.045, palmRadius: 0.065, restArmAngle: 0.70, clearance: 0.012,
@@ -180,9 +180,10 @@ export function createMochi(canvas, view) {
   const mouth = node();
   place(mouth, 0, Shape.mouthY);
   headPivot.add(mouth);
-  const mouthLeft = node(), mouthRight = node();
+  const mouthLeft = node(), mouthRight = node(), mouthBars = [];
   for (const [pivot, side] of [[mouthLeft, -1], [mouthRight, 1]]) {
     const bar = segment(Shape.mouthHalfWidth, 0.008, Palette.mouth, false);
+    mouthBars.push(bar);
     bar.rotation.z = Math.PI / 2;
     bar.position.set(side * (Shape.mouthHalfWidth * 0.5 - 0.004), 0, 0.012);
     pivot.add(bar);
@@ -400,6 +401,10 @@ export function createMochi(canvas, view) {
     mouthCavity.scale.set(0.045 + 0.015 * open + Shape.smileWiden * happy, halfHeight, 0.010);
     mouthCavity.position.set(0, 0.004 - halfHeight, 0.004);
     mouthCavity.visible = open > 0.03;
+    // The line hands over to the opening and is gone by mouthLineGoneAt
+    // (PrimitiveChibiBody.mouthLineWeight): never a shut mouth across an open one.
+    const lt = clamp((open - 0.03) / (Shape.mouthLineGoneAt - 0.03), 0, 1), line = 1 - lt * lt * (3 - 2 * lt);
+    for (const bar of mouthBars) { bar.scale.set(Math.max(line, 1e-4), 1, Math.max(line, 1e-4)); bar.visible = line > 0.25; }
     tongue.position.set(0, 0.004 - halfHeight * 1.45, 0.009);
     const ts = Math.max(1e-4, Math.min(1, open * 1.6));
     tongue.scale.set(0.026 * ts, 0.012 * ts, 0.006 * ts);

@@ -182,6 +182,9 @@ export const Shape = {
   mouthLine: 0.0075,
   smileTilt: 0.50,
   mouthDrop: 0.085,
+  /// The closed line hands over to the opening: it thins away as the mouth
+  /// opens and is gone by this much open (PrimitiveChibiBody.mouthLineWeight).
+  mouthLineGoneAt: 0.18,
   mouthWiden: 0.026,
   openSmileFlatten: 0.6,
   smileWiden: 0.012,
@@ -702,10 +705,11 @@ export function createMieMie(THREE) {
   const mouth = new THREE.Object3D();
   place(mouth, 0, S.mouthY, 0.002);
   headPivot.add(mouth);
-  const mouthHalves = [];
+  const mouthHalves = [], mouthBars = [];
   for (const side of [-1, 1]) {
     const pivot = new THREE.Object3D();
     const bar = segment(S.mouthHalfWidth, S.mouthLine, Palette.mouth, 0.5);
+    mouthBars.push(bar);
     bar.quaternion.copy(qAxis(Math.PI / 2, [0, 0, 1]));
     bar.position.set(side * (S.mouthHalfWidth * 0.5 - 0.004), 0, 0.010);
     pivot.add(bar);
@@ -1016,19 +1020,37 @@ export function createMieMie(THREE) {
     cavity.scale.set(width, half, 0.010);
     cavity.position.set(0, 0.004 - half, 0.004);
     cavity.visible = open > 0.03;
-    teeth.scale.set(width * 0.72, 0.009 * smoothstep((open - 0.12) / 0.2), 0.006);
-    teeth.position.set(0, 0.004 - 0.010, 0.009);
+    // The line hands over to the opening (a leaf scale, across the bar only).
+    const line = mouthLineWeight(open, S.mouthLineGoneAt);
+    for (const bar of mouthBars) { bar.scale.set(Math.max(line, 1e-4), 1, Math.max(line, 1e-4)); bar.visible = line > 0.25; }
+    // The teeth sit INSIDE the opening's top, never across its edge.
+    const centreY = 0.004 - half;
+    const toothHalf = Math.min(0.009 * smoothstep((open - 0.12) / 0.2), 0.3 * half);
+    const toothY = centreY + 0.88 * half - toothHalf;
+    const row = (toothY - centreY) / half;
+    const rowHalfWidth = width * Math.sqrt(Math.max(0, 1 - row * row));
+    teeth.scale.set(Math.max(1e-4, Math.min(width * 0.72, rowHalfWidth * 0.8)), Math.max(1e-4, toothHalf), 0.006);
+    teeth.position.set(0, toothY, 0.009);
     teeth.visible = open > 0.12;
     tongue.position.set(0, 0.004 - half * 1.45, 0.009);
     const tk = Math.min(1, open * 1.6);
     tongue.scale.set(0.024 * tk, 0.012 * tk, 0.006);
     tongue.visible = open > 0.25;
-    // The lower lip rides the bottom edge of the opening.
-    lip.position.set(0, 0.004 - 2 * half - S.lipRadii[1] * 0.35, 0.006);
+    // The lower lip rides the bottom edge of the opening: tucked under the
+    // line when shut, a thin rim below the opening when open.
+    const lipDrop = 0.35 + 0.40 * (1 - line);
+    lip.position.set(0, 0.004 - 2 * half - S.lipRadii[1] * lipDrop, 0.006);
     lip.scale.set(S.lipRadii[0] * (1 + 0.4 * open + 0.2 * happy), S.lipRadii[1], S.lipRadii[2]);
   }
 
   return { root, apply, Shape };
+}
+
+/// How much of the closed mouth line is still drawn at `open`: all of it with
+/// the lips together, none by `goneAt` (PrimitiveChibiBody.mouthLineWeight).
+export function mouthLineWeight(open, goneAt) {
+  const t = Math.min(1, Math.max(0, (open - 0.03) / (goneAt - 0.03)));
+  return 1 - t * t * (3 - 2 * t);
 }
 
 export function neutralPose() {

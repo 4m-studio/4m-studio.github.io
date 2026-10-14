@@ -71,6 +71,12 @@ export const Shape = {
   mouthArcSweep: 2.6,
   smileTilt: 0.55,
   mouthDrop: 0.085,
+  /// The closed ω hands over to the opening: it thins away as the mouth
+  /// opens and is gone by this much open (PrimitiveChibiBody.mouthLineWeight).
+  mouthLineGoneAt: 0.18,
+  /// The philtrum shut, and long enough to reach the opening once the ω has gone.
+  philtrumLength: 0.032,
+  philtrumOpenLength: 0.040,
   mouthWiden: 0.030,
   openSmileFlatten: 0.6,
   smileWiden: 0.014,
@@ -360,16 +366,17 @@ export function createTaro(THREE) {
   const mouth = new THREE.Object3D();
   place(mouth, 0, S.mouthY, S.mouthLift);
   headPivot.add(mouth);
-  const philtrum = segment(0.032, 0.0075, Palette.mouth);
-  philtrum.position.set(0, 0.014, 0.002);
+  const philtrum = segment(S.philtrumLength, 0.0075, Palette.mouth);
+  philtrum.position.set(0, 0.030 - S.philtrumLength / 2, 0.002);
   mouth.add(philtrum);
-  const mouthHalves = [];
+  const mouthHalves = [], mouthArcs = [];
   const arcG = arcGeometry(S.mouthArcRadius, S.mouthTube, S.mouthArcSweep);
   for (const side of [-1, 1]) {
     const pivot = new THREE.Object3D();
     const arc = new THREE.Mesh(arcG, matte(Palette.mouth));
     arc.position.set(side * S.mouthArcRadius, 0, 0);
     pivot.add(arc);
+    mouthArcs.push(arc);
     mouth.add(pivot);
     mouthHalves.push({ pivot, side });
   }
@@ -579,6 +586,12 @@ export function createTaro(THREE) {
     cavity.scale.set(0.034 + S.mouthWiden * open + S.smileWiden * happy, half, 0.010);
     cavity.position.set(0, -0.010 - half, -0.006);
     cavity.visible = open > 0.03;
+    // The ω hands over to the opening; the philtrum reaches down to meet it.
+    const line = mouthLineWeight(open, S.mouthLineGoneAt);
+    for (const arc of mouthArcs) { arc.scale.setScalar(Math.max(line, 1e-4)); arc.visible = line > 0.25; }
+    const pl = S.philtrumLength + (S.philtrumOpenLength - S.philtrumLength) * (1 - line);
+    philtrum.scale.set(1, pl / S.philtrumLength, 1);
+    philtrum.position.set(0, 0.030 - pl / 2, 0.002);
     tongue.position.set(0, -0.010 - half * 1.45, -0.001);
     const tk = Math.min(1, open * 1.6);
     tongue.scale.set(0.024 * tk * 1.3, 0.012 * tk * 1.3, 0.006);
@@ -587,6 +600,13 @@ export function createTaro(THREE) {
   }
 
   return { root, apply, Shape };
+}
+
+/// How much of the closed mouth line is still drawn at `open`: all of it with
+/// the lips together, none by `goneAt` (PrimitiveChibiBody.mouthLineWeight).
+export function mouthLineWeight(open, goneAt) {
+  const t = Math.min(1, Math.max(0, (open - 0.03) / (goneAt - 0.03)));
+  return 1 - t * t * (3 - 2 * t);
 }
 
 export function neutralPose() {
