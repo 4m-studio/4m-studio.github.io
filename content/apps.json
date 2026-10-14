@@ -87,6 +87,17 @@
       {
         "date": "2026-10",
         "title": {
+          "en": "Meet Zhuzhu, a 3D piglet",
+          "zh": "认识一下 Zhuzhu：一只 3D 小猪"
+        },
+        "body": {
+          "en": "A round pale-pink piglet with a bow on one ear. Her ears perk up when you raise your brows and flop forward when you frown, her snout sniffs and lifts when you smile or talk, and her corkscrew tail boings when she hops. Pick Zhuzhu on the AvatarTracker page to play with her.",
+          "zh": "一只圆滚滚的淡粉色小猪，一只耳朵上系着蝴蝶结。你一扬眉，它就竖起耳朵；一皱眉，耳朵就往前耷拉下来；你一笑或一说话，它的小鼻子就嗅一嗅、翘起来；它一蹦，卷卷的小尾巴也跟着弹。在随影的页面上选 Zhuzhu 就能和它玩。"
+        }
+      },
+      {
+        "date": "2026-10",
+        "title": {
           "en": "MieMie, now in 3D",
           "zh": "MieMie 来到了 3D"
         },
@@ -263,12 +274,12 @@
           "zh": "3D"
         },
         "title": {
-          "en": "And now, 3D: Mochi, Taro and MieMie.",
-          "zh": "现在，Mochi、Taro 和 MieMie 来到了 3D。"
+          "en": "And now, 3D: Mochi, Taro, MieMie and Zhuzhu.",
+          "zh": "现在，Mochi、Taro、MieMie 和 Zhuzhu 来到了 3D。"
         },
         "body": {
-          "en": "Mochi is AvatarTracker's first 3D character: a round little face with bear ears and a sprout on top, built from soft 3D shapes and lit like a toy. Turn your head and Mochi turns in real depth, while the eyes, brows and mouth keep following yours. Then came Taro, a chubby peach tabby: his ears perk up with your brows, his eyes squint shut when you smile, and his tail wags along. And MieMie herself has a 3D twin now: her bob swings as you tilt your head, and she still waves, makes a heart and throws a peace sign.",
-          "zh": "Mochi 是随影的第一个 3D 角色：圆圆的脸，一对小熊耳朵，头顶一棵小芽，由柔和的 3D 形状搭成，像玩具一样打光。你一转头，Mochi 就在真正的立体空间里转过来，眼睛、眉毛和嘴巴依然跟着你。随后加入的 Taro 是一只圆滚滚的桃色虎斑猫：你一扬眉，它就竖起耳朵；你一笑，它就眯起眼睛，尾巴也跟着摇。MieMie 本人也有了 3D 版：你一歪头，她的波波头就跟着晃，挥手、比心、比耶一样不少。"
+          "en": "Mochi is AvatarTracker's first 3D character: a round little face with bear ears and a sprout on top, built from soft 3D shapes and lit like a toy. Turn your head and Mochi turns in real depth, while the eyes, brows and mouth keep following yours. Then came Taro, a chubby peach tabby: his ears perk up with your brows, his eyes squint shut when you smile, and his tail wags along. And MieMie herself has a 3D twin now: her bob swings as you tilt your head, and she still waves, makes a heart and throws a peace sign. The newest is Zhuzhu, a round pink piglet with a bow: her ears perk and flop with your brows, her snout sniffs and lifts as you talk, and her corkscrew tail boings.",
+          "zh": "Mochi 是随影的第一个 3D 角色：圆圆的脸，一对小熊耳朵，头顶一棵小芽，由柔和的 3D 形状搭成，像玩具一样打光。你一转头，Mochi 就在真正的立体空间里转过来，眼睛、眉毛和嘴巴依然跟着你。随后加入的 Taro 是一只圆滚滚的桃色虎斑猫：你一扬眉，它就竖起耳朵；你一笑，它就眯起眼睛，尾巴也跟着摇。MieMie 本人也有了 3D 版：你一歪头，她的波波头就跟着晃，挥手、比心、比耶一样不少。最新加入的是 Zhuzhu，一只系着蝴蝶结的圆滚滚粉色小猪：耳朵随你的眉毛竖起、耷拉，你一说话它的小鼻子就嗅一嗅、翘起来，卷卷的小尾巴还会一弹一弹。"
         },
         "points": [
           {
@@ -304,8 +315,8 @@
           "zh": "一个角色栏，一键切换。"
         },
         "body": {
-          "en": "Home keeps every character in one row: Stick, Mochi, Taro, MieMie 3D, MieMie and Mika. Pick one and Go Live — switching never restarts the camera.",
-          "zh": "首页把所有角色放在同一排：火柴人、Mochi、Taro、MieMie 3D、MieMie 和 Mika。选一个，点 Go Live 就开播，切换角色也不会重启摄像头。"
+          "en": "Home keeps every character in one row: Stick, Mochi, Taro, MieMie 3D, Zhuzhu, MieMie and Mika. Pick one and Go Live — switching never restarts the camera.",
+          "zh": "首页把所有角色放在同一排：火柴人、Mochi、Taro、MieMie 3D、Zhuzhu、MieMie 和 Mika。选一个，点 Go Live 就开播，切换角色也不会重启摄像头。"
         },
         "points": [
           {

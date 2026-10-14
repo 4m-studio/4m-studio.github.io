@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The AvatarTracker cast — Stick, Mika, Mochi, Taro and MieMie 3D, next to MieMie (assets/js/miemie.js).
+   The AvatarTracker cast — Stick, Mika, Mochi, Taro, MieMie 3D and Zhuzhu, next to MieMie (assets/js/miemie.js).
 
    Only the AvatarTracker app page loads this. A switcher under the live stage
    swaps the character on the same canvas: the old one is torn down first, so
@@ -11,8 +11,8 @@
      the open hand stands in.
    - Stick: AvatarTracker's StickAvatarRenderer, drawn with lines in its
      dark-mode colours. Its arms follow the app's own gesture intents.
-   - Mochi, Taro and MieMie 3D: the 3D characters (PrimitiveChibiBody,
-     PrimitiveCatBody, PrimitiveMieMieBody), rebuilt with three.js in
+   - Mochi, Taro, MieMie 3D and Zhuzhu: the 3D characters (PrimitiveChibiBody,
+     PrimitiveCatBody, PrimitiveMieMieBody, PrimitivePigBody), rebuilt with three.js in
      assets/js/avatar3d.js, which is only downloaded when one of them is picked.
    ========================================================================== */
 (function () {
@@ -249,10 +249,10 @@
     c.restore();
   }
 
-  /* ---------- Mochi, Taro and MieMie 3D (3D — assets/js/avatar3d.js) ----------
-     Mochi is PrimitiveChibiBody, Taro PrimitiveCatBody and MieMie 3D
-     PrimitiveMieMieBody, all rebuilt with three.js. They share one bundle (the
-     characters plus the parts of three.js they use, ~145 KB gzipped), fetched
+  /* ---------- Mochi, Taro, MieMie 3D and Zhuzhu (3D — assets/js/avatar3d.js) ----------
+     Mochi is PrimitiveChibiBody, Taro PrimitiveCatBody, MieMie 3D
+     PrimitiveMieMieBody and Zhuzhu PrimitivePigBody, all rebuilt with three.js. They share one bundle (the
+     characters plus the parts of three.js they use, ~150 KB gzipped), fetched
      the first time someone picks any of them, never before. World units are the app's metres; the
      "artboard" is world × 1000 with y pointing down from the top of the view,
      so the shared engine can place the frame. */
@@ -268,7 +268,7 @@
   function lang() { return (document.documentElement.lang || 'en').slice(0, 2); }
   // Gesture targets in arm lengths from the shoulder, [outward, down], with the
   // app's hand shapes. 🫶 is the app's own heart: both hands at the chest.
-  // Taro's stub arms take the same targets as a direction and a reach.
+  // Taro's and Zhuzhu's stub arms take the same targets as a direction and a reach.
   var POSES_3D = {
     wave: function (t) { var s = Math.sin(t * 9); return { L: [0.9 + s * 0.08, -0.5 - s * 0.06], Ls: 'open' }; },
     heart: function (t) { var b = Math.max(0, Math.sin(t * 6)) * 0.05; return { L: [-0.62, 0.38 - b], R: [-0.62, 0.38 - b], Ls: 'heart', Rs: 'heart' }; },
@@ -364,7 +364,14 @@
   var MIEMIE3D = make3D({ id: 'miemie3d', name: 'MieMie 3D', factory: 'createMieMie3D',
     view: { yTop: 1.84, yBot: -0.40 }, chin: 0.62, eyes: 1.02 });
 
-  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO, miemie3d: MIEMIE3D };
+  // Zhuzhu: neck 0.58 + head 0.42 → head centre 1.00, chin 0.50 under it,
+  // eyes at 1.05. Her head is the widest of the cast (±0.60 m, the ears and bow
+  // further out), so her view is taller again than Taro's: she stands as big as
+  // he does, and the bow and raised paws stay inside the stage.
+  var ZHUZHU = make3D({ id: 'zhuzhu', name: 'Zhuzhu', factory: 'createZhuzhu3D',
+    view: { yTop: 2.22, yBot: -0.70 }, chin: 0.50, eyes: 1.05 });
+
+  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO, miemie3d: MIEMIE3D, zhuzhu: ZHUZHU };
 
   /* ---------- Switcher ---------- */
   function init() {
