@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://4m-studio.github.io/apps/storyreel/">
 <meta property="og:image" content="https://4m-studio.github.io/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../../assets/css/main.css?v=90f9e1f2">
+<link rel="stylesheet" href="../../assets/css/main.css?v=8239a848">
 <script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "StoryReel", "operatingSystem": "iOS", "applicationCategory": "Photo & Video", "description": "StoryReel turns a camera roll full of travel photos into a cinematic memory video. It already knows when and where every photo was taken — so it sorts, picks and sequences for you, and animates the route between places.", "url": "https://4m-studio.github.io/apps/storyreel/", "author": {"@type": "Organization", "name": "4M Studio", "url": "https://4m-studio.github.io/"}}</script>
 </head>
@@ -125,7 +125,7 @@
         </div>
         <div class="feature reveal" style="--d: 0.05s">
           <div class="feature__icon" aria-hidden="true">🎬</div>
-          <h3>12 cinematic themes</h3>
+          <h3>14 cinematic themes</h3>
           <p>Each theme bundles a map style, color mood, route animation and typography into one pick.</p>
         </div>
         <div class="feature reveal" style="--d: 0.10s">
@@ -135,6 +135,135 @@
         </div>
     </div>
   </div>
+</section>
+
+
+<section class="section section--tight tx" id="transitions" style="--accent: var(--storyreel)">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Photo transitions</p>
+      <h2>Every photo,<br><span class="grad-text">its own entrance.</span></h2>
+      <p class="lede">Between photos, StoryReel picks a transition that fits your theme&#x27;s mood, never uses the same one twice in a row, and keeps the calmest for the first photo of a new place.</p>
+      <p class="tx-note">Design preview, coming in a future update. The scenes are illustrations standing in for your photos.</p>
+    </div>
+    <div class="tx-stage reveal">
+      <div class="tx-phone"><canvas class="tx-player" width="540" height="960" role="img" aria-label="A sample trip playing with the selected theme&#x27;s transitions"></canvas></div>
+      <div class="tx-panel">
+        <label class="tx-field">Theme
+          <select class="tx-theme"><option value="elegant:0">Cinematic Journey · Elegant</option><option value="elegant:1">Warm Memory · Elegant</option><option value="elegant:2">Oil Painting · Elegant</option><option value="elegant:3">Bronze Relief · Elegant</option><option value="elegant:4">Starry Sea · Elegant</option><option value="elegant:5">Woven World · Elegant</option><option value="elegant:6">Blue Planet · Elegant</option><option value="classic:0">Travel Log · Classic</option><option value="classic:1">Minimal Title · Classic</option><option value="classic:2">Map Zoom-In · Classic</option><option value="classic:3">Vintage Chart · Classic</option><option value="snappy:0">Warm Celebration · Snappy</option><option value="snappy:1">Photo Wall · Snappy</option><option value="snappy:2">Doodle Journey · Snappy</option></select>
+        </label>
+        <p class="tx-now" aria-live="polite">Now playing: <strong class="tx-now__name">Crossfade</strong> <span class="tx-now__dur">0.60s</span></p>
+        <div class="tx-controls">
+          <button class="btn btn--ghost btn--sm tx-play" type="button">Pause</button>
+          <button class="btn btn--ghost btn--sm tx-slow" type="button" aria-pressed="false">Slow motion</button>
+        </div>
+        <div class="tx-moods">
+        <div class="tx-mood tx-mood--elegant">
+          <h3>Elegant</h3>
+          <p>Slow, cinematic settles for reflective trips.</p>
+          <ul class="tx-chips"><li>Crossfade</li><li>Zoom dissolve</li><li>Soft blur</li><li>Light leak</li><li>Dip to black</li></ul>
+          <p class="tx-themes"><span>Themes</span> Cinematic Journey · Warm Memory · Oil Painting · Bronze Relief · Starry Sea · Woven World · Blue Planet</p>
+        </div>
+        <div class="tx-mood tx-mood--classic">
+          <h3>Classic</h3>
+          <p>Clean, quick cuts that keep the trip moving.</p>
+          <ul class="tx-chips"><li>Crossfade</li><li>Soft wipe</li><li>Push</li></ul>
+          <p class="tx-themes"><span>Themes</span> Travel Log · Minimal Title · Map Zoom-In · Vintage Chart</p>
+        </div>
+        <div class="tx-mood tx-mood--snappy">
+          <h3>Snappy</h3>
+          <p>Energetic moves for celebrations and photo walls.</p>
+          <ul class="tx-chips"><li>Push</li><li>Whip pan</li><li>Flash</li><li>Zoom punch</li></ul>
+          <p class="tx-themes"><span>Themes</span> Warm Celebration · Photo Wall · Doodle Journey</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="tx-library-title reveal">Ten ways to cut</h3>
+    <div class="tx-grid">
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="crossfade" data-a="0" data-b="3" data-offset="0.00" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Crossfade</h3>
+            <p>The plain dissolve. Calm, and never wrong.</p>
+            <p class="tx-card__meta"><span>0.60s</span><span class="tx-tag tx-tag--elegant">Elegant</span><span class="tx-tag tx-tag--classic">Classic</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="zoomDissolve" data-a="2" data-b="5" data-offset="0.37" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Zoom dissolve</h3>
+            <p>The last photo drifts forward as the next one settles in.</p>
+            <p class="tx-card__meta"><span>0.80s</span><span class="tx-tag tx-tag--elegant">Elegant</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="blurDissolve" data-a="4" data-b="1" data-offset="0.74" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Soft blur</h3>
+            <p>Out of focus, then back into focus on the new photo.</p>
+            <p class="tx-card__meta"><span>0.80s</span><span class="tx-tag tx-tag--elegant">Elegant</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="lightLeak" data-a="0" data-b="3" data-offset="1.11" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Light leak</h3>
+            <p>A warm, film-style glow sweeps across as it dissolves.</p>
+            <p class="tx-card__meta"><span>0.90s</span><span class="tx-tag tx-tag--elegant">Elegant</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="dipBlack" data-a="2" data-b="5" data-offset="1.48" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Dip to black</h3>
+            <p>A breath of black, saved for the first photo of a new place.</p>
+            <p class="tx-card__meta"><span>0.90s</span><span class="tx-tag tx-tag--elegant">Elegant</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="softWipe" data-a="4" data-b="1" data-offset="1.85" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Soft wipe</h3>
+            <p>A feathered diagonal edge sweeps the next photo in.</p>
+            <p class="tx-card__meta"><span>0.60s</span><span class="tx-tag tx-tag--classic">Classic</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="push" data-a="0" data-b="3" data-offset="2.22" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Push</h3>
+            <p>The next photo pushes the last one off. Direction alternates.</p>
+            <p class="tx-card__meta"><span>0.50s</span><span class="tx-tag tx-tag--classic">Classic</span><span class="tx-tag tx-tag--snappy">Snappy</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="whipPan" data-a="2" data-b="5" data-offset="2.59" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Whip pan</h3>
+            <p>A fast pan with motion streaks, like swinging the camera.</p>
+            <p class="tx-card__meta"><span>0.40s</span><span class="tx-tag tx-tag--snappy">Snappy</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="flash" data-a="4" data-b="1" data-offset="2.96" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Flash</h3>
+            <p>A quick white flash on the cut. Bright and celebratory.</p>
+            <p class="tx-card__meta"><span>0.45s</span><span class="tx-tag tx-tag--snappy">Snappy</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="zoomPunch" data-a="0" data-b="3" data-offset="3.33" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>Zoom punch</h3>
+            <p>Zooms hard into the last photo; the next one pops in.</p>
+            <p class="tx-card__meta"><span>0.45s</span><span class="tx-tag tx-tag--snappy">Snappy</span></p>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script type="application/json" class="tx-data">{"lang": "en", "effects": [{"id": "crossfade", "dur": 0.6, "name": "Crossfade"}, {"id": "zoomDissolve", "dur": 0.8, "name": "Zoom dissolve"}, {"id": "blurDissolve", "dur": 0.8, "name": "Soft blur"}, {"id": "lightLeak", "dur": 0.9, "name": "Light leak"}, {"id": "dipBlack", "dur": 0.9, "name": "Dip to black"}, {"id": "softWipe", "dur": 0.6, "name": "Soft wipe"}, {"id": "push", "dur": 0.5, "name": "Push"}, {"id": "whipPan", "dur": 0.4, "name": "Whip pan"}, {"id": "flash", "dur": 0.45, "name": "Flash"}, {"id": "zoomPunch", "dur": 0.45, "name": "Zoom punch"}], "palettes": {"elegant": ["crossfade", "zoomDissolve", "blurDissolve", "lightLeak", "dipBlack"], "classic": ["crossfade", "softWipe", "push"], "snappy": ["push", "whipPan", "flash", "zoomPunch"]}, "labels": {"pause": "Pause", "play": "Play", "slow": "Slow motion", "normal": "Normal speed"}}</script>
 </section>
 
 <section class="section section--tight" style="--accent: var(--storyreel)">
@@ -223,5 +352,6 @@
   </div>
 </footer>
 <script src="../../assets/js/main.js?v=22449af1" defer></script>
+<script src="../../assets/js/transitions.js?v=d94c99aa" defer></script>
 </body>
 </html>

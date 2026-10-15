@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://4m-studio.github.io/zh/apps/storyreel/">
 <meta property="og:image" content="https://4m-studio.github.io/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../../../assets/css/main.css?v=90f9e1f2">
+<link rel="stylesheet" href="../../../assets/css/main.css?v=8239a848">
 <script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "旅迹", "operatingSystem": "iOS", "applicationCategory": "Photo & Video", "description": "旅迹把相册里的旅行照片变成电影感的回忆视频。它知道每张照片拍摄的时间和地点，自动帮你分章节、挑照片、排顺序，还会把地点之间的路线做成动画。", "url": "https://4m-studio.github.io/zh/apps/storyreel/", "author": {"@type": "Organization", "name": "4M Studio", "url": "https://4m-studio.github.io/"}}</script>
 </head>
@@ -125,7 +125,7 @@
         </div>
         <div class="feature reveal" style="--d: 0.05s">
           <div class="feature__icon" aria-hidden="true">🎬</div>
-          <h3>12 款电影感主题</h3>
+          <h3>14 款电影感主题</h3>
           <p>每个主题都把地图风格、色调、路线动画和字体打包好，一键套用。</p>
         </div>
         <div class="feature reveal" style="--d: 0.10s">
@@ -135,6 +135,135 @@
         </div>
     </div>
   </div>
+</section>
+
+
+<section class="section section--tight tx" id="transitions" style="--accent: var(--storyreel)">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">照片转场</p>
+      <h2>每一张照片，<br><span class="grad-text">都有自己的登场。</span></h2>
+      <p class="lede">照片之间，旅迹会按主题的氛围挑选转场：不会连续两次用同一个，新地点的第一张照片总是用最安静的那一种。</p>
+      <p class="tx-note">设计预览，将在后续版本推出。画面为示意插图，代表你的照片。</p>
+    </div>
+    <div class="tx-stage reveal">
+      <div class="tx-phone"><canvas class="tx-player" width="540" height="960" role="img" aria-label="按所选主题的转场播放的示例旅程"></canvas></div>
+      <div class="tx-panel">
+        <label class="tx-field">主题
+          <select class="tx-theme"><option value="elegant:0">电影质感 · 优雅</option><option value="elegant:1">温馨回忆 · 优雅</option><option value="elegant:2">油画印象 · 优雅</option><option value="elegant:3">古铜浮雕 · 优雅</option><option value="elegant:4">星辰大海 · 优雅</option><option value="elegant:5">羊毛织境 · 优雅</option><option value="elegant:6">蓝色星球 · 优雅</option><option value="classic:0">旅行纪录 · 经典</option><option value="classic:1">纯净标题 · 经典</option><option value="classic:2">地图聚焦 · 经典</option><option value="classic:3">复古航图 · 经典</option><option value="snappy:0">热烈庆祝 · 活力</option><option value="snappy:1">照片墙 · 活力</option><option value="snappy:2">手绘漫游 · 活力</option></select>
+        </label>
+        <p class="tx-now" aria-live="polite">正在播放: <strong class="tx-now__name">淡入淡出</strong> <span class="tx-now__dur">0.60s</span></p>
+        <div class="tx-controls">
+          <button class="btn btn--ghost btn--sm tx-play" type="button">暂停</button>
+          <button class="btn btn--ghost btn--sm tx-slow" type="button" aria-pressed="false">慢动作</button>
+        </div>
+        <div class="tx-moods">
+        <div class="tx-mood tx-mood--elegant">
+          <h3>优雅</h3>
+          <p>舒缓的电影感过渡，适合安静回味的旅程。</p>
+          <ul class="tx-chips"><li>淡入淡出</li><li>推进溶解</li><li>柔焦溶解</li><li>暖光漏光</li><li>黑场过渡</li></ul>
+          <p class="tx-themes"><span>主题</span> 电影质感 · 温馨回忆 · 油画印象 · 古铜浮雕 · 星辰大海 · 羊毛织境 · 蓝色星球</p>
+        </div>
+        <div class="tx-mood tx-mood--classic">
+          <h3>经典</h3>
+          <p>干净利落的切换，让旅程保持节奏。</p>
+          <ul class="tx-chips"><li>淡入淡出</li><li>斜向擦除</li><li>平推</li></ul>
+          <p class="tx-themes"><span>主题</span> 旅行纪录 · 纯净标题 · 地图聚焦 · 复古航图</p>
+        </div>
+        <div class="tx-mood tx-mood--snappy">
+          <h3>活力</h3>
+          <p>充满动感，适合庆祝与照片墙。</p>
+          <ul class="tx-chips"><li>平推</li><li>甩镜</li><li>闪白</li><li>冲击变焦</li></ul>
+          <p class="tx-themes"><span>主题</span> 热烈庆祝 · 照片墙 · 手绘漫游</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="tx-library-title reveal">十种转场</h3>
+    <div class="tx-grid">
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="crossfade" data-a="0" data-b="3" data-offset="0.00" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>淡入淡出</h3>
+            <p>最朴素的溶解，安静，永远不会出错。</p>
+            <p class="tx-card__meta"><span>0.60s</span><span class="tx-tag tx-tag--elegant">优雅</span><span class="tx-tag tx-tag--classic">经典</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="zoomDissolve" data-a="2" data-b="5" data-offset="0.37" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>推进溶解</h3>
+            <p>上一张缓缓前推，下一张轻轻落定。</p>
+            <p class="tx-card__meta"><span>0.80s</span><span class="tx-tag tx-tag--elegant">优雅</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="blurDissolve" data-a="4" data-b="1" data-offset="0.74" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>柔焦溶解</h3>
+            <p>先虚焦，再在新照片上重新清晰。</p>
+            <p class="tx-card__meta"><span>0.80s</span><span class="tx-tag tx-tag--elegant">优雅</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="lightLeak" data-a="0" data-b="3" data-offset="1.11" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>暖光漏光</h3>
+            <p>溶解时扫过一道胶片般的暖光。</p>
+            <p class="tx-card__meta"><span>0.90s</span><span class="tx-tag tx-tag--elegant">优雅</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="dipBlack" data-a="2" data-b="5" data-offset="1.48" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>黑场过渡</h3>
+            <p>短暂的黑场停顿，留给新地点的第一张照片。</p>
+            <p class="tx-card__meta"><span>0.90s</span><span class="tx-tag tx-tag--elegant">优雅</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="softWipe" data-a="4" data-b="1" data-offset="1.85" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>斜向擦除</h3>
+            <p>柔和的斜向边缘把下一张照片擦入画面。</p>
+            <p class="tx-card__meta"><span>0.60s</span><span class="tx-tag tx-tag--classic">经典</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="push" data-a="0" data-b="3" data-offset="2.22" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>平推</h3>
+            <p>下一张把上一张推出画面，方向左右交替。</p>
+            <p class="tx-card__meta"><span>0.50s</span><span class="tx-tag tx-tag--classic">经典</span><span class="tx-tag tx-tag--snappy">活力</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="whipPan" data-a="2" data-b="5" data-offset="2.59" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>甩镜</h3>
+            <p>带运动拖影的快速横摇，像甩动镜头。</p>
+            <p class="tx-card__meta"><span>0.40s</span><span class="tx-tag tx-tag--snappy">活力</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.00s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="flash" data-a="4" data-b="1" data-offset="2.96" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>闪白</h3>
+            <p>切换瞬间一道白光，明亮又欢快。</p>
+            <p class="tx-card__meta"><span>0.45s</span><span class="tx-tag tx-tag--snappy">活力</span></p>
+          </div>
+        </div>
+        <div class="tx-card reveal" style="--d: 0.04s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="zoomPunch" data-a="0" data-b="3" data-offset="3.33" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>冲击变焦</h3>
+            <p>猛地推近上一张，下一张弹入画面。</p>
+            <p class="tx-card__meta"><span>0.45s</span><span class="tx-tag tx-tag--snappy">活力</span></p>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script type="application/json" class="tx-data">{"lang": "zh", "effects": [{"id": "crossfade", "dur": 0.6, "name": "淡入淡出"}, {"id": "zoomDissolve", "dur": 0.8, "name": "推进溶解"}, {"id": "blurDissolve", "dur": 0.8, "name": "柔焦溶解"}, {"id": "lightLeak", "dur": 0.9, "name": "暖光漏光"}, {"id": "dipBlack", "dur": 0.9, "name": "黑场过渡"}, {"id": "softWipe", "dur": 0.6, "name": "斜向擦除"}, {"id": "push", "dur": 0.5, "name": "平推"}, {"id": "whipPan", "dur": 0.4, "name": "甩镜"}, {"id": "flash", "dur": 0.45, "name": "闪白"}, {"id": "zoomPunch", "dur": 0.45, "name": "冲击变焦"}], "palettes": {"elegant": ["crossfade", "zoomDissolve", "blurDissolve", "lightLeak", "dipBlack"], "classic": ["crossfade", "softWipe", "push"], "snappy": ["push", "whipPan", "flash", "zoomPunch"]}, "labels": {"pause": "暂停", "play": "播放", "slow": "慢动作", "normal": "正常速度"}}</script>
 </section>
 
 <section class="section section--tight" style="--accent: var(--storyreel)">
@@ -223,5 +352,6 @@
   </div>
 </footer>
 <script src="../../../assets/js/main.js?v=22449af1" defer></script>
+<script src="../../../assets/js/transitions.js?v=d94c99aa" defer></script>
 </body>
 </html>

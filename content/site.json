@@ -295,6 +295,42 @@
       "en": "Read the full privacy policy",
       "zh": "阅读完整隐私政策"
     },
+    "tx_theme": {
+      "en": "Theme",
+      "zh": "主题"
+    },
+    "tx_now": {
+      "en": "Now playing",
+      "zh": "正在播放"
+    },
+    "tx_pause": {
+      "en": "Pause",
+      "zh": "暂停"
+    },
+    "tx_play": {
+      "en": "Play",
+      "zh": "播放"
+    },
+    "tx_slow": {
+      "en": "Slow motion",
+      "zh": "慢动作"
+    },
+    "tx_normal": {
+      "en": "Normal speed",
+      "zh": "正常速度"
+    },
+    "tx_used_in": {
+      "en": "Used in",
+      "zh": "用于"
+    },
+    "tx_themes": {
+      "en": "Themes",
+      "zh": "主题"
+    },
+    "tx_player_label": {
+      "en": "A sample trip playing with the selected theme's transitions",
+      "zh": "按所选主题的转场播放的示例旅程"
+    },
     "p_details": {
       "en": "Details",
       "zh": "详细信息"

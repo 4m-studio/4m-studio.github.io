@@ -308,6 +308,71 @@ def tour(app, lang, root):
     return f'<div class="tour">{"".join(rows)}\n    </div>'
 
 
+def transitions_section(app, lang):
+    """Photo-to-photo transition gallery (StoryReel). Content: "transitions" in apps.json.
+    Markup only — assets/js/transitions.js draws the phone preview and the looping cards on canvas,
+    from the JSON embedded at the end of the section."""
+    tx = app["transitions"]
+    moods = {m["id"]: m for m in tx["moods"]}
+    options = "".join(
+        f'<option value="{m["id"]}:{i}">{esc(L(t, lang))} · {esc(L(m["name"], lang))}</option>'
+        for m in tx["moods"] for i, t in enumerate(m["themes"]))
+    mood_cards = "".join(f'''
+        <div class="tx-mood tx-mood--{m["id"]}">
+          <h3>{esc(L(m["name"], lang))}</h3>
+          <p>{esc(L(m["note"], lang))}</p>
+          <ul class="tx-chips">{"".join(f'<li>{esc(L(e["name"], lang))}</li>' for e in tx["effects"] if m["id"] in e["moods"])}</ul>
+          <p class="tx-themes"><span>{T("tx_themes", lang)}</span> {" · ".join(esc(L(t, lang)) for t in m["themes"])}</p>
+        </div>''' for m in tx["moods"])
+    cards = "".join(f'''
+        <div class="tx-card reveal" style="--d: {0.04 * (i % 2):.2f}s">
+          <canvas class="tx-card__canvas" width="184" height="328" data-fx="{e["id"]}" data-a="{(i * 2) % 6}" data-b="{(i * 2 + 3) % 6}" data-offset="{i * 0.37:.2f}" aria-hidden="true"></canvas>
+          <div class="tx-card__body">
+            <h3>{esc(L(e["name"], lang))}</h3>
+            <p>{esc(L(e["desc"], lang))}</p>
+            <p class="tx-card__meta"><span>{e["dur"]:.2f}s</span>{"".join(f'<span class="tx-tag tx-tag--{m}">{esc(L(moods[m]["name"], lang))}</span>' for m in e["moods"])}</p>
+          </div>
+        </div>''' for i, e in enumerate(tx["effects"]))
+    data = {
+        "lang": lang,
+        "effects": [{"id": e["id"], "dur": e["dur"], "name": L(e["name"], lang)} for e in tx["effects"]],
+        "palettes": {m["id"]: [e["id"] for e in tx["effects"] if m["id"] in e["moods"]] for m in tx["moods"]},
+        "labels": {k: T("tx_" + k, lang) for k in ("pause", "play", "slow", "normal")},
+    }
+    data_json = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'''
+<section class="section section--tight tx" id="transitions" style="--accent: var(--{app["accent"]})">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">{esc(L(tx["eyebrow"], lang))}</p>
+      <h2>{L(tx["title"], lang)}</h2>
+      <p class="lede">{esc(L(tx["lede"], lang))}</p>
+      <p class="tx-note">{esc(L(tx["note"], lang))}</p>
+    </div>
+    <div class="tx-stage reveal">
+      <div class="tx-phone"><canvas class="tx-player" width="540" height="960" role="img" aria-label="{esc(T("tx_player_label", lang))}"></canvas></div>
+      <div class="tx-panel">
+        <label class="tx-field">{T("tx_theme", lang)}
+          <select class="tx-theme">{options}</select>
+        </label>
+        <p class="tx-now" aria-live="polite">{T("tx_now", lang)}: <strong class="tx-now__name">{esc(L(tx["effects"][0]["name"], lang))}</strong> <span class="tx-now__dur">{tx["effects"][0]["dur"]:.2f}s</span></p>
+        <div class="tx-controls">
+          <button class="btn btn--ghost btn--sm tx-play" type="button">{T("tx_pause", lang)}</button>
+          <button class="btn btn--ghost btn--sm tx-slow" type="button" aria-pressed="false">{T("tx_slow", lang)}</button>
+        </div>
+        <div class="tx-moods">{mood_cards}
+        </div>
+      </div>
+    </div>
+    <h3 class="tx-library-title reveal">{esc(L(tx["library"], lang))}</h3>
+    <div class="tx-grid">{cards}
+    </div>
+  </div>
+  <script type="application/json" class="tx-data">{data_json}</script>
+</section>
+'''
+
+
 def visual(app, lang, root, big=False, home=False):
     if app["visual"] == "nest":
         return nest(lang, root, 500 if home else 440, compact=home)
@@ -681,6 +746,7 @@ def app_page(a, lang):
   </div>
 </section>
 
+{transitions_section(a, lang) if a.get("transitions") else ""}
 <section class="section section--tight" style="--accent: var(--{a["accent"]})">
   <div class="wrap facts">
     <div class="fact-card reveal">
@@ -718,6 +784,8 @@ def app_page(a, lang):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     scripts = ("main",) + {"miemie": ("rig", "miemie", "cast"), "nest": ("rig", "qqnest")}.get(a["visual"], ())
+    if a.get("transitions"):
+        scripts += ("transitions",)
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 

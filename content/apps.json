@@ -384,8 +384,8 @@
       {
         "emoji": "🎬",
         "title": {
-          "en": "12 cinematic themes",
-          "zh": "12 款电影感主题"
+          "en": "14 cinematic themes",
+          "zh": "14 款电影感主题"
         },
         "body": {
           "en": "Each theme bundles a map style, color mood, route animation and typography into one pick.",
@@ -428,6 +428,279 @@
         "en": "Globe, vintage chart, hand-drawn and more — each one a complete look for your trip video.",
         "zh": "蓝色星球、复古海图、手绘……每一款都是一整套旅行视频的视觉风格。"
       }
+    },
+    "transitions": {
+      "eyebrow": {
+        "en": "Photo transitions",
+        "zh": "照片转场"
+      },
+      "title": {
+        "en": "Every photo,<br><span class=\"grad-text\">its own entrance.</span>",
+        "zh": "每一张照片，<br><span class=\"grad-text\">都有自己的登场。</span>"
+      },
+      "lede": {
+        "en": "Between photos, StoryReel picks a transition that fits your theme's mood, never uses the same one twice in a row, and keeps the calmest for the first photo of a new place.",
+        "zh": "照片之间，旅迹会按主题的氛围挑选转场：不会连续两次用同一个，新地点的第一张照片总是用最安静的那一种。"
+      },
+      "note": {
+        "en": "Design preview, coming in a future update. The scenes are illustrations standing in for your photos.",
+        "zh": "设计预览，将在后续版本推出。画面为示意插图，代表你的照片。"
+      },
+      "library": {
+        "en": "Ten ways to cut",
+        "zh": "十种转场"
+      },
+      "moods": [
+        {
+          "id": "elegant",
+          "name": {
+            "en": "Elegant",
+            "zh": "优雅"
+          },
+          "note": {
+            "en": "Slow, cinematic settles for reflective trips.",
+            "zh": "舒缓的电影感过渡，适合安静回味的旅程。"
+          },
+          "themes": [
+            {
+              "en": "Cinematic Journey",
+              "zh": "电影质感"
+            },
+            {
+              "en": "Warm Memory",
+              "zh": "温馨回忆"
+            },
+            {
+              "en": "Oil Painting",
+              "zh": "油画印象"
+            },
+            {
+              "en": "Bronze Relief",
+              "zh": "古铜浮雕"
+            },
+            {
+              "en": "Starry Sea",
+              "zh": "星辰大海"
+            },
+            {
+              "en": "Woven World",
+              "zh": "羊毛织境"
+            },
+            {
+              "en": "Blue Planet",
+              "zh": "蓝色星球"
+            }
+          ]
+        },
+        {
+          "id": "classic",
+          "name": {
+            "en": "Classic",
+            "zh": "经典"
+          },
+          "note": {
+            "en": "Clean, quick cuts that keep the trip moving.",
+            "zh": "干净利落的切换，让旅程保持节奏。"
+          },
+          "themes": [
+            {
+              "en": "Travel Log",
+              "zh": "旅行纪录"
+            },
+            {
+              "en": "Minimal Title",
+              "zh": "纯净标题"
+            },
+            {
+              "en": "Map Zoom-In",
+              "zh": "地图聚焦"
+            },
+            {
+              "en": "Vintage Chart",
+              "zh": "复古航图"
+            }
+          ]
+        },
+        {
+          "id": "snappy",
+          "name": {
+            "en": "Snappy",
+            "zh": "活力"
+          },
+          "note": {
+            "en": "Energetic moves for celebrations and photo walls.",
+            "zh": "充满动感，适合庆祝与照片墙。"
+          },
+          "themes": [
+            {
+              "en": "Warm Celebration",
+              "zh": "热烈庆祝"
+            },
+            {
+              "en": "Photo Wall",
+              "zh": "照片墙"
+            },
+            {
+              "en": "Doodle Journey",
+              "zh": "手绘漫游"
+            }
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "id": "crossfade",
+          "dur": 0.6,
+          "moods": [
+            "elegant",
+            "classic"
+          ],
+          "name": {
+            "en": "Crossfade",
+            "zh": "淡入淡出"
+          },
+          "desc": {
+            "en": "The plain dissolve. Calm, and never wrong.",
+            "zh": "最朴素的溶解，安静，永远不会出错。"
+          }
+        },
+        {
+          "id": "zoomDissolve",
+          "dur": 0.8,
+          "moods": [
+            "elegant"
+          ],
+          "name": {
+            "en": "Zoom dissolve",
+            "zh": "推进溶解"
+          },
+          "desc": {
+            "en": "The last photo drifts forward as the next one settles in.",
+            "zh": "上一张缓缓前推，下一张轻轻落定。"
+          }
+        },
+        {
+          "id": "blurDissolve",
+          "dur": 0.8,
+          "moods": [
+            "elegant"
+          ],
+          "name": {
+            "en": "Soft blur",
+            "zh": "柔焦溶解"
+          },
+          "desc": {
+            "en": "Out of focus, then back into focus on the new photo.",
+            "zh": "先虚焦，再在新照片上重新清晰。"
+          }
+        },
+        {
+          "id": "lightLeak",
+          "dur": 0.9,
+          "moods": [
+            "elegant"
+          ],
+          "name": {
+            "en": "Light leak",
+            "zh": "暖光漏光"
+          },
+          "desc": {
+            "en": "A warm, film-style glow sweeps across as it dissolves.",
+            "zh": "溶解时扫过一道胶片般的暖光。"
+          }
+        },
+        {
+          "id": "dipBlack",
+          "dur": 0.9,
+          "moods": [
+            "elegant"
+          ],
+          "name": {
+            "en": "Dip to black",
+            "zh": "黑场过渡"
+          },
+          "desc": {
+            "en": "A breath of black, saved for the first photo of a new place.",
+            "zh": "短暂的黑场停顿，留给新地点的第一张照片。"
+          }
+        },
+        {
+          "id": "softWipe",
+          "dur": 0.6,
+          "moods": [
+            "classic"
+          ],
+          "name": {
+            "en": "Soft wipe",
+            "zh": "斜向擦除"
+          },
+          "desc": {
+            "en": "A feathered diagonal edge sweeps the next photo in.",
+            "zh": "柔和的斜向边缘把下一张照片擦入画面。"
+          }
+        },
+        {
+          "id": "push",
+          "dur": 0.5,
+          "moods": [
+            "classic",
+            "snappy"
+          ],
+          "name": {
+            "en": "Push",
+            "zh": "平推"
+          },
+          "desc": {
+            "en": "The next photo pushes the last one off. Direction alternates.",
+            "zh": "下一张把上一张推出画面，方向左右交替。"
+          }
+        },
+        {
+          "id": "whipPan",
+          "dur": 0.4,
+          "moods": [
+            "snappy"
+          ],
+          "name": {
+            "en": "Whip pan",
+            "zh": "甩镜"
+          },
+          "desc": {
+            "en": "A fast pan with motion streaks, like swinging the camera.",
+            "zh": "带运动拖影的快速横摇，像甩动镜头。"
+          }
+        },
+        {
+          "id": "flash",
+          "dur": 0.45,
+          "moods": [
+            "snappy"
+          ],
+          "name": {
+            "en": "Flash",
+            "zh": "闪白"
+          },
+          "desc": {
+            "en": "A quick white flash on the cut. Bright and celebratory.",
+            "zh": "切换瞬间一道白光，明亮又欢快。"
+          }
+        },
+        {
+          "id": "zoomPunch",
+          "dur": 0.45,
+          "moods": [
+            "snappy"
+          ],
+          "name": {
+            "en": "Zoom punch",
+            "zh": "冲击变焦"
+          },
+          "desc": {
+            "en": "Zooms hard into the last photo; the next one pops in.",
+            "zh": "猛地推近上一张，下一张弹入画面。"
+          }
+        }
+      ]
     },
     "shots": [
       {
