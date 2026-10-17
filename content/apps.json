@@ -390,6 +390,13 @@
         "body": {
           "en": "Each theme bundles a map style, color mood, route animation and typography into one pick.",
           "zh": "每个主题都把地图风格、色调、路线动画和字体打包好，一键套用。"
+        },
+        "link": {
+          "path": "apps/storyreel/transitions/",
+          "label": {
+            "en": "See the photo transitions",
+            "zh": "看看照片转场"
+          }
         }
       },
       {
@@ -418,17 +425,31 @@
         "zh": "AI 字幕为可选功能，需自行配置后才会启用"
       }
     ],
-    "news": {
-      "date": "2026-04",
-      "title": {
-        "en": "Twelve cinematic themes for StoryReel",
-        "zh": "旅迹上线 12 款电影感主题"
+    "news": [
+      {
+        "date": "2026-10",
+        "link": "apps/storyreel/transitions/",
+        "title": {
+          "en": "Photo transitions, matched to your theme",
+          "zh": "照片转场，随主题而变"
+        },
+        "body": {
+          "en": "Ten transitions in three moods, from a slow zoom dissolve to a whip pan. Preview how each theme moves between photos.",
+          "zh": "三种氛围、十种转场，从舒缓的推进溶解到利落的甩镜。来预览每个主题在照片之间的切换。"
+        }
       },
-      "body": {
-        "en": "Globe, vintage chart, hand-drawn and more — each one a complete look for your trip video.",
-        "zh": "蓝色星球、复古海图、手绘……每一款都是一整套旅行视频的视觉风格。"
+      {
+        "date": "2026-04",
+        "title": {
+          "en": "Twelve cinematic themes for StoryReel",
+          "zh": "旅迹上线 12 款电影感主题"
+        },
+        "body": {
+          "en": "Globe, vintage chart, hand-drawn and more — each one a complete look for your trip video.",
+          "zh": "蓝色星球、复古海图、手绘……每一款都是一整套旅行视频的视觉风格。"
+        }
       }
-    },
+    ],
     "transitions": {
       "eyebrow": {
         "en": "Photo transitions",

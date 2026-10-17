@@ -319,6 +319,10 @@
       "en": "Normal speed",
       "zh": "正常速度"
     },
+    "tx_back": {
+      "en": "Back to {app}",
+      "zh": "返回{app}"
+    },
     "tx_used_in": {
       "en": "Used in",
       "zh": "用于"

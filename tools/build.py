@@ -308,10 +308,10 @@ def tour(app, lang, root):
     return f'<div class="tour">{"".join(rows)}\n    </div>'
 
 
-def transitions_section(app, lang):
-    """Photo-to-photo transition gallery (StoryReel). Content: "transitions" in apps.json.
-    Markup only — assets/js/transitions.js draws the phone preview and the looping cards on canvas,
-    from the JSON embedded at the end of the section."""
+def transitions_body(app, lang, path):
+    """Body of /apps/<slug>/transitions/ — the photo-to-photo transition gallery (StoryReel).
+    Content: "transitions" in apps.json. Markup only — assets/js/transitions.js draws the phone
+    preview and the looping cards on canvas, from the JSON embedded at the end of the section."""
     tx = app["transitions"]
     moods = {m["id"]: m for m in tx["moods"]}
     options = "".join(
@@ -340,15 +340,25 @@ def transitions_section(app, lang):
         "labels": {k: T("tx_" + k, lang) for k in ("pause", "play", "slow", "normal")},
     }
     data_json = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    app_path = f"apps/{app['slug']}/"
     return f'''
+<section class="app-hero tx-hero" style="--accent: var(--{app["accent"]})">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{href(lang, path, lang, "")}">{T("breadcrumb_home", lang)}</a><span aria-hidden="true">/</span>
+      <a href="{href(lang, path, lang, "")}#apps">{T("nav_apps", lang)}</a><span aria-hidden="true">/</span>
+      <a href="{href(lang, path, lang, app_path)}">{esc(NM(app, lang))}</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{esc(L(tx["eyebrow"], lang))}</span>
+    </nav>
+    <p class="eyebrow">{esc(NM(app, lang))} · {esc(L(tx["eyebrow"], lang))}</p>
+    <h1>{L(tx["title"], lang)}</h1>
+    <p class="lede">{esc(L(tx["lede"], lang))}</p>
+    <p class="tx-note">{esc(L(tx["note"], lang))}</p>
+  </div>
+</section>
+
 <section class="section section--tight tx" id="transitions" style="--accent: var(--{app["accent"]})">
   <div class="wrap">
-    <div class="reveal">
-      <p class="eyebrow">{esc(L(tx["eyebrow"], lang))}</p>
-      <h2>{L(tx["title"], lang)}</h2>
-      <p class="lede">{esc(L(tx["lede"], lang))}</p>
-      <p class="tx-note">{esc(L(tx["note"], lang))}</p>
-    </div>
     <div class="tx-stage reveal">
       <div class="tx-phone"><canvas class="tx-player" width="540" height="960" role="img" aria-label="{esc(T("tx_player_label", lang))}"></canvas></div>
       <div class="tx-panel">
@@ -364,13 +374,21 @@ def transitions_section(app, lang):
         </div>
       </div>
     </div>
-    <h3 class="tx-library-title reveal">{esc(L(tx["library"], lang))}</h3>
+    <h2 class="tx-library-title reveal">{esc(L(tx["library"], lang))}</h2>
     <div class="tx-grid">{cards}
     </div>
+    <p class="tx-back"><a class="link-arrow" href="{href(lang, path, lang, app_path)}">{T("tx_back", lang, app=esc(NM(app, lang)))} {ARROW}</a></p>
   </div>
   <script type="application/json" class="tx-data">{data_json}</script>
 </section>
 '''
+
+
+def transitions_page(a, lang):
+    path = f"apps/{a['slug']}/transitions/"
+    tx = a["transitions"]
+    return page(lang, path, f'{L(tx["eyebrow"], lang)} — {NM(a, lang)} · 4M Studio', L(tx["lede"], lang),
+                transitions_body(a, lang, path), scripts=("main", "transitions"), app=a)
 
 
 def visual(app, lang, root, big=False, home=False):
@@ -569,7 +587,7 @@ def home(lang):
         <div class="post__meta"><span class="chip">{esc(NM(a, lang))}</span><span>{month(n["date"], lang)}</span></div>
         <h3>{esc(L(n["title"], lang))}</h3>
         <p>{esc(L(n["body"], lang))}</p>
-        <a class="link-arrow" href="{href(lang, path, lang, "apps/" + a["slug"] + "/")}">{T("read_more", lang)} {ARROW}</a>
+        <a class="link-arrow" href="{href(lang, path, lang, n.get("link") or "apps/" + a["slug"] + "/")}">{T("read_more", lang)} {ARROW}</a>
       </article>''' for i, (a, n) in enumerate(posts_src))
 
     marquee_items = SITE["marquee"][lang]
@@ -689,6 +707,14 @@ def contact_block(lang, app=None):
 
 
 # ---------- app pages ----------
+def feature_link(f, lang, path):
+    """Optional "link": {"path", "label"} on a feature card, e.g. StoryReel's themes card → its transitions page."""
+    if not f.get("link"):
+        return ""
+    return (f'\n          <a class="link-arrow feature__link" href="{href(lang, path, lang, f["link"]["path"])}">'
+            f'{esc(L(f["link"]["label"], lang))} {ARROW}</a>')
+
+
 def app_page(a, lang):
     path = f"apps/{a['slug']}/"
     root = rel_root(lang, path)
@@ -697,7 +723,7 @@ def app_page(a, lang):
         <div class="feature reveal" style="--d: {0.05 * (i % 3):.2f}s">
           <div class="feature__icon" aria-hidden="true">{f["emoji"]}</div>
           <h3>{esc(L(f["title"], lang))}</h3>
-          <p>{esc(L(f["body"], lang))}</p>
+          <p>{esc(L(f["body"], lang))}</p>{feature_link(f, lang, path)}
         </div>''' for i, f in enumerate(a.get("features", [])))
     grid_cls = "features features--after" if a.get("tour") else "features"
     feats = f'<div class="{grid_cls}">{feats}\n    </div>' if feats.strip() else ""
@@ -746,7 +772,6 @@ def app_page(a, lang):
   </div>
 </section>
 
-{transitions_section(a, lang) if a.get("transitions") else ""}
 <section class="section section--tight" style="--accent: var(--{a["accent"]})">
   <div class="wrap facts">
     <div class="fact-card reveal">
@@ -784,8 +809,6 @@ def app_page(a, lang):
         ld["downloadUrl"] = a["appStore"]
     head = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     scripts = ("main",) + {"miemie": ("rig", "miemie", "cast"), "nest": ("rig", "qqnest")}.get(a["visual"], ())
-    if a.get("transitions"):
-        scripts += ("transitions",)
     return page(lang, path, f'{NM(a, lang)} — {L(a["tagline"], lang)} · 4M Studio',
                 L(a["lede"], lang), body, scripts=scripts, head_extra=head, app=a)
 
@@ -883,6 +906,8 @@ def main():
         written.append(write(out_file(lang, ""), home(lang)))
         for a in APPS:
             written.append(write(out_file(lang, f"apps/{a['slug']}/"), app_page(a, lang)))
+            if a.get("transitions"):
+                written.append(write(out_file(lang, f"apps/{a['slug']}/transitions/"), transitions_page(a, lang)))
         for a in APPS:
             written.append(write(out_file(lang, f"privacy/{a['slug']}.html"), privacy_page(a, lang)))
         written.append(write(out_file(lang, "privacy/"), privacy_index(lang)))
@@ -890,7 +915,8 @@ def main():
     written.append(write("404.html", not_found()))
 
     urls = []
-    for path in ([""] + [f"apps/{a['slug']}/" for a in APPS] + ["privacy/", "terms/"]
+    for path in ([""] + [f"apps/{a['slug']}/" for a in APPS]
+                 + [f"apps/{a['slug']}/transitions/" for a in APPS if a.get("transitions")] + ["privacy/", "terms/"]
                  + [f"privacy/{a['slug']}.html" for a in APPS]):
         for lang in LANGS:
             alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{HTML_LANG[l]}" href="{abs_url(l, path)}"/>' for l in LANGS)
