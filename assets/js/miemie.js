@@ -83,6 +83,11 @@
   function wrap(d) { while (d > 180) d -= 360; while (d <= -180) d += 360; return d; }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function band(v, a, b) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+  function smoother(v) { var t = clamp(v, 0, 1); return t * t * t * (t * (t * 6 - 15) + 10); }
+
+  /* The app's Layered2DAvatarRenderer Mouth / Fade constants. */
+  var MOUTH = { solidAt: 0.32, minAperture: 0.16, closedWiden: 0.10, closedFlatten: 0.05,
+                grinFrom: 0.18, grinTo: 0.58 };
 
   function prepare(def) {
     if (def.ready || !def.arm) return def;
@@ -314,6 +319,11 @@
         smile: layer('mouthSmile', feat),
         open: layer('mouthOpen', feat)
       };
+      // The closed mouths scale about their centres; the open one hinges 18% down
+      // from its top edge (the app's anchorPoint), so it grows downward from the lips.
+      [this.mouth.neutral, this.mouth.smile].forEach(function (n) { n.ox = n.x + n.w / 2; n.oy = n.y + n.h / 2; });
+      this.mouth.open.ox = this.mouth.open.x + this.mouth.open.w / 2;
+      this.mouth.open.oy = this.mouth.open.y + this.mouth.open.h * 0.18;
       var hairFrontG = group(head, P[0], def.hairY);
       layer('hairFront', hairFrontG);
 
@@ -648,12 +658,29 @@
       eye.brow.ty = -S.brow.x * d.brow + c * 4;
     }, this);
 
-    // Mouth cross-fade
-    var sm = clamp(S.smile.x, 0, 1), op = clamp(S.open.x, 0, 1);
-    this.mouth.open.a = op;
-    this.mouth.smile.a = sm * (1 - op);
-    this.mouth.neutral.a = 1 - Math.max(sm, op);
-    if (d.mouthDrop) this.mouth.open.ty = this.mouth.smile.ty = this.mouth.neutral.ty = op * d.mouthDrop;
+    // Mouth — the app's Layered2DAvatarRenderer.applyMouth. Bottom to top the
+    // drawings are neutral, smile, open, and each fades in OVER the one below,
+    // which stays opaque; the closed ones go only once the open mouth is solid
+    // (a step, at the one value where it is already fully opaque). So there is
+    // never a shut mouth showing through an open one, nor skin through both.
+    // How far the mouth opens is carried by the open drawing's height instead.
+    var sm = clamp(S.smile.x, 0, 1), op = clamp(S.open.x, 0, 1), m = this.mouth;
+    var presence = smoother(Math.min(1, op / MOUTH.solidAt));
+    // The page's smiles are all presets — asked for, not tracked — so, as a
+    // preset in the app, they skip the teeth knee.
+    var drawnGrin = smoother((smoother(sm) - MOUTH.grinFrom) / (MOUTH.grinTo - MOUTH.grinFrom));
+    var closed = presence >= 1 ? 0 : 1;
+    m.neutral.a = closed;
+    m.smile.a = drawnGrin * closed;
+    m.open.a = presence;
+    // Below the grin the closed mouth stands in for a small smile: a touch wider, a touch flatter.
+    var cs = sm * (1 - drawnGrin);
+    m.neutral.sx = m.smile.sx = 1 + MOUTH.closedWiden * cs;
+    m.neutral.sy = m.smile.sy = 1 - MOUTH.closedFlatten * cs;
+    // A parted slit at low values, wide at high ones, hinged near its top edge.
+    m.open.sx = 1 + 0.12 * sm;
+    m.open.sy = MOUTH.minAperture + (1 - MOUTH.minAperture) * op;
+    if (d.mouthDrop) m.open.ty = m.smile.ty = m.neutral.ty = op * d.mouthDrop;
     n.blush.a = clamp(S.blush.x, 0, 1);
 
     // Arms (idle: a hint of swing with the breath)
