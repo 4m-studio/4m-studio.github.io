@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The AvatarTracker cast — Stick, Mika, Mochi, Taro, MieMie 3D and Zhuzhu, next to MieMie (assets/js/miemie.js).
+   The AvatarTracker cast — Stick, Mika, Mochi, Taro, MieMie 3D, Zhuzhu and AvatarSample B, next to MieMie (assets/js/miemie.js).
 
    Only the AvatarTracker app page loads this. A switcher under the live stage
    swaps the character on the same canvas: the old one is torn down first, so
@@ -14,6 +14,9 @@
    - Mochi, Taro, MieMie 3D and Zhuzhu: the 3D characters (PrimitiveChibiBody,
      PrimitiveCatBody, PrimitiveMieMieBody, PrimitivePigBody), rebuilt with three.js in
      assets/js/avatar3d.js, which is only downloaded when one of them is picked.
+   - AvatarSample B: pixiv's VRoid sample model, the app's modelled 3D human,
+     loaded with three-vrm (a chunk of the same bundle) from
+     assets/models/avatarsample-b.vrm, both fetched only when she is picked.
    ========================================================================== */
 (function () {
   'use strict';
@@ -305,16 +308,31 @@
         note.textContent = lang() === 'zh' ? '正在加载 3D…' : 'Loading 3D…';
         stage.appendChild(note);
         st.note = note;
+        if (o.dev) {
+          // A character that is not in the App Store version yet says so on the stage.
+          var dev = document.createElement('span');
+          dev.className = 'mm-devnote';
+          dev.textContent = o.dev[lang() === 'zh' ? 'zh' : 'en'];
+          stage.appendChild(dev);
+          st.dev = dev;
+        }
+        var failed = function () {
+          note.textContent = lang() === 'zh' ? '3D 加载失败，请刷新重试' : 'Couldn’t load 3D — try reloading';
+        };
         load3D(self.root).then(function (mod) {
           if (self.dead) return;
-          try { st.char3d = mod[o.factory](fig, VIEW); }
+          // A modelled character (o.model) is fetched on top of the bundle and reports how far it got.
+          var extra = o.model ? { url: new URL(self.root.getAttribute(o.model), document.baseURI).href,
+            onProgress: function (f) { if (!self.dead) note.textContent = (lang() === 'zh' ? '正在加载 3D… ' : 'Loading 3D… ') + Math.round(f * 100) + '%'; } } : undefined;
+          try { st.char3d = mod[o.factory](fig, VIEW, extra); }
           catch (e) { note.textContent = lang() === 'zh' ? '这台设备无法显示 3D' : '3D isn’t available on this device'; return; }
           st.char3d.setSize(st.css[0], st.css[1], window.devicePixelRatio || 1);
-          if (note.parentNode) note.parentNode.removeChild(note);
-          self.draw(); self.wake();
-        }, function () {
-          note.textContent = lang() === 'zh' ? '3D 加载失败，请刷新重试' : 'Couldn’t load 3D — try reloading';
-        });
+          Promise.resolve(st.char3d.ready).then(function () {
+            if (self.dead) return;
+            if (note.parentNode) note.parentNode.removeChild(note);
+            self.draw(); self.wake();
+          }, failed);
+        }, failed);
         return st;
       },
       build: function (self) { self.t3d = {}; self.last3d = 0; },
@@ -348,6 +366,7 @@
         if (st.char3d) st.char3d.dispose();
         st.char3d = null;
         if (st.note && st.note.parentNode) st.note.parentNode.removeChild(st.note);
+        if (st.dev && st.dev.parentNode) st.dev.parentNode.removeChild(st.dev);
       }
     };
   }
@@ -371,7 +390,15 @@
   var ZHUZHU = make3D({ id: 'zhuzhu', name: 'Zhuzhu', factory: 'createZhuzhu3D',
     view: { yTop: 2.22, yBot: -0.70 }, chin: 0.50, eyes: 1.05 });
 
-  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO, miemie3d: MIEMIE3D, zhuzhu: ZHUZHU };
+  // AvatarSample B: pixiv's VRoid sample model (VRM), the app's first modelled human —
+  // in Debug builds only so far, so the stage says she's in development. She is
+  // about 1.58 m to the top of her bows; the stage shows her from there to the hips
+  // (her chin at about 1.33 m, eyes at 1.41 m), so her raised hands stay in.
+  var SAMPLEB = make3D({ id: 'sampleb', name: 'Sample B', factory: 'createSampleB3D', model: 'data-vrm',
+    view: { yTop: 1.70, yBot: 0.58 }, chin: 1.33, eyes: 1.41,
+    dev: { en: 'In development · test builds only', zh: '开发中 · 目前仅在测试版中' } });
+
+  var DEFS = { stick: STICK, miemie: MM, mika: MIKA, mochi: MOCHI, taro: TARO, miemie3d: MIEMIE3D, zhuzhu: ZHUZHU, sampleb: SAMPLEB };
 
   /* ---------- Switcher ---------- */
   function init() {

@@ -87,6 +87,17 @@
       {
         "date": "2026-10",
         "title": {
+          "en": "Coming next: a modelled 3D human",
+          "zh": "即将到来：建模的 3D 人物"
+        },
+        "body": {
+          "en": "AvatarTracker can now drive a fully modelled character, with a real skeleton, a blend-shape face and hair that swings on its own. The first is AvatarSample B, pixiv's VRoid sample model. She's in test builds for now; pick Sample B on the AvatarTracker page to play with her.",
+          "zh": "随影现在可以驱动完整建模的角色了：真实骨骼、混合形状表情，头发还会自己摆动。第一位是 pixiv 的 VRoid 示例模型 AvatarSample B。她目前只在测试版里；在随影的页面上选 Sample B 就能和她玩。"
+        }
+      },
+      {
+        "date": "2026-10",
+        "title": {
           "en": "Meet Zhuzhu, a 3D piglet",
           "zh": "认识一下 Zhuzhu：一只 3D 小猪"
         },
@@ -295,6 +306,48 @@
             "zh": "同样的七种反应，🫶 会冒出一颗 3D 爱心"
           }
         ]
+      },
+      {
+        "img": {
+          "src": "avatartracker/sampleb-live.webp",
+          "alt": {
+            "en": "AvatarTracker live screen in a test build: AvatarSample B, a modelled 3D girl with long purple twin tails, black bow ribbons, star hair clips, a choker and an open varsity jacket, smiling at the camera above the reaction bar",
+            "zh": "随影测试版的直播画面：建模 3D 女孩 AvatarSample B，紫色长双马尾、黑色蝴蝶结发带、星星发夹、项圈和敞开的棒球夹克，对着镜头微笑，下方是反应栏"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "A modelled human",
+          "zh": "建模人物"
+        },
+        "title": {
+          "en": "Next: a fully modelled 3D human.",
+          "zh": "下一步：完整建模的 3D 人物。"
+        },
+        "body": {
+          "en": "The characters so far were drawn or built from simple shapes. Now AvatarTracker can also take a modelled character: a rigged 3D model with a real skeleton, a face made of blend shapes, and hair that moves on its own spring bones. The first is AvatarSample B, pixiv's VRoid sample model. Her blinks, mouth and brows follow yours, her head turns with yours, her long hair and bows swing as she moves, and she waves, makes a heart and throws a peace sign like the rest of the cast. She is still in development and only in test builds, but you can play with her at the top of this page: pick Sample B.",
+          "zh": "之前的角色，要么是画出来的，要么是用简单形状搭成的。现在，随影也能使用建模角色了：带真实骨骼的 3D 模型，用混合形状做出的脸，以及靠弹簧骨骼自己摆动的头发。第一位是 pixiv 的 VRoid 示例模型 AvatarSample B。她跟着你眨眼、张嘴、挑眉，跟着你转头；她一动，长发和蝴蝶结就跟着摆；挥手、比心、比耶，和其他角色一样不少。她还在开发中，目前只在测试版里，不过你现在就能在本页顶部和她玩：选 Sample B。"
+        },
+        "points": [
+          {
+            "en": "A real skeleton, a blend-shape face and hair physics",
+            "zh": "真实骨骼、混合形状表情和头发物理"
+          },
+          {
+            "en": "Made from a VRoid Studio model (VRM)",
+            "zh": "来自 VRoid Studio 模型（VRM）"
+          },
+          {
+            "en": "In development: in test builds only for now",
+            "zh": "开发中：目前仅在测试版中"
+          }
+        ],
+        "note": {
+          "en": "AvatarSample B © pixiv Inc. (VRoid Project), used under her VRM licence. 4M Studio is not affiliated with or endorsed by pixiv.",
+          "zh": "AvatarSample B © pixiv Inc.（VRoid Project），依其 VRM 许可使用。4M Studio 与 pixiv 无关联，亦未获其背书。"
+        }
       },
       {
         "img": {
@@ -725,7 +778,8 @@
     },
     "shots": [
       {
-        "src": "storyreel/timeline.webp", "src_zh": "storyreel/zh/timeline.webp",
+        "src": "storyreel/timeline.webp",
+        "src_zh": "storyreel/zh/timeline.webp",
         "alt": {
           "en": "StoryReel Timeline tab with photos grouped by day",
           "zh": "旅迹时间线页：按天分组的照片"
@@ -734,7 +788,8 @@
         "h": 1304
       },
       {
-        "src": "storyreel/home.webp", "src_zh": "storyreel/zh/home.webp",
+        "src": "storyreel/home.webp",
+        "src_zh": "storyreel/zh/home.webp",
         "alt": {
           "en": "StoryReel Home with trip projects and Browse Memories",
           "zh": "旅迹首页：旅行项目与回忆浏览"
@@ -744,7 +799,8 @@
         "island": false
       },
       {
-        "src": "storyreel/map.webp", "src_zh": "storyreel/zh/map.webp",
+        "src": "storyreel/map.webp",
+        "src_zh": "storyreel/zh/map.webp",
         "alt": {
           "en": "StoryReel Map tab showing photo counts on a globe",
           "zh": "旅迹地图页：地球上标出各地照片数量"
@@ -756,7 +812,8 @@
     "tour": [
       {
         "img": {
-          "src": "storyreel/appstore-stories.webp", "src_zh": "storyreel/zh/appstore-stories.webp",
+          "src": "storyreel/appstore-stories.webp",
+          "src_zh": "storyreel/zh/appstore-stories.webp",
           "alt": {
             "en": "StoryReel — Turn photos into travel stories: the Home screen with trip projects",
             "zh": "旅迹——把照片变成旅行故事：首页与旅行项目"
@@ -798,7 +855,8 @@
       },
       {
         "img": {
-          "src": "storyreel/appstore-chapters.webp", "src_zh": "storyreel/zh/appstore-chapters.webp",
+          "src": "storyreel/appstore-chapters.webp",
+          "src_zh": "storyreel/zh/appstore-chapters.webp",
           "alt": {
             "en": "StoryReel — Edit every chapter of the trip: the Story Builder with the Edit Chapter panel",
             "zh": "旅迹——编辑旅行的每个章节：故事编辑器与章节编辑面板"
@@ -840,7 +898,8 @@
       },
       {
         "img": {
-          "src": "storyreel/appstore-map-timeline.webp", "src_zh": "storyreel/zh/appstore-map-timeline.webp",
+          "src": "storyreel/appstore-map-timeline.webp",
+          "src_zh": "storyreel/zh/appstore-map-timeline.webp",
           "alt": {
             "en": "StoryReel — Follow the story on Map and Timeline",
             "zh": "旅迹——在地图和时间线上回顾旅程"
@@ -886,7 +945,8 @@
       }
     ],
     "banner": {
-      "src": "storyreel/appstore-overview.webp", "src_zh": "storyreel/zh/appstore-overview.webp",
+      "src": "storyreel/appstore-overview.webp",
+      "src_zh": "storyreel/zh/appstore-overview.webp",
       "alt": {
         "en": "StoryReel — Plan, build and relive every journey: Organize, Build and Explore",
         "zh": "旅迹——规划、创作、重温每一段旅程：整理、创作、探索"
@@ -2642,6 +2702,299 @@
           {
             "en": "An airplane-mode check in Advanced confirms it all works offline",
             "zh": "“高级选项”里的飞行模式自检，确认离线一切正常"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "keepfit",
+    "name": {
+      "en": "KeepFit",
+      "zh": "轻记"
+    },
+    "icon": "icon-keepfit.png",
+    "accent": "keepfit",
+    "isNew": true,
+    "appStore": "",
+    "visual": "shots",
+    "category": {
+      "en": "Health & Fitness",
+      "zh": "健康健美"
+    },
+    "tagline": {
+      "en": "Meals, workouts, sleep and weight — one screen.",
+      "zh": "饮食、运动、睡眠、体重，一屏看全。"
+    },
+    "headline": {
+      "en": "Snap your meal.<br><span class=\"grad-text\">See your day.</span>",
+      "zh": "拍下这一餐，<br><span class=\"grad-text\">看清这一天。</span>"
+    },
+    "lede": {
+      "en": "KeepFit puts calories and macros, workouts, steps, water, sleep and weight on one Today screen. Apple Health fills most of it in for you; snap a meal and AI estimates what's on the plate. Trends then shows where your weight is really heading, smoothed into a 7-day average with an ETA to your target.",
+      "zh": "轻记把热量和三大营养素、运动、步数、饮水、睡眠和体重放在同一个“今天”页面。大部分数据由 Apple 健康自动填好；拍下这一餐，AI 就估算出盘子里有什么。“趋势”页再把体重平滑成 7 天均线，告诉你真实走向和到达目标的预计日期。"
+    },
+    "platform": {
+      "en": "iPhone · iOS 17 · Apple Health",
+      "zh": "iPhone · iOS 17 · Apple 健康"
+    },
+    "requirements": {
+      "en": "iOS 17 or later. Works best with Apple Health. AI meal photos use your own Claude or Gemini API key. Nutrition estimates are approximate and not medical advice.",
+      "zh": "iOS 17 或更高版本；搭配 Apple 健康效果最佳。AI 识别餐食照片需要你自己的 Claude 或 Gemini API 密钥。营养数值为估算，不构成医疗建议。"
+    },
+    "features": [
+      {
+        "emoji": "🎯",
+        "title": {
+          "en": "A plan from your profile",
+          "zh": "按你的情况定计划"
+        },
+        "body": {
+          "en": "Set up asks your height, age, activity and goal — lose, maintain or gain, with a weekly pace — and works out calories, macros, water, steps and exercise for you.",
+          "zh": "首次设置会问你的身高、年龄、活动量和目标（减重、保持或增重，以及每周速度），再为你算出热量、营养素、饮水、步数和运动目标。"
+        }
+      },
+      {
+        "emoji": "📥",
+        "title": {
+          "en": "Bring your history",
+          "zh": "带上以前的数据"
+        },
+        "body": {
+          "en": "Import a CSV or cells copied from Google Sheets. Columns are recognised in English or Chinese, duplicates are counted before anything is saved, and every import can be undone.",
+          "zh": "导入 CSV，或直接粘贴从 Google 表格复制的单元格。中英文表头都能识别，保存前先统计重复项，每次导入都可以撤销。"
+        }
+      },
+      {
+        "emoji": "🔒",
+        "title": {
+          "en": "Yours, on your iPhone",
+          "zh": "数据只在你的 iPhone 上"
+        },
+        "body": {
+          "en": "No account and nothing to sign up for. Everything you log stays on the phone, and Apple Health is only read, never written.",
+          "zh": "无需账号，不用注册。你记录的一切都留在手机上；Apple 健康只读取，从不写入。"
+        }
+      }
+    ],
+    "privacy": [
+      {
+        "en": "Everything you log is stored only on your iPhone",
+        "zh": "你记录的一切只存在你的 iPhone 上"
+      },
+      {
+        "en": "Apple Health is read-only — KeepFit never writes to it",
+        "zh": "只读取 Apple 健康，从不写入"
+      },
+      {
+        "en": "Meal photos go only to the AI provider you pick, with your own key",
+        "zh": "餐食照片只发给你选的 AI 服务商，用的是你自己的密钥"
+      }
+    ],
+    "news": {
+      "date": "2026-10",
+      "title": {
+        "en": "New: KeepFit, your day on one screen",
+        "zh": "新 App：轻记，一屏看全你的一天"
+      },
+      "body": {
+        "en": "Calories, workouts, sleep, water and weight together, filled in from Apple Health — snap a meal and AI logs it.",
+        "zh": "热量、运动、睡眠、饮水和体重放在一起，由 Apple 健康自动填好——拍下一餐，AI 就帮你记上。"
+      }
+    },
+    "theme": {
+      "mode": "light",
+      "bg": "#fbf4f2",
+      "bg2": "#f6e6e2",
+      "ink": "#2a1512",
+      "colors": [
+        "#ec5a47",
+        "#ff8a75",
+        "#c23a3f"
+      ]
+    },
+    "shots": [
+      {
+        "src": "keepfit/journal.webp",
+        "alt": {
+          "en": "KeepFit Journal: today's entries — an AI-logged chicken grain bowl, a morning run from Apple Health, oatmeal, a weigh-in and last night's sleep — with filter chips and search above",
+          "zh": "轻记“日志”页：今天的记录——AI 识别的鸡肉谷物碗、来自 Apple 健康的晨跑、燕麦粥、一次称重和昨晚的睡眠——上方是筛选标签和搜索框"
+        },
+        "w": 600,
+        "h": 1304,
+        "island": false
+      },
+      {
+        "src": "keepfit/today.webp",
+        "alt": {
+          "en": "KeepFit Today screen: a week strip, then Calories with 808 kcal left and protein, carbs and fat bars, Activity rings for steps, exercise and active energy, Meals, Workouts, Water and Sleep tiles",
+          "zh": "轻记“今天”页：顶部是一周日期条，下面是还剩 808 千卡的热量环和蛋白质、碳水、脂肪进度条，步数、锻炼和活动能量三环，以及餐食、运动、饮水和睡眠卡片"
+        },
+        "w": 600,
+        "h": 1304,
+        "island": false
+      },
+      {
+        "src": "keepfit/trends.webp",
+        "alt": {
+          "en": "KeepFit Trends, one month: weight dots with a 7-day average line falling toward a dashed target, rate −0.8 lb a week and an ETA, then average calories eaten",
+          "zh": "轻记“趋势”页（一个月）：体重打点和 7 天均线朝着虚线目标下降，每周 −0.8 磅，并给出预计达成日期；下面是平均摄入热量"
+        },
+        "w": 600,
+        "h": 1304,
+        "island": false
+      }
+    ],
+    "tour": [
+      {
+        "img": {
+          "src": "keepfit/today.webp",
+          "alt": {
+            "en": "KeepFit Today screen: a week strip, then Calories with 808 kcal left and protein, carbs and fat bars, Activity rings for steps, exercise and active energy, Meals, Workouts, Water and Sleep tiles",
+            "zh": "轻记“今天”页：顶部是一周日期条，下面是还剩 808 千卡的热量环和蛋白质、碳水、脂肪进度条，步数、锻炼和活动能量三环，以及餐食、运动、饮水和睡眠卡片"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Today",
+          "zh": "今天"
+        },
+        "title": {
+          "en": "Your whole day on one screen.",
+          "zh": "一整天，一屏看全。"
+        },
+        "body": {
+          "en": "Calories left, with protein, carbs and fat; activity rings for steps, exercise and active energy; meals, workouts, water and sleep, then your latest weigh-in. Swipe the week strip, or pull it down for a month calendar, to see any day. Tap a tile for the full detail.",
+          "zh": "还剩多少热量，以及蛋白质、碳水和脂肪；步数、锻炼和活动能量三环；餐食、运动、饮水和睡眠，最后是最近一次称重。左右滑动周日期条，或下拉打开月历，就能查看任意一天；点开卡片看完整详情。"
+        },
+        "points": [
+          {
+            "en": "Workout calories can be added to the day's budget",
+            "zh": "运动消耗可计入当天的热量预算"
+          },
+          {
+            "en": "Steps, workouts and sleep arrive from Apple Health",
+            "zh": "步数、运动和睡眠来自 Apple 健康"
+          },
+          {
+            "en": "+8 fl oz of water in one tap",
+            "zh": "一下点击，记一杯水"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "keepfit/journal.webp",
+          "alt": {
+            "en": "KeepFit Journal: today's entries — an AI-logged chicken grain bowl, a morning run from Apple Health, oatmeal, a weigh-in and last night's sleep — with filter chips and search above",
+            "zh": "轻记“日志”页：今天的记录——AI 识别的鸡肉谷物碗、来自 Apple 健康的晨跑、燕麦粥、一次称重和昨晚的睡眠——上方是筛选标签和搜索框"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Journal",
+          "zh": "日志"
+        },
+        "title": {
+          "en": "Snap a meal. AI logs it.",
+          "zh": "拍下一餐，AI 帮你记。"
+        },
+        "body": {
+          "en": "Take a photo, or just describe what you ate, and AI names each food and estimates its calories, protein, carbs and fat for you to check before saving. Everything lands in the Journal, a timeline of every meal, workout, weigh-in and night's sleep, tagged by where it came from.",
+          "zh": "拍张照片，或者用文字描述吃了什么，AI 就识别出每样食物，估算热量、蛋白质、碳水和脂肪，你确认后再保存。所有记录都进入“日志”：每一餐、每次运动、每次称重和每晚睡眠按时间排好，并标明来源。"
+        },
+        "points": [
+          {
+            "en": "Photo or text — “2 eggs, toast, black coffee” works too",
+            "zh": "拍照或打字都行，“两个鸡蛋、吐司、黑咖啡”也可以"
+          },
+          {
+            "en": "Filter, search, jump to a date, swipe to edit or delete",
+            "zh": "筛选、搜索、跳到某天，滑动即可编辑或删除"
+          },
+          {
+            "en": "Health, AI and Imported tags show where each entry came from",
+            "zh": "“健康”“AI”“导入”标签标明每条记录的来源"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "keepfit/trends.webp",
+          "alt": {
+            "en": "KeepFit Trends, one month: weight dots with a 7-day average line falling toward a dashed target, rate −0.8 lb a week and an ETA, then average calories eaten",
+            "zh": "轻记“趋势”页（一个月）：体重打点和 7 天均线朝着虚线目标下降，每周 −0.8 磅，并给出预计达成日期；下面是平均摄入热量"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Trends",
+          "zh": "趋势"
+        },
+        "title": {
+          "en": "See past the day-to-day swings.",
+          "zh": "看穿每天的起伏。"
+        },
+        "body": {
+          "en": "Weight comes first: every weigh-in as a dot, a 7-day average that smooths out water weight, your target line, your weekly rate and an ETA. Below it, calories, macros, active energy, steps, workouts, sleep, water and resting heart rate over a week, a month or a year.",
+          "zh": "体重放在最前面：每次称重是一个点，7 天均线抹平水分带来的波动，再加上目标线、每周变化速度和预计达成日期。下面是一周、一个月或一年的热量、营养素、活动能量、步数、运动、睡眠、饮水和静息心率。"
+        },
+        "points": [
+          {
+            "en": "Scrub a chart to read any day, as in Apple Health",
+            "zh": "像 Apple 健康一样，拖动图表查看任意一天"
+          },
+          {
+            "en": "Long-press a card to reorder it, or hide what you don't track",
+            "zh": "长按卡片调整顺序，不关心的可以隐藏"
+          },
+          {
+            "en": "1W, 1M, 3M, 6M and 1Y ranges",
+            "zh": "1 周、1 月、3 月、6 月和 1 年"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "keepfit/settings.webp",
+          "alt": {
+            "en": "KeepFit Settings: Apple Health sync, AI food analysis with Claude selected and a working key, the model and its cost per photo, and this month's AI usage and estimated cost",
+            "zh": "轻记“设置”页：Apple 健康同步，AI 食物分析选择 Claude 且密钥可用，所选模型和每张照片的费用，以及本月 AI 用量和预估花费"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Your AI, your key",
+          "zh": "你的 AI，你的密钥"
+        },
+        "title": {
+          "en": "AI on your terms — and your bill.",
+          "zh": "AI 怎么用、花多少，你说了算。"
+        },
+        "body": {
+          "en": "Pick Claude or Gemini and paste your own API key; it stays in the iPhone's Keychain, and testing it is free. Photos are resized before upload, answers are kept short and the same photo is never analysed twice, so a meal costs a fraction of a cent. Settings shows this month's analyses and the estimated cost.",
+          "zh": "选择 Claude 或 Gemini，粘贴你自己的 API 密钥；密钥保存在 iPhone 的钥匙串里，测试密钥不花钱。照片上传前会先缩小，回答尽量简短，同一张照片不会重复分析，所以一餐的费用不到一美分。“设置”里能看到本月的分析次数和预估花费。"
+        },
+        "points": [
+          {
+            "en": "Cheapest capable model by default",
+            "zh": "默认使用够用且最便宜的模型"
+          },
+          {
+            "en": "Photos go straight from your iPhone to the provider you chose",
+            "zh": "照片直接从你的 iPhone 发给你选择的服务商"
+          },
+          {
+            "en": "No AI key? Log meals by hand — everything else works",
+            "zh": "没有密钥？手动记录餐食，其他功能照常使用"
           }
         ]
       }

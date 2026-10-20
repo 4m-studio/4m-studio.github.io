@@ -1,7 +1,7 @@
 # 4M Studio — website
 
 The marketing site for **4M Studio** and its iOS apps — AvatarTracker, StoryReel,
-MeetLog, QQNest, Wearly, WorthView, CardPick and LingoPal — in **English and 中文**.
+MeetLog, QQNest, Wearly, WorthView, CardPick, LingoPal and KeepFit — in **English and 中文**.
 Live at <https://4m-studio.github.io/>, served by GitHub Pages from `main`.
 
 Plain static HTML, CSS and JS. The pages are generated from two JSON files by a
@@ -111,6 +111,18 @@ rectangles, head pivot, eye apertures and arm skeleton copied from its
 To refresh the art: convert each `MieMie.avatarpkg/layers/*.png` to WebP at 50%
 into `assets/img/miemie/`. If a layer's rectangle changes in `avatar.json`,
 update its row in the `L` table.
+
+### AvatarTracker's 3D characters
+
+Mochi, Taro, MieMie 3D, Zhuzhu and AvatarSample B are drawn with three.js, built from
+`tools/avatar3d/` (see its README) into `assets/js/avatar3d.js` plus split chunks in
+`assets/js/3d/`, all fetched only when someone picks a 3D character. AvatarSample B is
+pixiv's VRoid sample model (**not CC0**; in the app's Debug builds only), loaded from
+`assets/models/avatarsample-b.vrm` (2.2 MB), a trimmed copy made by
+`tools/avatar3d/sampleb_web.py`. Her stage says *In development · test builds only*, and her tour row
+credits pixiv and says 4M Studio isn't affiliated with or endorsed by them — keep both while she's
+unreleased, and re-read her licence notes (AvatarTracker's
+`Tools/model_avatar/models/AvatarSample_B.LICENSE.md`) before changing how she's presented.
 
 ## 4. Before launch — still placeholder
 

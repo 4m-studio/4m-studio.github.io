@@ -204,15 +204,15 @@ GESTURES = [("wave", "👋"), ("heart", "🫶"), ("bigheart", "💗"), ("peace",
 
 
 CAST = [("stick", "Stick"), ("miemie", "MieMie"), ("mika", "Mika"), ("mochi", "Mochi"), ("taro", "Taro"),
-        ("miemie3d", "MieMie"), ("zhuzhu", "Zhuzhu")]
-CAST_3D = {"mochi", "taro", "miemie3d", "zhuzhu"}
+        ("miemie3d", "MieMie"), ("zhuzhu", "Zhuzhu"), ("sampleb", "Sample B")]
+CAST_3D = {"mochi", "taro", "miemie3d", "zhuzhu", "sampleb"}
 STICK_ICON = ('<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'
               '<circle cx="16" cy="11" r="7" fill="#14141c"/><path d="M13.4 9.6v2.2M18.6 9.6v2.2M13.6 14q2.4 1.6 4.8 0'
               'M16 18v6M16 24l-4 5M16 24l4 5M10.5 20.5h11"/></svg>')
 
 
 def cast_switcher(lang, root):
-    """Stick · MieMie · Mika · Mochi · Taro · MieMie 3D · Zhuzhu under the live stage (assets/js/cast.js swaps them on the same stage)."""
+    """Stick · MieMie · Mika · Mochi · Taro · MieMie 3D · Zhuzhu · AvatarSample B under the live stage (assets/js/cast.js swaps them on the same stage)."""
     btns = []
     for cid, name in CAST:
         av = (f'<span class="mm-cast__av mm-cast__av--stick" aria-hidden="true">{STICK_ICON}</span>' if cid == "stick" else
@@ -232,7 +232,8 @@ def miemie(lang, root, width=420, short=False, cast=False):
         f'aria-label="{esc(T("g_" + g, lang))}" aria-pressed="false">{e}</button>' for g, e in GESTURES)
     # short: on phones (home slide) the stage crops her at the waist so the whole card fits on screen
     # cast: the 3D characters' WebGL bundle is fetched on demand, so its URL (with cache-busting hash) rides on the element.
-    data3d = f' data-3d="{root}assets/js/avatar3d.js?v={ver("assets/js/avatar3d.js")}"' if cast else ""
+    data3d = (f' data-3d="{root}assets/js/avatar3d.js?v={ver("assets/js/avatar3d.js")}"'
+              f' data-vrm="{root}assets/models/avatarsample-b.vrm?v={ver("assets/models/avatarsample-b.vrm")}"') if cast else ""
     return f'''<div class="miemie" data-miemie{" data-short" if short else ""}{data3d} data-src="{root}assets/img/miemie/" data-frame-top="640" style="--mm-w:{width}px"
                data-hint-touch="{esc(T("mm_hint_touch", lang))}">
             <div class="mm-stage" tabindex="0" role="button" aria-label="{esc(T("mm_label", lang))}">
@@ -302,7 +303,7 @@ def tour(app, lang, root):
           <p class="tour__step"><span>{i + 1:02d}</span>{esc(L(t["step"], lang))}</p>
           <h3>{esc(L(t["title"], lang))}</h3>
           <p class="lede">{esc(L(t["body"], lang))}</p>
-          <ul class="feature-list">{pts}</ul>
+          <ul class="feature-list">{pts}</ul>{f'{chr(10)}          <p class="tour__note">{esc(L(t["note"], lang))}</p>' if t.get("note") else ""}
         </div>
       </div>''')
     return f'<div class="tour">{"".join(rows)}\n    </div>'
