@@ -69,7 +69,7 @@ def NMH(a, lang):
 
 
 def month(date, lang):
-    y, m = date.split("-")
+    y, m = date.split("-")[:2]          # "2026-10" or "2026-10-19" (the day only orders posts)
     if lang == "zh":
         return f"{y} 年 {int(m)} 月"
     return f"{SITE['months']['en'][int(m) - 1]} {y}"
@@ -580,9 +580,15 @@ def home(lang):
         <span class="link-arrow">{T("learn_more", lang)} {ARROW}</span>
       </a>''' for i, a in enumerate(APPS))
 
-    # An app's "news" is one post or a list of posts; every post is shown, newest first.
-    posts_src = sorted(((a, n) for a in APPS for n in (a["news"] if isinstance(a["news"], list) else [a["news"]])),
-                       key=lambda an: an[1]["date"], reverse=True)
+    # An app's "news" is one post or a list of posts; every post is shown, newest first. A date may carry a day
+    # ("2026-10-19") to order posts within a month; on the same date the app listed later in apps.json (the newer
+    # app) comes first, and an app's own posts keep their order.
+    posts_src = [(a, n) for i, a in enumerate(APPS)
+                 for j, n in enumerate(a["news"] if isinstance(a["news"], list) else [a["news"]])]
+    order = {id(n): (n["date"] + "-00" if len(n["date"]) == 7 else n["date"], i, -j)
+             for i, a in enumerate(APPS)
+             for j, n in enumerate(a["news"] if isinstance(a["news"], list) else [a["news"]])}
+    posts_src.sort(key=lambda an: order[id(an[1])], reverse=True)
     posts = "".join(f'''
       <article class="post reveal" style="--d: {0.05 * (i % 3):.2f}s">
         <div class="post__meta"><span class="chip">{esc(NM(a, lang))}</span><span>{month(n["date"], lang)}</span></div>

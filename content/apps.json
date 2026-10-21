@@ -85,7 +85,7 @@
     ],
     "news": [
       {
-        "date": "2026-10",
+        "date": "2026-10-19",
         "title": {
           "en": "Coming next: a modelled 3D human",
           "zh": "即将到来：建模的 3D 人物"
@@ -96,7 +96,7 @@
         }
       },
       {
-        "date": "2026-10",
+        "date": "2026-10-14",
         "title": {
           "en": "Meet Zhuzhu, a 3D piglet",
           "zh": "认识一下 Zhuzhu：一只 3D 小猪"
@@ -107,7 +107,7 @@
         }
       },
       {
-        "date": "2026-10",
+        "date": "2026-10-12",
         "title": {
           "en": "MieMie, now in 3D",
           "zh": "MieMie 来到了 3D"
@@ -118,7 +118,7 @@
         }
       },
       {
-        "date": "2026-10",
+        "date": "2026-10-07",
         "title": {
           "en": "Meet Taro, a chubby 3D cat",
           "zh": "认识一下 Taro：一只圆滚滚的 3D 小猫"
@@ -129,7 +129,7 @@
         }
       },
       {
-        "date": "2026-10",
+        "date": "2026-10-02",
         "title": {
           "en": "Meet Mochi, our first 3D character",
           "zh": "认识一下 Mochi：我们的第一个 3D 角色"
@@ -480,7 +480,7 @@
     ],
     "news": [
       {
-        "date": "2026-10",
+        "date": "2026-10-15",
         "link": "apps/storyreel/transitions/",
         "title": {
           "en": "Photo transitions, matched to your theme",
@@ -2494,7 +2494,7 @@
       }
     ],
     "news": {
-      "date": "2026-10",
+      "date": "2026-10-04",
       "title": {
         "en": "Meet LingoPal, a translator for Mom and Dad",
         "zh": "随译来了：给爸妈的翻译"
@@ -2791,17 +2791,74 @@
         "zh": "餐食照片只发给你选的 AI 服务商，用的是你自己的密钥"
       }
     ],
-    "news": {
-      "date": "2026-10",
-      "title": {
-        "en": "New: KeepFit, your day on one screen",
-        "zh": "新 App：轻记，一屏看全你的一天"
+    "news": [
+      {
+        "date": "2026-10-21",
+        "title": {
+          "en": "KeepFit Journal: every day on one card",
+          "zh": "轻记日志：每天一张卡片"
+        },
+        "body": {
+          "en": "The Journal now opens on one card per day: that day's meal photos as a collage, its net calories with a Gain, Even or Lose day badge, then eaten, burned, steps, sleep, weight and water at a glance. Tap any photo or number to edit it.",
+          "zh": "日志现在按天显示，每天一张卡片：当天的餐食照片拼在一起，标出净热量和“增重日”“持平日”或“减重日”，下面一眼看到摄入、消耗、步数、睡眠、体重和饮水。点任意一张照片或一个数字就能编辑。"
+        }
       },
-      "body": {
-        "en": "Calories, workouts, sleep, water and weight together, filled in from Apple Health — snap a meal and AI logs it.",
-        "zh": "热量、运动、睡眠、饮水和体重放在一起，由 Apple 健康自动填好——拍下一餐，AI 就帮你记上。"
+      {
+        "date": "2026-10-21",
+        "title": {
+          "en": "KeepFit Journal: a waterfall of your meals",
+          "zh": "轻记日志：餐食照片瀑布流"
+        },
+        "body": {
+          "en": "Switch to Photos and every meal you've snapped falls into a two-column waterfall, each photo at its own shape with its name, calories and day. Search finds a dish weeks back; tap one to open it. Prefer rows? The List view is still there.",
+          "zh": "切换到“照片”，你拍过的每一餐排成两列瀑布流，每张照片保持原本的比例，配上名称、热量和日期。搜索能翻到几周前的某道菜，点一下就能打开。更喜欢一行一行看？“列表”视图依然在。"
+        }
+      },
+      {
+        "date": "2026-10-19",
+        "title": {
+          "en": "New: KeepFit, your day on one screen",
+          "zh": "新 App：轻记，一屏看全你的一天"
+        },
+        "body": {
+          "en": "Calories, workouts, sleep, water and weight together, filled in from Apple Health — snap a meal and AI logs it.",
+          "zh": "热量、运动、睡眠、饮水和体重放在一起，由 Apple 健康自动填好——拍下一餐，AI 就帮你记上。"
+        }
+      },
+      {
+        "date": "2026-10-19",
+        "title": {
+          "en": "KeepFit: snap a meal and AI logs it",
+          "zh": "轻记：拍下一餐，AI 帮你记"
+        },
+        "body": {
+          "en": "Take a photo, or just type what you ate. Claude or Gemini, with your own API key, names each food and estimates its calories, protein, carbs and fat for you to check before saving — usually for a fraction of a cent.",
+          "zh": "拍张照片，或者打字写下吃了什么。用你自己的 API 密钥，Claude 或 Gemini 会识别出每样食物，估算热量、蛋白质、碳水和脂肪，你确认后再保存——一餐通常不到一美分。"
+        }
+      },
+      {
+        "date": "2026-10-19",
+        "title": {
+          "en": "KeepFit: weight trends that see past water weight",
+          "zh": "轻记：看穿水分波动的体重趋势"
+        },
+        "body": {
+          "en": "Every weigh-in becomes a dot on a 7-day average, with your target line, your weekly rate and an ETA — next to calories, sleep, steps and more, from a week to a year.",
+          "zh": "每次称重都是一个点，连成 7 天均线，再加上目标线、每周变化速度和预计达成日期；旁边还有热量、睡眠、步数等，从一周看到一年。"
+        }
+      },
+      {
+        "date": "2026-10-19",
+        "title": {
+          "en": "KeepFit: bring your history from Google Sheets",
+          "zh": "轻记：从 Google 表格带上以前的数据"
+        },
+        "body": {
+          "en": "Paste cells copied from Google Sheets or import a CSV from another tracker. Columns are recognised in English or Chinese, duplicates are counted before anything is saved, and every import can be undone.",
+          "zh": "粘贴从 Google 表格复制的单元格，或导入其他记录 App 导出的 CSV。中英文表头都能识别，保存前先统计重复项，每次导入都可以撤销。"
+        }
       }
-    },
+    ],
     "theme": {
       "mode": "light",
       "bg": "#fbf4f2",
@@ -2815,10 +2872,10 @@
     },
     "shots": [
       {
-        "src": "keepfit/journal.webp",
+        "src": "keepfit/journal-days.webp",
         "alt": {
-          "en": "KeepFit Journal: today's entries — an AI-logged chicken grain bowl, a morning run from Apple Health, oatmeal, a weigh-in and last night's sleep — with filter chips and search above",
-          "zh": "轻记“日志”页：今天的记录——AI 识别的鸡肉谷物碗、来自 Apple 健康的晨跑、燕麦粥、一次称重和昨晚的睡眠——上方是筛选标签和搜索框"
+          "en": "KeepFit Journal, Days view: today's card with a collage of three meal photos, −1,198 kcal net and a Lose day badge, tiles for eaten, burned, steps, sleep, weight and water, then the day's meals",
+          "zh": "轻记“日志”按天视图：今天的卡片上拼着三张餐食照片，净热量 −1,198 千卡并标为“减重日”，下面是摄入、消耗、步数、睡眠、体重和饮水，再往下是当天的餐食"
         },
         "w": 600,
         "h": 1304,
@@ -2886,10 +2943,10 @@
       },
       {
         "img": {
-          "src": "keepfit/journal.webp",
+          "src": "keepfit/journal-days.webp",
           "alt": {
-            "en": "KeepFit Journal: today's entries — an AI-logged chicken grain bowl, a morning run from Apple Health, oatmeal, a weigh-in and last night's sleep — with filter chips and search above",
-            "zh": "轻记“日志”页：今天的记录——AI 识别的鸡肉谷物碗、来自 Apple 健康的晨跑、燕麦粥、一次称重和昨晚的睡眠——上方是筛选标签和搜索框"
+            "en": "KeepFit Journal, Days view: today's card with a collage of three meal photos, −1,198 kcal net and a Lose day badge, tiles for eaten, burned, steps, sleep, weight and water, then the day's meals",
+            "zh": "轻记“日志”按天视图：今天的卡片上拼着三张餐食照片，净热量 −1,198 千卡并标为“减重日”，下面是摄入、消耗、步数、睡眠、体重和饮水，再往下是当天的餐食"
           },
           "w": 600,
           "h": 1304,
@@ -2904,8 +2961,8 @@
           "zh": "拍下一餐，AI 帮你记。"
         },
         "body": {
-          "en": "Take a photo, or just describe what you ate, and AI names each food and estimates its calories, protein, carbs and fat for you to check before saving. Everything lands in the Journal, a timeline of every meal, workout, weigh-in and night's sleep, tagged by where it came from.",
-          "zh": "拍张照片，或者用文字描述吃了什么，AI 就识别出每样食物，估算热量、蛋白质、碳水和脂肪，你确认后再保存。所有记录都进入“日志”：每一餐、每次运动、每次称重和每晚睡眠按时间排好，并标明来源。"
+          "en": "Take a photo, or just describe what you ate, and AI names each food and estimates its calories, protein, carbs and fat for you to check before saving. Everything lands in the Journal, a timeline of every meal, workout, weigh-in and night's sleep, tagged by where it came from. Each day gets its own card: that day's meal photos, its net calories and a Lose, Even or Gain day badge.",
+          "zh": "拍张照片，或者用文字描述吃了什么，AI 就识别出每样食物，估算热量、蛋白质、碳水和脂肪，你确认后再保存。所有记录都进入“日志”：每一餐、每次运动、每次称重和每晚睡眠按时间排好，并标明来源。每天一张卡片：当天的餐食照片、净热量，以及“减重日”“持平日”或“增重日”。"
         },
         "points": [
           {
@@ -2919,6 +2976,44 @@
           {
             "en": "Health, AI and Imported tags show where each entry came from",
             "zh": "“健康”“AI”“导入”标签标明每条记录的来源"
+          }
+        ]
+      },
+      {
+        "img": {
+          "src": "keepfit/journal-photos.webp",
+          "alt": {
+            "en": "KeepFit Journal, Photos view: a two-column waterfall of meal photos — a chicken grain bowl, Greek yogurt with berries, oatmeal with banana, salmon with rice and greens, avocado toast — each with its calories and day",
+            "zh": "轻记“日志”照片视图：两列瀑布流排着餐食照片——鸡肉谷物碗、希腊酸奶配莓果、香蕉燕麦粥、三文鱼配米饭和蔬菜、牛油果吐司——每张都标着热量和日期"
+          },
+          "w": 600,
+          "h": 1304,
+          "island": false
+        },
+        "step": {
+          "en": "Photos",
+          "zh": "照片"
+        },
+        "title": {
+          "en": "Every meal, on one photo wall.",
+          "zh": "每一餐，都在照片墙上。"
+        },
+        "body": {
+          "en": "Switch the Journal to Photos and every meal you've snapped falls into a two-column waterfall, each photo at its own shape, with its name, calories and day. Prefer rows? The List view is one tap away.",
+          "zh": "把“日志”切换到“照片”，你拍过的每一餐排成两列瀑布流，每张照片保持原本的比例，配上名称、热量和日期。更喜欢一行一行看？点一下就回到“列表”。"
+        },
+        "points": [
+          {
+            "en": "Search finds a dish weeks back",
+            "zh": "搜索能翻到几周前的某道菜"
+          },
+          {
+            "en": "Tap a photo to open and edit the meal",
+            "zh": "点一张照片，就能打开并编辑这一餐"
+          },
+          {
+            "en": "Days, Photos or List — the Journal remembers your pick",
+            "zh": "按天、照片或列表——日志会记住你的选择"
           }
         ]
       },
